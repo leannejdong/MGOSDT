@@ -1,6 +1,8 @@
 # GOSDTMultiway Documentation
 A Multiway split extension of [Generalized Optimal Sparse Decision Tree](https://arxiv.org/pdf/2006.08690.pdf).
 
+Under development!
+
 # Table of Content
 - [Usage](#usage)
 - [Development](#development)
@@ -29,6 +31,8 @@ Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
 
 ### Executing the Program
 ```bash
+sh run.sh
+# or
 gosdt dataset.csv config.json
 # or 
 cat dataset.csv | gosdt config.json >> output.json
