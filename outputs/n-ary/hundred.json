@@ -1,0 +1,45 @@
+[
+  {
+    "children": [
+      {
+        "in": [
+          1.373737,
+          null
+        ],
+        "then": {
+          "complexity": 0.05000000074505806,
+          "loss": 0.029999999329447746,
+          "name": "label",
+          "prediction": 0
+        }
+      },
+      {
+        "in": [
+          -1.373737,
+          1.373737
+        ],
+        "then": {
+          "complexity": 0.05000000074505806,
+          "loss": 0.07999999821186066,
+          "name": "label",
+          "prediction": 1
+        }
+      },
+      {
+        "in": [
+          null,
+          -1.373737
+        ],
+        "then": {
+          "complexity": 0.05000000074505806,
+          "loss": 0.009999999776482582,
+          "name": "label",
+          "prediction": 0
+        }
+      }
+    ],
+    "feature": 0,
+    "name": "x",
+    "type": "rational"
+  }
+]
