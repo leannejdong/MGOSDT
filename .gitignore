@@ -11,7 +11,7 @@ gosdt_test
 
 # Autobuild Ignores
 MANIFEST
-Makefile
+#Makefile
 config.log
 config.status
 autom4te.cache/*
@@ -19,7 +19,7 @@ aclocal.m4
 m4
 libtool
 .deps
-gosdt
+#gosdt
 gosdt_test
 
 #vim
