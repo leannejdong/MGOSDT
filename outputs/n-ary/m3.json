@@ -46,11 +46,11 @@ Original Dataset Dimension: 554 x 7
 Binary Dataset Dimension: 554 x 17
 Dataset Dimensions: 554 x 15 x 2
 Starting Optimization
-Time: 0.000264727, Objective: [0.458383, 0.505365], Boundary: 0.046982, Graph Size: 1, Queue Size: 22
-Time: 0.0304487, Objective: [0.494458, 0.505365], Boundary: 0.0109062, Graph Size: 612, Queue Size: 6
-Time: 0.0304731, Objective: [0.505365, 0.505365], Boundary: 0, Graph Size: 612, Queue Size: 5
+Time: 0.000247173, Objective: [0.458383, 0.505365], Boundary: 0.046982, Graph Size: 1, Queue Size: 22
+Time: 0.0326777, Objective: [0.494458, 0.505365], Boundary: 0.0109062, Graph Size: 612, Queue Size: 6
+Time: 0.0327198, Objective: [0.505365, 0.505365], Boundary: 0, Graph Size: 612, Queue Size: 5
 Optimization Complete
-Training Duration: 0.03 seconds
+Training Duration: 0.032 seconds
 Number of Iterations: 1233 iterations
 Size of Graph: 612 nodes
 Objective Boundary: [0.505365, 0.505365]

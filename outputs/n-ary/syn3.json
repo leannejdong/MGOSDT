@@ -36,8 +36,8 @@ Original Dataset Dimension: 10 x 2
 Binary Dataset Dimension: 10 x 12
 Dataset Dimensions: 10 x 10 x 2
 Starting Optimization
-Time: 0.000116972, Objective: [0.027, 0.318], Boundary: 0.291, Graph Size: 1, Queue Size: 10
-Time: 0.000204121, Objective: [0.027, 0.027], Boundary: 0, Graph Size: 11, Queue Size: 0
+Time: 0.000134869, Objective: [0.027, 0.318], Boundary: 0.291, Graph Size: 1, Queue Size: 10
+Time: 0.000237264, Objective: [0.027, 0.027], Boundary: 0, Graph Size: 11, Queue Size: 0
 Optimization Complete
 Training Duration: 0 seconds
 Number of Iterations: 11 iterations

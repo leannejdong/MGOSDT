@@ -46,16 +46,16 @@ Original Dataset Dimension: 601 x 7
 Binary Dataset Dimension: 601 x 17
 Dataset Dimensions: 601 x 15 x 2
 Starting Optimization
-Time: 0.000222719, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 1, Queue Size: 22
-Time: 0.212329, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 3854, Queue Size: 18737
-Time: 0.351738, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 6344, Queue Size: 10286
-Time: 0.467026, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 8364, Queue Size: 2297
-Time: 0.5118, Objective: [0.175767, 0.379592], Boundary: 0.203825, Graph Size: 8548, Queue Size: 305
-Time: 0.521073, Objective: [0.175767, 0.379592], Boundary: 0.203825, Graph Size: 8548, Queue Size: 82
-Time: 0.523059, Objective: [0.273331, 0.379592], Boundary: 0.106261, Graph Size: 8548, Queue Size: 15
-Time: 0.523139, Objective: [0.379592, 0.379592], Boundary: 0, Graph Size: 8548, Queue Size: 15
+Time: 0.000206388, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 1, Queue Size: 22
+Time: 0.240093, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 3854, Queue Size: 18737
+Time: 0.405806, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 6344, Queue Size: 10286
+Time: 0.542038, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 8364, Queue Size: 2297
+Time: 0.595651, Objective: [0.175767, 0.379592], Boundary: 0.203825, Graph Size: 8548, Queue Size: 305
+Time: 0.606547, Objective: [0.175767, 0.379592], Boundary: 0.203825, Graph Size: 8548, Queue Size: 82
+Time: 0.608929, Objective: [0.273331, 0.379592], Boundary: 0.106261, Graph Size: 8548, Queue Size: 15
+Time: 0.609024, Objective: [0.379592, 0.379592], Boundary: 0, Graph Size: 8548, Queue Size: 15
 Optimization Complete
-Training Duration: 0.523 seconds
+Training Duration: 0.609 seconds
 Number of Iterations: 40630 iterations
 Size of Graph: 8548 nodes
 Objective Boundary: [0.379592, 0.379592]
