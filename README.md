@@ -21,7 +21,7 @@ Describes how to install and use the library as a stand-alone command-line progr
 Currently supported as a Python extension.
 
 ## Installing Dependencies
-Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
+Refer to [**Dependency Installation**](#dependencies)
 
 ## As a Stand-Alone Command Line Program
 ### Installation
@@ -103,7 +103,6 @@ print(model.tree)
 ---
 
 # Development
-
 
 Guide for developers who want to use, modify and test the library.
 
