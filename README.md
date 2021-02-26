@@ -18,7 +18,7 @@ Under development!
 Guide for end-users who want to use the library without modification.
 
 Describes how to install and use the library as a stand-alone command-line program or as an embedded extension in a larger project.
-Currently supported as a Python extension.
+Currently unsupported as a Python extension.
 
 ## Installing Dependencies
 Refer to [**Dependency Installation**](#dependencies)
@@ -114,7 +114,7 @@ Describes how to install and use the library with details on project structure.
  - **notebooks** - interactive notebooks for examples and visualizations
  - **experiments** - configurations, datasets, and models to run experiments
  - **doc** - documentation
- - **python** - code relating to the Python implementation and wrappers around C++ implementation
+ - **python** - code relating to the Python implementation and wrappers around C++ implementation (unavailable)
  - **auto** - automations for checking and installing project dependencies
  - **dist** - compiled binaries for distribution
  - **build** - compiled binary objects and other build artifacts
@@ -147,10 +147,13 @@ Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
    ```
    gosdt dataset.csv config.json
    ```
+<!---   
  - **Build and Install the Python Extension**
    ```
    ./autobuild --install-python
    ```
+-->
+
  For a full list of build options, run `./autobuild --help`
 
 ---
