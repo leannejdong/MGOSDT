@@ -14,7 +14,7 @@ Using configuration: {
   "non_binary": true,
   "precision_limit": 0,
   "profile": "",
-  "regularization": 0.008999999612569809,
+  "regularization": 0.009999999776482582,
   "rule_list": false,
   "similar_support": true,
   "stack_limit": 0,
@@ -46,48 +46,22 @@ Original Dataset Dimension: 554 x 7
 Binary Dataset Dimension: 554 x 17
 Dataset Dimensions: 554 x 15 x 2
 Starting Optimization
-Time: 0.000247173, Objective: [0.458383, 0.505365], Boundary: 0.046982, Graph Size: 1, Queue Size: 22
-Time: 0.0326777, Objective: [0.494458, 0.505365], Boundary: 0.0109062, Graph Size: 612, Queue Size: 6
-Time: 0.0327198, Objective: [0.505365, 0.505365], Boundary: 0, Graph Size: 612, Queue Size: 5
+Time: 0.000201467, Objective: [0.462383, 0.50639], Boundary: 0.0440072, Graph Size: 1, Queue Size: 22
+Time: 0.0146705, Objective: [0.50639, 0.50639], Boundary: 0, Graph Size: 397, Queue Size: 2
 Optimization Complete
-Training Duration: 0.032 seconds
-Number of Iterations: 1233 iterations
-Size of Graph: 612 nodes
-Objective Boundary: [0.505365, 0.505365]
+Training Duration: 0.014 seconds
+Number of Iterations: 706 iterations
+Size of Graph: 397 nodes
+Objective Boundary: [0.50639, 0.50639]
 Optimality Gap: 0
 Models Generated: 1
-Loss: 0.487365
-Complexity: 0.018
+Loss: 0.49639
+Complexity: 0.01
 [
   {
-    "children": [
-      {
-        "in": [
-          2,
-          null
-        ],
-        "then": {
-          "complexity": 0.008999999612569809,
-          "loss": 0.23826715350151062,
-          "name": "class",
-          "prediction": 1
-        }
-      },
-      {
-        "in": [
-          null,
-          2
-        ],
-        "then": {
-          "complexity": 0.008999999612569809,
-          "loss": 0.24909746646881104,
-          "name": "class",
-          "prediction": 0
-        }
-      }
-    ],
-    "feature": 3,
-    "name": "a4",
-    "type": "integral"
+    "complexity": 0.009999999776482582,
+    "loss": 0.49638989567756653,
+    "name": "class",
+    "prediction": 1
   }
 ]

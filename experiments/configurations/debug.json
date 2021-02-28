@@ -1,6 +1,6 @@
 {
     "uncertainty_tolerance": 0.0,
-    "regularization": 0.009,
+    "regularization": 0.01,
     "upperbound": 0.0,
     
     "time_limit": 0,

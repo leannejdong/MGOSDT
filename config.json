@@ -10,7 +10,7 @@
   "diagnostics": false,
   "verbose": false,
 
-  "regularization": 0.000010,
+  "regularization": 0.010,
   "uncertainty_tolerance": 0.0,
   "upperbound": 0.0,
 

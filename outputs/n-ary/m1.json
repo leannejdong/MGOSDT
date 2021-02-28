@@ -14,7 +14,7 @@ Using configuration: {
   "non_binary": true,
   "precision_limit": 0,
   "profile": "",
-  "regularization": 0.008999999612569809,
+  "regularization": 0.009999999776482582,
   "rule_list": false,
   "similar_support": true,
   "stack_limit": 0,
@@ -46,23 +46,20 @@ Original Dataset Dimension: 556 x 7
 Binary Dataset Dimension: 556 x 17
 Dataset Dimensions: 556 x 15 x 2
 Starting Optimization
-Time: 0.000766546, Objective: [0.458662, 0.498209], Boundary: 0.0395468, Graph Size: 1, Queue Size: 22
-Time: 0.0483946, Objective: [0.478446, 0.498209], Boundary: 0.0197626, Graph Size: 507, Queue Size: 19
-Time: 0.0484583, Objective: [0.483842, 0.498209], Boundary: 0.0143669, Graph Size: 507, Queue Size: 18
-Time: 0.0486812, Objective: [0.496432, 0.498209], Boundary: 0.00177699, Graph Size: 507, Queue Size: 3
-Time: 0.048708, Objective: [0.498209, 0.498209], Boundary: 0, Graph Size: 507, Queue Size: 2
+Time: 0.00026445, Objective: [0.462662, 0.499209], Boundary: 0.0365468, Graph Size: 1, Queue Size: 22
+Time: 0.0139927, Objective: [0.499209, 0.499209], Boundary: 0, Graph Size: 281, Queue Size: 9
 Optimization Complete
-Training Duration: 0.048 seconds
-Number of Iterations: 960 iterations
-Size of Graph: 507 nodes
-Objective Boundary: [0.498209, 0.498209]
+Training Duration: 0.014 seconds
+Number of Iterations: 489 iterations
+Size of Graph: 281 nodes
+Objective Boundary: [0.499209, 0.499209]
 Optimality Gap: 0
 Models Generated: 1
 Loss: 0.489209
-Complexity: 0.009
+Complexity: 0.01
 [
   {
-    "complexity": 0.008999999612569809,
+    "complexity": 0.009999999776482582,
     "loss": 0.4892086386680603,
     "name": "class",
     "prediction": 1

@@ -14,7 +14,7 @@ Using configuration: {
   "non_binary": true,
   "precision_limit": 0,
   "profile": "",
-  "regularization": 0.008999999612569809,
+  "regularization": 0.009999999776482582,
   "rule_list": false,
   "similar_support": true,
   "stack_limit": 0,
@@ -46,23 +46,26 @@ Original Dataset Dimension: 601 x 7
 Binary Dataset Dimension: 601 x 17
 Dataset Dimensions: 601 x 15 x 2
 Starting Optimization
-Time: 0.000206388, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 1, Queue Size: 22
-Time: 0.240093, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 3854, Queue Size: 18737
-Time: 0.405806, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 6344, Queue Size: 10286
-Time: 0.542038, Objective: [0.175767, 0.495537], Boundary: 0.31977, Graph Size: 8364, Queue Size: 2297
-Time: 0.595651, Objective: [0.175767, 0.379592], Boundary: 0.203825, Graph Size: 8548, Queue Size: 305
-Time: 0.606547, Objective: [0.175767, 0.379592], Boundary: 0.203825, Graph Size: 8548, Queue Size: 82
-Time: 0.608929, Objective: [0.273331, 0.379592], Boundary: 0.106261, Graph Size: 8548, Queue Size: 15
-Time: 0.609024, Objective: [0.379592, 0.379592], Boundary: 0, Graph Size: 8548, Queue Size: 15
+Time: 0.000237511, Objective: [0.179767, 0.497537], Boundary: 0.31777, Graph Size: 1, Queue Size: 22
+Time: 0.209744, Objective: [0.179767, 0.497537], Boundary: 0.31777, Graph Size: 3845, Queue Size: 13948
+Time: 0.340473, Objective: [0.179767, 0.497537], Boundary: 0.31777, Graph Size: 6397, Queue Size: 5132
+Time: 0.419774, Objective: [0.179767, 0.497537], Boundary: 0.31777, Graph Size: 7458, Queue Size: 282
+Time: 0.424879, Objective: [0.179767, 0.472812], Boundary: 0.293045, Graph Size: 7458, Queue Size: 153
+Time: 0.424987, Objective: [0.179767, 0.392879], Boundary: 0.213111, Graph Size: 7458, Queue Size: 150
+Time: 0.429363, Objective: [0.304626, 0.392879], Boundary: 0.0882529, Graph Size: 7458, Queue Size: 13
+Time: 0.429474, Objective: [0.31797, 0.392879], Boundary: 0.0749085, Graph Size: 7458, Queue Size: 9
+Time: 0.429546, Objective: [0.356256, 0.392879], Boundary: 0.0366223, Graph Size: 7458, Queue Size: 12
+Time: 0.429575, Objective: [0.362895, 0.392879], Boundary: 0.0299834, Graph Size: 7458, Queue Size: 10
+Time: 0.429617, Objective: [0.392879, 0.392879], Boundary: 0, Graph Size: 7458, Queue Size: 8
 Optimization Complete
-Training Duration: 0.609 seconds
-Number of Iterations: 40630 iterations
-Size of Graph: 8548 nodes
-Objective Boundary: [0.379592, 0.379592]
+Training Duration: 0.429 seconds
+Number of Iterations: 32375 iterations
+Size of Graph: 7458 nodes
+Objective Boundary: [0.392879, 0.392879]
 Optimality Gap: 0
 Models Generated: 1
-Loss: 0.244592
-Complexity: 0.135
+Loss: 0.272879
+Complexity: 0.12
 [
   {
     "children": [
@@ -86,7 +89,7 @@ Complexity: 0.135
                       null
                     ],
                     "then": {
-                      "complexity": 0.008999999612569809,
+                      "complexity": 0.009999999776482582,
                       "loss": 0.029950082302093506,
                       "name": "class",
                       "prediction": 0
@@ -119,7 +122,7 @@ Complexity: 0.135
                                         null
                                       ],
                                       "then": {
-                                        "complexity": 0.008999999612569809,
+                                        "complexity": 0.009999999776482582,
                                         "loss": 0.0,
                                         "name": "class",
                                         "prediction": 0
@@ -131,7 +134,7 @@ Complexity: 0.135
                                         2
                                       ],
                                       "then": {
-                                        "complexity": 0.008999999612569809,
+                                        "complexity": 0.009999999776482582,
                                         "loss": 0.0,
                                         "name": "class",
                                         "prediction": 1
@@ -149,7 +152,7 @@ Complexity: 0.135
                                   2
                                 ],
                                 "then": {
-                                  "complexity": 0.008999999612569809,
+                                  "complexity": 0.009999999776482582,
                                   "loss": 0.0,
                                   "name": "class",
                                   "prediction": 1
@@ -167,7 +170,7 @@ Complexity: 0.135
                             2
                           ],
                           "then": {
-                            "complexity": 0.008999999612569809,
+                            "complexity": 0.009999999776482582,
                             "loss": 0.0,
                             "name": "class",
                             "prediction": 1
@@ -191,7 +194,7 @@ Complexity: 0.135
                 2
               ],
               "then": {
-                "complexity": 0.008999999612569809,
+                "complexity": 0.009999999776482582,
                 "loss": 0.024958401918411255,
                 "name": "class",
                 "prediction": 1
@@ -230,8 +233,8 @@ Complexity: 0.135
                             null
                           ],
                           "then": {
-                            "complexity": 0.008999999612569809,
-                            "loss": 0.06655573844909668,
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.0682196319103241,
                             "name": "class",
                             "prediction": 1
                           }
@@ -256,7 +259,7 @@ Complexity: 0.135
                                         null
                                       ],
                                       "then": {
-                                        "complexity": 0.008999999612569809,
+                                        "complexity": 0.009999999776482582,
                                         "loss": 0.0,
                                         "name": "class",
                                         "prediction": 1
@@ -268,82 +271,7 @@ Complexity: 0.135
                                         2
                                       ],
                                       "then": {
-                                        "complexity": 0.008999999612569809,
-                                        "loss": 0.0,
-                                        "name": "class",
-                                        "prediction": 0
-                                      }
-                                    }
-                                  ],
-                                  "feature": 2,
-                                  "name": "a3",
-                                  "type": "integral"
-                                }
-                              },
-                              {
-                                "in": [
-                                  null,
-                                  2
-                                ],
-                                "then": {
-                                  "complexity": 0.008999999612569809,
-                                  "loss": 0.004991680383682251,
-                                  "name": "class",
-                                  "prediction": 0
-                                }
-                              }
-                            ],
-                            "feature": 1,
-                            "name": "a2",
-                            "type": "integral"
-                          }
-                        }
-                      ],
-                      "feature": 4,
-                      "name": "a5",
-                      "type": "integral"
-                    }
-                  },
-                  {
-                    "in": [
-                      null,
-                      2
-                    ],
-                    "then": {
-                      "children": [
-                        {
-                          "in": [
-                            2,
-                            null
-                          ],
-                          "then": {
-                            "children": [
-                              {
-                                "in": [
-                                  2,
-                                  null
-                                ],
-                                "then": {
-                                  "children": [
-                                    {
-                                      "in": [
-                                        2,
-                                        null
-                                      ],
-                                      "then": {
-                                        "complexity": 0.008999999612569809,
-                                        "loss": 0.0,
-                                        "name": "class",
-                                        "prediction": 1
-                                      }
-                                    },
-                                    {
-                                      "in": [
-                                        null,
-                                        2
-                                      ],
-                                      "then": {
-                                        "complexity": 0.008999999612569809,
+                                        "complexity": 0.009999999776482582,
                                         "loss": 0.0,
                                         "name": "class",
                                         "prediction": 0
@@ -361,7 +289,7 @@ Complexity: 0.135
                                   2
                                 ],
                                 "then": {
-                                  "complexity": 0.008999999612569809,
+                                  "complexity": 0.009999999776482582,
                                   "loss": 0.011647254228591919,
                                   "name": "class",
                                   "prediction": 0
@@ -372,28 +300,28 @@ Complexity: 0.135
                             "name": "a3",
                             "type": "integral"
                           }
-                        },
-                        {
-                          "in": [
-                            null,
-                            2
-                          ],
-                          "then": {
-                            "complexity": 0.008999999612569809,
-                            "loss": 0.029950082302093506,
-                            "name": "class",
-                            "prediction": 0
-                          }
                         }
                       ],
-                      "feature": 1,
-                      "name": "a2",
+                      "feature": 3,
+                      "name": "a4",
                       "type": "integral"
+                    }
+                  },
+                  {
+                    "in": [
+                      null,
+                      2
+                    ],
+                    "then": {
+                      "complexity": 0.009999999776482582,
+                      "loss": 0.041597336530685425,
+                      "name": "class",
+                      "prediction": 0
                     }
                   }
                 ],
-                "feature": 3,
-                "name": "a4",
+                "feature": 5,
+                "name": "a6",
                 "type": "integral"
               }
             },
@@ -403,15 +331,15 @@ Complexity: 0.135
                 2
               ],
               "then": {
-                "complexity": 0.008999999612569809,
-                "loss": 0.07653909921646118,
+                "complexity": 0.009999999776482582,
+                "loss": 0.09650582075119019,
                 "name": "class",
                 "prediction": 0
               }
             }
           ],
-          "feature": 5,
-          "name": "a6",
+          "feature": 1,
+          "name": "a2",
           "type": "integral"
         }
       }

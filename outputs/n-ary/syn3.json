@@ -14,7 +14,7 @@ Using configuration: {
   "non_binary": true,
   "precision_limit": 0,
   "profile": "",
-  "regularization": 0.008999999612569809,
+  "regularization": 0.009999999776482582,
   "rule_list": false,
   "similar_support": true,
   "stack_limit": 0,
@@ -36,17 +36,17 @@ Original Dataset Dimension: 10 x 2
 Binary Dataset Dimension: 10 x 12
 Dataset Dimensions: 10 x 10 x 2
 Starting Optimization
-Time: 0.000134869, Objective: [0.027, 0.318], Boundary: 0.291, Graph Size: 1, Queue Size: 10
-Time: 0.000237264, Objective: [0.027, 0.027], Boundary: 0, Graph Size: 11, Queue Size: 0
+Time: 0.0288294, Objective: [0.03, 0.32], Boundary: 0.29, Graph Size: 1, Queue Size: 10
+Time: 0.0599609, Objective: [0.03, 0.03], Boundary: 0, Graph Size: 11, Queue Size: 0
 Optimization Complete
-Training Duration: 0 seconds
+Training Duration: 0.064 seconds
 Number of Iterations: 11 iterations
 Size of Graph: 11 nodes
-Objective Boundary: [0.027, 0.027]
+Objective Boundary: [0.03, 0.03]
 Optimality Gap: 0
 Models Generated: 1
 Loss: 0
-Complexity: 0.027
+Complexity: 0.03
 [
   {
     "children": [
@@ -56,7 +56,7 @@ Complexity: 0.027
           null
         ],
         "then": {
-          "complexity": 0.008999999612569809,
+          "complexity": 0.009999999776482582,
           "loss": 0.0,
           "name": "y",
           "prediction": 0
@@ -68,7 +68,7 @@ Complexity: 0.027
           7
         ],
         "then": {
-          "complexity": 0.008999999612569809,
+          "complexity": 0.009999999776482582,
           "loss": 0.0,
           "name": "y",
           "prediction": 1
@@ -80,7 +80,7 @@ Complexity: 0.027
           3
         ],
         "then": {
-          "complexity": 0.008999999612569809,
+          "complexity": 0.009999999776482582,
           "loss": 0.0,
           "name": "y",
           "prediction": 0

@@ -14,7 +14,7 @@ Using configuration: {
   "non_binary": true,
   "precision_limit": 0,
   "profile": "",
-  "regularization": 0.008999999612569809,
+  "regularization": 0.009999999776482582,
   "rule_list": false,
   "similar_support": true,
   "stack_limit": 0,
@@ -36,18 +36,18 @@ Original Dataset Dimension: 10 x 2
 Binary Dataset Dimension: 10 x 12
 Dataset Dimensions: 10 x 10 x 2
 Starting Optimization
-Time: 0.000147573, Objective: [0.027, 0.409], Boundary: 0.382, Graph Size: 1, Queue Size: 14
-Time: 0.000865648, Objective: [0.036, 0.045], Boundary: 0.009, Graph Size: 34, Queue Size: 6
-Time: 0.000882223, Objective: [0.045, 0.045], Boundary: 0, Graph Size: 34, Queue Size: 5
+Time: 0.00011807, Objective: [0.03, 0.41], Boundary: 0.38, Graph Size: 1, Queue Size: 14
+Time: 0.000695791, Objective: [0.04, 0.05], Boundary: 0.01, Graph Size: 34, Queue Size: 6
+Time: 0.000709758, Objective: [0.05, 0.05], Boundary: 0, Graph Size: 34, Queue Size: 5
 Optimization Complete
 Training Duration: 0 seconds
 Number of Iterations: 114 iterations
 Size of Graph: 34 nodes
-Objective Boundary: [0.045, 0.045]
+Objective Boundary: [0.05, 0.05]
 Optimality Gap: 0
 Models Generated: 1
 Loss: 0
-Complexity: 0.045
+Complexity: 0.05
 [
   {
     "children": [
@@ -57,7 +57,7 @@ Complexity: 0.045
           null
         ],
         "then": {
-          "complexity": 0.008999999612569809,
+          "complexity": 0.009999999776482582,
           "loss": 0.0,
           "name": " y",
           "prediction": 1
@@ -69,7 +69,7 @@ Complexity: 0.045
           8
         ],
         "then": {
-          "complexity": 0.008999999612569809,
+          "complexity": 0.009999999776482582,
           "loss": 0.0,
           "name": " y",
           "prediction": 0
@@ -81,7 +81,7 @@ Complexity: 0.045
           6
         ],
         "then": {
-          "complexity": 0.008999999612569809,
+          "complexity": 0.009999999776482582,
           "loss": 0.0,
           "name": " y",
           "prediction": 1
@@ -93,7 +93,7 @@ Complexity: 0.045
           4
         ],
         "then": {
-          "complexity": 0.008999999612569809,
+          "complexity": 0.009999999776482582,
           "loss": 0.0,
           "name": " y",
           "prediction": 0
@@ -105,7 +105,7 @@ Complexity: 0.045
           2
         ],
         "then": {
-          "complexity": 0.008999999612569809,
+          "complexity": 0.009999999776482582,
           "loss": 0.0,
           "name": " y",
           "prediction": 1
