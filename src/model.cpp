@@ -251,11 +251,11 @@ void Model::to_json(json & node) const {
 
 void Model::_to_json(json & node) const {
     if (this -> terminal) {
-        node["prediction"] = this -> binary_target;
-        node["loss"] = this -> _loss; // This value is correct regardless of translation
+        node["prediction"] = /*this ->*/ binary_target;
+        node["loss"] = /*this ->*/ _loss; // This value is correct regardless of translation
         node["complexity"] = Configuration::regularization;
     } else {
-        node["feature"] = this -> binary_feature;
+        node["feature"] = /*this ->*/ binary_feature;
         node["false"] = json::object();
         node["true"] = json::object();
         this -> negative -> _to_json(node["false"]);
@@ -348,5 +348,5 @@ void Model::decode_json(json & node) const {
         decode_json(node["true"]);
     }
 
-    return;
+//    return;
 }
