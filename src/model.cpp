@@ -246,7 +246,7 @@ void Model::to_json(json & node) const {
     _to_json(node);
     decode_json(node);
     // Convert to N-ary
-    if (Configuration::non_binary) { summarize(node); }
+//    if (Configuration::non_binary) { summarize(node); }
 }
 
 void Model::_to_json(json & node) const {

@@ -1,6 +1,6 @@
 {
     "uncertainty_tolerance": 0.0,
-    "regularization": 0.005,
+    "regularization": 0.01,
     
     "time_limit": 86400,
     "worker_limit": 1,

@@ -1,0 +1,80 @@
+Generalized Optimal Sparse Decision Tree
+Using data set: syn3.txt
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "continuous_feature_exchange": true,
+  "costs": "",
+  "diagnostics": false,
+  "feature_exchange": true,
+  "feature_transform": true,
+  "look_ahead": true,
+  "model": "",
+  "model_limit": 1,
+  "precision_limit": 0,
+  "profile": "",
+  "regularization": 0.009999999776482582,
+  "rule_list": false,
+  "similar_support": true,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: x
+  Inferred Type: Integral, Empirical Cardinality: 10, Optionality: 0
+Feature Index: 1, Feature Name: y
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 10 x 2
+Binary Dataset Dimension: 10 x 12
+Dataset Dimensions: 10 x 10 x 2
+Starting Optimization
+Time: 0.041659, Objective: [0.03, 0.32], Boundary: 0.29, Graph Size: 1, Queue Size: 10
+Time: 0.084301, Objective: [0.03, 0.03], Boundary: 0, Graph Size: 11, Queue Size: 0
+Optimization Complete
+Training Duration: 0.09 seconds
+Number of Iterations: 11 iterations
+Size of Graph: 11 nodes
+Objective Boundary: [0.03, 0.03]
+Optimality Gap: 0
+Models Generated: 1
+Loss: 0
+Complexity: 0.03
+[
+  {
+    "false": {
+      "complexity": 0.009999999776482582,
+      "loss": 0.0,
+      "name": "y",
+      "prediction": 0
+    },
+    "feature": 0,
+    "name": "x",
+    "reference": 3,
+    "relation": ">=",
+    "true": {
+      "false": {
+        "complexity": 0.009999999776482582,
+        "loss": 0.0,
+        "name": "y",
+        "prediction": 1
+      },
+      "feature": 0,
+      "name": "x",
+      "reference": 7,
+      "relation": ">=",
+      "true": {
+        "complexity": 0.009999999776482582,
+        "loss": 0.0,
+        "name": "y",
+        "prediction": 0
+      }
+    }
+  }
+]

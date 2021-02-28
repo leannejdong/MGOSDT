@@ -7,4 +7,4 @@ gosdt m2.csv ./experiments/configurations/debug.json >outputs/m2.json
 gosdt ./experiments/datasets/monk_3/m3.csv ./experiments/configurations/debug.json >outputs/m3.json
 gosdt syn3.txt ./experiments/configurations/debug.json >outputs/syn3.json
 gosdt syn5.txt ./experiments/configurations/debug.json >outputs/syn5.json
-gosdt tic-tac-toe.csv ./experiments/configurations/debug.json >outputs/tic-tac-toe.json
+#gosdt tic-tac-toe.csv ./experiments/configurations/debug.json >outputs/tic-tac-toe.json
