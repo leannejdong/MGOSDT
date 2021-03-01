@@ -34,7 +34,7 @@
 ==9437== I   refs:      4,718,020
 ```
 
-To get a more accurate view, we run `kcachegrind callgrind.out.9437` and we see a GUI,  ![callgrind_binary](callgrind.out.9437)
+To get a more accurate view, we run `kcachegrind callgrind.out.9437` and we see a GUI,  ![callgrind_binary](callgrind.out.9437.png)
 
 The screenshot above shows the profiling results for my code. The left panel shows the functions called by my code sorted by total time spent inside each function. Because functions call each other, callgrind shows two cost metrics as proxies for time spent in each function: Incl., showing the total cost of a function, and self, showing the time spent in each function itself discounting the callees. By clicking on "Self" to order to functions by the cost of the function itself, we sort the functions by the costs of their own codes.
 
@@ -68,7 +68,7 @@ To inspect cache misses, we run `valgrind --tool=cachegrind gosdt syn3.txt ./exp
 
 ```
 
-Then, `kcachegrind cachegrind.out.42203` invokes ![cachegrind_binary](cachegrind.out.42203)
+Then, `kcachegrind cachegrind.out.42203` invokes ![cachegrind_binary](cachegrind.out.42203.png)
 
 * The I1 miss rates states there were 14,052 instruction cache misses.
 
@@ -106,7 +106,7 @@ Event sort order: Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw
 Thresholds:       0.1 100 100 100 100 100 100 100 100
 ```
 
-Run `kcachegrind callgrind.out.27421` we invoke ![callgrind_n_ary](callgrind.out.27421)
+Run `kcachegrind callgrind.out.27421` we invoke ![callgrind_n_ary](callgrind.out.27421.png)
 
 #### Cache misses count with Cachegrind 
 
@@ -137,7 +137,7 @@ To inspect cache misses, we run `valgrind --tool=cachegrind gosdt syn3.txt ./exp
 ==109661== LL miss rate:        0.3% (      0.3%     +     0.8%  )
 ```
 
-Run `kcachegrind cachegrind.out.46502`, we invoke ![cachegrind_n_ary](cachegrind.out.46502)
+Run `kcachegrind cachegrind.out.46502`, we invoke ![cachegrind_n_ary](cachegrind.out.46502.png)
 
 
 
