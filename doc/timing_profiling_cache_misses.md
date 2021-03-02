@@ -1,22 +1,28 @@
 - http://valgrind.org/docs/manual/cg-manual.html
 
+### How to read time from perf?
 
-### Instruction misses
-- **Ir**: number of instructions executed
-- **I1mr**: I1 cache read misses
-- **ILmr**: LL (last level) cache instruction read misses
+The kind of time we are interested depend on what we want to optimize. In `perf`,
+* The `user` time is the time actually spent running your program, which is the relevant number
+if we are trying to make your code faster.
 
-### Cache misses
-- **Dr**: number of memory reads
-- **D1mr**: D1 cache read misses
-- **DLmr**: LL (last level) cache data read misses
-- **Dw**: number of memory writes
-- **D1mw**: D1 cache write misses
-- **DLmw**: LL (last level) cache data write misses
+* The `sys` time is time spent on things like reading/write files, which is the relevant number if we are trying to optimize your file access.
 
->On a modern machine, an L1 miss will typically cost around 10 cycles, an LL miss can cost as much as 200 cycles, and a mispredicted branch costs in the region of 10 to 30 cycles. Detailed cache and branch profiling can be very useful for understanding how our program interacts with the machine and thus how to make it faster.
+* The `real` time is most important, if we are just trying to get an overall idea of how long it takes to run your program.
 
 ### GOSDT
+
+
+#### Timing
+
+Base on Monk2 dataset (`experiments/datasets/monk_2/data.csv`),
+
+```sh
+leanne@tensorbook:~/Dev/GeneralizedOptimalSparseDecisionTrees$ time gosdt experiments/datasets/monk_2/data.csv experiments/configurations/debug.json >outputs/m2.json
+real0m2.962s
+user0m9.241s
+sys0m1.964s
+```
 
 #### Profiling with Callgrind 
 
@@ -78,6 +84,21 @@ Then, `kcachegrind cachegrind.out.42203` invokes ![cachegrind_binary](cachegrind
 
 ### MGOSDT
 
+#### Timing
+
+Base on Monk2 dataset (`experiments/datasets/monk_2/data.csv`),
+
+```sh
+leanne@tensorbook:~/Dev/mgosdt$ time gosdt experiments/datasets/monk_2/data.csv experiments/configurations/debug.json >outputs/m2.json
+real0m0.465s
+user0m0.453s
+sys0m0.012s
+```
+
+And the training duration can be seen in the `outputs/m2.json` as 0.432, compared to GOSDT's training duration as 2.747, which is 6.41 faster.
+
+So, in `real time`, MGOSDT 18 times faster!
+
 #### Profiling with Callgrind
 
 ```sh
@@ -138,6 +159,21 @@ To inspect cache misses, we run `valgrind --tool=cachegrind gosdt syn3.txt ./exp
 ```
 
 Run `kcachegrind cachegrind.out.46502`, we invoke ![cachegrind_n_ary](cachegrind.out.46502.png)
+
+##### Instruction misses
+- **Ir**: number of instructions executed
+- **I1mr**: I1 cache read misses
+- **ILmr**: LL (last level) cache instruction read misses
+
+##### Cache misses
+- **Dr**: number of memory reads
+- **D1mr**: D1 cache read misses
+- **DLmr**: LL (last level) cache data read misses
+- **Dw**: number of memory writes
+- **D1mw**: D1 cache write misses
+- **DLmw**: LL (last level) cache data write misses
+
+>On a modern machine, an L1 miss will typically cost around 10 cycles, an LL miss can cost as much as 200 cycles, and a mispredicted branch costs in the region of 10 to 30 cycles. Detailed cache and branch profiling can be very useful for understanding how our program interacts with the machine and thus how to make it faster.
 
 
 
