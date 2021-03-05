@@ -1,71 +1,3 @@
-Generalized Optimal Sparse Decision Tree
-Using data set: experiments/datasets/monk_2/data.csv
-Using configuration: {
-  "balance": false,
-  "cancellation": true,
-  "continuous_feature_exchange": true,
-  "costs": "",
-  "diagnostics": false,
-  "feature_exchange": true,
-  "feature_transform": true,
-  "look_ahead": true,
-  "model": "",
-  "model_limit": 1,
-  "non_binary": true,
-  "precision_limit": 0,
-  "profile": "",
-  "regularization": 0.009999999776482582,
-  "rule_list": false,
-  "similar_support": true,
-  "stack_limit": 0,
-  "time_limit": 0,
-  "timing": "",
-  "trace": "",
-  "tree": "",
-  "uncertainty_tolerance": 0.0,
-  "upperbound": 0.0,
-  "verbose": true,
-  "worker_limit": 1
-}
-Initializing Optimization Framework
-Feature Index: 0, Feature Name: a1
-  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
-Feature Index: 1, Feature Name: a2
-  Inferred Type: Integral, Empirical Cardinality: 3, Optionality: 0
-Feature Index: 2, Feature Name: a3
-  Inferred Type: Integral, Empirical Cardinality: 3, Optionality: 0
-Feature Index: 3, Feature Name: a4
-  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
-Feature Index: 4, Feature Name: a5
-  Inferred Type: Integral, Empirical Cardinality: 3, Optionality: 0
-Feature Index: 5, Feature Name: a6
-  Inferred Type: Integral, Empirical Cardinality: 4, Optionality: 0
-Feature Index: 6, Feature Name: class
-  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
-Original Dataset Dimension: 601 x 7
-Binary Dataset Dimension: 601 x 17
-Dataset Dimensions: 601 x 15 x 2
-Starting Optimization
-Time: 0.000798819, Objective: [0.179767, 0.497537], Boundary: 0.31777, Graph Size: 1, Queue Size: 22
-Time: 0.209596, Objective: [0.179767, 0.497537], Boundary: 0.31777, Graph Size: 3845, Queue Size: 13948
-Time: 0.341183, Objective: [0.179767, 0.497537], Boundary: 0.31777, Graph Size: 6397, Queue Size: 5132
-Time: 0.421959, Objective: [0.179767, 0.497537], Boundary: 0.31777, Graph Size: 7458, Queue Size: 282
-Time: 0.42709, Objective: [0.179767, 0.472812], Boundary: 0.293045, Graph Size: 7458, Queue Size: 153
-Time: 0.427196, Objective: [0.179767, 0.392879], Boundary: 0.213111, Graph Size: 7458, Queue Size: 150
-Time: 0.431612, Objective: [0.304626, 0.392879], Boundary: 0.0882529, Graph Size: 7458, Queue Size: 13
-Time: 0.431727, Objective: [0.31797, 0.392879], Boundary: 0.0749085, Graph Size: 7458, Queue Size: 9
-Time: 0.431796, Objective: [0.356256, 0.392879], Boundary: 0.0366223, Graph Size: 7458, Queue Size: 12
-Time: 0.431824, Objective: [0.362895, 0.392879], Boundary: 0.0299834, Graph Size: 7458, Queue Size: 10
-Time: 0.431868, Objective: [0.392879, 0.392879], Boundary: 0, Graph Size: 7458, Queue Size: 8
-Optimization Complete
-Training Duration: 0.432 seconds
-Number of Iterations: 32375 iterations
-Size of Graph: 7458 nodes
-Objective Boundary: [0.392879, 0.392879]
-Optimality Gap: 0
-Models Generated: 1
-Loss: 0.272879
-Complexity: 0.12
 [
   {
     "children": [
@@ -159,8 +91,8 @@ Complexity: 0.12
                                 }
                               }
                             ],
-                            "feature": 1,
-                            "name": "a2",
+                            "feature": 4,
+                            "name": "a5",
                             "type": "integral"
                           }
                         },
@@ -177,8 +109,8 @@ Complexity: 0.12
                           }
                         }
                       ],
-                      "feature": 4,
-                      "name": "a5",
+                      "feature": 1,
+                      "name": "a2",
                       "type": "integral"
                     }
                   }

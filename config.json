@@ -1,5 +1,5 @@
 {
-  "balance": false,
+  "balance": true,
   "cancellation": true,
   "look_ahead": true,
   "similar_support": true,
@@ -8,8 +8,7 @@
   "rule_list": false,
 
   "diagnostics": false,
-  "verbose": false,
-
+  "verbose": true,
   "regularization": 0.010,
   "uncertainty_tolerance": 0.0,
   "upperbound": 0.0,
@@ -17,9 +16,9 @@
   "model_limit": 1,
   "precision_limit": 0,
   "stack_limit": 0,
-  "tile_limit": 0,
-  "time_limit": 0,
-  "worker_limit": 1,
+  "tile_limit": 1,
+  "time_limit": 1,
+  "worker_limit": 8,
 
   "costs": "",
   "model": "",

@@ -1,7 +1,6 @@
 #include "main.hpp"
 
 int main(int argc, char *argv[]) {
-
 	struct pollfd file_descriptors;
 	file_descriptors.fd = 0; /* this is STDIN */
 	file_descriptors.events = POLLIN;

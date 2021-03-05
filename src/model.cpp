@@ -245,9 +245,9 @@ void Model::summarize(json & node) const {
 void Model::to_json(json & node) const {
     _to_json(node);
     decode_json(node);
+    std::cerr << "checking..."<< "\n";
     // Convert to N-ary
     if (Configuration::non_binary) { 
-      std::cout << "Hi" << "\n";
       summarize(node); }
 }
 

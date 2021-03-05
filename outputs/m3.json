@@ -1,0 +1,33 @@
+[
+  {
+    "children": [
+      {
+        "in": [
+          2,
+          null
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.23999999463558197,
+          "name": "class",
+          "prediction": 1
+        }
+      },
+      {
+        "in": [
+          null,
+          2
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.24731183052062988,
+          "name": "class",
+          "prediction": 0
+        }
+      }
+    ],
+    "feature": 3,
+    "name": "a4",
+    "type": "integral"
+  }
+]

@@ -1,0 +1,283 @@
+[
+  {
+    "children": [
+      {
+        "in": [
+          1,
+          null
+        ],
+        "then": {
+          "children": [
+            {
+              "in": [
+                2,
+                null
+              ],
+              "then": {
+                "children": [
+                  {
+                    "in": [
+                      2,
+                      null
+                    ],
+                    "then": {
+                      "complexity": 0.009999999776482582,
+                      "loss": 0.029900331050157547,
+                      "name": "class",
+                      "prediction": 0
+                    }
+                  },
+                  {
+                    "in": [
+                      null,
+                      2
+                    ],
+                    "then": {
+                      "children": [
+                        {
+                          "in": [
+                            2,
+                            null
+                          ],
+                          "then": {
+                            "children": [
+                              {
+                                "in": [
+                                  2,
+                                  null
+                                ],
+                                "then": {
+                                  "children": [
+                                    {
+                                      "in": [
+                                        2,
+                                        null
+                                      ],
+                                      "then": {
+                                        "complexity": 0.009999999776482582,
+                                        "loss": 0.0,
+                                        "name": "class",
+                                        "prediction": 0
+                                      }
+                                    },
+                                    {
+                                      "in": [
+                                        null,
+                                        2
+                                      ],
+                                      "then": {
+                                        "complexity": 0.009999999776482582,
+                                        "loss": 0.0,
+                                        "name": "class",
+                                        "prediction": 1
+                                      }
+                                    }
+                                  ],
+                                  "feature": 5,
+                                  "name": "a6",
+                                  "type": "integral"
+                                }
+                              },
+                              {
+                                "in": [
+                                  null,
+                                  2
+                                ],
+                                "then": {
+                                  "complexity": 0.009999999776482582,
+                                  "loss": 0.0,
+                                  "name": "class",
+                                  "prediction": 1
+                                }
+                              }
+                            ],
+                            "feature": 4,
+                            "name": "a5",
+                            "type": "integral"
+                          }
+                        },
+                        {
+                          "in": [
+                            null,
+                            2
+                          ],
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.0,
+                            "name": "class",
+                            "prediction": 1
+                          }
+                        }
+                      ],
+                      "feature": 1,
+                      "name": "a2",
+                      "type": "integral"
+                    }
+                  }
+                ],
+                "feature": 3,
+                "name": "a4",
+                "type": "integral"
+              }
+            },
+            {
+              "in": [
+                null,
+                2
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.02500000037252903,
+                "name": "class",
+                "prediction": 1
+              }
+            }
+          ],
+          "feature": 2,
+          "name": "a3",
+          "type": "integral"
+        }
+      },
+      {
+        "in": [
+          null,
+          1
+        ],
+        "then": {
+          "children": [
+            {
+              "in": [
+                2,
+                null
+              ],
+              "then": {
+                "children": [
+                  {
+                    "in": [
+                      2,
+                      null
+                    ],
+                    "then": {
+                      "children": [
+                        {
+                          "in": [
+                            2,
+                            null
+                          ],
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.06833333522081375,
+                            "name": "class",
+                            "prediction": 1
+                          }
+                        },
+                        {
+                          "in": [
+                            null,
+                            2
+                          ],
+                          "then": {
+                            "children": [
+                              {
+                                "in": [
+                                  2,
+                                  null
+                                ],
+                                "then": {
+                                  "children": [
+                                    {
+                                      "in": [
+                                        2,
+                                        null
+                                      ],
+                                      "then": {
+                                        "complexity": 0.009999999776482582,
+                                        "loss": 0.0,
+                                        "name": "class",
+                                        "prediction": 1
+                                      }
+                                    },
+                                    {
+                                      "in": [
+                                        null,
+                                        2
+                                      ],
+                                      "then": {
+                                        "complexity": 0.009999999776482582,
+                                        "loss": 0.0,
+                                        "name": "class",
+                                        "prediction": 0
+                                      }
+                                    }
+                                  ],
+                                  "feature": 4,
+                                  "name": "a5",
+                                  "type": "integral"
+                                }
+                              },
+                              {
+                                "in": [
+                                  null,
+                                  2
+                                ],
+                                "then": {
+                                  "complexity": 0.009999999776482582,
+                                  "loss": 0.011627906933426857,
+                                  "name": "class",
+                                  "prediction": 0
+                                }
+                              }
+                            ],
+                            "feature": 2,
+                            "name": "a3",
+                            "type": "integral"
+                          }
+                        }
+                      ],
+                      "feature": 3,
+                      "name": "a4",
+                      "type": "integral"
+                    }
+                  },
+                  {
+                    "in": [
+                      null,
+                      2
+                    ],
+                    "then": {
+                      "complexity": 0.009999999776482582,
+                      "loss": 0.04152823984622955,
+                      "name": "class",
+                      "prediction": 0
+                    }
+                  }
+                ],
+                "feature": 5,
+                "name": "a6",
+                "type": "integral"
+              }
+            },
+            {
+              "in": [
+                null,
+                2
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.09634551405906677,
+                "name": "class",
+                "prediction": 0
+              }
+            }
+          ],
+          "feature": 1,
+          "name": "a2",
+          "type": "integral"
+        }
+      }
+    ],
+    "feature": 0,
+    "name": "a1",
+    "type": "integral"
+  }
+]
