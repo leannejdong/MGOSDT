@@ -1,0 +1,62 @@
+[
+  {
+    "children": [
+      {
+        "in": [
+          4,
+          null
+        ],
+        "then": {
+          "complexity": 9.999999747378752e-06,
+          "loss": 0.23122751712799072,
+          "name": "C1 “Rank of card #1”",
+          "prediction": 1
+        }
+      },
+      {
+        "in": [
+          3,
+          4
+        ],
+        "then": {
+          "complexity": 9.999999747378752e-06,
+          "loss": 0.22934827208518982,
+          "name": "C1 “Rank of card #1”",
+          "prediction": 4
+        }
+      },
+      {
+        "in": [
+          2,
+          3
+        ],
+        "then": {
+          "complexity": 9.999999747378752e-06,
+          "loss": 0.23098762333393097,
+          "name": "C1 “Rank of card #1”",
+          "prediction": 9
+        }
+      },
+      {
+        "in": [
+          null,
+          2
+        ],
+        "then": {
+          "complexity": 9.999999747378752e-06,
+          "loss": 0.22495001554489136,
+          "name": "C1 “Rank of card #1”",
+          "prediction": 8
+        }
+      }
+    ],
+    "feature": 0,
+    "name": "%S1 “Suit of card #1”",
+    "type": "integral"
+  }
+]
+
+real	0m0.089s
+user	0m0.091s
+sys	0m0.005s
+

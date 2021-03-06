@@ -1,0 +1,113 @@
+[
+  {
+    "children": [
+      {
+        "in": [
+          9,
+          null
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.285165935754776,
+          "name": "S3 “Suit of card #3”",
+          "prediction": 4
+        }
+      },
+      {
+        "in": [
+          null,
+          9
+        ],
+        "then": {
+          "children": [
+            {
+              "in": [
+                7,
+                null
+              ],
+              "then": {
+                "children": [
+                  {
+                    "in": [
+                      3,
+                      null
+                    ],
+                    "then": {
+                      "children": [
+                        {
+                          "in": [
+                            8,
+                            null
+                          ],
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.024110354483127594,
+                            "name": "S3 “Suit of card #3”",
+                            "prediction": 3
+                          }
+                        },
+                        {
+                          "in": [
+                            null,
+                            8
+                          ],
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.0245501808822155,
+                            "name": "S3 “Suit of card #3”",
+                            "prediction": 1
+                          }
+                        }
+                      ],
+                      "feature": 3,
+                      "name": "C2 “Rank of card #2”",
+                      "type": "integral"
+                    }
+                  },
+                  {
+                    "in": [
+                      null,
+                      3
+                    ],
+                    "then": {
+                      "complexity": 0.009999999776482582,
+                      "loss": 0.0628148764371872,
+                      "name": "S3 “Suit of card #3”",
+                      "prediction": 2
+                    }
+                  }
+                ],
+                "feature": 1,
+                "name": "C1 “Rank of card #1”",
+                "type": "integral"
+              }
+            },
+            {
+              "in": [
+                null,
+                7
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.20879650115966797,
+                "name": "S3 “Suit of card #3”",
+                "prediction": 4
+              }
+            }
+          ],
+          "feature": 3,
+          "name": "C2 “Rank of card #2”",
+          "type": "integral"
+        }
+      }
+    ],
+    "feature": 1,
+    "name": "C1 “Rank of card #1”",
+    "type": "integral"
+  }
+]
+
+real	0m16.205s
+user	2m4.533s
+sys	0m1.380s
+

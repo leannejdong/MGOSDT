@@ -1,0 +1,107 @@
+Generalized Optimal Sparse Decision Tree
+Using data set: experiments/datasets/poker/poker1000c2.csv
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "continuous_feature_exchange": true,
+  "costs": "",
+  "diagnostics": false,
+  "feature_exchange": true,
+  "feature_transform": true,
+  "look_ahead": true,
+  "model": "",
+  "model_limit": 1,
+  "non_binary": true,
+  "precision_limit": 0,
+  "profile": "",
+  "regularization": 9.999999747378752e-05,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 4
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: %S1 “Suit of card #1”
+  Inferred Type: Integral, Empirical Cardinality: 4, Optionality: 0
+Feature Index: 1, Feature Name: C1 “Rank of card #1”
+  Inferred Type: Categorical, Empirical Cardinality: 13, Optionality: 0
+Original Dataset Dimension: 1000 x 2
+Binary Dataset Dimension: 1000 x 17
+Dataset Dimensions: 1000 x 4 x 13
+Starting Optimization
+Time: 0.000331812, Objective: [0.8923, 0.8982], Boundary: 0.00590008, Graph Size: 1, Queue Size: 3
+Time: 0.000462729, Objective: [0.8923, 0.8924], Boundary: 0.000100017, Graph Size: 8, Queue Size: 6
+Time: 0.000510308, Objective: [0.8924, 0.8924], Boundary: 0, Graph Size: 10, Queue Size: 0
+Optimization Complete
+Training Duration: 0 seconds
+Number of Iterations: 1872 iterations
+Size of Graph: 10 nodes
+Objective Boundary: [0.8924, 0.8924]
+Optimality Gap: 0
+Models Generated: 1
+Loss: 0.892
+Complexity: 0.0004
+[
+  {
+    "children": [
+      {
+        "in": [
+          4,
+          null
+        ],
+        "then": {
+          "complexity": 9.999999747378752e-05,
+          "loss": 0.25099998712539673,
+          "name": "C1 “Rank of card #1”",
+          "prediction": 9
+        }
+      },
+      {
+        "in": [
+          3,
+          4
+        ],
+        "then": {
+          "complexity": 9.999999747378752e-05,
+          "loss": 0.2070000171661377,
+          "name": "C1 “Rank of card #1”",
+          "prediction": 7
+        }
+      },
+      {
+        "in": [
+          2,
+          3
+        ],
+        "then": {
+          "complexity": 9.999999747378752e-05,
+          "loss": 0.2199999988079071,
+          "name": "C1 “Rank of card #1”",
+          "prediction": 1
+        }
+      },
+      {
+        "in": [
+          null,
+          2
+        ],
+        "then": {
+          "complexity": 9.999999747378752e-05,
+          "loss": 0.21400001645088196,
+          "name": "C1 “Rank of card #1”",
+          "prediction": 11
+        }
+      }
+    ],
+    "feature": 0,
+    "name": "%S1 “Suit of card #1”",
+    "type": "integral"
+  }
+]
