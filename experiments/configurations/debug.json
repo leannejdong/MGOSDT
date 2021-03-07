@@ -1,10 +1,10 @@
 {
     "uncertainty_tolerance": 0.0,
-    "regularization": 0.01,
+    "regularization": 0.001,
     "upperbound": 0.0,
     
     "time_limit": 86400,
-    "worker_limit": 8,
+    "worker_limit": 4,
     "tile_limit": 1,
     "model_limit": 1,
 

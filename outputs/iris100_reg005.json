@@ -1,0 +1,33 @@
+[
+  {
+    "children": [
+      {
+        "in": [
+          2.45,
+          null
+        ],
+        "then": {
+          "complexity": 0.004999999888241291,
+          "loss": 0.009999999776482582,
+          "name": "class",
+          "prediction": "Iris-versicolor"
+        }
+      },
+      {
+        "in": [
+          null,
+          2.45
+        ],
+        "then": {
+          "complexity": 0.004999999888241291,
+          "loss": 0.0,
+          "name": "class",
+          "prediction": "Iris-setosa"
+        }
+      }
+    ],
+    "feature": 2,
+    "name": "petal_length",
+    "type": "rational"
+  }
+]

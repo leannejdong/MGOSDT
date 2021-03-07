@@ -1,0 +1,70 @@
+[
+  {
+    "children": [
+      {
+        "in": [
+          4.85,
+          null
+        ],
+        "then": {
+          "children": [
+            {
+              "in": [
+                5.95,
+                null
+              ],
+              "then": {
+                "complexity": 0.0010000000474974513,
+                "loss": 0.0,
+                "name": "class",
+                "prediction": "Iris-versicolor"
+              }
+            },
+            {
+              "in": [
+                null,
+                5.95
+              ],
+              "then": {
+                "complexity": 0.0010000000474974513,
+                "loss": 0.0,
+                "name": "class",
+                "prediction": "Iris-virginica"
+              }
+            }
+          ],
+          "feature": 0,
+          "name": "sepal_length",
+          "type": "rational"
+        }
+      },
+      {
+        "in": [
+          2.45,
+          4.85
+        ],
+        "then": {
+          "complexity": 0.0010000000474974513,
+          "loss": 0.0,
+          "name": "class",
+          "prediction": "Iris-versicolor"
+        }
+      },
+      {
+        "in": [
+          null,
+          2.45
+        ],
+        "then": {
+          "complexity": 0.0010000000474974513,
+          "loss": 0.0,
+          "name": "class",
+          "prediction": "Iris-setosa"
+        }
+      }
+    ],
+    "feature": 2,
+    "name": "petal_length",
+    "type": "rational"
+  }
+]

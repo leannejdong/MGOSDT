@@ -1,0 +1,308 @@
+[
+  {
+    "children": [
+      {
+        "in": [
+          1,
+          null
+        ],
+        "then": {
+          "complexity": 0.0010000000474974513,
+          "loss": 0.09600000083446503,
+          "name": "recidivate-within-two-years:1",
+          "prediction": 1
+        }
+      },
+      {
+        "in": [
+          null,
+          1
+        ],
+        "then": {
+          "children": [
+            {
+              "in": [
+                1,
+                null
+              ],
+              "then": {
+                "children": [
+                  {
+                    "in": [
+                      1,
+                      null
+                    ],
+                    "then": {
+                      "children": [
+                        {
+                          "in": [
+                            1,
+                            null
+                          ],
+                          "then": {
+                            "complexity": 0.0010000000474974513,
+                            "loss": 0.006000000052154064,
+                            "name": "recidivate-within-two-years:1",
+                            "prediction": 1
+                          }
+                        },
+                        {
+                          "in": [
+                            null,
+                            1
+                          ],
+                          "then": {
+                            "complexity": 0.0010000000474974513,
+                            "loss": 0.018000001087784767,
+                            "name": "recidivate-within-two-years:1",
+                            "prediction": 0
+                          }
+                        }
+                      ],
+                      "feature": 8,
+                      "name": "priors:=1",
+                      "type": "integral"
+                    }
+                  },
+                  {
+                    "in": [
+                      null,
+                      1
+                    ],
+                    "then": {
+                      "children": [
+                        {
+                          "in": [
+                            1,
+                            null
+                          ],
+                          "then": {
+                            "children": [
+                              {
+                                "in": [
+                                  1,
+                                  null
+                                ],
+                                "then": {
+                                  "complexity": 0.0010000000474974513,
+                                  "loss": 0.0020000000949949026,
+                                  "name": "recidivate-within-two-years:1",
+                                  "prediction": 1
+                                }
+                              },
+                              {
+                                "in": [
+                                  null,
+                                  1
+                                ],
+                                "then": {
+                                  "complexity": 0.0010000000474974513,
+                                  "loss": 0.020000001415610313,
+                                  "name": "recidivate-within-two-years:1",
+                                  "prediction": 0
+                                }
+                              }
+                            ],
+                            "feature": 9,
+                            "name": "priors:2-3",
+                            "type": "integral"
+                          }
+                        },
+                        {
+                          "in": [
+                            null,
+                            1
+                          ],
+                          "then": {
+                            "children": [
+                              {
+                                "in": [
+                                  1,
+                                  null
+                                ],
+                                "then": {
+                                  "children": [
+                                    {
+                                      "in": [
+                                        1,
+                                        null
+                                      ],
+                                      "then": {
+                                        "complexity": 0.0010000000474974513,
+                                        "loss": 0.0020000000949949026,
+                                        "name": "recidivate-within-two-years:1",
+                                        "prediction": 1
+                                      }
+                                    },
+                                    {
+                                      "in": [
+                                        null,
+                                        1
+                                      ],
+                                      "then": {
+                                        "complexity": 0.0010000000474974513,
+                                        "loss": 0.01600000075995922,
+                                        "name": "recidivate-within-two-years:1",
+                                        "prediction": 0
+                                      }
+                                    }
+                                  ],
+                                  "feature": 8,
+                                  "name": "priors:=1",
+                                  "type": "integral"
+                                }
+                              },
+                              {
+                                "in": [
+                                  null,
+                                  1
+                                ],
+                                "then": {
+                                  "complexity": 0.0010000000474974513,
+                                  "loss": 0.1120000034570694,
+                                  "name": "recidivate-within-two-years:1",
+                                  "prediction": 0
+                                }
+                              }
+                            ],
+                            "feature": 2,
+                            "name": "age:<26",
+                            "type": "integral"
+                          }
+                        }
+                      ],
+                      "feature": 1,
+                      "name": "age:<23",
+                      "type": "integral"
+                    }
+                  }
+                ],
+                "feature": 0,
+                "name": "age:<21",
+                "type": "integral"
+              }
+            },
+            {
+              "in": [
+                null,
+                1
+              ],
+              "then": {
+                "children": [
+                  {
+                    "in": [
+                      1,
+                      null
+                    ],
+                    "then": {
+                      "children": [
+                        {
+                          "in": [
+                            1,
+                            null
+                          ],
+                          "then": {
+                            "complexity": 0.0010000000474974513,
+                            "loss": 0.0020000000949949026,
+                            "name": "recidivate-within-two-years:1",
+                            "prediction": 1
+                          }
+                        },
+                        {
+                          "in": [
+                            null,
+                            1
+                          ],
+                          "then": {
+                            "complexity": 0.0010000000474974513,
+                            "loss": 0.0,
+                            "name": "recidivate-within-two-years:1",
+                            "prediction": 0
+                          }
+                        }
+                      ],
+                      "feature": 2,
+                      "name": "age:<26",
+                      "type": "integral"
+                    }
+                  },
+                  {
+                    "in": [
+                      null,
+                      1
+                    ],
+                    "then": {
+                      "children": [
+                        {
+                          "in": [
+                            1,
+                            null
+                          ],
+                          "then": {
+                            "children": [
+                              {
+                                "in": [
+                                  1,
+                                  null
+                                ],
+                                "then": {
+                                  "complexity": 0.0010000000474974513,
+                                  "loss": 0.006000000052154064,
+                                  "name": "recidivate-within-two-years:1",
+                                  "prediction": 1
+                                }
+                              },
+                              {
+                                "in": [
+                                  null,
+                                  1
+                                ],
+                                "then": {
+                                  "complexity": 0.0010000000474974513,
+                                  "loss": 0.0,
+                                  "name": "recidivate-within-two-years:1",
+                                  "prediction": 0
+                                }
+                              }
+                            ],
+                            "feature": 5,
+                            "name": "juvenile-misdemeanors:=0",
+                            "type": "integral"
+                          }
+                        },
+                        {
+                          "in": [
+                            null,
+                            1
+                          ],
+                          "then": {
+                            "complexity": 0.0010000000474974513,
+                            "loss": 0.0020000000949949026,
+                            "name": "recidivate-within-two-years:1",
+                            "prediction": 0
+                          }
+                        }
+                      ],
+                      "feature": 4,
+                      "name": "juvenile-felonies:=0",
+                      "type": "integral"
+                    }
+                  }
+                ],
+                "feature": 9,
+                "name": "priors:2-3",
+                "type": "integral"
+              }
+            }
+          ],
+          "feature": 6,
+          "name": "juvenile-crimes:=0",
+          "type": "integral"
+        }
+      }
+    ],
+    "feature": 10,
+    "name": "priors:>3",
+    "type": "integral"
+  }
+]

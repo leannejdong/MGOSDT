@@ -26,16 +26,16 @@ Refer to [**Dependency Installation**](#dependencies)
 ## As a Stand-Alone Command Line Program
 ### Installation
 ```
-./autobuild --build
+./autobuild --install
 ```
 
 ### Executing the Program
 ```bash
 sh run.sh
 # or
-gosdt dataset.csv config.json
+gosdt  pokerc4.csv config.json
 # or 
-cat dataset.csv | gosdt config.json >> output.json
+time gosdt pokerc4.csv experiments/configurations/debug.json > outputs/n-ary/pokerc4.json
 ```
 
 For examples of dataset files, refer to `experiments/datasets/compas/binned.csv`.
