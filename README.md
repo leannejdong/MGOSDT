@@ -141,7 +141,7 @@ Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
    ```
  - **Build and Install Program**
    ```
-   ./autobuild --build --enable-tests
+   ./autobuild --install --enable-tests
    ```
  - **Run the Program** 
    ```
