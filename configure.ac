@@ -1,7 +1,7 @@
 AC_PREREQ([2.69])
 AC_INIT([gosdt],[0.1.0])
 #: ${CXXFLAGS=-O3} # for production release
-: ${CXXFLAGS=-O0 -g} # for debugging
+: ${CXXFLAGS=-O2 -g} # for debugging
 AC_CONFIG_MACRO_DIR([auto])
 AC_CONFIG_AUX_DIR([build])
 m4_include([auto/ax_cxx_compile_stdcxx.m4])
