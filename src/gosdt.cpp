@@ -59,11 +59,11 @@ void GOSDT::fit(std::istream & data_source, std::unordered_set< Model > & models
         }
         #endif
     }
-    for (auto iterator = workers.begin(); iterator != workers.end(); ++iterator) { (* iterator).join(); } // Wait for the thread pool to terminate
+//    for (auto iterator = workers.begin(); iterator != workers.end(); ++iterator) { (* iterator).join(); } // Wait for the thread pool to terminate
 
-//    for (auto&model: models) {
-//        model.join();
-//    }
+    for (auto &thread: workers) {
+        thread.join();
+    }
     auto stop = std::chrono::steady_clock::now(); // Stop measuring training time
     GOSDT::time = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() / 1000.0;
     if(Configuration::verbose) { std::cout << "Optimization Complete" << std::endl; }
