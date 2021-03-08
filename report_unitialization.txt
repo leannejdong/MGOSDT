@@ -1,0 +1,561 @@
+==118842== Memcheck, a memory error detector
+==118842== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==118842== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==118842== Command: gosdt m2.csv experiments/configurations/debug.json
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x142365: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x163305: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842==    by 0x17BC4C: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x17DC8C: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x11945C: main (in /usr/local/bin/gosdt)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488ADD8: tbb::spin_rw_mutex_v3::internal_acquire_reader() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x14238A: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x163305: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842==    by 0x17BC4C: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x17DC8C: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x11945C: main (in /usr/local/bin/gosdt)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488ADE5: tbb::spin_rw_mutex_v3::internal_acquire_reader() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x14238A: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x163305: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842==    by 0x17BC4C: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x17DC8C: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x11945C: main (in /usr/local/bin/gosdt)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x142390: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x163305: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842==    by 0x17BC4C: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x17DC8C: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x11945C: main (in /usr/local/bin/gosdt)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AE9D: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x142647: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x163305: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842==    by 0x17BC4C: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x17DC8C: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x11945C: main (in /usr/local/bin/gosdt)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AECB: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x142647: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x163305: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842==    by 0x17BC4C: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x17DC8C: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x11945C: main (in /usr/local/bin/gosdt)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AEEA: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x142647: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x163305: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842==    by 0x17BC4C: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x17DC8C: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x11945C: main (in /usr/local/bin/gosdt)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AF29: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x142647: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x163305: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842==    by 0x17BC4C: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x17DC8C: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x11945C: main (in /usr/local/bin/gosdt)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x142716: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x163305: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842==    by 0x17BC4C: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x17DC8C: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x11945C: main (in /usr/local/bin/gosdt)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Conditional jump or move depends on uninitialised value(s)
+==118842==    at 0x142C3D: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x163305: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842==    by 0x17BC4C: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x17DC8C: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x11945C: main (in /usr/local/bin/gosdt)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x142467: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x163305: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842==    by 0x17BC4C: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x17DC8C: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/local/bin/gosdt)
+==118842==    by 0x11945C: main (in /usr/local/bin/gosdt)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Thread 2:
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x143514: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x143522: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AF84: tbb::spin_rw_mutex_v3::internal_try_acquire_writer() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x143865: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AF98: tbb::spin_rw_mutex_v3::internal_try_acquire_writer() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x143865: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x143878: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x143898: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x1438E1: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x1438EF: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AF84: tbb::spin_rw_mutex_v3::internal_try_acquire_writer() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x1439DC: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AF98: tbb::spin_rw_mutex_v3::internal_try_acquire_writer() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x1439DC: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x1439EA: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x1432D7: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x143315: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x143327: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488ADD8: tbb::spin_rw_mutex_v3::internal_acquire_reader() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x14334B: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488ADE5: tbb::spin_rw_mutex_v3::internal_acquire_reader() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x14334B: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x143356: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Conditional jump or move depends on uninitialised value(s)
+==118842==    at 0x14338C: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AE9D: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x143405: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AECB: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x143405: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AEEA: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x143405: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x488AF29: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==118842==    by 0x143405: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x143398: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x14339C: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Conditional jump or move depends on uninitialised value(s)
+==118842==    at 0x1433B8: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x1433C9: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (in /usr/local/bin/gosdt)
+==118842==    by 0x143A06: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x14391F: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Conditional jump or move depends on uninitialised value(s)
+==118842==    at 0x14394C: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x143959: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x14395D: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Conditional jump or move depends on uninitialised value(s)
+==118842==    at 0x14398F: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x1439A5: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x14354E: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Conditional jump or move depends on uninitialised value(s)
+==118842==    at 0x1412FA: Tile::operator==(Tile const&) const (in /usr/local/bin/gosdt)
+==118842==    by 0x1411B1: Message::operator==(Message const&) const (in /usr/local/bin/gosdt)
+==118842==    by 0x14358E: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x1437CC: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Conditional jump or move depends on uninitialised value(s)
+==118842==    at 0x1437E6: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+==118842== Use of uninitialised value of size 8
+==118842==    at 0x1437F8: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::erase(Message* const&) (in /usr/local/bin/gosdt)
+==118842==    by 0x1431A1: Queue::pop(Message&) (in /usr/local/bin/gosdt)
+==118842==    by 0x16FAC7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+==118842==    by 0x17BB15: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+==118842==    by 0x4A4ED83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==118842==    by 0x4CCE608: start_thread (pthread_create.c:477)
+==118842==    by 0x4E0A292: clone (clone.S:95)
+==118842==  Uninitialised value was created by a stack allocation
+==118842==    at 0x16305F: Optimizer::initialize() (in /usr/local/bin/gosdt)
+==118842== 
+checking...
+==118842== 
+==118842== HEAP SUMMARY:
+==118842==     in use at exit: 24,192 bytes in 173 blocks
+==118842==   total heap usage: 88,103 allocs, 87,930 frees, 68,878,034 bytes allocated
+==118842== 
+==118842== LEAK SUMMARY:
+==118842==    definitely lost: 4,576 bytes in 13 blocks
+==118842==    indirectly lost: 17,696 bytes in 152 blocks
+==118842==      possibly lost: 0 bytes in 0 blocks
+==118842==    still reachable: 1,920 bytes in 8 blocks
+==118842==         suppressed: 0 bytes in 0 blocks
+==118842== Rerun with --leak-check=full to see details of leaked memory
+==118842== 
+==118842== For lists of detected and suppressed errors, rerun with: -s
+==118842== ERROR SUMMARY: 48 errors from 48 contexts (suppressed: 0 from 0)
