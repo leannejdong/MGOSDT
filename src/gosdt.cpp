@@ -20,8 +20,8 @@ void GOSDT::fit(std::istream & data_source, std::string & result) {
     std::unordered_set< Model > models;
     fit(data_source, models);
     json output = json::array();
-    for (auto iterator = models.begin(); iterator != models.end(); ++iterator) {
-        Model model = * iterator;
+    for (auto& model: models) {
+        // Model model = * iterator;
         json object = json::object();
         model.to_json(object);
         output.push_back(object);
@@ -45,7 +45,7 @@ void GOSDT::fit(std::istream & data_source, std::unordered_set< Model > & models
     std::vector< int > iterations(Configuration::worker_limit);
 
     if(Configuration::verbose) { std::cout << "Starting Optimization" << std::endl; }
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::steady_clock::now();
 
     optimizer.initialize();
     for (unsigned int i = 0; i < Configuration::worker_limit; ++i) {
@@ -55,13 +55,16 @@ void GOSDT::fit(std::istream & data_source, std::unordered_set< Model > & models
             // If using Ubuntu Build, we can pin each thread to a specific CPU core to improve cache locality
             cpu_set_t cpuset; CPU_ZERO(&cpuset); CPU_SET(i, &cpuset);
             int error = pthread_setaffinity_np(workers[i].native_handle(), sizeof(cpu_set_t), &cpuset);
-            if (error != 0) { std::cerr << "Error calling pthread_setaffinity_np: " << error << std::endl; }
+            if (error != 0) { std::cerr << "Error calling pthread_setaffinity_np: " << error << "\n"; }
         }
         #endif
     }
     for (auto iterator = workers.begin(); iterator != workers.end(); ++iterator) { (* iterator).join(); } // Wait for the thread pool to terminate
-    
-    auto stop = std::chrono::high_resolution_clock::now(); // Stop measuring training time
+
+//    for (auto&model: models) {
+//        model.join();
+//    }
+    auto stop = std::chrono::steady_clock::now(); // Stop measuring training time
     GOSDT::time = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() / 1000.0;
     if(Configuration::verbose) { std::cout << "Optimization Complete" << std::endl; }
 
