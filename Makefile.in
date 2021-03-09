@@ -92,8 +92,7 @@ host_triplet = @host@
 @INCLUDE_OPENCL_TRUE@@OSX_TRUE@am__append_2 = -DINCLUDE_OPENCL
 @INCLUDE_OPENCL_TRUE@@OSX_TRUE@am__append_3 = $(CL_LD_FLAGS)
 @INCLUDE_OPENCL_TRUE@@OSX_TRUE@am__append_4 = $(CL_ADD)
-bin_PROGRAMS = gosdt$(EXEEXT) $(am__EXEEXT_1)
-@INCLUDE_TESTS_TRUE@am__append_5 = gosdt_test
+bin_PROGRAMS = gosdt$(EXEEXT) gosdt_test$(EXEEXT)
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/auto/ax_cxx_compile_stdcxx.m4 \
@@ -108,7 +107,6 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-@INCLUDE_TESTS_TRUE@am__EXEEXT_1 = gosdt_test$(EXEEXT)
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
@@ -129,43 +127,20 @@ am__DEPENDENCIES_3 = $(am__DEPENDENCIES_2)
 gosdt_DEPENDENCIES = $(am__DEPENDENCIES_3)
 gosdt_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(gosdt_LDFLAGS) \
 	$(LDFLAGS) -o $@
-am__gosdt_test_SOURCES_DIST = src/types.hpp \
-	src/integrity_violation.hpp \
-	src/optimizer/diagnosis/false_convergence.hpp \
-	src/optimizer/diagnosis/non_convergence.hpp \
-	src/optimizer/diagnosis/trace.hpp \
-	src/optimizer/diagnosis/tree.hpp \
-	src/optimizer/dispatch/dispatch.hpp \
-	src/optimizer/extraction/models.hpp src/bitmask.cpp \
-	src/bitmask.hpp src/configuration.cpp src/configuration.hpp \
-	src/task.cpp src/task.hpp src/message.cpp src/message.hpp \
-	src/tile.cpp src/tile.hpp src/graph.cpp src/graph.hpp \
-	src/queue.cpp src/queue.hpp src/model.cpp src/model.hpp \
-	src/encoder.cpp src/encoder.hpp src/index.cpp src/index.hpp \
-	src/dataset.cpp src/dataset.hpp src/optimizer.cpp \
-	src/optimizer.hpp src/state.cpp src/state.hpp \
-	src/local_state.cpp src/local_state.hpp src/gosdt.cpp \
-	src/gosdt.hpp test/test_bitmask.hpp test/test_index.hpp \
-	test/test_queue.hpp test/test_consistency.hpp test/main.cpp
-@INCLUDE_TESTS_TRUE@am_gosdt_test_OBJECTS =  \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-bitmask.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-configuration.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-task.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-message.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-tile.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-graph.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-queue.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-model.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-encoder.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-index.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-dataset.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-optimizer.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-state.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-local_state.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	src/gosdt_test-gosdt.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	test/gosdt_test-main.$(OBJEXT)
+am_gosdt_test_OBJECTS = src/gosdt_test-bitmask.$(OBJEXT) \
+	src/gosdt_test-configuration.$(OBJEXT) \
+	src/gosdt_test-task.$(OBJEXT) src/gosdt_test-message.$(OBJEXT) \
+	src/gosdt_test-tile.$(OBJEXT) src/gosdt_test-graph.$(OBJEXT) \
+	src/gosdt_test-queue.$(OBJEXT) src/gosdt_test-model.$(OBJEXT) \
+	src/gosdt_test-encoder.$(OBJEXT) \
+	src/gosdt_test-index.$(OBJEXT) \
+	src/gosdt_test-dataset.$(OBJEXT) \
+	src/gosdt_test-optimizer.$(OBJEXT) \
+	src/gosdt_test-state.$(OBJEXT) \
+	src/gosdt_test-local_state.$(OBJEXT) \
+	src/gosdt_test-gosdt.$(OBJEXT) test/gosdt_test-main.$(OBJEXT)
 gosdt_test_OBJECTS = $(am_gosdt_test_OBJECTS)
-@INCLUDE_TESTS_TRUE@gosdt_test_DEPENDENCIES = $(am__DEPENDENCIES_3)
+gosdt_test_DEPENDENCIES = $(am__DEPENDENCIES_3)
 gosdt_test_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
 	$(gosdt_test_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
@@ -240,7 +215,7 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(gosdt_SOURCES) $(gosdt_test_SOURCES)
-DIST_SOURCES = $(gosdt_SOURCES) $(am__gosdt_test_SOURCES_DIST)
+DIST_SOURCES = $(gosdt_SOURCES) $(gosdt_test_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -466,53 +441,53 @@ gosdt_SOURCES = \
 	src/main.cpp \
 	src/main.hpp
 
-@INCLUDE_TESTS_TRUE@gosdt_test_CPPFLAGS = $(CPP_FLAGS)
-@INCLUDE_TESTS_TRUE@gosdt_test_LDFLAGS = $(LD_FLAGS)
-@INCLUDE_TESTS_TRUE@gosdt_test_LDADD = $(LD_ADD)
-@INCLUDE_TESTS_TRUE@gosdt_test_SOURCES = \
-@INCLUDE_TESTS_TRUE@	src/types.hpp \
-@INCLUDE_TESTS_TRUE@	src/integrity_violation.hpp \
-@INCLUDE_TESTS_TRUE@	src/optimizer/diagnosis/false_convergence.hpp \
-@INCLUDE_TESTS_TRUE@	src/optimizer/diagnosis/non_convergence.hpp \
-@INCLUDE_TESTS_TRUE@	src/optimizer/diagnosis/trace.hpp \
-@INCLUDE_TESTS_TRUE@	src/optimizer/diagnosis/tree.hpp \
-@INCLUDE_TESTS_TRUE@	src/optimizer/dispatch/dispatch.hpp \
-@INCLUDE_TESTS_TRUE@	src/optimizer/extraction/models.hpp \
-@INCLUDE_TESTS_TRUE@	src/bitmask.cpp \
-@INCLUDE_TESTS_TRUE@	src/bitmask.hpp \
-@INCLUDE_TESTS_TRUE@	src/configuration.cpp \
-@INCLUDE_TESTS_TRUE@	src/configuration.hpp \
-@INCLUDE_TESTS_TRUE@	src/task.cpp \
-@INCLUDE_TESTS_TRUE@	src/task.hpp \
-@INCLUDE_TESTS_TRUE@	src/message.cpp \
-@INCLUDE_TESTS_TRUE@	src/message.hpp \
-@INCLUDE_TESTS_TRUE@	src/tile.cpp \
-@INCLUDE_TESTS_TRUE@	src/tile.hpp \
-@INCLUDE_TESTS_TRUE@	src/graph.cpp \
-@INCLUDE_TESTS_TRUE@	src/graph.hpp \
-@INCLUDE_TESTS_TRUE@	src/queue.cpp \
-@INCLUDE_TESTS_TRUE@	src/queue.hpp \
-@INCLUDE_TESTS_TRUE@	src/model.cpp \
-@INCLUDE_TESTS_TRUE@	src/model.hpp \
-@INCLUDE_TESTS_TRUE@	src/encoder.cpp \
-@INCLUDE_TESTS_TRUE@	src/encoder.hpp \
-@INCLUDE_TESTS_TRUE@	src/index.cpp \
-@INCLUDE_TESTS_TRUE@	src/index.hpp \
-@INCLUDE_TESTS_TRUE@	src/dataset.cpp \
-@INCLUDE_TESTS_TRUE@	src/dataset.hpp \
-@INCLUDE_TESTS_TRUE@	src/optimizer.cpp \
-@INCLUDE_TESTS_TRUE@	src/optimizer.hpp \
-@INCLUDE_TESTS_TRUE@	src/state.cpp \
-@INCLUDE_TESTS_TRUE@	src/state.hpp \
-@INCLUDE_TESTS_TRUE@	src/local_state.cpp \
-@INCLUDE_TESTS_TRUE@	src/local_state.hpp \
-@INCLUDE_TESTS_TRUE@	src/gosdt.cpp \
-@INCLUDE_TESTS_TRUE@	src/gosdt.hpp \
-@INCLUDE_TESTS_TRUE@	test/test_bitmask.hpp \
-@INCLUDE_TESTS_TRUE@	test/test_index.hpp \
-@INCLUDE_TESTS_TRUE@	test/test_queue.hpp \
-@INCLUDE_TESTS_TRUE@	test/test_consistency.hpp \
-@INCLUDE_TESTS_TRUE@	test/main.cpp
+gosdt_test_CPPFLAGS = $(CPP_FLAGS)
+gosdt_test_LDFLAGS = $(LD_FLAGS)
+gosdt_test_LDADD = $(LD_ADD)
+gosdt_test_SOURCES = \
+	src/types.hpp \
+	src/integrity_violation.hpp \
+	src/optimizer/diagnosis/false_convergence.hpp \
+	src/optimizer/diagnosis/non_convergence.hpp \
+	src/optimizer/diagnosis/trace.hpp \
+	src/optimizer/diagnosis/tree.hpp \
+	src/optimizer/dispatch/dispatch.hpp \
+	src/optimizer/extraction/models.hpp \
+	src/bitmask.cpp \
+	src/bitmask.hpp \
+	src/configuration.cpp \
+	src/configuration.hpp \
+	src/task.cpp \
+	src/task.hpp \
+	src/message.cpp \
+	src/message.hpp \
+	src/tile.cpp \
+	src/tile.hpp \
+	src/graph.cpp \
+	src/graph.hpp \
+	src/queue.cpp \
+	src/queue.hpp \
+	src/model.cpp \
+	src/model.hpp \
+	src/encoder.cpp \
+	src/encoder.hpp \
+	src/index.cpp \
+	src/index.hpp \
+	src/dataset.cpp \
+	src/dataset.hpp \
+	src/optimizer.cpp \
+	src/optimizer.hpp \
+	src/state.cpp \
+	src/state.hpp \
+	src/local_state.cpp \
+	src/local_state.hpp \
+	src/gosdt.cpp \
+	src/gosdt.hpp \
+	test/test_bitmask.hpp \
+	test/test_index.hpp \
+	test/test_queue.hpp \
+	test/test_consistency.hpp \
+	test/main.cpp
 
 all: all-am
 
@@ -1613,6 +1588,8 @@ uninstall-am: uninstall-binPROGRAMS
 test: gosdt_test
 	./gosdt_test
 	rm gosdt_test
+
+# endif
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
