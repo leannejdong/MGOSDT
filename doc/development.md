@@ -21,7 +21,7 @@ Describes the project structure and tooling available.
 # Installing Dependencies
 Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
 
-# Build Process
+# Build Process (You may need `sudo`)
  - **Check Updates to the Dependency Tests or Makefile** 
    ```
    ./autobuild --regenerate
@@ -47,3 +47,26 @@ Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
    ./autobuild --install-python
    ```
  For a full list of build options, run `./autobuild --help`
+ 
+ For quick rebuild and test,
+ 
+ - **Clean up the files from ./configure
+ ```
+ ./autobuild --clean
+ ```
+ 
+ - **configure,
+ 
+ ```
+ ./configure
+ ```
+ 
+ ```
+ ./autobuild --install
+ ```
+ 
+ ```
+ ./autobuild --test
+ ```
+ -
+ 
