@@ -497,7 +497,7 @@ void Bitmask::resize(unsigned int new_size) {
     if (this -> content == NULL) { 
         initialize(new_size);
     } else if (Bitmask::integrity_check && new_size > (this -> capacity())) {
-        std::cout << "Resize: " << new_size << ", Capacity: " << this -> capacity() << std::endl;
+        std::cout << "Resize: " << new_size << ", Capacity: " << this -> capacity() << "\n";
         std::stringstream reason;
         reason << "Attempt to resize beyond allocated capacity";
         throw IntegrityViolation("Bitmask::resize", reason.str());
@@ -969,7 +969,7 @@ void Bitmask::benchmark(unsigned int size) {
     float gmp_hash = 0.0;
     float gmp_iterate = 0.0;
 
-    std::cout << "Benchmarking Memory Copy..." << std::endl;
+    std::cout << "Benchmarking Memory Copy..." << "\n";
     for (unsigned int i = 10; i < trials; ++i) {
         Bitmask expectation(length);
         for (unsigned int j = 0; j < length; ++j) { expectation.set(j, j % 100 < i); }
@@ -991,9 +991,9 @@ void Bitmask::benchmark(unsigned int size) {
             float duration = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count();
             custom_copy += duration;
             if (beta != expectation) {
-                std::cout << "Custom copy is incorrect." << std::endl;
-                std::cout << "Expected: " << expectation.to_string() << std::endl;
-                std::cout << "Got:      " << beta.to_string() << std::endl;
+                std::cout << "Custom copy is incorrect." << "\n";
+                std::cout << "Expected: " << expectation.to_string() << "\n";
+                std::cout << "Got:      " << beta.to_string() << "\n";
                 exit(1);
             }
         }
@@ -1015,9 +1015,9 @@ void Bitmask::benchmark(unsigned int size) {
             float duration = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count();
             std_copy += duration;
             if (beta != expectation) { 
-                std::cout << "STD copy is incorrect." << std::endl;
-                std::cout << "Expected: " << expectation.to_string() << std::endl;
-                std::cout << "Got:      " << beta.to_string() << std::endl;
+                std::cout << "STD copy is incorrect." << "\n";
+                std::cout << "Expected: " << expectation.to_string() << "\n";
+                std::cout << "Got:      " << beta.to_string() << "\n";
                 exit(1);
             }
         }
@@ -1054,19 +1054,19 @@ void Bitmask::benchmark(unsigned int size) {
             mpz_export(beta.data(), NULL, -1, sizeof(bitblock), -1, nails, mpz_beta);
             
             if (beta != expectation) { 
-                std::cout << "GMP copy is incorrect." << std::endl;
-                std::cout << "Expected: " << expectation.to_string() << std::endl;
-                std::cout << "Got:      " << beta.to_string() << std::endl;
+                std::cout << "GMP copy is incorrect." << "\n";
+                std::cout << "Expected: " << expectation.to_string() << "\n";
+                std::cout << "Got:      " << beta.to_string() << "\n";
                 exit(1);
             }
         }
     }
-    std::cout << "Results:" << std::endl;
-    std::cout << "  Custom Copy Average Runtime: " << (float)custom_copy / (float)(trials * samples) << " ns" << std::endl;
-    std::cout << "  STD Copy Average Runtime: " << (float)std_copy / (float)(trials * samples) << " ns" << std::endl;
-    std::cout << "  GMP Copy Average Runtime: " << (float)gmp_copy / (float)(trials * samples) << " ns" << std::endl;
+    std::cout << "Results:" << "\n";
+    std::cout << "  Custom Copy Average Runtime: " << (float)custom_copy / (float)(trials * samples) << " ns" << "\n";
+    std::cout << "  STD Copy Average Runtime: " << (float)std_copy / (float)(trials * samples) << " ns" << "\n";
+    std::cout << "  GMP Copy Average Runtime: " << (float)gmp_copy / (float)(trials * samples) << " ns" << "\n";
 
-    std::cout << "Benchmarking Memory Compare..." << std::endl;
+    std::cout << "Benchmarking Memory Compare..." << "\n";
     for (unsigned int i = 10; i < trials; ++i) {
         {
             // Set-up

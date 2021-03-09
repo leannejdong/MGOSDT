@@ -35,7 +35,7 @@ gosdt_CPPFLAGS = $(CPP_FLAGS)
 gosdt_LDFLAGS = $(LD_FLAGS) 
 gosdt_LDADD = $(LD_ADD)
 
-gosdt_SOURCES = \
+ gosdt_SOURCES = \
 	src/types.hpp \
 	src/integrity_violation.hpp \
 	src/optimizer/diagnosis/false_convergence.hpp \
@@ -126,7 +126,6 @@ gosdt_test_SOURCES = \
 	test/test_index.hpp \
 	test/test_queue.hpp \
 	test/test_consistency.hpp \
-	test/test.cpp \
-	test/test.hpp
+	test/main.cpp
 
 endif

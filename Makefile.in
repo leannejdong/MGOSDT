@@ -146,8 +146,7 @@ am__gosdt_test_SOURCES_DIST = src/types.hpp \
 	src/optimizer.hpp src/state.cpp src/state.hpp \
 	src/local_state.cpp src/local_state.hpp src/gosdt.cpp \
 	src/gosdt.hpp test/test_bitmask.hpp test/test_index.hpp \
-	test/test_queue.hpp test/test_consistency.hpp test/test.cpp \
-	test/test.hpp
+	test/test_queue.hpp test/test_consistency.hpp test/main.cpp
 @INCLUDE_TESTS_TRUE@am_gosdt_test_OBJECTS =  \
 @INCLUDE_TESTS_TRUE@	src/gosdt_test-bitmask.$(OBJEXT) \
 @INCLUDE_TESTS_TRUE@	src/gosdt_test-configuration.$(OBJEXT) \
@@ -164,7 +163,7 @@ am__gosdt_test_SOURCES_DIST = src/types.hpp \
 @INCLUDE_TESTS_TRUE@	src/gosdt_test-state.$(OBJEXT) \
 @INCLUDE_TESTS_TRUE@	src/gosdt_test-local_state.$(OBJEXT) \
 @INCLUDE_TESTS_TRUE@	src/gosdt_test-gosdt.$(OBJEXT) \
-@INCLUDE_TESTS_TRUE@	test/gosdt_test-test.$(OBJEXT)
+@INCLUDE_TESTS_TRUE@	test/gosdt_test-main.$(OBJEXT)
 gosdt_test_OBJECTS = $(am_gosdt_test_OBJECTS)
 @INCLUDE_TESTS_TRUE@gosdt_test_DEPENDENCIES = $(am__DEPENDENCIES_3)
 gosdt_test_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
@@ -209,7 +208,7 @@ am__depfiles_remade = src/$(DEPDIR)/gosdt-bitmask.Po \
 	src/$(DEPDIR)/gosdt_test-state.Po \
 	src/$(DEPDIR)/gosdt_test-task.Po \
 	src/$(DEPDIR)/gosdt_test-tile.Po \
-	test/$(DEPDIR)/gosdt_test-test.Po
+	test/$(DEPDIR)/gosdt_test-main.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -513,8 +512,7 @@ gosdt_SOURCES = \
 @INCLUDE_TESTS_TRUE@	test/test_index.hpp \
 @INCLUDE_TESTS_TRUE@	test/test_queue.hpp \
 @INCLUDE_TESTS_TRUE@	test/test_consistency.hpp \
-@INCLUDE_TESTS_TRUE@	test/test.cpp \
-@INCLUDE_TESTS_TRUE@	test/test.hpp
+@INCLUDE_TESTS_TRUE@	test/main.cpp
 
 all: all-am
 
@@ -673,7 +671,7 @@ test/$(am__dirstamp):
 test/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) test/$(DEPDIR)
 	@: > test/$(DEPDIR)/$(am__dirstamp)
-test/gosdt_test-test.$(OBJEXT): test/$(am__dirstamp) \
+test/gosdt_test-main.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 
 gosdt_test$(EXEEXT): $(gosdt_test_OBJECTS) $(gosdt_test_DEPENDENCIES) $(EXTRA_gosdt_test_DEPENDENCIES) 
@@ -719,7 +717,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/gosdt_test-state.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/gosdt_test-task.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/gosdt_test-tile.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/gosdt_test-test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/gosdt_test-main.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -1177,19 +1175,19 @@ src/gosdt_test-gosdt.obj: src/gosdt.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-gosdt.obj `if test -f 'src/gosdt.cpp'; then $(CYGPATH_W) 'src/gosdt.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gosdt.cpp'; fi`
 
-test/gosdt_test-test.o: test/test.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/gosdt_test-test.o -MD -MP -MF test/$(DEPDIR)/gosdt_test-test.Tpo -c -o test/gosdt_test-test.o `test -f 'test/test.cpp' || echo '$(srcdir)/'`test/test.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/gosdt_test-test.Tpo test/$(DEPDIR)/gosdt_test-test.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='test/test.cpp' object='test/gosdt_test-test.o' libtool=no @AMDEPBACKSLASH@
+test/gosdt_test-main.o: test/main.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/gosdt_test-main.o -MD -MP -MF test/$(DEPDIR)/gosdt_test-main.Tpo -c -o test/gosdt_test-main.o `test -f 'test/main.cpp' || echo '$(srcdir)/'`test/main.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/gosdt_test-main.Tpo test/$(DEPDIR)/gosdt_test-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='test/main.cpp' object='test/gosdt_test-main.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/gosdt_test-test.o `test -f 'test/test.cpp' || echo '$(srcdir)/'`test/test.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/gosdt_test-main.o `test -f 'test/main.cpp' || echo '$(srcdir)/'`test/main.cpp
 
-test/gosdt_test-test.obj: test/test.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/gosdt_test-test.obj -MD -MP -MF test/$(DEPDIR)/gosdt_test-test.Tpo -c -o test/gosdt_test-test.obj `if test -f 'test/test.cpp'; then $(CYGPATH_W) 'test/test.cpp'; else $(CYGPATH_W) '$(srcdir)/test/test.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/gosdt_test-test.Tpo test/$(DEPDIR)/gosdt_test-test.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='test/test.cpp' object='test/gosdt_test-test.obj' libtool=no @AMDEPBACKSLASH@
+test/gosdt_test-main.obj: test/main.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/gosdt_test-main.obj -MD -MP -MF test/$(DEPDIR)/gosdt_test-main.Tpo -c -o test/gosdt_test-main.obj `if test -f 'test/main.cpp'; then $(CYGPATH_W) 'test/main.cpp'; else $(CYGPATH_W) '$(srcdir)/test/main.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) test/$(DEPDIR)/gosdt_test-main.Tpo test/$(DEPDIR)/gosdt_test-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='test/main.cpp' object='test/gosdt_test-main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/gosdt_test-test.obj `if test -f 'test/test.cpp'; then $(CYGPATH_W) 'test/test.cpp'; else $(CYGPATH_W) '$(srcdir)/test/test.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/gosdt_test-main.obj `if test -f 'test/main.cpp'; then $(CYGPATH_W) 'test/main.cpp'; else $(CYGPATH_W) '$(srcdir)/test/main.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -1494,7 +1492,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/gosdt_test-state.Po
 	-rm -f src/$(DEPDIR)/gosdt_test-task.Po
 	-rm -f src/$(DEPDIR)/gosdt_test-tile.Po
-	-rm -f test/$(DEPDIR)/gosdt_test-test.Po
+	-rm -f test/$(DEPDIR)/gosdt_test-main.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -1573,7 +1571,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/gosdt_test-state.Po
 	-rm -f src/$(DEPDIR)/gosdt_test-task.Po
 	-rm -f src/$(DEPDIR)/gosdt_test-tile.Po
-	-rm -f test/$(DEPDIR)/gosdt_test-test.Po
+	-rm -f test/$(DEPDIR)/gosdt_test-main.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

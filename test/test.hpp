@@ -42,7 +42,7 @@ std::string error_message(std::string message, std::string context = "") {
 
 int expect(bool assertion, std::string message, std::string context = "") {
     if (!assertion) {
-        std::cout << error_message(message, context) << std::endl;
+        std::cout << error_message(message, context) << "\n";
         return 1;
     } else {
         return 0;
