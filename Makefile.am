@@ -32,7 +32,7 @@ endif
 
 bin_PROGRAMS = gosdt
 gosdt_CPPFLAGS = $(CPP_FLAGS)
-gosdt_LDFLAGS = $(LD_FLAGS) 
+gosdt_LDFLAGS = $(LD_FLAGS)
 gosdt_LDADD = $(LD_ADD)
 
  gosdt_SOURCES = \

@@ -422,7 +422,7 @@ LD_ADD = -ltbb -ltbbmalloc -lgmp $(am__append_4)
 CL_LD_FLAGS = @CL_CFLAGS@
 CL_ADD = @CL_LIBS@
 gosdt_CPPFLAGS = $(CPP_FLAGS)
-gosdt_LDFLAGS = $(LD_FLAGS) 
+gosdt_LDFLAGS = $(LD_FLAGS)
 gosdt_LDADD = $(LD_ADD)
 gosdt_SOURCES = \
 	src/types.hpp \

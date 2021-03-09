@@ -308,8 +308,8 @@ CPP =
 CPPFLAGS = 
 CXX = g++-10 -std=gnu++11
 CXXCPP = g++-10 -std=gnu++11 -E
-CXXDEPMODE = depmode=none
-CXXFLAGS = -g -O2
+CXXDEPMODE = depmode=gcc3
+CXXFLAGS = -O0 -g -Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align -Wno-vla -Wnull-dereference -Wmaybe-uninitialized -Wnon-virtual-dtor -Woverloaded-virtual -fsanitize=address
 CYGPATH_W = echo
 DEFS = -DPACKAGE_NAME=\"gosdt\" -DPACKAGE_TARNAME=\"gosdt\" -DPACKAGE_VERSION=\"0.1.0\" -DPACKAGE_STRING=\"gosdt\ 0.1.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DHAVE_CXX11=1 -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_IOSTREAM=1 -DHAVE_LIBGMP=1 -DHAVE_BOOST=1 -DPACKAGE=\"gosdt\" -DVERSION=\"0.1.0\"
 DEPDIR = .deps
@@ -422,7 +422,7 @@ LD_ADD = -ltbb -ltbbmalloc -lgmp $(am__append_4)
 CL_LD_FLAGS = 
 CL_ADD = 
 gosdt_CPPFLAGS = $(CPP_FLAGS)
-gosdt_LDFLAGS = $(LD_FLAGS) 
+gosdt_LDFLAGS = $(LD_FLAGS)
 gosdt_LDADD = $(LD_ADD)
 gosdt_SOURCES = \
 	src/types.hpp \
@@ -726,468 +726,468 @@ $(am__depfiles_remade):
 am--depfiles: $(am__depfiles_remade)
 
 .cpp.o:
-#	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
-#	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-#	$(am__mv) $$depbase.Tpo $$depbase.Po
-	$(AM_V_CXX)source='$<' object='$@' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ $<
+	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
+	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+	$(am__mv) $$depbase.Tpo $$depbase.Po
+#	$(AM_V_CXX)source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ $<
 
 .cpp.obj:
-#	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
-#	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
-#	$(am__mv) $$depbase.Tpo $$depbase.Po
-	$(AM_V_CXX)source='$<' object='$@' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
+	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
+	$(am__mv) $$depbase.Tpo $$depbase.Po
+#	$(AM_V_CXX)source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 src/gosdt-bitmask.o: src/bitmask.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-bitmask.o -MD -MP -MF src/$(DEPDIR)/gosdt-bitmask.Tpo -c -o src/gosdt-bitmask.o `test -f 'src/bitmask.cpp' || echo '$(srcdir)/'`src/bitmask.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-bitmask.Tpo src/$(DEPDIR)/gosdt-bitmask.Po
-	$(AM_V_CXX)source='src/bitmask.cpp' object='src/gosdt-bitmask.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-bitmask.o `test -f 'src/bitmask.cpp' || echo '$(srcdir)/'`src/bitmask.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-bitmask.o -MD -MP -MF src/$(DEPDIR)/gosdt-bitmask.Tpo -c -o src/gosdt-bitmask.o `test -f 'src/bitmask.cpp' || echo '$(srcdir)/'`src/bitmask.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-bitmask.Tpo src/$(DEPDIR)/gosdt-bitmask.Po
+#	$(AM_V_CXX)source='src/bitmask.cpp' object='src/gosdt-bitmask.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-bitmask.o `test -f 'src/bitmask.cpp' || echo '$(srcdir)/'`src/bitmask.cpp
 
 src/gosdt-bitmask.obj: src/bitmask.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-bitmask.obj -MD -MP -MF src/$(DEPDIR)/gosdt-bitmask.Tpo -c -o src/gosdt-bitmask.obj `if test -f 'src/bitmask.cpp'; then $(CYGPATH_W) 'src/bitmask.cpp'; else $(CYGPATH_W) '$(srcdir)/src/bitmask.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-bitmask.Tpo src/$(DEPDIR)/gosdt-bitmask.Po
-	$(AM_V_CXX)source='src/bitmask.cpp' object='src/gosdt-bitmask.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-bitmask.obj `if test -f 'src/bitmask.cpp'; then $(CYGPATH_W) 'src/bitmask.cpp'; else $(CYGPATH_W) '$(srcdir)/src/bitmask.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-bitmask.obj -MD -MP -MF src/$(DEPDIR)/gosdt-bitmask.Tpo -c -o src/gosdt-bitmask.obj `if test -f 'src/bitmask.cpp'; then $(CYGPATH_W) 'src/bitmask.cpp'; else $(CYGPATH_W) '$(srcdir)/src/bitmask.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-bitmask.Tpo src/$(DEPDIR)/gosdt-bitmask.Po
+#	$(AM_V_CXX)source='src/bitmask.cpp' object='src/gosdt-bitmask.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-bitmask.obj `if test -f 'src/bitmask.cpp'; then $(CYGPATH_W) 'src/bitmask.cpp'; else $(CYGPATH_W) '$(srcdir)/src/bitmask.cpp'; fi`
 
 src/gosdt-configuration.o: src/configuration.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-configuration.o -MD -MP -MF src/$(DEPDIR)/gosdt-configuration.Tpo -c -o src/gosdt-configuration.o `test -f 'src/configuration.cpp' || echo '$(srcdir)/'`src/configuration.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-configuration.Tpo src/$(DEPDIR)/gosdt-configuration.Po
-	$(AM_V_CXX)source='src/configuration.cpp' object='src/gosdt-configuration.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-configuration.o `test -f 'src/configuration.cpp' || echo '$(srcdir)/'`src/configuration.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-configuration.o -MD -MP -MF src/$(DEPDIR)/gosdt-configuration.Tpo -c -o src/gosdt-configuration.o `test -f 'src/configuration.cpp' || echo '$(srcdir)/'`src/configuration.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-configuration.Tpo src/$(DEPDIR)/gosdt-configuration.Po
+#	$(AM_V_CXX)source='src/configuration.cpp' object='src/gosdt-configuration.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-configuration.o `test -f 'src/configuration.cpp' || echo '$(srcdir)/'`src/configuration.cpp
 
 src/gosdt-configuration.obj: src/configuration.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-configuration.obj -MD -MP -MF src/$(DEPDIR)/gosdt-configuration.Tpo -c -o src/gosdt-configuration.obj `if test -f 'src/configuration.cpp'; then $(CYGPATH_W) 'src/configuration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/configuration.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-configuration.Tpo src/$(DEPDIR)/gosdt-configuration.Po
-	$(AM_V_CXX)source='src/configuration.cpp' object='src/gosdt-configuration.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-configuration.obj `if test -f 'src/configuration.cpp'; then $(CYGPATH_W) 'src/configuration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/configuration.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-configuration.obj -MD -MP -MF src/$(DEPDIR)/gosdt-configuration.Tpo -c -o src/gosdt-configuration.obj `if test -f 'src/configuration.cpp'; then $(CYGPATH_W) 'src/configuration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/configuration.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-configuration.Tpo src/$(DEPDIR)/gosdt-configuration.Po
+#	$(AM_V_CXX)source='src/configuration.cpp' object='src/gosdt-configuration.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-configuration.obj `if test -f 'src/configuration.cpp'; then $(CYGPATH_W) 'src/configuration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/configuration.cpp'; fi`
 
 src/gosdt-task.o: src/task.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-task.o -MD -MP -MF src/$(DEPDIR)/gosdt-task.Tpo -c -o src/gosdt-task.o `test -f 'src/task.cpp' || echo '$(srcdir)/'`src/task.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-task.Tpo src/$(DEPDIR)/gosdt-task.Po
-	$(AM_V_CXX)source='src/task.cpp' object='src/gosdt-task.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-task.o `test -f 'src/task.cpp' || echo '$(srcdir)/'`src/task.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-task.o -MD -MP -MF src/$(DEPDIR)/gosdt-task.Tpo -c -o src/gosdt-task.o `test -f 'src/task.cpp' || echo '$(srcdir)/'`src/task.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-task.Tpo src/$(DEPDIR)/gosdt-task.Po
+#	$(AM_V_CXX)source='src/task.cpp' object='src/gosdt-task.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-task.o `test -f 'src/task.cpp' || echo '$(srcdir)/'`src/task.cpp
 
 src/gosdt-task.obj: src/task.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-task.obj -MD -MP -MF src/$(DEPDIR)/gosdt-task.Tpo -c -o src/gosdt-task.obj `if test -f 'src/task.cpp'; then $(CYGPATH_W) 'src/task.cpp'; else $(CYGPATH_W) '$(srcdir)/src/task.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-task.Tpo src/$(DEPDIR)/gosdt-task.Po
-	$(AM_V_CXX)source='src/task.cpp' object='src/gosdt-task.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-task.obj `if test -f 'src/task.cpp'; then $(CYGPATH_W) 'src/task.cpp'; else $(CYGPATH_W) '$(srcdir)/src/task.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-task.obj -MD -MP -MF src/$(DEPDIR)/gosdt-task.Tpo -c -o src/gosdt-task.obj `if test -f 'src/task.cpp'; then $(CYGPATH_W) 'src/task.cpp'; else $(CYGPATH_W) '$(srcdir)/src/task.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-task.Tpo src/$(DEPDIR)/gosdt-task.Po
+#	$(AM_V_CXX)source='src/task.cpp' object='src/gosdt-task.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-task.obj `if test -f 'src/task.cpp'; then $(CYGPATH_W) 'src/task.cpp'; else $(CYGPATH_W) '$(srcdir)/src/task.cpp'; fi`
 
 src/gosdt-message.o: src/message.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-message.o -MD -MP -MF src/$(DEPDIR)/gosdt-message.Tpo -c -o src/gosdt-message.o `test -f 'src/message.cpp' || echo '$(srcdir)/'`src/message.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-message.Tpo src/$(DEPDIR)/gosdt-message.Po
-	$(AM_V_CXX)source='src/message.cpp' object='src/gosdt-message.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-message.o `test -f 'src/message.cpp' || echo '$(srcdir)/'`src/message.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-message.o -MD -MP -MF src/$(DEPDIR)/gosdt-message.Tpo -c -o src/gosdt-message.o `test -f 'src/message.cpp' || echo '$(srcdir)/'`src/message.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-message.Tpo src/$(DEPDIR)/gosdt-message.Po
+#	$(AM_V_CXX)source='src/message.cpp' object='src/gosdt-message.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-message.o `test -f 'src/message.cpp' || echo '$(srcdir)/'`src/message.cpp
 
 src/gosdt-message.obj: src/message.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-message.obj -MD -MP -MF src/$(DEPDIR)/gosdt-message.Tpo -c -o src/gosdt-message.obj `if test -f 'src/message.cpp'; then $(CYGPATH_W) 'src/message.cpp'; else $(CYGPATH_W) '$(srcdir)/src/message.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-message.Tpo src/$(DEPDIR)/gosdt-message.Po
-	$(AM_V_CXX)source='src/message.cpp' object='src/gosdt-message.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-message.obj `if test -f 'src/message.cpp'; then $(CYGPATH_W) 'src/message.cpp'; else $(CYGPATH_W) '$(srcdir)/src/message.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-message.obj -MD -MP -MF src/$(DEPDIR)/gosdt-message.Tpo -c -o src/gosdt-message.obj `if test -f 'src/message.cpp'; then $(CYGPATH_W) 'src/message.cpp'; else $(CYGPATH_W) '$(srcdir)/src/message.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-message.Tpo src/$(DEPDIR)/gosdt-message.Po
+#	$(AM_V_CXX)source='src/message.cpp' object='src/gosdt-message.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-message.obj `if test -f 'src/message.cpp'; then $(CYGPATH_W) 'src/message.cpp'; else $(CYGPATH_W) '$(srcdir)/src/message.cpp'; fi`
 
 src/gosdt-tile.o: src/tile.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-tile.o -MD -MP -MF src/$(DEPDIR)/gosdt-tile.Tpo -c -o src/gosdt-tile.o `test -f 'src/tile.cpp' || echo '$(srcdir)/'`src/tile.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-tile.Tpo src/$(DEPDIR)/gosdt-tile.Po
-	$(AM_V_CXX)source='src/tile.cpp' object='src/gosdt-tile.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-tile.o `test -f 'src/tile.cpp' || echo '$(srcdir)/'`src/tile.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-tile.o -MD -MP -MF src/$(DEPDIR)/gosdt-tile.Tpo -c -o src/gosdt-tile.o `test -f 'src/tile.cpp' || echo '$(srcdir)/'`src/tile.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-tile.Tpo src/$(DEPDIR)/gosdt-tile.Po
+#	$(AM_V_CXX)source='src/tile.cpp' object='src/gosdt-tile.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-tile.o `test -f 'src/tile.cpp' || echo '$(srcdir)/'`src/tile.cpp
 
 src/gosdt-tile.obj: src/tile.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-tile.obj -MD -MP -MF src/$(DEPDIR)/gosdt-tile.Tpo -c -o src/gosdt-tile.obj `if test -f 'src/tile.cpp'; then $(CYGPATH_W) 'src/tile.cpp'; else $(CYGPATH_W) '$(srcdir)/src/tile.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-tile.Tpo src/$(DEPDIR)/gosdt-tile.Po
-	$(AM_V_CXX)source='src/tile.cpp' object='src/gosdt-tile.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-tile.obj `if test -f 'src/tile.cpp'; then $(CYGPATH_W) 'src/tile.cpp'; else $(CYGPATH_W) '$(srcdir)/src/tile.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-tile.obj -MD -MP -MF src/$(DEPDIR)/gosdt-tile.Tpo -c -o src/gosdt-tile.obj `if test -f 'src/tile.cpp'; then $(CYGPATH_W) 'src/tile.cpp'; else $(CYGPATH_W) '$(srcdir)/src/tile.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-tile.Tpo src/$(DEPDIR)/gosdt-tile.Po
+#	$(AM_V_CXX)source='src/tile.cpp' object='src/gosdt-tile.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-tile.obj `if test -f 'src/tile.cpp'; then $(CYGPATH_W) 'src/tile.cpp'; else $(CYGPATH_W) '$(srcdir)/src/tile.cpp'; fi`
 
 src/gosdt-graph.o: src/graph.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-graph.o -MD -MP -MF src/$(DEPDIR)/gosdt-graph.Tpo -c -o src/gosdt-graph.o `test -f 'src/graph.cpp' || echo '$(srcdir)/'`src/graph.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-graph.Tpo src/$(DEPDIR)/gosdt-graph.Po
-	$(AM_V_CXX)source='src/graph.cpp' object='src/gosdt-graph.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-graph.o `test -f 'src/graph.cpp' || echo '$(srcdir)/'`src/graph.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-graph.o -MD -MP -MF src/$(DEPDIR)/gosdt-graph.Tpo -c -o src/gosdt-graph.o `test -f 'src/graph.cpp' || echo '$(srcdir)/'`src/graph.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-graph.Tpo src/$(DEPDIR)/gosdt-graph.Po
+#	$(AM_V_CXX)source='src/graph.cpp' object='src/gosdt-graph.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-graph.o `test -f 'src/graph.cpp' || echo '$(srcdir)/'`src/graph.cpp
 
 src/gosdt-graph.obj: src/graph.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-graph.obj -MD -MP -MF src/$(DEPDIR)/gosdt-graph.Tpo -c -o src/gosdt-graph.obj `if test -f 'src/graph.cpp'; then $(CYGPATH_W) 'src/graph.cpp'; else $(CYGPATH_W) '$(srcdir)/src/graph.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-graph.Tpo src/$(DEPDIR)/gosdt-graph.Po
-	$(AM_V_CXX)source='src/graph.cpp' object='src/gosdt-graph.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-graph.obj `if test -f 'src/graph.cpp'; then $(CYGPATH_W) 'src/graph.cpp'; else $(CYGPATH_W) '$(srcdir)/src/graph.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-graph.obj -MD -MP -MF src/$(DEPDIR)/gosdt-graph.Tpo -c -o src/gosdt-graph.obj `if test -f 'src/graph.cpp'; then $(CYGPATH_W) 'src/graph.cpp'; else $(CYGPATH_W) '$(srcdir)/src/graph.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-graph.Tpo src/$(DEPDIR)/gosdt-graph.Po
+#	$(AM_V_CXX)source='src/graph.cpp' object='src/gosdt-graph.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-graph.obj `if test -f 'src/graph.cpp'; then $(CYGPATH_W) 'src/graph.cpp'; else $(CYGPATH_W) '$(srcdir)/src/graph.cpp'; fi`
 
 src/gosdt-queue.o: src/queue.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-queue.o -MD -MP -MF src/$(DEPDIR)/gosdt-queue.Tpo -c -o src/gosdt-queue.o `test -f 'src/queue.cpp' || echo '$(srcdir)/'`src/queue.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-queue.Tpo src/$(DEPDIR)/gosdt-queue.Po
-	$(AM_V_CXX)source='src/queue.cpp' object='src/gosdt-queue.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-queue.o `test -f 'src/queue.cpp' || echo '$(srcdir)/'`src/queue.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-queue.o -MD -MP -MF src/$(DEPDIR)/gosdt-queue.Tpo -c -o src/gosdt-queue.o `test -f 'src/queue.cpp' || echo '$(srcdir)/'`src/queue.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-queue.Tpo src/$(DEPDIR)/gosdt-queue.Po
+#	$(AM_V_CXX)source='src/queue.cpp' object='src/gosdt-queue.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-queue.o `test -f 'src/queue.cpp' || echo '$(srcdir)/'`src/queue.cpp
 
 src/gosdt-queue.obj: src/queue.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-queue.obj -MD -MP -MF src/$(DEPDIR)/gosdt-queue.Tpo -c -o src/gosdt-queue.obj `if test -f 'src/queue.cpp'; then $(CYGPATH_W) 'src/queue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/queue.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-queue.Tpo src/$(DEPDIR)/gosdt-queue.Po
-	$(AM_V_CXX)source='src/queue.cpp' object='src/gosdt-queue.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-queue.obj `if test -f 'src/queue.cpp'; then $(CYGPATH_W) 'src/queue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/queue.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-queue.obj -MD -MP -MF src/$(DEPDIR)/gosdt-queue.Tpo -c -o src/gosdt-queue.obj `if test -f 'src/queue.cpp'; then $(CYGPATH_W) 'src/queue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/queue.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-queue.Tpo src/$(DEPDIR)/gosdt-queue.Po
+#	$(AM_V_CXX)source='src/queue.cpp' object='src/gosdt-queue.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-queue.obj `if test -f 'src/queue.cpp'; then $(CYGPATH_W) 'src/queue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/queue.cpp'; fi`
 
 src/gosdt-model.o: src/model.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-model.o -MD -MP -MF src/$(DEPDIR)/gosdt-model.Tpo -c -o src/gosdt-model.o `test -f 'src/model.cpp' || echo '$(srcdir)/'`src/model.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-model.Tpo src/$(DEPDIR)/gosdt-model.Po
-	$(AM_V_CXX)source='src/model.cpp' object='src/gosdt-model.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-model.o `test -f 'src/model.cpp' || echo '$(srcdir)/'`src/model.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-model.o -MD -MP -MF src/$(DEPDIR)/gosdt-model.Tpo -c -o src/gosdt-model.o `test -f 'src/model.cpp' || echo '$(srcdir)/'`src/model.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-model.Tpo src/$(DEPDIR)/gosdt-model.Po
+#	$(AM_V_CXX)source='src/model.cpp' object='src/gosdt-model.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-model.o `test -f 'src/model.cpp' || echo '$(srcdir)/'`src/model.cpp
 
 src/gosdt-model.obj: src/model.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-model.obj -MD -MP -MF src/$(DEPDIR)/gosdt-model.Tpo -c -o src/gosdt-model.obj `if test -f 'src/model.cpp'; then $(CYGPATH_W) 'src/model.cpp'; else $(CYGPATH_W) '$(srcdir)/src/model.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-model.Tpo src/$(DEPDIR)/gosdt-model.Po
-	$(AM_V_CXX)source='src/model.cpp' object='src/gosdt-model.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-model.obj `if test -f 'src/model.cpp'; then $(CYGPATH_W) 'src/model.cpp'; else $(CYGPATH_W) '$(srcdir)/src/model.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-model.obj -MD -MP -MF src/$(DEPDIR)/gosdt-model.Tpo -c -o src/gosdt-model.obj `if test -f 'src/model.cpp'; then $(CYGPATH_W) 'src/model.cpp'; else $(CYGPATH_W) '$(srcdir)/src/model.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-model.Tpo src/$(DEPDIR)/gosdt-model.Po
+#	$(AM_V_CXX)source='src/model.cpp' object='src/gosdt-model.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-model.obj `if test -f 'src/model.cpp'; then $(CYGPATH_W) 'src/model.cpp'; else $(CYGPATH_W) '$(srcdir)/src/model.cpp'; fi`
 
 src/gosdt-encoder.o: src/encoder.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-encoder.o -MD -MP -MF src/$(DEPDIR)/gosdt-encoder.Tpo -c -o src/gosdt-encoder.o `test -f 'src/encoder.cpp' || echo '$(srcdir)/'`src/encoder.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-encoder.Tpo src/$(DEPDIR)/gosdt-encoder.Po
-	$(AM_V_CXX)source='src/encoder.cpp' object='src/gosdt-encoder.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-encoder.o `test -f 'src/encoder.cpp' || echo '$(srcdir)/'`src/encoder.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-encoder.o -MD -MP -MF src/$(DEPDIR)/gosdt-encoder.Tpo -c -o src/gosdt-encoder.o `test -f 'src/encoder.cpp' || echo '$(srcdir)/'`src/encoder.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-encoder.Tpo src/$(DEPDIR)/gosdt-encoder.Po
+#	$(AM_V_CXX)source='src/encoder.cpp' object='src/gosdt-encoder.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-encoder.o `test -f 'src/encoder.cpp' || echo '$(srcdir)/'`src/encoder.cpp
 
 src/gosdt-encoder.obj: src/encoder.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-encoder.obj -MD -MP -MF src/$(DEPDIR)/gosdt-encoder.Tpo -c -o src/gosdt-encoder.obj `if test -f 'src/encoder.cpp'; then $(CYGPATH_W) 'src/encoder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/encoder.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-encoder.Tpo src/$(DEPDIR)/gosdt-encoder.Po
-	$(AM_V_CXX)source='src/encoder.cpp' object='src/gosdt-encoder.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-encoder.obj `if test -f 'src/encoder.cpp'; then $(CYGPATH_W) 'src/encoder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/encoder.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-encoder.obj -MD -MP -MF src/$(DEPDIR)/gosdt-encoder.Tpo -c -o src/gosdt-encoder.obj `if test -f 'src/encoder.cpp'; then $(CYGPATH_W) 'src/encoder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/encoder.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-encoder.Tpo src/$(DEPDIR)/gosdt-encoder.Po
+#	$(AM_V_CXX)source='src/encoder.cpp' object='src/gosdt-encoder.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-encoder.obj `if test -f 'src/encoder.cpp'; then $(CYGPATH_W) 'src/encoder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/encoder.cpp'; fi`
 
 src/gosdt-index.o: src/index.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-index.o -MD -MP -MF src/$(DEPDIR)/gosdt-index.Tpo -c -o src/gosdt-index.o `test -f 'src/index.cpp' || echo '$(srcdir)/'`src/index.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-index.Tpo src/$(DEPDIR)/gosdt-index.Po
-	$(AM_V_CXX)source='src/index.cpp' object='src/gosdt-index.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-index.o `test -f 'src/index.cpp' || echo '$(srcdir)/'`src/index.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-index.o -MD -MP -MF src/$(DEPDIR)/gosdt-index.Tpo -c -o src/gosdt-index.o `test -f 'src/index.cpp' || echo '$(srcdir)/'`src/index.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-index.Tpo src/$(DEPDIR)/gosdt-index.Po
+#	$(AM_V_CXX)source='src/index.cpp' object='src/gosdt-index.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-index.o `test -f 'src/index.cpp' || echo '$(srcdir)/'`src/index.cpp
 
 src/gosdt-index.obj: src/index.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-index.obj -MD -MP -MF src/$(DEPDIR)/gosdt-index.Tpo -c -o src/gosdt-index.obj `if test -f 'src/index.cpp'; then $(CYGPATH_W) 'src/index.cpp'; else $(CYGPATH_W) '$(srcdir)/src/index.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-index.Tpo src/$(DEPDIR)/gosdt-index.Po
-	$(AM_V_CXX)source='src/index.cpp' object='src/gosdt-index.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-index.obj `if test -f 'src/index.cpp'; then $(CYGPATH_W) 'src/index.cpp'; else $(CYGPATH_W) '$(srcdir)/src/index.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-index.obj -MD -MP -MF src/$(DEPDIR)/gosdt-index.Tpo -c -o src/gosdt-index.obj `if test -f 'src/index.cpp'; then $(CYGPATH_W) 'src/index.cpp'; else $(CYGPATH_W) '$(srcdir)/src/index.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-index.Tpo src/$(DEPDIR)/gosdt-index.Po
+#	$(AM_V_CXX)source='src/index.cpp' object='src/gosdt-index.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-index.obj `if test -f 'src/index.cpp'; then $(CYGPATH_W) 'src/index.cpp'; else $(CYGPATH_W) '$(srcdir)/src/index.cpp'; fi`
 
 src/gosdt-dataset.o: src/dataset.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-dataset.o -MD -MP -MF src/$(DEPDIR)/gosdt-dataset.Tpo -c -o src/gosdt-dataset.o `test -f 'src/dataset.cpp' || echo '$(srcdir)/'`src/dataset.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-dataset.Tpo src/$(DEPDIR)/gosdt-dataset.Po
-	$(AM_V_CXX)source='src/dataset.cpp' object='src/gosdt-dataset.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-dataset.o `test -f 'src/dataset.cpp' || echo '$(srcdir)/'`src/dataset.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-dataset.o -MD -MP -MF src/$(DEPDIR)/gosdt-dataset.Tpo -c -o src/gosdt-dataset.o `test -f 'src/dataset.cpp' || echo '$(srcdir)/'`src/dataset.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-dataset.Tpo src/$(DEPDIR)/gosdt-dataset.Po
+#	$(AM_V_CXX)source='src/dataset.cpp' object='src/gosdt-dataset.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-dataset.o `test -f 'src/dataset.cpp' || echo '$(srcdir)/'`src/dataset.cpp
 
 src/gosdt-dataset.obj: src/dataset.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-dataset.obj -MD -MP -MF src/$(DEPDIR)/gosdt-dataset.Tpo -c -o src/gosdt-dataset.obj `if test -f 'src/dataset.cpp'; then $(CYGPATH_W) 'src/dataset.cpp'; else $(CYGPATH_W) '$(srcdir)/src/dataset.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-dataset.Tpo src/$(DEPDIR)/gosdt-dataset.Po
-	$(AM_V_CXX)source='src/dataset.cpp' object='src/gosdt-dataset.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-dataset.obj `if test -f 'src/dataset.cpp'; then $(CYGPATH_W) 'src/dataset.cpp'; else $(CYGPATH_W) '$(srcdir)/src/dataset.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-dataset.obj -MD -MP -MF src/$(DEPDIR)/gosdt-dataset.Tpo -c -o src/gosdt-dataset.obj `if test -f 'src/dataset.cpp'; then $(CYGPATH_W) 'src/dataset.cpp'; else $(CYGPATH_W) '$(srcdir)/src/dataset.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-dataset.Tpo src/$(DEPDIR)/gosdt-dataset.Po
+#	$(AM_V_CXX)source='src/dataset.cpp' object='src/gosdt-dataset.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-dataset.obj `if test -f 'src/dataset.cpp'; then $(CYGPATH_W) 'src/dataset.cpp'; else $(CYGPATH_W) '$(srcdir)/src/dataset.cpp'; fi`
 
 src/gosdt-optimizer.o: src/optimizer.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-optimizer.o -MD -MP -MF src/$(DEPDIR)/gosdt-optimizer.Tpo -c -o src/gosdt-optimizer.o `test -f 'src/optimizer.cpp' || echo '$(srcdir)/'`src/optimizer.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-optimizer.Tpo src/$(DEPDIR)/gosdt-optimizer.Po
-	$(AM_V_CXX)source='src/optimizer.cpp' object='src/gosdt-optimizer.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-optimizer.o `test -f 'src/optimizer.cpp' || echo '$(srcdir)/'`src/optimizer.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-optimizer.o -MD -MP -MF src/$(DEPDIR)/gosdt-optimizer.Tpo -c -o src/gosdt-optimizer.o `test -f 'src/optimizer.cpp' || echo '$(srcdir)/'`src/optimizer.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-optimizer.Tpo src/$(DEPDIR)/gosdt-optimizer.Po
+#	$(AM_V_CXX)source='src/optimizer.cpp' object='src/gosdt-optimizer.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-optimizer.o `test -f 'src/optimizer.cpp' || echo '$(srcdir)/'`src/optimizer.cpp
 
 src/gosdt-optimizer.obj: src/optimizer.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-optimizer.obj -MD -MP -MF src/$(DEPDIR)/gosdt-optimizer.Tpo -c -o src/gosdt-optimizer.obj `if test -f 'src/optimizer.cpp'; then $(CYGPATH_W) 'src/optimizer.cpp'; else $(CYGPATH_W) '$(srcdir)/src/optimizer.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-optimizer.Tpo src/$(DEPDIR)/gosdt-optimizer.Po
-	$(AM_V_CXX)source='src/optimizer.cpp' object='src/gosdt-optimizer.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-optimizer.obj `if test -f 'src/optimizer.cpp'; then $(CYGPATH_W) 'src/optimizer.cpp'; else $(CYGPATH_W) '$(srcdir)/src/optimizer.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-optimizer.obj -MD -MP -MF src/$(DEPDIR)/gosdt-optimizer.Tpo -c -o src/gosdt-optimizer.obj `if test -f 'src/optimizer.cpp'; then $(CYGPATH_W) 'src/optimizer.cpp'; else $(CYGPATH_W) '$(srcdir)/src/optimizer.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-optimizer.Tpo src/$(DEPDIR)/gosdt-optimizer.Po
+#	$(AM_V_CXX)source='src/optimizer.cpp' object='src/gosdt-optimizer.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-optimizer.obj `if test -f 'src/optimizer.cpp'; then $(CYGPATH_W) 'src/optimizer.cpp'; else $(CYGPATH_W) '$(srcdir)/src/optimizer.cpp'; fi`
 
 src/gosdt-state.o: src/state.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-state.o -MD -MP -MF src/$(DEPDIR)/gosdt-state.Tpo -c -o src/gosdt-state.o `test -f 'src/state.cpp' || echo '$(srcdir)/'`src/state.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-state.Tpo src/$(DEPDIR)/gosdt-state.Po
-	$(AM_V_CXX)source='src/state.cpp' object='src/gosdt-state.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-state.o `test -f 'src/state.cpp' || echo '$(srcdir)/'`src/state.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-state.o -MD -MP -MF src/$(DEPDIR)/gosdt-state.Tpo -c -o src/gosdt-state.o `test -f 'src/state.cpp' || echo '$(srcdir)/'`src/state.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-state.Tpo src/$(DEPDIR)/gosdt-state.Po
+#	$(AM_V_CXX)source='src/state.cpp' object='src/gosdt-state.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-state.o `test -f 'src/state.cpp' || echo '$(srcdir)/'`src/state.cpp
 
 src/gosdt-state.obj: src/state.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-state.obj -MD -MP -MF src/$(DEPDIR)/gosdt-state.Tpo -c -o src/gosdt-state.obj `if test -f 'src/state.cpp'; then $(CYGPATH_W) 'src/state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/state.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-state.Tpo src/$(DEPDIR)/gosdt-state.Po
-	$(AM_V_CXX)source='src/state.cpp' object='src/gosdt-state.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-state.obj `if test -f 'src/state.cpp'; then $(CYGPATH_W) 'src/state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/state.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-state.obj -MD -MP -MF src/$(DEPDIR)/gosdt-state.Tpo -c -o src/gosdt-state.obj `if test -f 'src/state.cpp'; then $(CYGPATH_W) 'src/state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/state.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-state.Tpo src/$(DEPDIR)/gosdt-state.Po
+#	$(AM_V_CXX)source='src/state.cpp' object='src/gosdt-state.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-state.obj `if test -f 'src/state.cpp'; then $(CYGPATH_W) 'src/state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/state.cpp'; fi`
 
 src/gosdt-local_state.o: src/local_state.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-local_state.o -MD -MP -MF src/$(DEPDIR)/gosdt-local_state.Tpo -c -o src/gosdt-local_state.o `test -f 'src/local_state.cpp' || echo '$(srcdir)/'`src/local_state.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-local_state.Tpo src/$(DEPDIR)/gosdt-local_state.Po
-	$(AM_V_CXX)source='src/local_state.cpp' object='src/gosdt-local_state.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-local_state.o `test -f 'src/local_state.cpp' || echo '$(srcdir)/'`src/local_state.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-local_state.o -MD -MP -MF src/$(DEPDIR)/gosdt-local_state.Tpo -c -o src/gosdt-local_state.o `test -f 'src/local_state.cpp' || echo '$(srcdir)/'`src/local_state.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-local_state.Tpo src/$(DEPDIR)/gosdt-local_state.Po
+#	$(AM_V_CXX)source='src/local_state.cpp' object='src/gosdt-local_state.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-local_state.o `test -f 'src/local_state.cpp' || echo '$(srcdir)/'`src/local_state.cpp
 
 src/gosdt-local_state.obj: src/local_state.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-local_state.obj -MD -MP -MF src/$(DEPDIR)/gosdt-local_state.Tpo -c -o src/gosdt-local_state.obj `if test -f 'src/local_state.cpp'; then $(CYGPATH_W) 'src/local_state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/local_state.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-local_state.Tpo src/$(DEPDIR)/gosdt-local_state.Po
-	$(AM_V_CXX)source='src/local_state.cpp' object='src/gosdt-local_state.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-local_state.obj `if test -f 'src/local_state.cpp'; then $(CYGPATH_W) 'src/local_state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/local_state.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-local_state.obj -MD -MP -MF src/$(DEPDIR)/gosdt-local_state.Tpo -c -o src/gosdt-local_state.obj `if test -f 'src/local_state.cpp'; then $(CYGPATH_W) 'src/local_state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/local_state.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-local_state.Tpo src/$(DEPDIR)/gosdt-local_state.Po
+#	$(AM_V_CXX)source='src/local_state.cpp' object='src/gosdt-local_state.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-local_state.obj `if test -f 'src/local_state.cpp'; then $(CYGPATH_W) 'src/local_state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/local_state.cpp'; fi`
 
 src/gosdt-gosdt.o: src/gosdt.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-gosdt.o -MD -MP -MF src/$(DEPDIR)/gosdt-gosdt.Tpo -c -o src/gosdt-gosdt.o `test -f 'src/gosdt.cpp' || echo '$(srcdir)/'`src/gosdt.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-gosdt.Tpo src/$(DEPDIR)/gosdt-gosdt.Po
-	$(AM_V_CXX)source='src/gosdt.cpp' object='src/gosdt-gosdt.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-gosdt.o `test -f 'src/gosdt.cpp' || echo '$(srcdir)/'`src/gosdt.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-gosdt.o -MD -MP -MF src/$(DEPDIR)/gosdt-gosdt.Tpo -c -o src/gosdt-gosdt.o `test -f 'src/gosdt.cpp' || echo '$(srcdir)/'`src/gosdt.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-gosdt.Tpo src/$(DEPDIR)/gosdt-gosdt.Po
+#	$(AM_V_CXX)source='src/gosdt.cpp' object='src/gosdt-gosdt.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-gosdt.o `test -f 'src/gosdt.cpp' || echo '$(srcdir)/'`src/gosdt.cpp
 
 src/gosdt-gosdt.obj: src/gosdt.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-gosdt.obj -MD -MP -MF src/$(DEPDIR)/gosdt-gosdt.Tpo -c -o src/gosdt-gosdt.obj `if test -f 'src/gosdt.cpp'; then $(CYGPATH_W) 'src/gosdt.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gosdt.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-gosdt.Tpo src/$(DEPDIR)/gosdt-gosdt.Po
-	$(AM_V_CXX)source='src/gosdt.cpp' object='src/gosdt-gosdt.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-gosdt.obj `if test -f 'src/gosdt.cpp'; then $(CYGPATH_W) 'src/gosdt.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gosdt.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-gosdt.obj -MD -MP -MF src/$(DEPDIR)/gosdt-gosdt.Tpo -c -o src/gosdt-gosdt.obj `if test -f 'src/gosdt.cpp'; then $(CYGPATH_W) 'src/gosdt.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gosdt.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-gosdt.Tpo src/$(DEPDIR)/gosdt-gosdt.Po
+#	$(AM_V_CXX)source='src/gosdt.cpp' object='src/gosdt-gosdt.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-gosdt.obj `if test -f 'src/gosdt.cpp'; then $(CYGPATH_W) 'src/gosdt.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gosdt.cpp'; fi`
 
 src/gosdt-main.o: src/main.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-main.o -MD -MP -MF src/$(DEPDIR)/gosdt-main.Tpo -c -o src/gosdt-main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-main.Tpo src/$(DEPDIR)/gosdt-main.Po
-	$(AM_V_CXX)source='src/main.cpp' object='src/gosdt-main.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-main.o -MD -MP -MF src/$(DEPDIR)/gosdt-main.Tpo -c -o src/gosdt-main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-main.Tpo src/$(DEPDIR)/gosdt-main.Po
+#	$(AM_V_CXX)source='src/main.cpp' object='src/gosdt-main.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
 
 src/gosdt-main.obj: src/main.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-main.obj -MD -MP -MF src/$(DEPDIR)/gosdt-main.Tpo -c -o src/gosdt-main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-main.Tpo src/$(DEPDIR)/gosdt-main.Po
-	$(AM_V_CXX)source='src/main.cpp' object='src/gosdt-main.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt-main.obj -MD -MP -MF src/$(DEPDIR)/gosdt-main.Tpo -c -o src/gosdt-main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt-main.Tpo src/$(DEPDIR)/gosdt-main.Po
+#	$(AM_V_CXX)source='src/main.cpp' object='src/gosdt-main.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt-main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
 
 src/gosdt_test-bitmask.o: src/bitmask.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-bitmask.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-bitmask.Tpo -c -o src/gosdt_test-bitmask.o `test -f 'src/bitmask.cpp' || echo '$(srcdir)/'`src/bitmask.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-bitmask.Tpo src/$(DEPDIR)/gosdt_test-bitmask.Po
-	$(AM_V_CXX)source='src/bitmask.cpp' object='src/gosdt_test-bitmask.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-bitmask.o `test -f 'src/bitmask.cpp' || echo '$(srcdir)/'`src/bitmask.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-bitmask.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-bitmask.Tpo -c -o src/gosdt_test-bitmask.o `test -f 'src/bitmask.cpp' || echo '$(srcdir)/'`src/bitmask.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-bitmask.Tpo src/$(DEPDIR)/gosdt_test-bitmask.Po
+#	$(AM_V_CXX)source='src/bitmask.cpp' object='src/gosdt_test-bitmask.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-bitmask.o `test -f 'src/bitmask.cpp' || echo '$(srcdir)/'`src/bitmask.cpp
 
 src/gosdt_test-bitmask.obj: src/bitmask.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-bitmask.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-bitmask.Tpo -c -o src/gosdt_test-bitmask.obj `if test -f 'src/bitmask.cpp'; then $(CYGPATH_W) 'src/bitmask.cpp'; else $(CYGPATH_W) '$(srcdir)/src/bitmask.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-bitmask.Tpo src/$(DEPDIR)/gosdt_test-bitmask.Po
-	$(AM_V_CXX)source='src/bitmask.cpp' object='src/gosdt_test-bitmask.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-bitmask.obj `if test -f 'src/bitmask.cpp'; then $(CYGPATH_W) 'src/bitmask.cpp'; else $(CYGPATH_W) '$(srcdir)/src/bitmask.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-bitmask.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-bitmask.Tpo -c -o src/gosdt_test-bitmask.obj `if test -f 'src/bitmask.cpp'; then $(CYGPATH_W) 'src/bitmask.cpp'; else $(CYGPATH_W) '$(srcdir)/src/bitmask.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-bitmask.Tpo src/$(DEPDIR)/gosdt_test-bitmask.Po
+#	$(AM_V_CXX)source='src/bitmask.cpp' object='src/gosdt_test-bitmask.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-bitmask.obj `if test -f 'src/bitmask.cpp'; then $(CYGPATH_W) 'src/bitmask.cpp'; else $(CYGPATH_W) '$(srcdir)/src/bitmask.cpp'; fi`
 
 src/gosdt_test-configuration.o: src/configuration.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-configuration.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-configuration.Tpo -c -o src/gosdt_test-configuration.o `test -f 'src/configuration.cpp' || echo '$(srcdir)/'`src/configuration.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-configuration.Tpo src/$(DEPDIR)/gosdt_test-configuration.Po
-	$(AM_V_CXX)source='src/configuration.cpp' object='src/gosdt_test-configuration.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-configuration.o `test -f 'src/configuration.cpp' || echo '$(srcdir)/'`src/configuration.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-configuration.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-configuration.Tpo -c -o src/gosdt_test-configuration.o `test -f 'src/configuration.cpp' || echo '$(srcdir)/'`src/configuration.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-configuration.Tpo src/$(DEPDIR)/gosdt_test-configuration.Po
+#	$(AM_V_CXX)source='src/configuration.cpp' object='src/gosdt_test-configuration.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-configuration.o `test -f 'src/configuration.cpp' || echo '$(srcdir)/'`src/configuration.cpp
 
 src/gosdt_test-configuration.obj: src/configuration.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-configuration.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-configuration.Tpo -c -o src/gosdt_test-configuration.obj `if test -f 'src/configuration.cpp'; then $(CYGPATH_W) 'src/configuration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/configuration.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-configuration.Tpo src/$(DEPDIR)/gosdt_test-configuration.Po
-	$(AM_V_CXX)source='src/configuration.cpp' object='src/gosdt_test-configuration.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-configuration.obj `if test -f 'src/configuration.cpp'; then $(CYGPATH_W) 'src/configuration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/configuration.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-configuration.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-configuration.Tpo -c -o src/gosdt_test-configuration.obj `if test -f 'src/configuration.cpp'; then $(CYGPATH_W) 'src/configuration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/configuration.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-configuration.Tpo src/$(DEPDIR)/gosdt_test-configuration.Po
+#	$(AM_V_CXX)source='src/configuration.cpp' object='src/gosdt_test-configuration.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-configuration.obj `if test -f 'src/configuration.cpp'; then $(CYGPATH_W) 'src/configuration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/configuration.cpp'; fi`
 
 src/gosdt_test-task.o: src/task.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-task.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-task.Tpo -c -o src/gosdt_test-task.o `test -f 'src/task.cpp' || echo '$(srcdir)/'`src/task.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-task.Tpo src/$(DEPDIR)/gosdt_test-task.Po
-	$(AM_V_CXX)source='src/task.cpp' object='src/gosdt_test-task.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-task.o `test -f 'src/task.cpp' || echo '$(srcdir)/'`src/task.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-task.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-task.Tpo -c -o src/gosdt_test-task.o `test -f 'src/task.cpp' || echo '$(srcdir)/'`src/task.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-task.Tpo src/$(DEPDIR)/gosdt_test-task.Po
+#	$(AM_V_CXX)source='src/task.cpp' object='src/gosdt_test-task.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-task.o `test -f 'src/task.cpp' || echo '$(srcdir)/'`src/task.cpp
 
 src/gosdt_test-task.obj: src/task.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-task.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-task.Tpo -c -o src/gosdt_test-task.obj `if test -f 'src/task.cpp'; then $(CYGPATH_W) 'src/task.cpp'; else $(CYGPATH_W) '$(srcdir)/src/task.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-task.Tpo src/$(DEPDIR)/gosdt_test-task.Po
-	$(AM_V_CXX)source='src/task.cpp' object='src/gosdt_test-task.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-task.obj `if test -f 'src/task.cpp'; then $(CYGPATH_W) 'src/task.cpp'; else $(CYGPATH_W) '$(srcdir)/src/task.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-task.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-task.Tpo -c -o src/gosdt_test-task.obj `if test -f 'src/task.cpp'; then $(CYGPATH_W) 'src/task.cpp'; else $(CYGPATH_W) '$(srcdir)/src/task.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-task.Tpo src/$(DEPDIR)/gosdt_test-task.Po
+#	$(AM_V_CXX)source='src/task.cpp' object='src/gosdt_test-task.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-task.obj `if test -f 'src/task.cpp'; then $(CYGPATH_W) 'src/task.cpp'; else $(CYGPATH_W) '$(srcdir)/src/task.cpp'; fi`
 
 src/gosdt_test-message.o: src/message.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-message.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-message.Tpo -c -o src/gosdt_test-message.o `test -f 'src/message.cpp' || echo '$(srcdir)/'`src/message.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-message.Tpo src/$(DEPDIR)/gosdt_test-message.Po
-	$(AM_V_CXX)source='src/message.cpp' object='src/gosdt_test-message.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-message.o `test -f 'src/message.cpp' || echo '$(srcdir)/'`src/message.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-message.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-message.Tpo -c -o src/gosdt_test-message.o `test -f 'src/message.cpp' || echo '$(srcdir)/'`src/message.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-message.Tpo src/$(DEPDIR)/gosdt_test-message.Po
+#	$(AM_V_CXX)source='src/message.cpp' object='src/gosdt_test-message.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-message.o `test -f 'src/message.cpp' || echo '$(srcdir)/'`src/message.cpp
 
 src/gosdt_test-message.obj: src/message.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-message.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-message.Tpo -c -o src/gosdt_test-message.obj `if test -f 'src/message.cpp'; then $(CYGPATH_W) 'src/message.cpp'; else $(CYGPATH_W) '$(srcdir)/src/message.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-message.Tpo src/$(DEPDIR)/gosdt_test-message.Po
-	$(AM_V_CXX)source='src/message.cpp' object='src/gosdt_test-message.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-message.obj `if test -f 'src/message.cpp'; then $(CYGPATH_W) 'src/message.cpp'; else $(CYGPATH_W) '$(srcdir)/src/message.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-message.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-message.Tpo -c -o src/gosdt_test-message.obj `if test -f 'src/message.cpp'; then $(CYGPATH_W) 'src/message.cpp'; else $(CYGPATH_W) '$(srcdir)/src/message.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-message.Tpo src/$(DEPDIR)/gosdt_test-message.Po
+#	$(AM_V_CXX)source='src/message.cpp' object='src/gosdt_test-message.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-message.obj `if test -f 'src/message.cpp'; then $(CYGPATH_W) 'src/message.cpp'; else $(CYGPATH_W) '$(srcdir)/src/message.cpp'; fi`
 
 src/gosdt_test-tile.o: src/tile.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-tile.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-tile.Tpo -c -o src/gosdt_test-tile.o `test -f 'src/tile.cpp' || echo '$(srcdir)/'`src/tile.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-tile.Tpo src/$(DEPDIR)/gosdt_test-tile.Po
-	$(AM_V_CXX)source='src/tile.cpp' object='src/gosdt_test-tile.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-tile.o `test -f 'src/tile.cpp' || echo '$(srcdir)/'`src/tile.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-tile.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-tile.Tpo -c -o src/gosdt_test-tile.o `test -f 'src/tile.cpp' || echo '$(srcdir)/'`src/tile.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-tile.Tpo src/$(DEPDIR)/gosdt_test-tile.Po
+#	$(AM_V_CXX)source='src/tile.cpp' object='src/gosdt_test-tile.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-tile.o `test -f 'src/tile.cpp' || echo '$(srcdir)/'`src/tile.cpp
 
 src/gosdt_test-tile.obj: src/tile.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-tile.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-tile.Tpo -c -o src/gosdt_test-tile.obj `if test -f 'src/tile.cpp'; then $(CYGPATH_W) 'src/tile.cpp'; else $(CYGPATH_W) '$(srcdir)/src/tile.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-tile.Tpo src/$(DEPDIR)/gosdt_test-tile.Po
-	$(AM_V_CXX)source='src/tile.cpp' object='src/gosdt_test-tile.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-tile.obj `if test -f 'src/tile.cpp'; then $(CYGPATH_W) 'src/tile.cpp'; else $(CYGPATH_W) '$(srcdir)/src/tile.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-tile.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-tile.Tpo -c -o src/gosdt_test-tile.obj `if test -f 'src/tile.cpp'; then $(CYGPATH_W) 'src/tile.cpp'; else $(CYGPATH_W) '$(srcdir)/src/tile.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-tile.Tpo src/$(DEPDIR)/gosdt_test-tile.Po
+#	$(AM_V_CXX)source='src/tile.cpp' object='src/gosdt_test-tile.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-tile.obj `if test -f 'src/tile.cpp'; then $(CYGPATH_W) 'src/tile.cpp'; else $(CYGPATH_W) '$(srcdir)/src/tile.cpp'; fi`
 
 src/gosdt_test-graph.o: src/graph.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-graph.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-graph.Tpo -c -o src/gosdt_test-graph.o `test -f 'src/graph.cpp' || echo '$(srcdir)/'`src/graph.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-graph.Tpo src/$(DEPDIR)/gosdt_test-graph.Po
-	$(AM_V_CXX)source='src/graph.cpp' object='src/gosdt_test-graph.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-graph.o `test -f 'src/graph.cpp' || echo '$(srcdir)/'`src/graph.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-graph.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-graph.Tpo -c -o src/gosdt_test-graph.o `test -f 'src/graph.cpp' || echo '$(srcdir)/'`src/graph.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-graph.Tpo src/$(DEPDIR)/gosdt_test-graph.Po
+#	$(AM_V_CXX)source='src/graph.cpp' object='src/gosdt_test-graph.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-graph.o `test -f 'src/graph.cpp' || echo '$(srcdir)/'`src/graph.cpp
 
 src/gosdt_test-graph.obj: src/graph.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-graph.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-graph.Tpo -c -o src/gosdt_test-graph.obj `if test -f 'src/graph.cpp'; then $(CYGPATH_W) 'src/graph.cpp'; else $(CYGPATH_W) '$(srcdir)/src/graph.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-graph.Tpo src/$(DEPDIR)/gosdt_test-graph.Po
-	$(AM_V_CXX)source='src/graph.cpp' object='src/gosdt_test-graph.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-graph.obj `if test -f 'src/graph.cpp'; then $(CYGPATH_W) 'src/graph.cpp'; else $(CYGPATH_W) '$(srcdir)/src/graph.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-graph.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-graph.Tpo -c -o src/gosdt_test-graph.obj `if test -f 'src/graph.cpp'; then $(CYGPATH_W) 'src/graph.cpp'; else $(CYGPATH_W) '$(srcdir)/src/graph.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-graph.Tpo src/$(DEPDIR)/gosdt_test-graph.Po
+#	$(AM_V_CXX)source='src/graph.cpp' object='src/gosdt_test-graph.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-graph.obj `if test -f 'src/graph.cpp'; then $(CYGPATH_W) 'src/graph.cpp'; else $(CYGPATH_W) '$(srcdir)/src/graph.cpp'; fi`
 
 src/gosdt_test-queue.o: src/queue.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-queue.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-queue.Tpo -c -o src/gosdt_test-queue.o `test -f 'src/queue.cpp' || echo '$(srcdir)/'`src/queue.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-queue.Tpo src/$(DEPDIR)/gosdt_test-queue.Po
-	$(AM_V_CXX)source='src/queue.cpp' object='src/gosdt_test-queue.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-queue.o `test -f 'src/queue.cpp' || echo '$(srcdir)/'`src/queue.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-queue.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-queue.Tpo -c -o src/gosdt_test-queue.o `test -f 'src/queue.cpp' || echo '$(srcdir)/'`src/queue.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-queue.Tpo src/$(DEPDIR)/gosdt_test-queue.Po
+#	$(AM_V_CXX)source='src/queue.cpp' object='src/gosdt_test-queue.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-queue.o `test -f 'src/queue.cpp' || echo '$(srcdir)/'`src/queue.cpp
 
 src/gosdt_test-queue.obj: src/queue.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-queue.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-queue.Tpo -c -o src/gosdt_test-queue.obj `if test -f 'src/queue.cpp'; then $(CYGPATH_W) 'src/queue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/queue.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-queue.Tpo src/$(DEPDIR)/gosdt_test-queue.Po
-	$(AM_V_CXX)source='src/queue.cpp' object='src/gosdt_test-queue.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-queue.obj `if test -f 'src/queue.cpp'; then $(CYGPATH_W) 'src/queue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/queue.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-queue.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-queue.Tpo -c -o src/gosdt_test-queue.obj `if test -f 'src/queue.cpp'; then $(CYGPATH_W) 'src/queue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/queue.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-queue.Tpo src/$(DEPDIR)/gosdt_test-queue.Po
+#	$(AM_V_CXX)source='src/queue.cpp' object='src/gosdt_test-queue.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-queue.obj `if test -f 'src/queue.cpp'; then $(CYGPATH_W) 'src/queue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/queue.cpp'; fi`
 
 src/gosdt_test-model.o: src/model.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-model.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-model.Tpo -c -o src/gosdt_test-model.o `test -f 'src/model.cpp' || echo '$(srcdir)/'`src/model.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-model.Tpo src/$(DEPDIR)/gosdt_test-model.Po
-	$(AM_V_CXX)source='src/model.cpp' object='src/gosdt_test-model.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-model.o `test -f 'src/model.cpp' || echo '$(srcdir)/'`src/model.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-model.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-model.Tpo -c -o src/gosdt_test-model.o `test -f 'src/model.cpp' || echo '$(srcdir)/'`src/model.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-model.Tpo src/$(DEPDIR)/gosdt_test-model.Po
+#	$(AM_V_CXX)source='src/model.cpp' object='src/gosdt_test-model.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-model.o `test -f 'src/model.cpp' || echo '$(srcdir)/'`src/model.cpp
 
 src/gosdt_test-model.obj: src/model.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-model.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-model.Tpo -c -o src/gosdt_test-model.obj `if test -f 'src/model.cpp'; then $(CYGPATH_W) 'src/model.cpp'; else $(CYGPATH_W) '$(srcdir)/src/model.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-model.Tpo src/$(DEPDIR)/gosdt_test-model.Po
-	$(AM_V_CXX)source='src/model.cpp' object='src/gosdt_test-model.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-model.obj `if test -f 'src/model.cpp'; then $(CYGPATH_W) 'src/model.cpp'; else $(CYGPATH_W) '$(srcdir)/src/model.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-model.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-model.Tpo -c -o src/gosdt_test-model.obj `if test -f 'src/model.cpp'; then $(CYGPATH_W) 'src/model.cpp'; else $(CYGPATH_W) '$(srcdir)/src/model.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-model.Tpo src/$(DEPDIR)/gosdt_test-model.Po
+#	$(AM_V_CXX)source='src/model.cpp' object='src/gosdt_test-model.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-model.obj `if test -f 'src/model.cpp'; then $(CYGPATH_W) 'src/model.cpp'; else $(CYGPATH_W) '$(srcdir)/src/model.cpp'; fi`
 
 src/gosdt_test-encoder.o: src/encoder.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-encoder.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-encoder.Tpo -c -o src/gosdt_test-encoder.o `test -f 'src/encoder.cpp' || echo '$(srcdir)/'`src/encoder.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-encoder.Tpo src/$(DEPDIR)/gosdt_test-encoder.Po
-	$(AM_V_CXX)source='src/encoder.cpp' object='src/gosdt_test-encoder.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-encoder.o `test -f 'src/encoder.cpp' || echo '$(srcdir)/'`src/encoder.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-encoder.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-encoder.Tpo -c -o src/gosdt_test-encoder.o `test -f 'src/encoder.cpp' || echo '$(srcdir)/'`src/encoder.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-encoder.Tpo src/$(DEPDIR)/gosdt_test-encoder.Po
+#	$(AM_V_CXX)source='src/encoder.cpp' object='src/gosdt_test-encoder.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-encoder.o `test -f 'src/encoder.cpp' || echo '$(srcdir)/'`src/encoder.cpp
 
 src/gosdt_test-encoder.obj: src/encoder.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-encoder.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-encoder.Tpo -c -o src/gosdt_test-encoder.obj `if test -f 'src/encoder.cpp'; then $(CYGPATH_W) 'src/encoder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/encoder.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-encoder.Tpo src/$(DEPDIR)/gosdt_test-encoder.Po
-	$(AM_V_CXX)source='src/encoder.cpp' object='src/gosdt_test-encoder.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-encoder.obj `if test -f 'src/encoder.cpp'; then $(CYGPATH_W) 'src/encoder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/encoder.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-encoder.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-encoder.Tpo -c -o src/gosdt_test-encoder.obj `if test -f 'src/encoder.cpp'; then $(CYGPATH_W) 'src/encoder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/encoder.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-encoder.Tpo src/$(DEPDIR)/gosdt_test-encoder.Po
+#	$(AM_V_CXX)source='src/encoder.cpp' object='src/gosdt_test-encoder.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-encoder.obj `if test -f 'src/encoder.cpp'; then $(CYGPATH_W) 'src/encoder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/encoder.cpp'; fi`
 
 src/gosdt_test-index.o: src/index.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-index.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-index.Tpo -c -o src/gosdt_test-index.o `test -f 'src/index.cpp' || echo '$(srcdir)/'`src/index.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-index.Tpo src/$(DEPDIR)/gosdt_test-index.Po
-	$(AM_V_CXX)source='src/index.cpp' object='src/gosdt_test-index.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-index.o `test -f 'src/index.cpp' || echo '$(srcdir)/'`src/index.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-index.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-index.Tpo -c -o src/gosdt_test-index.o `test -f 'src/index.cpp' || echo '$(srcdir)/'`src/index.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-index.Tpo src/$(DEPDIR)/gosdt_test-index.Po
+#	$(AM_V_CXX)source='src/index.cpp' object='src/gosdt_test-index.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-index.o `test -f 'src/index.cpp' || echo '$(srcdir)/'`src/index.cpp
 
 src/gosdt_test-index.obj: src/index.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-index.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-index.Tpo -c -o src/gosdt_test-index.obj `if test -f 'src/index.cpp'; then $(CYGPATH_W) 'src/index.cpp'; else $(CYGPATH_W) '$(srcdir)/src/index.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-index.Tpo src/$(DEPDIR)/gosdt_test-index.Po
-	$(AM_V_CXX)source='src/index.cpp' object='src/gosdt_test-index.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-index.obj `if test -f 'src/index.cpp'; then $(CYGPATH_W) 'src/index.cpp'; else $(CYGPATH_W) '$(srcdir)/src/index.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-index.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-index.Tpo -c -o src/gosdt_test-index.obj `if test -f 'src/index.cpp'; then $(CYGPATH_W) 'src/index.cpp'; else $(CYGPATH_W) '$(srcdir)/src/index.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-index.Tpo src/$(DEPDIR)/gosdt_test-index.Po
+#	$(AM_V_CXX)source='src/index.cpp' object='src/gosdt_test-index.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-index.obj `if test -f 'src/index.cpp'; then $(CYGPATH_W) 'src/index.cpp'; else $(CYGPATH_W) '$(srcdir)/src/index.cpp'; fi`
 
 src/gosdt_test-dataset.o: src/dataset.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-dataset.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-dataset.Tpo -c -o src/gosdt_test-dataset.o `test -f 'src/dataset.cpp' || echo '$(srcdir)/'`src/dataset.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-dataset.Tpo src/$(DEPDIR)/gosdt_test-dataset.Po
-	$(AM_V_CXX)source='src/dataset.cpp' object='src/gosdt_test-dataset.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-dataset.o `test -f 'src/dataset.cpp' || echo '$(srcdir)/'`src/dataset.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-dataset.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-dataset.Tpo -c -o src/gosdt_test-dataset.o `test -f 'src/dataset.cpp' || echo '$(srcdir)/'`src/dataset.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-dataset.Tpo src/$(DEPDIR)/gosdt_test-dataset.Po
+#	$(AM_V_CXX)source='src/dataset.cpp' object='src/gosdt_test-dataset.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-dataset.o `test -f 'src/dataset.cpp' || echo '$(srcdir)/'`src/dataset.cpp
 
 src/gosdt_test-dataset.obj: src/dataset.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-dataset.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-dataset.Tpo -c -o src/gosdt_test-dataset.obj `if test -f 'src/dataset.cpp'; then $(CYGPATH_W) 'src/dataset.cpp'; else $(CYGPATH_W) '$(srcdir)/src/dataset.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-dataset.Tpo src/$(DEPDIR)/gosdt_test-dataset.Po
-	$(AM_V_CXX)source='src/dataset.cpp' object='src/gosdt_test-dataset.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-dataset.obj `if test -f 'src/dataset.cpp'; then $(CYGPATH_W) 'src/dataset.cpp'; else $(CYGPATH_W) '$(srcdir)/src/dataset.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-dataset.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-dataset.Tpo -c -o src/gosdt_test-dataset.obj `if test -f 'src/dataset.cpp'; then $(CYGPATH_W) 'src/dataset.cpp'; else $(CYGPATH_W) '$(srcdir)/src/dataset.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-dataset.Tpo src/$(DEPDIR)/gosdt_test-dataset.Po
+#	$(AM_V_CXX)source='src/dataset.cpp' object='src/gosdt_test-dataset.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-dataset.obj `if test -f 'src/dataset.cpp'; then $(CYGPATH_W) 'src/dataset.cpp'; else $(CYGPATH_W) '$(srcdir)/src/dataset.cpp'; fi`
 
 src/gosdt_test-optimizer.o: src/optimizer.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-optimizer.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-optimizer.Tpo -c -o src/gosdt_test-optimizer.o `test -f 'src/optimizer.cpp' || echo '$(srcdir)/'`src/optimizer.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-optimizer.Tpo src/$(DEPDIR)/gosdt_test-optimizer.Po
-	$(AM_V_CXX)source='src/optimizer.cpp' object='src/gosdt_test-optimizer.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-optimizer.o `test -f 'src/optimizer.cpp' || echo '$(srcdir)/'`src/optimizer.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-optimizer.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-optimizer.Tpo -c -o src/gosdt_test-optimizer.o `test -f 'src/optimizer.cpp' || echo '$(srcdir)/'`src/optimizer.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-optimizer.Tpo src/$(DEPDIR)/gosdt_test-optimizer.Po
+#	$(AM_V_CXX)source='src/optimizer.cpp' object='src/gosdt_test-optimizer.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-optimizer.o `test -f 'src/optimizer.cpp' || echo '$(srcdir)/'`src/optimizer.cpp
 
 src/gosdt_test-optimizer.obj: src/optimizer.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-optimizer.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-optimizer.Tpo -c -o src/gosdt_test-optimizer.obj `if test -f 'src/optimizer.cpp'; then $(CYGPATH_W) 'src/optimizer.cpp'; else $(CYGPATH_W) '$(srcdir)/src/optimizer.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-optimizer.Tpo src/$(DEPDIR)/gosdt_test-optimizer.Po
-	$(AM_V_CXX)source='src/optimizer.cpp' object='src/gosdt_test-optimizer.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-optimizer.obj `if test -f 'src/optimizer.cpp'; then $(CYGPATH_W) 'src/optimizer.cpp'; else $(CYGPATH_W) '$(srcdir)/src/optimizer.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-optimizer.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-optimizer.Tpo -c -o src/gosdt_test-optimizer.obj `if test -f 'src/optimizer.cpp'; then $(CYGPATH_W) 'src/optimizer.cpp'; else $(CYGPATH_W) '$(srcdir)/src/optimizer.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-optimizer.Tpo src/$(DEPDIR)/gosdt_test-optimizer.Po
+#	$(AM_V_CXX)source='src/optimizer.cpp' object='src/gosdt_test-optimizer.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-optimizer.obj `if test -f 'src/optimizer.cpp'; then $(CYGPATH_W) 'src/optimizer.cpp'; else $(CYGPATH_W) '$(srcdir)/src/optimizer.cpp'; fi`
 
 src/gosdt_test-state.o: src/state.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-state.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-state.Tpo -c -o src/gosdt_test-state.o `test -f 'src/state.cpp' || echo '$(srcdir)/'`src/state.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-state.Tpo src/$(DEPDIR)/gosdt_test-state.Po
-	$(AM_V_CXX)source='src/state.cpp' object='src/gosdt_test-state.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-state.o `test -f 'src/state.cpp' || echo '$(srcdir)/'`src/state.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-state.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-state.Tpo -c -o src/gosdt_test-state.o `test -f 'src/state.cpp' || echo '$(srcdir)/'`src/state.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-state.Tpo src/$(DEPDIR)/gosdt_test-state.Po
+#	$(AM_V_CXX)source='src/state.cpp' object='src/gosdt_test-state.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-state.o `test -f 'src/state.cpp' || echo '$(srcdir)/'`src/state.cpp
 
 src/gosdt_test-state.obj: src/state.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-state.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-state.Tpo -c -o src/gosdt_test-state.obj `if test -f 'src/state.cpp'; then $(CYGPATH_W) 'src/state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/state.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-state.Tpo src/$(DEPDIR)/gosdt_test-state.Po
-	$(AM_V_CXX)source='src/state.cpp' object='src/gosdt_test-state.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-state.obj `if test -f 'src/state.cpp'; then $(CYGPATH_W) 'src/state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/state.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-state.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-state.Tpo -c -o src/gosdt_test-state.obj `if test -f 'src/state.cpp'; then $(CYGPATH_W) 'src/state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/state.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-state.Tpo src/$(DEPDIR)/gosdt_test-state.Po
+#	$(AM_V_CXX)source='src/state.cpp' object='src/gosdt_test-state.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-state.obj `if test -f 'src/state.cpp'; then $(CYGPATH_W) 'src/state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/state.cpp'; fi`
 
 src/gosdt_test-local_state.o: src/local_state.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-local_state.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-local_state.Tpo -c -o src/gosdt_test-local_state.o `test -f 'src/local_state.cpp' || echo '$(srcdir)/'`src/local_state.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-local_state.Tpo src/$(DEPDIR)/gosdt_test-local_state.Po
-	$(AM_V_CXX)source='src/local_state.cpp' object='src/gosdt_test-local_state.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-local_state.o `test -f 'src/local_state.cpp' || echo '$(srcdir)/'`src/local_state.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-local_state.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-local_state.Tpo -c -o src/gosdt_test-local_state.o `test -f 'src/local_state.cpp' || echo '$(srcdir)/'`src/local_state.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-local_state.Tpo src/$(DEPDIR)/gosdt_test-local_state.Po
+#	$(AM_V_CXX)source='src/local_state.cpp' object='src/gosdt_test-local_state.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-local_state.o `test -f 'src/local_state.cpp' || echo '$(srcdir)/'`src/local_state.cpp
 
 src/gosdt_test-local_state.obj: src/local_state.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-local_state.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-local_state.Tpo -c -o src/gosdt_test-local_state.obj `if test -f 'src/local_state.cpp'; then $(CYGPATH_W) 'src/local_state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/local_state.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-local_state.Tpo src/$(DEPDIR)/gosdt_test-local_state.Po
-	$(AM_V_CXX)source='src/local_state.cpp' object='src/gosdt_test-local_state.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-local_state.obj `if test -f 'src/local_state.cpp'; then $(CYGPATH_W) 'src/local_state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/local_state.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-local_state.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-local_state.Tpo -c -o src/gosdt_test-local_state.obj `if test -f 'src/local_state.cpp'; then $(CYGPATH_W) 'src/local_state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/local_state.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-local_state.Tpo src/$(DEPDIR)/gosdt_test-local_state.Po
+#	$(AM_V_CXX)source='src/local_state.cpp' object='src/gosdt_test-local_state.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-local_state.obj `if test -f 'src/local_state.cpp'; then $(CYGPATH_W) 'src/local_state.cpp'; else $(CYGPATH_W) '$(srcdir)/src/local_state.cpp'; fi`
 
 src/gosdt_test-gosdt.o: src/gosdt.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-gosdt.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-gosdt.Tpo -c -o src/gosdt_test-gosdt.o `test -f 'src/gosdt.cpp' || echo '$(srcdir)/'`src/gosdt.cpp
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-gosdt.Tpo src/$(DEPDIR)/gosdt_test-gosdt.Po
-	$(AM_V_CXX)source='src/gosdt.cpp' object='src/gosdt_test-gosdt.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-gosdt.o `test -f 'src/gosdt.cpp' || echo '$(srcdir)/'`src/gosdt.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-gosdt.o -MD -MP -MF src/$(DEPDIR)/gosdt_test-gosdt.Tpo -c -o src/gosdt_test-gosdt.o `test -f 'src/gosdt.cpp' || echo '$(srcdir)/'`src/gosdt.cpp
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-gosdt.Tpo src/$(DEPDIR)/gosdt_test-gosdt.Po
+#	$(AM_V_CXX)source='src/gosdt.cpp' object='src/gosdt_test-gosdt.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-gosdt.o `test -f 'src/gosdt.cpp' || echo '$(srcdir)/'`src/gosdt.cpp
 
 src/gosdt_test-gosdt.obj: src/gosdt.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-gosdt.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-gosdt.Tpo -c -o src/gosdt_test-gosdt.obj `if test -f 'src/gosdt.cpp'; then $(CYGPATH_W) 'src/gosdt.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gosdt.cpp'; fi`
-#	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-gosdt.Tpo src/$(DEPDIR)/gosdt_test-gosdt.Po
-	$(AM_V_CXX)source='src/gosdt.cpp' object='src/gosdt_test-gosdt.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-gosdt.obj `if test -f 'src/gosdt.cpp'; then $(CYGPATH_W) 'src/gosdt.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gosdt.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT src/gosdt_test-gosdt.obj -MD -MP -MF src/$(DEPDIR)/gosdt_test-gosdt.Tpo -c -o src/gosdt_test-gosdt.obj `if test -f 'src/gosdt.cpp'; then $(CYGPATH_W) 'src/gosdt.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gosdt.cpp'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/gosdt_test-gosdt.Tpo src/$(DEPDIR)/gosdt_test-gosdt.Po
+#	$(AM_V_CXX)source='src/gosdt.cpp' object='src/gosdt_test-gosdt.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o src/gosdt_test-gosdt.obj `if test -f 'src/gosdt.cpp'; then $(CYGPATH_W) 'src/gosdt.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gosdt.cpp'; fi`
 
 test/gosdt_test-main.o: test/main.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/gosdt_test-main.o -MD -MP -MF test/$(DEPDIR)/gosdt_test-main.Tpo -c -o test/gosdt_test-main.o `test -f 'test/main.cpp' || echo '$(srcdir)/'`test/main.cpp
-#	$(AM_V_at)$(am__mv) test/$(DEPDIR)/gosdt_test-main.Tpo test/$(DEPDIR)/gosdt_test-main.Po
-	$(AM_V_CXX)source='test/main.cpp' object='test/gosdt_test-main.o' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/gosdt_test-main.o `test -f 'test/main.cpp' || echo '$(srcdir)/'`test/main.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/gosdt_test-main.o -MD -MP -MF test/$(DEPDIR)/gosdt_test-main.Tpo -c -o test/gosdt_test-main.o `test -f 'test/main.cpp' || echo '$(srcdir)/'`test/main.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/gosdt_test-main.Tpo test/$(DEPDIR)/gosdt_test-main.Po
+#	$(AM_V_CXX)source='test/main.cpp' object='test/gosdt_test-main.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/gosdt_test-main.o `test -f 'test/main.cpp' || echo '$(srcdir)/'`test/main.cpp
 
 test/gosdt_test-main.obj: test/main.cpp
-#	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/gosdt_test-main.obj -MD -MP -MF test/$(DEPDIR)/gosdt_test-main.Tpo -c -o test/gosdt_test-main.obj `if test -f 'test/main.cpp'; then $(CYGPATH_W) 'test/main.cpp'; else $(CYGPATH_W) '$(srcdir)/test/main.cpp'; fi`
-#	$(AM_V_at)$(am__mv) test/$(DEPDIR)/gosdt_test-main.Tpo test/$(DEPDIR)/gosdt_test-main.Po
-	$(AM_V_CXX)source='test/main.cpp' object='test/gosdt_test-main.obj' libtool=no \
-	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/gosdt_test-main.obj `if test -f 'test/main.cpp'; then $(CYGPATH_W) 'test/main.cpp'; else $(CYGPATH_W) '$(srcdir)/test/main.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/gosdt_test-main.obj -MD -MP -MF test/$(DEPDIR)/gosdt_test-main.Tpo -c -o test/gosdt_test-main.obj `if test -f 'test/main.cpp'; then $(CYGPATH_W) 'test/main.cpp'; else $(CYGPATH_W) '$(srcdir)/test/main.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/gosdt_test-main.Tpo test/$(DEPDIR)/gosdt_test-main.Po
+#	$(AM_V_CXX)source='test/main.cpp' object='test/gosdt_test-main.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gosdt_test_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/gosdt_test-main.obj `if test -f 'test/main.cpp'; then $(CYGPATH_W) 'test/main.cpp'; else $(CYGPATH_W) '$(srcdir)/test/main.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique

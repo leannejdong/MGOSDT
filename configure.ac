@@ -1,7 +1,7 @@
 AC_PREREQ([2.69])
 AC_INIT([gosdt],[0.1.0])
 #: ${CXXFLAGS=-O3} # for production release
-: ${CPP_FLAGS=-O2 -g -Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align -Wno-vla -Wnull-dereference -Wmaybe-uninitialized -Wnon-virtual-dtor -Woverloaded-virtual -fsanitize=address} # for debugging
+: ${CPP_FLAGS=-O -g -fsanitize=address -Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align -Wno-vla -Wnull-dereference -Wmaybe-uninitialized -Wnon-virtual-dtor -Woverloaded-virtual} # for debugging with address sanitizer, keep O; for speed up, keep O2
 AC_CONFIG_MACRO_DIR([auto])
 AC_CONFIG_AUX_DIR([build])
 m4_include([auto/ax_cxx_compile_stdcxx.m4])
@@ -114,4 +114,7 @@ fi
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 AC_CONFIG_FILES([Makefile])
 
-AC_OUTPUT
+)
+AC_CONFIG_AUX_DIR)
+AC_CONFIG_AUX_DIR)
+AC_CONFIG_AUX_DIRAC_OUTPUT
