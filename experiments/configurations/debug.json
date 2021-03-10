@@ -10,7 +10,7 @@
 
     "verbose": false,
     "diagnostics": false,
-    "balance": false,
+    "balance": true,
     "non_binary": true,
 
     "look_ahead": true,
