@@ -126,7 +126,8 @@ Describes how to install and use the library with details on project structure.
 ## Installing Dependencies
 Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
 
-## Build Process
+## Build Process 
+(You'd need `sudo`. It will create files that are owned by root)
  - **Check Updates to the Dependency Tests or Makefile** 
    ```
    ./autobuild --regenerate
@@ -147,6 +148,30 @@ Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
    ```
    gosdt dataset.csv config.json
    ```
+## Re-build Process 
+(With use of `sudo`, files created will be owned by root)
+
+- **Clean up**
+    ```
+    ./autobuild --clean
+    ```
+- **Reconfigure**
+    
+    ```
+    ./autobuild --reconfigure
+    ```
+
+- **Build**
+
+    ```
+    ./autobuild --build
+    ```
+- **Install**
+  
+    ```
+    ./autobuild --install
+    ```
+
 <!---   
  - **Build and Install the Python Extension**
    ```

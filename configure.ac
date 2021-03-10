@@ -1,7 +1,7 @@
 AC_PREREQ([2.69])
 AC_INIT([gosdt],[0.1.0])
 #: ${CXXFLAGS=-O3} # for production release
-: ${CPP_FLAGS=-O -g -fsanitize=address -Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align -Wno-vla -Wnull-dereference -Wmaybe-uninitialized -Wnon-virtual-dtor -Woverloaded-virtual} # for debugging with address sanitizer, keep O; for speed up, keep O2
+: ${CXX_FLAGS=-O0 -g -fsanitize=address -Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align -Wno-vla -Wnull-dereference -Wmaybe-uninitialized -Wnon-virtual-dtor -Woverloaded-virtual} # for debugging
 AC_CONFIG_MACRO_DIR([auto])
 AC_CONFIG_AUX_DIR([build])
 m4_include([auto/ax_cxx_compile_stdcxx.m4])
@@ -67,10 +67,10 @@ SAVED_LDFLAGS=$LDFLAGS
 LDFLAGS="$LDFLAGS -l tbb"
 AC_LINK_IFELSE(
     [AC_LANG_PROGRAM(
-        [#include <tbb/concurrent_hash_map.h>], 
+        [#include <tbb/concurrent_hash_map.h>],
         []
     )],
-    [TEST_LIBS="$TEST_LIBS -l tbb"] [TBB_INSTALLED=1], 
+    [TEST_LIBS="$TEST_LIBS -l tbb"] [TBB_INSTALLED=1],
     [AC_MSG_ERROR([Intel TBB is missing on this system. Please install Intel TBB and try again.])]
 )
 LDFLAGS=$SAVED_LDFLAGS
@@ -114,7 +114,4 @@ fi
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 AC_CONFIG_FILES([Makefile])
 
-)
-AC_CONFIG_AUX_DIR)
-AC_CONFIG_AUX_DIR)
-AC_CONFIG_AUX_DIRAC_OUTPUT
+AC_OUTPUT

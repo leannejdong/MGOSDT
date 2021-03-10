@@ -51,7 +51,7 @@ int expect(bool assertion, std::string message, std::string context = "") {
 
 int expect(int expectation, int reality, std::string message, std::string context = "") {
     if (expectation != reality) {
-        std::cout << error_message(expectation, reality, message, context) << std::endl;
+        std::cout << error_message(expectation, reality, message, context) << "\n";
         return 1;
     } else {
         return 0;
@@ -98,19 +98,19 @@ int expect(T const & expectation, T const & reality, std::string message, std::s
 }
 
 void pass(std::string message) {
-    std::cout << "\033[1;32m" << message << "\033[0m" << std::endl;
+    std::cout << "\033[1;32m" << message << "\033[0m" << "\n";
 }
 
 void fail(std::string message) {
-    std::cout << "\033[1;31m" << message << "\033[0m" << std::endl;
+    std::cout << "\033[1;31m" << message << "\033[0m" << "\n";
 }
 
 int run_tests(std::string unit_name, int (*tests)(void)) {
     int failures = tests();
     if (failures == 0) {
-        std::cout << "\033[1;32m" << unit_name << " Tests Passed" << "\033[0m" << std::endl;
+        std::cout << "\033[1;32m" << unit_name << " Tests Passed" << "\033[0m" << "\n";
     } else {
-        std::cout << "\033[1;31m" << failures << " " << unit_name << " Tests Failed" << "\033[0m" << std::endl;
+        std::cout << "\033[1;31m" << failures << " " << unit_name << " Tests Failed" << "\033[0m" << "\n";
     }
     return failures;
 }

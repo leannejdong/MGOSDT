@@ -2356,7 +2356,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 #: ${CXXFLAGS=-O3} # for production release
-: ${CPP_FLAGS=-O -g -fsanitize=address -Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align -Wno-vla -Wnull-dereference -Wmaybe-uninitialized -Wnon-virtual-dtor -Woverloaded-virtual} # for debugging
+: ${CXX_FLAGS=-O0 -g -fsanitize=address -Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align -Wno-vla -Wnull-dereference -Wmaybe-uninitialized -Wnon-virtual-dtor -Woverloaded-virtual} # for debugging
 
 ac_aux_dir=
 for ac_dir in build "$srcdir"/build; do
