@@ -1,0 +1,97 @@
+checking...
+[
+  {
+    "children": [
+      {
+        "in": [
+          4,
+          null
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.2540610730648041,
+          "name": "C1 “Rank of card #1”",
+          "prediction": 6
+        }
+      },
+      {
+        "in": [
+          null,
+          4
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.6559847593307495,
+          "name": "C1 “Rank of card #1”",
+          "prediction": 13
+        }
+      }
+    ],
+    "feature": 0,
+    "name": "%S1 “Suit of card #1”",
+    "type": "integral"
+  }
+]
+
+real	0m0.099s
+user	0m0.068s
+sys	0m0.025s
+=================================================================
+==26967==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f4e1e818947 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.5+0x10f947)
+    #1 0x55de17a5ebc4 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55de17a63e7a in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f4e1e818947 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.5+0x10f947)
+    #1 0x55de17a5d21f in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55de17a5deaf in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55de17a63e7a in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f4e1e818947 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.5+0x10f947)
+    #1 0x55de17a5d21f in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55de17a5dc4f in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55de17a63e7a in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+
+Indirect leak of 93 byte(s) in 3 object(s) allocated from:
+    #0 0x7f4e1e818947 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.5+0x10f947)
+    #1 0x7f4e1e55edbe in std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/lib/x86_64-linux-gnu/libstdc++.so.6+0x142dbe)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f4e1e818947 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.5+0x10f947)
+    #1 0x55de17a7a1a5 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) /usr/include/c++/9/bits/shared_ptr_base.h:625
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f4e1e818947 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.5+0x10f947)
+    #1 0x55de17a5d1bf in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55de17a5deaf in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55de17a63e7a in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f4e1e818947 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.5+0x10f947)
+    #1 0x55de17a5d1bf in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55de17a5dc4f in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55de17a63e7a in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f4e1e818947 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.5+0x10f947)
+    #1 0x55de17a5e950 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) /usr/include/c++/9/bits/shared_ptr_base.h:625
+    #2 0x55de17a5e950 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/9/bits/shared_ptr_base.h:636
+    #3 0x55de17a5e950 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/9/bits/shared_ptr_base.h:1125
+    #4 0x55de17a5e950 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/9/bits/shared_ptr.h:139
+    #5 0x55de17a5e950 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:152
+    #6 0x55de17a63e7a in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f4e1e818947 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.5+0x10f947)
+    #1 0x55de17a5e7e0 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) /usr/include/c++/9/bits/shared_ptr_base.h:625
+    #2 0x55de17a5e7e0 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/9/bits/shared_ptr_base.h:636
+    #3 0x55de17a5e7e0 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/9/bits/shared_ptr_base.h:1125
+    #4 0x55de17a5e7e0 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/9/bits/shared_ptr.h:139
+    #5 0x55de17a5e7e0 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:151
+    #6 0x55de17a63e7a in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+
+SUMMARY: AddressSanitizer: 1309 byte(s) leaked in 12 allocation(s).

@@ -77,7 +77,7 @@ gosdt_LDADD = $(LD_ADD)
 	src/main.cpp \
 	src/main.hpp
 
-if INCLUDE_TESTS
+# if INCLUDE_TESTS
 bin_PROGRAMS += gosdt_test
 gosdt_test_CPPFLAGS = $(CPP_FLAGS)
 gosdt_test_LDFLAGS = $(LD_FLAGS)
@@ -128,4 +128,4 @@ gosdt_test_SOURCES = \
 	test/test_consistency.hpp \
 	test/main.cpp
 
-endif
+# endif
