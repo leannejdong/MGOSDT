@@ -149,7 +149,7 @@ Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
    gosdt dataset.csv config.json
    ```
 ## Re-build Process 
-(With use of `sudo`, files created will be owned by root)
+(Be mindful that if you use `sudo`, files created will be owned by root)
 
 - **Clean up**
     ```
@@ -169,8 +169,31 @@ Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
 - **Install**
   
     ```
-    ./autobuild --install
+    sudo ./autobuild --install
     ```
+  
+## Re-build test 
+(without changing configuration via modifying
+`configure.ac` or `Makefile.am`)
+<!---
+- **Clean up**
+    ```
+    ./autobuild --clean
+    ```
+- **Reconfigure**
+    ```
+    ./autobuild --reconfigure
+    ```
+- **Check for Missing Dependencies**
+   ```
+   ./autobuild --configure --enable-tests
+   ```
+--->
+- **Build and Run Test Suite**
+  ```
+  ./autobuild --test
+  ```
+
 
 <!---   
  - **Build and Install the Python Extension**
