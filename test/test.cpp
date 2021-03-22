@@ -12,21 +12,21 @@ int main() {
     units["Queue"] = test_queue;
     units["Consistency"] = test_consistency;
 
-    for (std::map< std::string, int (*)(void) >::iterator iterator = units.begin(); iterator != units.end(); ++iterator ) {
+    for (auto iterator = units.begin(); iterator != units.end(); ++iterator ) {
         try {
-            failures += run_tests(iterator -> first, iterator -> second);
+            failures += run_tests((*iterator).first, (*iterator).second);
         } catch (char const * exception) {
-            std::cout << "\033[1;31m" << "Uncaught Exception in "  << iterator -> first  << " Tests" << "\033[0m" << std::endl;
-            std::cout << "\033[1;31m" << "Uncaught Exception: "  << exception << "\033[0m" << std::endl;
+            std::cout << "\033[1;31m" << "Uncaught Exception in "  << (*iterator).first << " Tests" << "\033[0m" << "\n";
+            std::cout << "\033[1;31m" << "Uncaught Exception: "  << exception << "\033[0m" << "\n";
             failures += 1;
         }
     }
 
     if (failures == 0) {
-        std::cout << "\033[1;32m" << "All Tests Passed" << "\033[0m" << std::endl;
+        std::cout << "\033[1;32m" << "All Tests Passed" << "\033[0m" << "\n";
         return 0;
     } else {
-        std::cout << "\033[1;31m" << failures << " Tests Failed" << "\033[0m" << std::endl;
+        std::cout << "\033[1;31m" << failures << " Tests Failed" << "\033[0m" << "\n";
         return 1;
     }
 }
