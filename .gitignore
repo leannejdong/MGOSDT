@@ -20,8 +20,9 @@ aclocal.m4
 m4
 libtool
 .deps
-#gosdt
-gosdt_test
 
 #vim
 *.swp
+
+#doxy aux
+doc
