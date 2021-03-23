@@ -10,7 +10,7 @@ int main() {
     units["Bitmask"] = test_bitmask;
     units["Index"] = test_index;
     units["Queue"] = test_queue;
-    units["Consistency"] = test_consistency;
+  //  units["Consistency"] = test_consistency;
 
     for (auto iterator = units.begin(); iterator != units.end(); ++iterator ) {
         try {

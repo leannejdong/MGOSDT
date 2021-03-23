@@ -24,5 +24,7 @@ libtool
 #vim
 *.swp
 
-#doxy aux
+#folders aux
 doc
+.idea/
+
