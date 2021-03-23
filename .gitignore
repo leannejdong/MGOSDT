@@ -25,6 +25,6 @@ libtool
 *.swp
 
 #folders aux
-doc
+doc/docs/
 .idea/
 
