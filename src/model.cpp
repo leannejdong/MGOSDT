@@ -212,11 +212,11 @@ void Model::summarize(json & node) const {
                  json & condition = c["in"];
                  json & child = c["then"];
             if (child.contains("feature") && child["feature"] == node["feature"]) {
-                // Child has grand children and child feature matches parent feature
-  //              for (json::iterator sub_it = child["children"].begin(); sub_it != child["children"].end(); ++sub_it) {
-  //                  json & subcondition = (* sub_it)["in"];
-  //                  json & grandchild = (* sub_it)["then"];
-                for (auto &sc : node["children"]) {
+                 //Child has grand children and child feature matches parent feature
+//                for (json::iterator sub_it = child["children"].begin(); sub_it != child["children"].end(); ++sub_it) {
+//                    json & subcondition = (* sub_it)["in"];
+//                    json & grandchild = (* sub_it)["then"];
+                for (auto &sc : child["children"]) {
                     json & subcondition = sc["in"];
                     json & grandchild = sc["then"];
                     if (integral || rational) {
