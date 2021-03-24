@@ -3,7 +3,16 @@
 #include "test_index.hpp"
 #include "test_queue.hpp"
 #include "test_consistency.hpp"
-
+/*! The try-catch block provides some logic how to run a test.
+ * It runs the test inside a try block.
+ * Adds the number of failures.
+ * If there is an exception it prints out some details of the exception.
+ * We are trying to avoid duplicating the logic
+ * So instead of doing the same logic 3 times for the 3 different test functions, it uses a loop.
+ * We create the map to iterate over
+ * the map has what is different about each test, which is the name of the test and the actual functions that runs the test
+ * the fact that it is a map does not matter, we are basically using the map as a list of pairs.
+ */
 int main() {
     int failures = 0;
     std::map< std::string, int (*)(void) > units;
