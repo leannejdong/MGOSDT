@@ -1,0 +1,70 @@
+[
+  {
+    "children": [
+      {
+        "in": [
+          3,
+          null
+        ],
+        "then": {
+          "children": [
+            {
+              "in": [
+                7,
+                null
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "y",
+                "prediction": 0
+              }
+            },
+            {
+              "in": [
+                null,
+                7
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "y",
+                "prediction": 1
+              }
+            }
+          ],
+          "feature": 0,
+          "name": "x",
+          "type": "integral"
+        }
+      },
+      {
+        "in": [
+          3,
+          3
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.0,
+          "name": "y",
+          "prediction": 0
+        }
+      },
+      {
+        "in": [
+          null,
+          3
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.0,
+          "name": "y",
+          "prediction": 0
+        }
+      }
+    ],
+    "feature": 0,
+    "name": "x",
+    "type": "integral"
+  }
+]
