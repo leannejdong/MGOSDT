@@ -1,0 +1,585 @@
+==147041== Memcheck, a memory error detector
+==147041== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==147041== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==147041== Command: gosdt syn3.txt experiments/configurations/debug.json
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13B1E8: __TBB_machine_atomic_load<tbb::interface5::internal::hash_map_node_base*, 2> (gcc_generic.h:160)
+==147041==    by 0x13B1E8: load_with_acquire (gcc_generic.h:175)
+==147041==    by 0x13B1E8: __TBB_load_with_acquire<tbb::interface5::internal::hash_map_node_base*> (tbb_machine.h:713)
+==147041==    by 0x13B1E8: itt_load_word_with_acquire<tbb::interface5::internal::hash_map_node_base*> (tbb_profiling.h:205)
+==147041==    by 0x13B1E8: acquire (concurrent_hash_map.h:708)
+==147041==    by 0x13B1E8: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13B1E8: lookup (concurrent_hash_map.h:1270)
+==147041==    by 0x13B1E8: generic_move_insert<tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::accessor_not_used> (concurrent_hash_map.h:1157)
+==147041==    by 0x13B1E8: insert (concurrent_hash_map.h:1084)
+==147041==    by 0x13B1E8: Queue::push(Message const&) (queue.cpp:16)
+==147041==    by 0x16CFDC: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (gosdt.cpp:50)
+==147041==    by 0x16E6BC: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (gosdt.cpp:21)
+==147041==    by 0x115A90: main (main.cpp:40)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DDD8: tbb::spin_rw_mutex_v3::internal_acquire_reader() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13B20D: acquire (spin_rw_mutex.h:111)
+==147041==    by 0x13B20D: acquire (concurrent_hash_map.h:713)
+==147041==    by 0x13B20D: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13B20D: lookup (concurrent_hash_map.h:1270)
+==147041==    by 0x13B20D: generic_move_insert<tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::accessor_not_used> (concurrent_hash_map.h:1157)
+==147041==    by 0x13B20D: insert (concurrent_hash_map.h:1084)
+==147041==    by 0x13B20D: Queue::push(Message const&) (queue.cpp:16)
+==147041==    by 0x16CFDC: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (gosdt.cpp:50)
+==147041==    by 0x16E6BC: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (gosdt.cpp:21)
+==147041==    by 0x115A90: main (main.cpp:40)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DDE5: tbb::spin_rw_mutex_v3::internal_acquire_reader() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13B20D: acquire (spin_rw_mutex.h:111)
+==147041==    by 0x13B20D: acquire (concurrent_hash_map.h:713)
+==147041==    by 0x13B20D: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13B20D: lookup (concurrent_hash_map.h:1270)
+==147041==    by 0x13B20D: generic_move_insert<tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::accessor_not_used> (concurrent_hash_map.h:1157)
+==147041==    by 0x13B20D: insert (concurrent_hash_map.h:1084)
+==147041==    by 0x13B20D: Queue::push(Message const&) (queue.cpp:16)
+==147041==    by 0x16CFDC: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (gosdt.cpp:50)
+==147041==    by 0x16E6BC: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (gosdt.cpp:21)
+==147041==    by 0x115A90: main (main.cpp:40)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13B213: acquire (spin_rw_mutex.h:111)
+==147041==    by 0x13B213: acquire (concurrent_hash_map.h:713)
+==147041==    by 0x13B213: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13B213: lookup (concurrent_hash_map.h:1270)
+==147041==    by 0x13B213: generic_move_insert<tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::accessor_not_used> (concurrent_hash_map.h:1157)
+==147041==    by 0x13B213: insert (concurrent_hash_map.h:1084)
+==147041==    by 0x13B213: Queue::push(Message const&) (queue.cpp:16)
+==147041==    by 0x16CFDC: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (gosdt.cpp:50)
+==147041==    by 0x16E6BC: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (gosdt.cpp:21)
+==147041==    by 0x115A90: main (main.cpp:40)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DE9D: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13B43F: upgrade_to_writer (spin_rw_mutex.h:120)
+==147041==    by 0x13B43F: upgrade_to_writer (spin_rw_mutex.h:116)
+==147041==    by 0x13B43F: lookup (concurrent_hash_map.h:1280)
+==147041==    by 0x13B43F: generic_move_insert<tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::accessor_not_used> (concurrent_hash_map.h:1157)
+==147041==    by 0x13B43F: insert (concurrent_hash_map.h:1084)
+==147041==    by 0x13B43F: Queue::push(Message const&) (queue.cpp:16)
+==147041==    by 0x16CFDC: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (gosdt.cpp:50)
+==147041==    by 0x16E6BC: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (gosdt.cpp:21)
+==147041==    by 0x115A90: main (main.cpp:40)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DECB: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13B43F: upgrade_to_writer (spin_rw_mutex.h:120)
+==147041==    by 0x13B43F: upgrade_to_writer (spin_rw_mutex.h:116)
+==147041==    by 0x13B43F: lookup (concurrent_hash_map.h:1280)
+==147041==    by 0x13B43F: generic_move_insert<tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::accessor_not_used> (concurrent_hash_map.h:1157)
+==147041==    by 0x13B43F: insert (concurrent_hash_map.h:1084)
+==147041==    by 0x13B43F: Queue::push(Message const&) (queue.cpp:16)
+==147041==    by 0x16CFDC: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (gosdt.cpp:50)
+==147041==    by 0x16E6BC: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (gosdt.cpp:21)
+==147041==    by 0x115A90: main (main.cpp:40)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DEEA: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13B43F: upgrade_to_writer (spin_rw_mutex.h:120)
+==147041==    by 0x13B43F: upgrade_to_writer (spin_rw_mutex.h:116)
+==147041==    by 0x13B43F: lookup (concurrent_hash_map.h:1280)
+==147041==    by 0x13B43F: generic_move_insert<tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::accessor_not_used> (concurrent_hash_map.h:1157)
+==147041==    by 0x13B43F: insert (concurrent_hash_map.h:1084)
+==147041==    by 0x13B43F: Queue::push(Message const&) (queue.cpp:16)
+==147041==    by 0x16CFDC: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (gosdt.cpp:50)
+==147041==    by 0x16E6BC: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (gosdt.cpp:21)
+==147041==    by 0x115A90: main (main.cpp:40)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DF29: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13B43F: upgrade_to_writer (spin_rw_mutex.h:120)
+==147041==    by 0x13B43F: upgrade_to_writer (spin_rw_mutex.h:116)
+==147041==    by 0x13B43F: lookup (concurrent_hash_map.h:1280)
+==147041==    by 0x13B43F: generic_move_insert<tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::accessor_not_used> (concurrent_hash_map.h:1157)
+==147041==    by 0x13B43F: insert (concurrent_hash_map.h:1084)
+==147041==    by 0x13B43F: Queue::push(Message const&) (queue.cpp:16)
+==147041==    by 0x16CFDC: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (gosdt.cpp:50)
+==147041==    by 0x16E6BC: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (gosdt.cpp:21)
+==147041==    by 0x115A90: main (main.cpp:40)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13B5A3: add_to_bucket (concurrent_hash_map.h:175)
+==147041==    by 0x13B5A3: insert_new_node (concurrent_hash_map.h:287)
+==147041==    by 0x13B5A3: lookup (concurrent_hash_map.h:1291)
+==147041==    by 0x13B5A3: generic_move_insert<tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::accessor_not_used> (concurrent_hash_map.h:1157)
+==147041==    by 0x13B5A3: insert (concurrent_hash_map.h:1084)
+==147041==    by 0x13B5A3: Queue::push(Message const&) (queue.cpp:16)
+==147041==    by 0x16CFDC: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (gosdt.cpp:50)
+==147041==    by 0x16E6BC: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (gosdt.cpp:21)
+==147041==    by 0x115A90: main (main.cpp:40)
+==147041== 
+==147041== Conditional jump or move depends on uninitialised value(s)
+==147041==    at 0x13B886: ~scoped_lock (spin_rw_mutex.h:102)
+==147041==    by 0x13B886: ~bucket_accessor (concurrent_hash_map.h:700)
+==147041==    by 0x13B886: lookup (concurrent_hash_map.h:1304)
+==147041==    by 0x13B886: generic_move_insert<tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::accessor_not_used> (concurrent_hash_map.h:1157)
+==147041==    by 0x13B886: insert (concurrent_hash_map.h:1084)
+==147041==    by 0x13B886: Queue::push(Message const&) (queue.cpp:16)
+==147041==    by 0x16CFDC: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (gosdt.cpp:50)
+==147041==    by 0x16E6BC: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (gosdt.cpp:21)
+==147041==    by 0x115A90: main (main.cpp:40)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13B2ED: __TBB_machine_and (gcc_generic.h:140)
+==147041==    by 0x13B2ED: release (spin_rw_mutex.h:132)
+==147041==    by 0x13B2ED: ~scoped_lock (spin_rw_mutex.h:102)
+==147041==    by 0x13B2ED: ~bucket_accessor (concurrent_hash_map.h:700)
+==147041==    by 0x13B2ED: lookup (concurrent_hash_map.h:1304)
+==147041==    by 0x13B2ED: generic_move_insert<tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::accessor_not_used> (concurrent_hash_map.h:1157)
+==147041==    by 0x13B2ED: insert (concurrent_hash_map.h:1084)
+==147041==    by 0x13B2ED: Queue::push(Message const&) (queue.cpp:16)
+==147041==    by 0x16CFDC: GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (gosdt.cpp:50)
+==147041==    by 0x16E6BC: GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (gosdt.cpp:21)
+==147041==    by 0x115A90: main (main.cpp:40)
+==147041== 
+==147041== Thread 2:
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13BAC6: get_bucket (concurrent_hash_map.h:239)
+==147041==    by 0x13BAC6: acquire (concurrent_hash_map.h:706)
+==147041==    by 0x13BAC6: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BAC6: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BAC6: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13BAD4: __TBB_machine_atomic_load<tbb::interface5::internal::hash_map_node_base*, 2> (gcc_generic.h:160)
+==147041==    by 0x13BAD4: load_with_acquire (gcc_generic.h:175)
+==147041==    by 0x13BAD4: __TBB_load_with_acquire<tbb::interface5::internal::hash_map_node_base*> (tbb_machine.h:713)
+==147041==    by 0x13BAD4: itt_load_word_with_acquire<tbb::interface5::internal::hash_map_node_base*> (tbb_profiling.h:205)
+==147041==    by 0x13BAD4: acquire (concurrent_hash_map.h:708)
+==147041==    by 0x13BAD4: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BAD4: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BAD4: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DF84: tbb::spin_rw_mutex_v3::internal_try_acquire_writer() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13BD57: try_acquire (spin_rw_mutex.h:155)
+==147041==    by 0x13BD57: acquire (concurrent_hash_map.h:709)
+==147041==    by 0x13BD57: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD57: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD57: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DF98: tbb::spin_rw_mutex_v3::internal_try_acquire_writer() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13BD57: try_acquire (spin_rw_mutex.h:155)
+==147041==    by 0x13BD57: acquire (concurrent_hash_map.h:709)
+==147041==    by 0x13BD57: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD57: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD57: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13BD65: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD65: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD65: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD65: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD65: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13C027: __TBB_machine_atomic_store<tbb::interface5::internal::hash_map_node_base*, 3> (gcc_generic.h:168)
+==147041==    by 0x13C027: store_with_release (gcc_generic.h:178)
+==147041==    by 0x13C027: __TBB_store_with_release<tbb::interface5::internal::hash_map_node_base*, tbb::interface5::internal::hash_map_node_base*> (tbb_machine.h:717)
+==147041==    by 0x13C027: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:726)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13C065: get_bucket (concurrent_hash_map.h:239)
+==147041==    by 0x13C065: acquire (concurrent_hash_map.h:706)
+==147041==    by 0x13C065: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13C065: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:732)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13C077: __TBB_machine_atomic_load<tbb::interface5::internal::hash_map_node_base*, 2> (gcc_generic.h:160)
+==147041==    by 0x13C077: load_with_acquire (gcc_generic.h:175)
+==147041==    by 0x13C077: __TBB_load_with_acquire<tbb::interface5::internal::hash_map_node_base*> (tbb_machine.h:713)
+==147041==    by 0x13C077: itt_load_word_with_acquire<tbb::interface5::internal::hash_map_node_base*> (tbb_profiling.h:205)
+==147041==    by 0x13C077: acquire (concurrent_hash_map.h:708)
+==147041==    by 0x13C077: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13C077: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:732)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DDD8: tbb::spin_rw_mutex_v3::internal_acquire_reader() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13C09B: acquire (spin_rw_mutex.h:111)
+==147041==    by 0x13C09B: acquire (concurrent_hash_map.h:713)
+==147041==    by 0x13C09B: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13C09B: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:732)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DDE5: tbb::spin_rw_mutex_v3::internal_acquire_reader() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13C09B: acquire (spin_rw_mutex.h:111)
+==147041==    by 0x13C09B: acquire (concurrent_hash_map.h:713)
+==147041==    by 0x13C09B: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13C09B: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:732)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13C0A6: __TBB_machine_atomic_load<tbb::interface5::internal::hash_map_node_base*, 2> (gcc_generic.h:160)
+==147041==    by 0x13C0A6: load_with_acquire (gcc_generic.h:175)
+==147041==    by 0x13C0A6: __TBB_load_with_acquire<tbb::interface5::internal::hash_map_node_base*> (tbb_machine.h:713)
+==147041==    by 0x13C0A6: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:737)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Conditional jump or move depends on uninitialised value(s)
+==147041==    at 0x13C0DC: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:744)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DE9D: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13C155: upgrade_to_writer (spin_rw_mutex.h:120)
+==147041==    by 0x13C155: upgrade_to_writer (spin_rw_mutex.h:116)
+==147041==    by 0x13C155: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:746)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DECB: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13C155: upgrade_to_writer (spin_rw_mutex.h:120)
+==147041==    by 0x13C155: upgrade_to_writer (spin_rw_mutex.h:116)
+==147041==    by 0x13C155: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:746)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DEEA: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13C155: upgrade_to_writer (spin_rw_mutex.h:120)
+==147041==    by 0x13C155: upgrade_to_writer (spin_rw_mutex.h:116)
+==147041==    by 0x13C155: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:746)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x488DF29: tbb::spin_rw_mutex_v3::internal_upgrade() (in /usr/lib/x86_64-linux-gnu/libtbb.so.2)
+==147041==    by 0x13C155: upgrade_to_writer (spin_rw_mutex.h:120)
+==147041==    by 0x13C155: upgrade_to_writer (spin_rw_mutex.h:116)
+==147041==    by 0x13C155: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:746)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13C0E8: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:749)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13C0EC: add_to_bucket (concurrent_hash_map.h:175)
+==147041==    by 0x13C0EC: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:750)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Conditional jump or move depends on uninitialised value(s)
+==147041==    at 0x13C108: ~scoped_lock (spin_rw_mutex.h:102)
+==147041==    by 0x13C108: ~bucket_accessor (concurrent_hash_map.h:700)
+==147041==    by 0x13C108: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:732)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13C119: __TBB_machine_and (gcc_generic.h:140)
+==147041==    by 0x13C119: release (spin_rw_mutex.h:132)
+==147041==    by 0x13C119: ~scoped_lock (spin_rw_mutex.h:102)
+==147041==    by 0x13C119: ~bucket_accessor (concurrent_hash_map.h:700)
+==147041==    by 0x13C119: tbb::interface5::concurrent_hash_map<Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<Message*, bool> > >::rehash_bucket(tbb::interface5::internal::hash_map_base::bucket*, unsigned long) (concurrent_hash_map.h:732)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:711)
+==147041==    by 0x13BD87: acquire (concurrent_hash_map.h:705)
+==147041==    by 0x13BD87: bucket_accessor (concurrent_hash_map.h:703)
+==147041==    by 0x13BD87: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BD87: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13BB05: erase (concurrent_hash_map.h:1396)
+==147041==    by 0x13BB05: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Conditional jump or move depends on uninitialised value(s)
+==147041==    at 0x13A07A: Tile::operator==(Tile const&) const (tile.cpp:19)
+==147041==    by 0x139F39: Message::operator==(Message const&) const (message.cpp:113)
+==147041==    by 0x13BB44: equal (queue.hpp:32)
+==147041==    by 0x13BB44: erase (concurrent_hash_map.h:1397)
+==147041==    by 0x13BB44: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13BCC6: erase (concurrent_hash_map.h:1411)
+==147041==    by 0x13BCC6: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Conditional jump or move depends on uninitialised value(s)
+==147041==    at 0x13BCE0: ~scoped_lock (spin_rw_mutex.h:102)
+==147041==    by 0x13BCE0: ~bucket_accessor (concurrent_hash_map.h:700)
+==147041==    by 0x13BCE0: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BCE0: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+==147041== Use of uninitialised value of size 8
+==147041==    at 0x13BCF6: __TBB_machine_and (gcc_generic.h:140)
+==147041==    by 0x13BCF6: release (spin_rw_mutex.h:132)
+==147041==    by 0x13BCF6: ~scoped_lock (spin_rw_mutex.h:102)
+==147041==    by 0x13BCF6: ~bucket_accessor (concurrent_hash_map.h:700)
+==147041==    by 0x13BCF6: erase (concurrent_hash_map.h:1393)
+==147041==    by 0x13BCF6: Queue::pop(Message&) (queue.cpp:33)
+==147041==    by 0x161697: Optimizer::iterate(unsigned int) (optimizer.cpp:78)
+==147041==    by 0x16CEA5: GOSDT::work(int, Optimizer&, int&) (gosdt.cpp:144)
+==147041==    by 0x4A51D83: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==147041==    by 0x4CD1608: start_thread (pthread_create.c:477)
+==147041==    by 0x4E0D292: clone (clone.S:95)
+==147041== 
+checking...
+[
+  {
+    "children": [
+      {
+        "in": [
+          3,
+          null
+        ],
+        "then": {
+          "children": [
+            {
+              "in": [
+                7,
+                null
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "y",
+                "prediction": 0
+              }
+            },
+            {
+              "in": [
+                null,
+                7
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "y",
+                "prediction": 1
+              }
+            }
+          ],
+          "feature": 0,
+          "name": "x",
+          "type": "integral"
+        }
+      },
+      {
+        "in": [
+          3,
+          3
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.0,
+          "name": "y",
+          "prediction": 0
+        }
+      },
+      {
+        "in": [
+          null,
+          3
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.0,
+          "name": "y",
+          "prediction": 0
+        }
+      }
+    ],
+    "feature": 0,
+    "name": "x",
+    "type": "integral"
+  }
+]
+==147041== 
+==147041== HEAP SUMMARY:
+==147041==     in use at exit: 3,648 bytes in 27 blocks
+==147041==   total heap usage: 959 allocs, 932 frees, 50,527,643 bytes allocated
+==147041== 
+==147041== LEAK SUMMARY:
+==147041==    definitely lost: 1,056 bytes in 3 blocks
+==147041==    indirectly lost: 2,592 bytes in 24 blocks
+==147041==      possibly lost: 0 bytes in 0 blocks
+==147041==    still reachable: 0 bytes in 0 blocks
+==147041==         suppressed: 0 bytes in 0 blocks
+==147041== Rerun with --leak-check=full to see details of leaked memory
+==147041== 
+==147041== Use --track-origins=yes to see where uninitialised values come from
+==147041== For lists of detected and suppressed errors, rerun with: -s
+==147041== ERROR SUMMARY: 36 errors from 36 contexts (suppressed: 0 from 0)

@@ -1,0 +1,1209 @@
+[
+  {
+    "false": {
+      "complexity": 0.009999999776482582,
+      "loss": 0.0,
+      "name": " y",
+      "prediction": 1
+    },
+    "feature": 0,
+    "name": "x",
+    "reference": 2,
+    "relation": ">=",
+    "true": {
+      "false": {
+        "complexity": 0.009999999776482582,
+        "loss": 0.0,
+        "name": " y",
+        "prediction": 0
+      },
+      "feature": 0,
+      "name": "x",
+      "reference": 4,
+      "relation": ">=",
+      "true": {
+        "false": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.0,
+          "name": " y",
+          "prediction": 1
+        },
+        "feature": 0,
+        "name": "x",
+        "reference": 6,
+        "relation": ">=",
+        "true": {
+          "false": {
+            "complexity": 0.009999999776482582,
+            "loss": 0.0,
+            "name": " y",
+            "prediction": 0
+          },
+          "feature": 0,
+          "name": "x",
+          "reference": 8,
+          "relation": ">=",
+          "true": {
+            "complexity": 0.009999999776482582,
+            "loss": 0.0,
+            "name": " y",
+            "prediction": 1
+          },
+          "type": "integral"
+        },
+        "type": "integral"
+      },
+      "type": "integral"
+    },
+    "type": "integral"
+  }
+]
+
+=================================================================
+==146205==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 1200 byte(s) in 5 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4528a148 in Queue::push(Message const&) src/queue.cpp:12
+    #2 0x55dd45314b8c in Optimizer::signal_exploiters(tbb::interface5::concurrent_hash_map<Tile, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > >, GraphVertexHashComparator, tbb::scalable_allocator<std::pair<Tile const, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > > > > >::accessor&, Task&, unsigned int) src/optimizer/dispatch/dispatch.hpp:244
+    #3 0x55dd4530f9f8 in Optimizer::dispatch(Message const&, unsigned int) src/optimizer/dispatch/dispatch.hpp:36
+    #4 0x55dd4531a209 in Optimizer::iterate(unsigned int) src/optimizer.cpp:79
+    #5 0x55dd45344e8e in GOSDT::work(int, Optimizer&, int&) src/gosdt.cpp:141
+    #6 0x55dd45349fe3 in void std::__invoke_impl<void, void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> >(std::__invoke_other, void (*&&)(int, Optimizer&, int&), unsigned int&&, std::reference_wrapper<Optimizer>&&, std::reference_wrapper<int>&&) /usr/include/c++/10/bits/invoke.h:60
+    #7 0x55dd45349e35 in std::__invoke_result<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> >::type std::__invoke<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> >(void (*&&)(int, Optimizer&, int&), unsigned int&&, std::reference_wrapper<Optimizer>&&, std::reference_wrapper<int>&&) /usr/include/c++/10/bits/invoke.h:95
+    #8 0x55dd45349d14 in void std::thread::_Invoker<std::tuple<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> > >::_M_invoke<0ul, 1ul, 2ul, 3ul>(std::_Index_tuple<0ul, 1ul, 2ul, 3ul>) /usr/include/c++/10/thread:264
+    #9 0x55dd45349c91 in std::thread::_Invoker<std::tuple<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> > >::operator()() /usr/include/c++/10/thread:271
+    #10 0x55dd45349c71 in std::thread::_State_impl<std::thread::_Invoker<std::tuple<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> > > >::_M_run() /usr/include/c++/10/thread:215
+    #11 0x7f3b23df0d83  (/lib/x86_64-linux-gnu/libstdc++.so.6+0xd6d83)
+
+Direct leak of 704 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45317f07 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #4 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #5 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #6 0x55dd4534a9ae in main src/main.cpp:41
+    #7 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Direct leak of 704 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45317f07 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Direct leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45317f07 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #3 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #4 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #5 0x55dd4534a9ae in main src/main.cpp:41
+    #6 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Direct leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453156d2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Direct leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45317f07 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Direct leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453156d2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #4 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #5 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #6 0x55dd4534a9ae in main src/main.cpp:41
+    #7 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Direct leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45317f07 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #4 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #5 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #6 0x55dd4534a9ae in main src/main.cpp:41
+    #7 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Direct leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453156d2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Direct leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45317f07 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 704 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160f7 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 704 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453156d2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 704 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160f7 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 704 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315dcc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 704 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45317f07 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 704 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315dcc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453156d2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315dcc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315dcc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160f7 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453156d2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #4 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #5 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #6 0x55dd4534a9ae in main src/main.cpp:41
+    #7 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315dcc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #4 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #5 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #6 0x55dd4534a9ae in main src/main.cpp:41
+    #7 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160f7 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315dcc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160f7 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #4 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #5 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #6 0x55dd4534a9ae in main src/main.cpp:41
+    #7 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45317f07 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45317f07 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45317f07 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45317f07 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:153
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #4 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #5 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #6 0x55dd4534a9ae in main src/main.cpp:41
+    #7 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160f7 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315dcc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 352 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160f7 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 72 byte(s) in 3 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e1c in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:151
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 72 byte(s) in 3 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e76 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:152
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 64 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315d87 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 64 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160b2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 64 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315d87 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 64 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315694 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 64 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160b2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e76 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:152
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e1c in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:151
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453160e6 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45315dbb in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e76 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:152
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #8 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #9 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #10 0x55dd4534a9ae in main src/main.cpp:41
+    #11 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e1c in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:151
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #8 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #9 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #10 0x55dd4534a9ae in main src/main.cpp:41
+    #11 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e76 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:152
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #8 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #9 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #10 0x55dd4534a9ae in main src/main.cpp:41
+    #11 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e1c in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:151
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #8 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #9 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #10 0x55dd4534a9ae in main src/main.cpp:41
+    #11 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453160e6 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45315dbb in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 48 byte(s) in 2 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453156c1 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315d87 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315d87 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315694 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #4 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #5 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #6 0x55dd4534a9ae in main src/main.cpp:41
+    #7 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160b2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315d87 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160b2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315d87 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315694 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #5 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #6 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #7 0x55dd4534a9ae in main src/main.cpp:41
+    #8 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315694 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315694 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160b2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #4 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #5 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #6 0x55dd4534a9ae in main src/main.cpp:41
+    #7 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315d87 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #4 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #5 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #6 0x55dd4534a9ae in main src/main.cpp:41
+    #7 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160b2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd453160b2 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #4 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #5 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #6 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #7 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #8 0x55dd4534a9ae in main src/main.cpp:41
+    #9 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45315694 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #2 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #3 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #4 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #5 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #6 0x55dd4534a9ae in main src/main.cpp:41
+    #7 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453156c1 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #8 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #9 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #10 0x55dd4534a9ae in main src/main.cpp:41
+    #11 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e76 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:152
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e1c in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:151
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453160e6 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45315dbb in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e76 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:152
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e1c in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:151
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453160e6 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e76 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:152
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #9 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #10 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #11 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #12 0x55dd4534a9ae in main src/main.cpp:41
+    #13 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453156c1 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #9 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #10 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #11 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #12 0x55dd4534a9ae in main src/main.cpp:41
+    #13 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45315dbb in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453156c1 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #9 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #10 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #11 0x55dd4534a9ae in main src/main.cpp:41
+    #12 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453156c1 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #9 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #10 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #11 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #12 0x55dd4534a9ae in main src/main.cpp:41
+    #13 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e1c in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:151
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #9 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #10 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #11 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #12 0x55dd4534a9ae in main src/main.cpp:41
+    #13 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453160e6 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #8 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #9 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #10 0x55dd4534a9ae in main src/main.cpp:41
+    #11 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e76 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:152
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #9 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #10 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #11 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #12 0x55dd4534a9ae in main src/main.cpp:41
+    #13 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453160e6 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #9 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #10 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #11 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #12 0x55dd4534a9ae in main src/main.cpp:41
+    #13 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45315dbb in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #8 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #9 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #10 0x55dd4534a9ae in main src/main.cpp:41
+    #11 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e1c in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:151
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #9 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #10 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #11 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #12 0x55dd4534a9ae in main src/main.cpp:41
+    #13 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e76 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:152
+    #6 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #7 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #8 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #9 0x55dd4534a9ae in main src/main.cpp:41
+    #10 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453160e6 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:74
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #9 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #10 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #11 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #12 0x55dd4534a9ae in main src/main.cpp:41
+    #13 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd45326a3a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x160a3a)
+    #2 0x55dd4532402a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Model*>(Model*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd45321568 in std::__shared_ptr<Model, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e712 in std::shared_ptr<Model>::shared_ptr<Model, void>(Model*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45317e1c in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:151
+    #6 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #7 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #8 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #9 0x55dd4534a9ae in main src/main.cpp:41
+    #10 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45315dbb in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #9 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #10 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #11 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #12 0x55dd4534a9ae in main src/main.cpp:41
+    #13 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd45315dbb in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:65
+    #6 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #7 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #8 0x55dd45316007 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:69
+    #9 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #10 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #11 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #12 0x55dd4534a9ae in main src/main.cpp:41
+    #13 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7f3b240b8f17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55dd4532618a in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*) (/home/leanne/Dev/GOSDTJimmy/gosdt+0x16018a)
+    #2 0x55dd45323b00 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Bitmask*>(Bitmask*, std::integral_constant<bool, false>) /usr/include/c++/10/bits/shared_ptr_base.h:639
+    #3 0x55dd453213c6 in std::__shared_ptr<Bitmask, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr_base.h:1128
+    #4 0x55dd4531e6be in std::shared_ptr<Bitmask>::shared_ptr<Bitmask, void>(Bitmask*) /usr/include/c++/10/bits/shared_ptr.h:159
+    #5 0x55dd453156c1 in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:38
+    #6 0x55dd45315cdc in Optimizer::models(Tile const&, std::unordered_set<Model*, std::hash<Model*>, std::equal_to<Model*>, std::allocator<Model*> >&, bool) src/optimizer/extraction/models.hpp:60
+    #7 0x55dd45314fc5 in Optimizer::models(std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/optimizer/extraction/models.hpp:5
+    #8 0x55dd45344152 in GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) src/gosdt.cpp:99
+    #9 0x55dd45342836 in GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) src/gosdt.cpp:21
+    #10 0x55dd4534a9ae in main src/main.cpp:41
+    #11 0x7f3b239c00b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+SUMMARY: AddressSanitizer: 17000 byte(s) leaked in 122 allocation(s).
