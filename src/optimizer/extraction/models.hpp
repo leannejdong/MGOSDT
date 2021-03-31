@@ -1,7 +1,7 @@
 
 void Optimizer::models(std::unordered_set< Model > & results) {
     if (Configuration::model_limit == 0) { return; }
-    std::unordered_set< Model *, std::hash< Model * >, std::equal_to< Model * > > local_results;
+    std::unordered_set<std::shared_ptr<Model>, std::hash<std::shared_ptr<Model>>, std::equal_to<std::shared_ptr<Model>>> local_results;
     models(this -> root, local_results);
     // std::cout << "Local Size: " << local_results.size() << std::endl;
     // std::cout << "Result Size: " << results.size() << std::endl;
@@ -22,7 +22,8 @@ void Optimizer::models(std::unordered_set< Model > & results) {
     // std::cout << "Result Size: " << results.size() << std::endl;
 }
 
-void Optimizer::models(key_type const & identifier, std::unordered_set< Model *, std::hash< Model * >, std::equal_to< Model * > > & results, bool leaf) {
+//void Optimizer::models(key_type const & identifier, std::unordered_set< Model *, std::hash< Model * >, std::equal_to< Model * > > & results, bool leaf) {
+void Optimizer::models(key_type const & identifier, std::unordered_set<std::shared_ptr<Model>> & results, bool leaf){
     vertex_accessor task_accessor;
     if (State::graph.vertices.find(task_accessor, identifier) == false) { return; }
     Task & task = task_accessor -> second;
@@ -35,7 +36,8 @@ void Optimizer::models(key_type const & identifier, std::unordered_set< Model *,
         // std::shared_ptr<key_type> stump(new Tile(set));
         // Model stump_key(stump_set); // shallow variant
         // Model * stump_address = new Model(stump_set);
-        Model * model = new Model(std::shared_ptr<Bitmask>(new Bitmask(task.capture_set())));
+//        Model * model = new Model(std::shared_ptr<Bitmask>(new Bitmask(task.capture_set())));
+        std::shared_ptr<Model> model = std::make_shared<Model>(std::make_shared<Bitmask>(task.capture_set()));
         model -> identify(identifier);
         
         model -> translate_self(task.order());
@@ -51,8 +53,8 @@ void Optimizer::models(key_type const & identifier, std::unordered_set< Model *,
         if (std::get<2>(* iterator) > task.upperbound() + std::numeric_limits<float>::epsilon()) { continue; }
         int feature = std::get<0>(* iterator);
         // std::cout << "Feature: " << feature << std::endl;
-        std::unordered_set< Model * > negatives;
-        std::unordered_set< Model * > positives;
+        std::unordered_set<std::shared_ptr<Model>> negatives;
+        std::unordered_set<std::shared_ptr<Model>> positives;
         bool ready = true;
 
         child_accessor left_key, right_key;
@@ -62,7 +64,8 @@ void Optimizer::models(key_type const & identifier, std::unordered_set< Model *,
         } else {
             Bitmask subset(task.capture_set());
             State::dataset.subset(feature, false, subset);
-            Model * model = new Model(std::shared_ptr<Bitmask>(new Bitmask(subset)));
+//            Model * model = new Model(std::shared_ptr<Bitmask>(new Bitmask(subset)));
+            std::shared_ptr<Model> model = std::make_shared<Model>(std::make_shared<Bitmask>(subset));
             negatives.insert(model);
         }
         if (State::graph.children.find(right_key, std::make_pair(identifier, feature + 1))) {
@@ -71,7 +74,8 @@ void Optimizer::models(key_type const & identifier, std::unordered_set< Model *,
         } else {
             Bitmask subset(task.capture_set());
             State::dataset.subset(feature, true, subset);
-            Model * model = new Model(std::shared_ptr<Bitmask>(new Bitmask(subset)));
+      //      Model * model = new Model(std::shared_ptr<Bitmask>(new Bitmask(subset)));
+            std::shared_ptr<Model> model = std::make_shared<Model>(std::make_shared<Bitmask>(subset));
             positives.insert(model);
         }
 
@@ -98,9 +102,10 @@ void Optimizer::models(key_type const & identifier, std::unordered_set< Model *,
                     if (Configuration::model_limit > 0 && results.size() >= Configuration::model_limit) { continue; }
 
                     std::shared_ptr<Model> negative(* negative_it);
-                    std::shared_ptr<Model> positive(new Model(std::shared_ptr<Bitmask>(new Bitmask(positive_subset))));
-
-                    Model * model = new Model(feature, negative, positive);
+//                    std::shared_ptr<Model> positive(new Model(std::shared_ptr<Bitmask>(new Bitmask(positive_subset))));
+                    auto positive = std::make_shared<Model>(std::make_shared<Bitmask>(positive_subset));
+//                     Model * model = new Model(feature, negative, positive);
+                    std::shared_ptr<Model> model = std::make_shared<Model>(feature, negative, positive);
                     model -> identify(identifier);
                     model -> translate_self(task.order());
                     translation_accessor negative_translation, positive_translation;
@@ -122,10 +127,11 @@ void Optimizer::models(key_type const & identifier, std::unordered_set< Model *,
                 if (risk <= task.upperbound() + std::numeric_limits<float>::epsilon()) {
                     if (Configuration::model_limit > 0 && results.size() >= Configuration::model_limit) { continue; }
 
-                    std::shared_ptr<Model> negative(new Model(std::shared_ptr<Bitmask>(new Bitmask(negative_subset))));
+//                    std::shared_ptr<Model> negative(new Model(std::shared_ptr<Bitmask>(new Bitmask(negative_subset))));
+                    auto negative = std::make_shared<Model>(std::make_shared<Bitmask>(negative_subset));
                     std::shared_ptr<Model> positive(* positive_it);
-
-                    Model * model = new Model(feature, negative, positive);
+                    std::shared_ptr<Model> model = std::make_shared<Model>(feature, negative, positive);
+                   // Model * model = new Model(feature, negative, positive);
                     model -> identify(identifier);
                     model -> translate_self(task.order());
                     translation_accessor negative_translation, positive_translation;
@@ -150,7 +156,8 @@ void Optimizer::models(key_type const & identifier, std::unordered_set< Model *,
                     
                     std::shared_ptr<Model> negative(* negative_it);
                     std::shared_ptr<Model> positive(* positive_it);
-                    Model * model = new Model(feature, negative, positive);
+                    //Model * model = new Model(feature, negative, positive);
+                    std::shared_ptr<Model> model = std::make_shared<Model>(feature, negative, positive);
                     model -> identify(identifier);
                     model -> translate_self(task.order());
                     translation_accessor negative_translation, positive_translation;

@@ -216,7 +216,7 @@ void Model::summarize(json & node) const {
   //              for (json::iterator sub_it = child["children"].begin(); sub_it != child["children"].end(); ++sub_it) {
   //                  json & subcondition = (* sub_it)["in"];
   //                  json & grandchild = (* sub_it)["then"];
-                for (auto &sc : node["children"]) {
+                for (auto &sc : child["children"]) {
                     json & subcondition = sc["in"];
                     json & grandchild = sc["then"];
                     if (integral || rational) {
