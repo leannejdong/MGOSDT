@@ -1,0 +1,317 @@
+checking...
+[
+  {
+    "children": [
+      {
+        "in": [
+          1,
+          null
+        ],
+        "then": {
+          "children": [
+            {
+              "in": [
+                2,
+                null
+              ],
+              "then": {
+                "children": [
+                  {
+                    "in": [
+                      2,
+                      null
+                    ],
+                    "then": {
+                      "complexity": 0.009999999776482582,
+                      "loss": 0.029900331050157547,
+                      "name": "class",
+                      "prediction": 0
+                    }
+                  },
+                  {
+                    "in": [
+                      null,
+                      2
+                    ],
+                    "then": {
+                      "children": [
+                        {
+                          "in": [
+                            2,
+                            null
+                          ],
+                          "then": {
+                            "children": [
+                              {
+                                "in": [
+                                  2,
+                                  null
+                                ],
+                                "then": {
+                                  "children": [
+                                    {
+                                      "in": [
+                                        2,
+                                        null
+                                      ],
+                                      "then": {
+                                        "complexity": 0.009999999776482582,
+                                        "loss": 0.0,
+                                        "name": "class",
+                                        "prediction": 0
+                                      }
+                                    },
+                                    {
+                                      "in": [
+                                        null,
+                                        2
+                                      ],
+                                      "then": {
+                                        "complexity": 0.009999999776482582,
+                                        "loss": 0.0,
+                                        "name": "class",
+                                        "prediction": 1
+                                      }
+                                    }
+                                  ],
+                                  "feature": 5,
+                                  "name": "a6",
+                                  "type": "integral"
+                                }
+                              },
+                              {
+                                "in": [
+                                  null,
+                                  2
+                                ],
+                                "then": {
+                                  "complexity": 0.009999999776482582,
+                                  "loss": 0.0,
+                                  "name": "class",
+                                  "prediction": 1
+                                }
+                              }
+                            ],
+                            "feature": 1,
+                            "name": "a2",
+                            "type": "integral"
+                          }
+                        },
+                        {
+                          "in": [
+                            null,
+                            2
+                          ],
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.0,
+                            "name": "class",
+                            "prediction": 1
+                          }
+                        }
+                      ],
+                      "feature": 4,
+                      "name": "a5",
+                      "type": "integral"
+                    }
+                  }
+                ],
+                "feature": 3,
+                "name": "a4",
+                "type": "integral"
+              }
+            },
+            {
+              "in": [
+                null,
+                2
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.02500000037252903,
+                "name": "class",
+                "prediction": 1
+              }
+            }
+          ],
+          "feature": 2,
+          "name": "a3",
+          "type": "integral"
+        }
+      },
+      {
+        "in": [
+          null,
+          1
+        ],
+        "then": {
+          "children": [
+            {
+              "in": [
+                2,
+                null
+              ],
+              "then": {
+                "children": [
+                  {
+                    "in": [
+                      2,
+                      null
+                    ],
+                    "then": {
+                      "children": [
+                        {
+                          "in": [
+                            2,
+                            null
+                          ],
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.06833333522081375,
+                            "name": "class",
+                            "prediction": 1
+                          }
+                        },
+                        {
+                          "in": [
+                            null,
+                            2
+                          ],
+                          "then": {
+                            "children": [
+                              {
+                                "in": [
+                                  2,
+                                  null
+                                ],
+                                "then": {
+                                  "children": [
+                                    {
+                                      "in": [
+                                        2,
+                                        null
+                                      ],
+                                      "then": {
+                                        "complexity": 0.009999999776482582,
+                                        "loss": 0.0,
+                                        "name": "class",
+                                        "prediction": 1
+                                      }
+                                    },
+                                    {
+                                      "in": [
+                                        null,
+                                        2
+                                      ],
+                                      "then": {
+                                        "complexity": 0.009999999776482582,
+                                        "loss": 0.0,
+                                        "name": "class",
+                                        "prediction": 0
+                                      }
+                                    }
+                                  ],
+                                  "feature": 4,
+                                  "name": "a5",
+                                  "type": "integral"
+                                }
+                              },
+                              {
+                                "in": [
+                                  null,
+                                  2
+                                ],
+                                "then": {
+                                  "complexity": 0.009999999776482582,
+                                  "loss": 0.011627906933426857,
+                                  "name": "class",
+                                  "prediction": 0
+                                }
+                              }
+                            ],
+                            "feature": 2,
+                            "name": "a3",
+                            "type": "integral"
+                          }
+                        }
+                      ],
+                      "feature": 3,
+                      "name": "a4",
+                      "type": "integral"
+                    }
+                  },
+                  {
+                    "in": [
+                      null,
+                      2
+                    ],
+                    "then": {
+                      "complexity": 0.009999999776482582,
+                      "loss": 0.04152823984622955,
+                      "name": "class",
+                      "prediction": 0
+                    }
+                  }
+                ],
+                "feature": 5,
+                "name": "a6",
+                "type": "integral"
+              }
+            },
+            {
+              "in": [
+                null,
+                2
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.09634551405906677,
+                "name": "class",
+                "prediction": 0
+              }
+            }
+          ],
+          "feature": 1,
+          "name": "a2",
+          "type": "integral"
+        }
+      }
+    ],
+    "feature": 0,
+    "name": "a1",
+    "type": "integral"
+  }
+]
+
+=================================================================
+==43890==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 1440 byte(s) in 6 object(s) allocated from:
+    #0 0x7f171a32df17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55f506edc108 in Queue::push(Message const&) src/queue.cpp:12
+    #2 0x55f506f66b56 in Optimizer::signal_exploiters(tbb::interface5::concurrent_hash_map<Tile, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > >, GraphVertexHashComparator, tbb::scalable_allocator<std::pair<Tile const, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > > > > >::accessor&, Task&, unsigned int) src/optimizer/dispatch/dispatch.hpp:244
+    #3 0x55f506f619c2 in Optimizer::dispatch(Message const&, unsigned int) src/optimizer/dispatch/dispatch.hpp:36
+    #4 0x55f506f6be19 in Optimizer::iterate(unsigned int) src/optimizer.cpp:79
+    #5 0x55f506f9a32a in GOSDT::work(int, Optimizer&, int&) src/gosdt.cpp:144
+    #6 0x55f506f9f653 in void std::__invoke_impl<void, void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> >(std::__invoke_other, void (*&&)(int, Optimizer&, int&), unsigned int&&, std::reference_wrapper<Optimizer>&&, std::reference_wrapper<int>&&) /usr/include/c++/10/bits/invoke.h:60
+    #7 0x55f506f9f4a5 in std::__invoke_result<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> >::type std::__invoke<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> >(void (*&&)(int, Optimizer&, int&), unsigned int&&, std::reference_wrapper<Optimizer>&&, std::reference_wrapper<int>&&) /usr/include/c++/10/bits/invoke.h:95
+    #8 0x55f506f9f384 in void std::thread::_Invoker<std::tuple<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> > >::_M_invoke<0ul, 1ul, 2ul, 3ul>(std::_Index_tuple<0ul, 1ul, 2ul, 3ul>) /usr/include/c++/10/thread:264
+    #9 0x55f506f9f301 in std::thread::_Invoker<std::tuple<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> > >::operator()() /usr/include/c++/10/thread:271
+    #10 0x55f506f9f2e1 in std::thread::_State_impl<std::thread::_Invoker<std::tuple<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> > > >::_M_run() /usr/include/c++/10/thread:215
+    #11 0x7f171a065d83  (/lib/x86_64-linux-gnu/libstdc++.so.6+0xd6d83)
+
+Direct leak of 240 byte(s) in 1 object(s) allocated from:
+    #0 0x7f171a32df17 in operator new(unsigned long) (/lib/x86_64-linux-gnu/libasan.so.6+0xb1f17)
+    #1 0x55f506edc108 in Queue::push(Message const&) src/queue.cpp:12
+    #2 0x55f506f66b56 in Optimizer::signal_exploiters(tbb::interface5::concurrent_hash_map<Tile, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > >, GraphVertexHashComparator, tbb::scalable_allocator<std::pair<Tile const, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > > > > >::accessor&, Task&, unsigned int) src/optimizer/dispatch/dispatch.hpp:244
+    #3 0x55f506f61d72 in Optimizer::dispatch(Message const&, unsigned int) src/optimizer/dispatch/dispatch.hpp:62
+    #4 0x55f506f6be19 in Optimizer::iterate(unsigned int) src/optimizer.cpp:79
+    #5 0x55f506f9a32a in GOSDT::work(int, Optimizer&, int&) src/gosdt.cpp:144
+    #6 0x55f506f9f653 in void std::__invoke_impl<void, void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> >(std::__invoke_other, void (*&&)(int, Optimizer&, int&), unsigned int&&, std::reference_wrapper<Optimizer>&&, std::reference_wrapper<int>&&) /usr/include/c++/10/bits/invoke.h:60
+    #7 0x55f506f9f4a5 in std::__invoke_result<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> >::type std::__invoke<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> >(void (*&&)(int, Optimizer&, int&), unsigned int&&, std::reference_wrapper<Optimizer>&&, std::reference_wrapper<int>&&) /usr/include/c++/10/bits/invoke.h:95
+    #8 0x55f506f9f384 in void std::thread::_Invoker<std::tuple<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> > >::_M_invoke<0ul, 1ul, 2ul, 3ul>(std::_Index_tuple<0ul, 1ul, 2ul, 3ul>) /usr/include/c++/10/thread:264
+    #9 0x55f506f9f301 in std::thread::_Invoker<std::tuple<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> > >::operator()() /usr/include/c++/10/thread:271
+    #10 0x55f506f9f2e1 in std::thread::_State_impl<std::thread::_Invoker<std::tuple<void (*)(int, Optimizer&, int&), unsigned int, std::reference_wrapper<Optimizer>, std::reference_wrapper<int> > > >::_M_run() /usr/include/c++/10/thread:215
+    #11 0x7f171a065d83  (/lib/x86_64-linux-gnu/libstdc++.so.6+0xd6d83)
+
+SUMMARY: AddressSanitizer: 1680 byte(s) leaked in 7 allocation(s).
