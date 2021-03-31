@@ -1,7 +1,7 @@
 
 void Optimizer::models(std::unordered_set< Model > & results) {
     if (Configuration::model_limit == 0) { return; }
-    std::unordered_set<std::shared_ptr<Model>, std::hash<std::shared_ptr<Model>>, std::equal_to<std::shared_ptr<Model>>> local_results;
+    std::unordered_set< Model *, std::hash< Model * >, std::equal_to< Model * > > local_results;
     models(this -> root, local_results);
     // std::cout << "Local Size: " << local_results.size() << std::endl;
     // std::cout << "Result Size: " << results.size() << std::endl;
@@ -22,8 +22,7 @@ void Optimizer::models(std::unordered_set< Model > & results) {
     // std::cout << "Result Size: " << results.size() << std::endl;
 }
 
-//void Optimizer::models(key_type const & identifier, std::unordered_set< Model *, std::hash< Model * >, std::equal_to< Model * > > & results, bool leaf) {
-void Optimizer::models(key_type const & identifier, std::unordered_set<std::shared_ptr<Model>> & results, bool leaf){
+void Optimizer::models(key_type const & identifier, std::unordered_set< Model *, std::hash< Model * >, std::equal_to< Model * > > & results, bool leaf) {
     vertex_accessor task_accessor;
     if (State::graph.vertices.find(task_accessor, identifier) == false) { return; }
     Task & task = task_accessor -> second;
@@ -53,8 +52,8 @@ void Optimizer::models(key_type const & identifier, std::unordered_set<std::shar
         if (std::get<2>(* iterator) > task.upperbound() + std::numeric_limits<float>::epsilon()) { continue; }
         int feature = std::get<0>(* iterator);
         // std::cout << "Feature: " << feature << std::endl;
-        std::unordered_set<std::shared_ptr<Model>> negatives;
-        std::unordered_set<std::shared_ptr<Model>> positives;
+        std::unordered_set< Model * > negatives;
+        std::unordered_set< Model * > positives;
         bool ready = true;
 
         child_accessor left_key, right_key;

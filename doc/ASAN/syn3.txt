@@ -1,0 +1,46 @@
+checking...
+[
+  {
+    "children": [
+      {
+        "in": [
+          7,
+          null
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.0,
+          "name": "y",
+          "prediction": 0
+        }
+      },
+      {
+        "in": [
+          3,
+          7
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.0,
+          "name": "y",
+          "prediction": 1
+        }
+      },
+      {
+        "in": [
+          null,
+          3
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.0,
+          "name": "y",
+          "prediction": 0
+        }
+      }
+    ],
+    "feature": 0,
+    "name": "x",
+    "type": "integral"
+  }
+]

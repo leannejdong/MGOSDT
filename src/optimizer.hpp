@@ -124,7 +124,7 @@ private:
 
     // @param set: identifier for the root node from which to extract optimal models
     // @modifies results: internal set of extracted models
-    void models(key_type const & identifier, std::unordered_set< Model * > & results, bool leaf = false);
+    void models(key_type const & identifier, std::unordered_set<std::shared_ptr<Model>> & results, bool leaf = false);
 
     void print(void) const;
     void profile(void);

@@ -4,7 +4,7 @@ void Optimizer::diagnose_false_convergence(void) {
 }
 bool Optimizer::diagnose_false_convergence(key_type const & key) {
     if (Configuration::diagnostics == false) { return false; }
-    std::unordered_set< Model * > results;
+    std::unordered_set<std::shared_ptr<Model> > results;
     models(key, results);
     if (results.size() > 0) { return false; }
 
