@@ -1,0 +1,2564 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" width="1200" height="2134" onload="init(evt)" viewBox="0 0 1200 2134" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- Flame graph stack visualization. See https://github.com/brendangregg/FlameGraph for latest version, and http://www.brendangregg.com/flamegraphs.html for examples. -->
+<!-- NOTES:  -->
+<defs>
+	<linearGradient id="background" y1="0" y2="1" x1="0" x2="0" >
+		<stop stop-color="#eeeeee" offset="5%" />
+		<stop stop-color="#eeeeb0" offset="95%" />
+	</linearGradient>
+</defs>
+<style type="text/css">
+	text { font-family:Verdana; font-size:12px; fill:rgb(0,0,0); }
+	#search, #ignorecase { opacity:0.1; cursor:pointer; }
+	#search:hover, #search.show, #ignorecase:hover, #ignorecase.show { opacity:1; }
+	#subtitle { text-anchor:middle; font-color:rgb(160,160,160); }
+	#title { text-anchor:middle; font-size:17px}
+	#unzoom { cursor:pointer; }
+	#frames > *:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
+	.hide { display:none; }
+	.parent { opacity:0.5; }
+</style>
+<script type="text/ecmascript">
+<![CDATA[
+	"use strict";
+	var details, searchbtn, unzoombtn, matchedtxt, svg, searching, currentSearchTerm, ignorecase, ignorecaseBtn;
+	function init(evt) {
+		details = document.getElementById("details").firstChild;
+		searchbtn = document.getElementById("search");
+		ignorecaseBtn = document.getElementById("ignorecase");
+		unzoombtn = document.getElementById("unzoom");
+		matchedtxt = document.getElementById("matched");
+		svg = document.getElementsByTagName("svg")[0];
+		searching = 0;
+		currentSearchTerm = null;
+	}
+
+	window.addEventListener("click", function(e) {
+		var target = find_group(e.target);
+		if (target) {
+			if (target.nodeName == "a") {
+				if (e.ctrlKey === false) return;
+				e.preventDefault();
+			}
+			if (target.classList.contains("parent")) unzoom();
+			zoom(target);
+		}
+		else if (e.target.id == "unzoom") unzoom();
+		else if (e.target.id == "search") search_prompt();
+		else if (e.target.id == "ignorecase") toggle_ignorecase();
+	}, false)
+
+	// mouse-over for info
+	// show
+	window.addEventListener("mouseover", function(e) {
+		var target = find_group(e.target);
+		if (target) details.nodeValue = "Function: " + g_to_text(target);
+	}, false)
+
+	// clear
+	window.addEventListener("mouseout", function(e) {
+		var target = find_group(e.target);
+		if (target) details.nodeValue = ' ';
+	}, false)
+
+	// ctrl-F for search
+	window.addEventListener("keydown",function (e) {
+		if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+			e.preventDefault();
+			search_prompt();
+		}
+	}, false)
+
+	// ctrl-I to toggle case-sensitive search
+	window.addEventListener("keydown",function (e) {
+		if (e.ctrlKey && e.keyCode === 73) {
+			e.preventDefault();
+			toggle_ignorecase();
+		}
+	}, false)
+
+	// functions
+	function find_child(node, selector) {
+		var children = node.querySelectorAll(selector);
+		if (children.length) return children[0];
+		return;
+	}
+	function find_group(node) {
+		var parent = node.parentElement;
+		if (!parent) return;
+		if (parent.id == "frames") return node;
+		return find_group(parent);
+	}
+	function orig_save(e, attr, val) {
+		if (e.attributes["_orig_" + attr] != undefined) return;
+		if (e.attributes[attr] == undefined) return;
+		if (val == undefined) val = e.attributes[attr].value;
+		e.setAttribute("_orig_" + attr, val);
+	}
+	function orig_load(e, attr) {
+		if (e.attributes["_orig_"+attr] == undefined) return;
+		e.attributes[attr].value = e.attributes["_orig_" + attr].value;
+		e.removeAttribute("_orig_"+attr);
+	}
+	function g_to_text(e) {
+		var text = find_child(e, "title").firstChild.nodeValue;
+		return (text)
+	}
+	function g_to_func(e) {
+		var func = g_to_text(e);
+		// if there's any manipulation we want to do to the function
+		// name before it's searched, do it here before returning.
+		return (func);
+	}
+	function update_text(e) {
+		var r = find_child(e, "rect");
+		var t = find_child(e, "text");
+		var w = parseFloat(r.attributes.width.value) -3;
+		var txt = find_child(e, "title").textContent.replace(/\([^(]*\)$/,"");
+		t.attributes.x.value = parseFloat(r.attributes.x.value) + 3;
+
+		// Smaller than this size won't fit anything
+		if (w < 2 * 12 * 0.59) {
+			t.textContent = "";
+			return;
+		}
+
+		t.textContent = txt;
+		// Fit in full text width
+		if (/^ *$/.test(txt) || t.getSubStringLength(0, txt.length) < w)
+			return;
+
+		for (var x = txt.length - 2; x > 0; x--) {
+			if (t.getSubStringLength(0, x + 2) <= w) {
+				t.textContent = txt.substring(0, x) + "..";
+				return;
+			}
+		}
+		t.textContent = "";
+	}
+
+	// zoom
+	function zoom_reset(e) {
+		if (e.attributes != undefined) {
+			orig_load(e, "x");
+			orig_load(e, "width");
+		}
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_reset(c[i]);
+		}
+	}
+	function zoom_child(e, x, ratio) {
+		if (e.attributes != undefined) {
+			if (e.attributes.x != undefined) {
+				orig_save(e, "x");
+				e.attributes.x.value = (parseFloat(e.attributes.x.value) - x - 10) * ratio + 10;
+				if (e.tagName == "text")
+					e.attributes.x.value = find_child(e.parentNode, "rect[x]").attributes.x.value + 3;
+			}
+			if (e.attributes.width != undefined) {
+				orig_save(e, "width");
+				e.attributes.width.value = parseFloat(e.attributes.width.value) * ratio;
+			}
+		}
+
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_child(c[i], x - 10, ratio);
+		}
+	}
+	function zoom_parent(e) {
+		if (e.attributes) {
+			if (e.attributes.x != undefined) {
+				orig_save(e, "x");
+				e.attributes.x.value = 10;
+			}
+			if (e.attributes.width != undefined) {
+				orig_save(e, "width");
+				e.attributes.width.value = parseInt(svg.width.baseVal.value) - (10 * 2);
+			}
+		}
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_parent(c[i]);
+		}
+	}
+	function zoom(node) {
+		var attr = find_child(node, "rect").attributes;
+		var width = parseFloat(attr.width.value);
+		var xmin = parseFloat(attr.x.value);
+		var xmax = parseFloat(xmin + width);
+		var ymin = parseFloat(attr.y.value);
+		var ratio = (svg.width.baseVal.value - 2 * 10) / width;
+
+		// XXX: Workaround for JavaScript float issues (fix me)
+		var fudge = 0.0001;
+
+		unzoombtn.classList.remove("hide");
+
+		var el = document.getElementById("frames").children;
+		for (var i = 0; i < el.length; i++) {
+			var e = el[i];
+			var a = find_child(e, "rect").attributes;
+			var ex = parseFloat(a.x.value);
+			var ew = parseFloat(a.width.value);
+			var upstack;
+			// Is it an ancestor
+			if (0 == 0) {
+				upstack = parseFloat(a.y.value) > ymin;
+			} else {
+				upstack = parseFloat(a.y.value) < ymin;
+			}
+			if (upstack) {
+				// Direct ancestor
+				if (ex <= xmin && (ex+ew+fudge) >= xmax) {
+					e.classList.add("parent");
+					zoom_parent(e);
+					update_text(e);
+				}
+				// not in current path
+				else
+					e.classList.add("hide");
+			}
+			// Children maybe
+			else {
+				// no common path
+				if (ex < xmin || ex + fudge >= xmax) {
+					e.classList.add("hide");
+				}
+				else {
+					zoom_child(e, xmin, ratio);
+					update_text(e);
+				}
+			}
+		}
+		search();
+	}
+	function unzoom() {
+		unzoombtn.classList.add("hide");
+		var el = document.getElementById("frames").children;
+		for(var i = 0; i < el.length; i++) {
+			el[i].classList.remove("parent");
+			el[i].classList.remove("hide");
+			zoom_reset(el[i]);
+			update_text(el[i]);
+		}
+		search();
+	}
+
+	// search
+	function toggle_ignorecase() {
+		ignorecase = !ignorecase;
+		if (ignorecase) {
+			ignorecaseBtn.classList.add("show");
+		} else {
+			ignorecaseBtn.classList.remove("show");
+		}
+		reset_search();
+		search();
+	}
+	function reset_search() {
+		var el = document.querySelectorAll("#frames rect");
+		for (var i = 0; i < el.length; i++) {
+			orig_load(el[i], "fill")
+		}
+	}
+	function search_prompt() {
+		if (!searching) {
+			var term = prompt("Enter a search term (regexp " +
+			    "allowed, eg: ^ext4_)"
+			    + (ignorecase ? ", ignoring case" : "")
+			    + "\nPress Ctrl-i to toggle case sensitivity", "");
+			if (term != null) {
+				currentSearchTerm = term;
+				search();
+			}
+		} else {
+			reset_search();
+			searching = 0;
+			currentSearchTerm = null;
+			searchbtn.classList.remove("show");
+			searchbtn.firstChild.nodeValue = "Search"
+			matchedtxt.classList.add("hide");
+			matchedtxt.firstChild.nodeValue = ""
+		}
+	}
+	function search(term) {
+		if (currentSearchTerm === null) return;
+		var term = currentSearchTerm;
+
+		var re = new RegExp(term, ignorecase ? 'i' : '');
+		var el = document.getElementById("frames").children;
+		var matches = new Object();
+		var maxwidth = 0;
+		for (var i = 0; i < el.length; i++) {
+			var e = el[i];
+			var func = g_to_func(e);
+			var rect = find_child(e, "rect");
+			if (func == null || rect == null)
+				continue;
+
+			// Save max width. Only works as we have a root frame
+			var w = parseFloat(rect.attributes.width.value);
+			if (w > maxwidth)
+				maxwidth = w;
+
+			if (func.match(re)) {
+				// highlight
+				var x = parseFloat(rect.attributes.x.value);
+				orig_save(rect, "fill");
+				rect.attributes.fill.value = "rgb(230,0,230)";
+
+				// remember matches
+				if (matches[x] == undefined) {
+					matches[x] = w;
+				} else {
+					if (w > matches[x]) {
+						// overwrite with parent
+						matches[x] = w;
+					}
+				}
+				searching = 1;
+			}
+		}
+		if (!searching)
+			return;
+
+		searchbtn.classList.add("show");
+		searchbtn.firstChild.nodeValue = "Reset Search";
+
+		// calculate percent matched, excluding vertical overlap
+		var count = 0;
+		var lastx = -1;
+		var lastw = 0;
+		var keys = Array();
+		for (k in matches) {
+			if (matches.hasOwnProperty(k))
+				keys.push(k);
+		}
+		// sort the matched frames by their x location
+		// ascending, then width descending
+		keys.sort(function(a, b){
+			return a - b;
+		});
+		// Step through frames saving only the biggest bottom-up frames
+		// thanks to the sort order. This relies on the tree property
+		// where children are always smaller than their parents.
+		var fudge = 0.0001;	// JavaScript floating point
+		for (var k in keys) {
+			var x = parseFloat(keys[k]);
+			var w = matches[keys[k]];
+			if (x >= lastx + lastw - fudge) {
+				count += w;
+				lastx = x;
+				lastw = w;
+			}
+		}
+		// display matched percent
+		matchedtxt.classList.remove("hide");
+		var pct = 100 * count / maxwidth;
+		if (pct != 100) pct = pct.toFixed(1)
+		matchedtxt.firstChild.nodeValue = "Matched: " + pct + "%";
+	}
+]]>
+</script>
+<rect x="0.0" y="0" width="1200.0" height="2134.0" fill="url(#background)"  />
+<text id="title" x="600.00" y="24" >Flame Graph</text>
+<text id="details" x="10.00" y="2117" > </text>
+<text id="unzoom" x="10.00" y="24" class="hide">Reset Zoom</text>
+<text id="search" x="1090.00" y="24" >Search</text>
+<text id="ignorecase" x="1174.00" y="24" >ic</text>
+<text id="matched" x="1090.00" y="2117" > </text>
+<g id="frames">
+<g >
+<title>asm_exc_page_fault (3 samples, 0.19%)</title><rect x="228.9" y="2037" width="2.2" height="15.0" fill="rgb(227,43,54)" rx="2" ry="2" />
+<text  x="231.92" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (39 samples, 2.41%)</title><rect x="675.5" y="1989" width="28.5" height="15.0" fill="rgb(206,17,34)" rx="2" ry="2" />
+<text  x="678.53" y="1999.5" >[u..</text>
+</g>
+<g >
+<title>Message::exploitation (1 samples, 0.06%)</title><rect x="423.8" y="2021" width="0.7" height="15.0" fill="rgb(210,212,33)" rx="2" ry="2" />
+<text  x="426.77" y="2031.5" ></text>
+</g>
+<g >
+<title>native_write_msr (5 samples, 0.31%)</title><rect x="1186.4" y="1845" width="3.6" height="15.0" fill="rgb(219,195,54)" rx="2" ry="2" />
+<text  x="1189.35" y="1855.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (1 samples, 0.06%)</title><rect x="681.4" y="1525" width="0.7" height="15.0" fill="rgb(225,10,34)" rx="2" ry="2" />
+<text  x="684.37" y="1535.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="821" width="16.8" height="15.0" fill="rgb(216,189,28)" rx="2" ry="2" />
+<text  x="687.29" y="831.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="373" width="14.6" height="15.0" fill="rgb(238,162,39)" rx="2" ry="2" />
+<text  x="688.75" y="383.5" ></text>
+</g>
+<g >
+<title>Dataset::construct_bitmasks (1 samples, 0.06%)</title><rect x="423.0" y="2021" width="0.8" height="15.0" fill="rgb(226,195,51)" rx="2" ry="2" />
+<text  x="426.04" y="2031.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (6 samples, 0.37%)</title><rect x="1150.6" y="2053" width="4.4" height="15.0" fill="rgb(247,29,10)" rx="2" ry="2" />
+<text  x="1153.59" y="2063.5" ></text>
+</g>
+<g >
+<title>free_pcppages_bulk (1 samples, 0.06%)</title><rect x="1154.2" y="1797" width="0.8" height="15.0" fill="rgb(234,160,33)" rx="2" ry="2" />
+<text  x="1157.24" y="1807.5" ></text>
+</g>
+<g >
+<title>Bitmask::hash (2 samples, 0.12%)</title><rect x="671.9" y="1989" width="1.4" height="15.0" fill="rgb(232,179,48)" rx="2" ry="2" />
+<text  x="674.88" y="1999.5" ></text>
+</g>
+<g >
+<title>do_syscall_64 (1 samples, 0.06%)</title><rect x="795.2" y="2021" width="0.7" height="15.0" fill="rgb(212,131,24)" rx="2" ry="2" />
+<text  x="798.21" y="2031.5" ></text>
+</g>
+<g >
+<title>Tile::hash (1 samples, 0.06%)</title><rect x="276.4" y="2037" width="0.7" height="15.0" fill="rgb(227,49,31)" rx="2" ry="2" />
+<text  x="279.36" y="2047.5" ></text>
+</g>
+<g >
+<title>Bitmask::~Bitmask (2 samples, 0.12%)</title><rect x="271.2" y="2037" width="1.5" height="15.0" fill="rgb(242,119,20)" rx="2" ry="2" />
+<text  x="274.25" y="2047.5" ></text>
+</g>
+<g >
+<title>Bitmask::operator= (3 samples, 0.19%)</title><rect x="470.5" y="2005" width="2.2" height="15.0" fill="rgb(234,66,3)" rx="2" ry="2" />
+<text  x="473.47" y="2015.5" ></text>
+</g>
+<g >
+<title>Bitmask::operator== (54 samples, 3.34%)</title><rect x="369.0" y="2021" width="39.4" height="15.0" fill="rgb(210,99,13)" rx="2" ry="2" />
+<text  x="372.04" y="2031.5" >Bit..</text>
+</g>
+<g >
+<title>intel_pmu_enable_all (5 samples, 0.31%)</title><rect x="760.2" y="1925" width="3.6" height="15.0" fill="rgb(244,162,48)" rx="2" ry="2" />
+<text  x="763.18" y="1935.5" ></text>
+</g>
+<g >
+<title>[unknown] (34 samples, 2.10%)</title><rect x="678.4" y="1829" width="24.9" height="15.0" fill="rgb(206,85,21)" rx="2" ry="2" />
+<text  x="681.45" y="1839.5" >[..</text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (1 samples, 0.06%)</title><rect x="682.1" y="1285" width="0.7" height="15.0" fill="rgb(207,226,21)" rx="2" ry="2" />
+<text  x="685.10" y="1295.5" ></text>
+</g>
+<g >
+<title>Tile::operator== (1 samples, 0.06%)</title><rect x="677.0" y="1925" width="0.7" height="15.0" fill="rgb(217,78,42)" rx="2" ry="2" />
+<text  x="679.99" y="1935.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (1 samples, 0.06%)</title><rect x="679.2" y="1637" width="0.7" height="15.0" fill="rgb(238,89,19)" rx="2" ry="2" />
+<text  x="682.18" y="1647.5" ></text>
+</g>
+<g >
+<title>Dataset::summary (4 samples, 0.25%)</title><rect x="153.0" y="2005" width="2.9" height="15.0" fill="rgb(219,151,45)" rx="2" ry="2" />
+<text  x="156.03" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="629" width="16.8" height="15.0" fill="rgb(252,53,17)" rx="2" ry="2" />
+<text  x="687.29" y="639.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (3 samples, 0.19%)</title><rect x="752.9" y="1957" width="2.2" height="15.0" fill="rgb(214,55,14)" rx="2" ry="2" />
+<text  x="755.88" y="1967.5" ></text>
+</g>
+<g >
+<title>native_write_msr (5 samples, 0.31%)</title><rect x="760.2" y="1909" width="3.6" height="15.0" fill="rgb(211,187,51)" rx="2" ry="2" />
+<text  x="763.18" y="1919.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 1.79%)</title><rect x="682.1" y="1525" width="21.2" height="15.0" fill="rgb(205,200,44)" rx="2" ry="2" />
+<text  x="685.10" y="1535.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (2 samples, 0.12%)</title><rect x="1160.1" y="1989" width="1.4" height="15.0" fill="rgb(219,213,26)" rx="2" ry="2" />
+<text  x="1163.08" y="1999.5" ></text>
+</g>
+<g >
+<title>alloc_pages_vma (1 samples, 0.06%)</title><rect x="1160.1" y="1941" width="0.7" height="15.0" fill="rgb(237,122,45)" rx="2" ry="2" />
+<text  x="1163.08" y="1951.5" ></text>
+</g>
+<g >
+<title>x86_pmu_enable (5 samples, 0.31%)</title><rect x="760.2" y="1941" width="3.6" height="15.0" fill="rgb(218,109,29)" rx="2" ry="2" />
+<text  x="763.18" y="1951.5" ></text>
+</g>
+<g >
+<title>schedule (1 samples, 0.06%)</title><rect x="1128.7" y="1957" width="0.7" height="15.0" fill="rgb(246,201,50)" rx="2" ry="2" />
+<text  x="1131.70" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="981" width="16.8" height="15.0" fill="rgb(212,81,10)" rx="2" ry="2" />
+<text  x="687.29" y="991.5" ></text>
+</g>
+<g >
+<title>tbb::spin_rw_mutex_v3::internal_try_acquire_writer (2 samples, 0.12%)</title><rect x="758.0" y="2021" width="1.4" height="15.0" fill="rgb(215,90,19)" rx="2" ry="2" />
+<text  x="760.99" y="2031.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (1 samples, 0.06%)</title><rect x="683.6" y="1061" width="0.7" height="15.0" fill="rgb(222,54,10)" rx="2" ry="2" />
+<text  x="686.56" y="1071.5" ></text>
+</g>
+<g >
+<title>get_page_from_freelist (1 samples, 0.06%)</title><rect x="795.2" y="1749" width="0.7" height="15.0" fill="rgb(205,121,8)" rx="2" ry="2" />
+<text  x="798.21" y="1759.5" ></text>
+</g>
+<g >
+<title>[unknown] (35 samples, 2.16%)</title><rect x="677.7" y="1909" width="25.6" height="15.0" fill="rgb(227,185,4)" rx="2" ry="2" />
+<text  x="680.72" y="1919.5" >[..</text>
+</g>
+<g >
+<title>Bitmask::count (3 samples, 0.19%)</title><rect x="464.6" y="2005" width="2.2" height="15.0" fill="rgb(232,59,5)" rx="2" ry="2" />
+<text  x="467.63" y="2015.5" ></text>
+</g>
+<g >
+<title>cgroup_throttle_swaprate (1 samples, 0.06%)</title><rect x="363.9" y="1909" width="0.8" height="15.0" fill="rgb(206,41,22)" rx="2" ry="2" />
+<text  x="366.93" y="1919.5" ></text>
+</g>
+<g >
+<title>Message::operator== (8 samples, 0.49%)</title><rect x="426.0" y="2021" width="5.8" height="15.0" fill="rgb(253,144,47)" rx="2" ry="2" />
+<text  x="428.96" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="917" width="16.8" height="15.0" fill="rgb(216,162,49)" rx="2" ry="2" />
+<text  x="687.29" y="927.5" ></text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="549" width="16.1" height="15.0" fill="rgb(253,187,6)" rx="2" ry="2" />
+<text  x="688.02" y="559.5" ></text>
+</g>
+<g >
+<title>[unknown] (30 samples, 1.86%)</title><rect x="681.4" y="1573" width="21.9" height="15.0" fill="rgb(206,15,39)" rx="2" ry="2" />
+<text  x="684.37" y="1583.5" >[..</text>
+</g>
+<g >
+<title>release_pages (3 samples, 0.19%)</title><rect x="1152.8" y="1845" width="2.2" height="15.0" fill="rgb(232,49,46)" rx="2" ry="2" />
+<text  x="1155.78" y="1855.5" ></text>
+</g>
+<g >
+<title>__gmpn_nior_n (43 samples, 2.66%)</title><rect x="868.2" y="2053" width="31.4" height="15.0" fill="rgb(215,90,37)" rx="2" ry="2" />
+<text  x="871.18" y="2063.5" >__..</text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="309" width="14.6" height="15.0" fill="rgb(243,100,23)" rx="2" ry="2" />
+<text  x="688.75" y="319.5" ></text>
+</g>
+<g >
+<title>tbb::spin_rw_mutex_v3::internal_try_acquire_writer (11 samples, 0.68%)</title><rect x="828.8" y="2037" width="8.0" height="15.0" fill="rgb(254,56,16)" rx="2" ry="2" />
+<text  x="831.78" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (25 samples, 1.55%)</title><rect x="682.8" y="1285" width="18.3" height="15.0" fill="rgb(230,137,30)" rx="2" ry="2" />
+<text  x="685.83" y="1295.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, Task, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, Task&gt; &gt; &gt;::lookup (2 samples, 0.12%)</title><rect x="166.9" y="2021" width="1.5" height="15.0" fill="rgb(219,55,53)" rx="2" ry="2" />
+<text  x="169.90" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 1.79%)</title><rect x="682.1" y="1445" width="21.2" height="15.0" fill="rgb(217,88,52)" rx="2" ry="2" />
+<text  x="685.10" y="1455.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (3 samples, 0.19%)</title><rect x="1144.8" y="2037" width="2.1" height="15.0" fill="rgb(214,62,51)" rx="2" ry="2" />
+<text  x="1147.76" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1077" width="17.5" height="15.0" fill="rgb(214,80,39)" rx="2" ry="2" />
+<text  x="686.56" y="1087.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (1 samples, 0.06%)</title><rect x="678.4" y="1765" width="0.8" height="15.0" fill="rgb(226,21,0)" rx="2" ry="2" />
+<text  x="681.45" y="1775.5" ></text>
+</g>
+<g >
+<title>Bitmask::count (2 samples, 0.12%)</title><rect x="331.1" y="2021" width="1.4" height="15.0" fill="rgb(239,101,21)" rx="2" ry="2" />
+<text  x="334.09" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1157" width="17.5" height="15.0" fill="rgb(237,109,19)" rx="2" ry="2" />
+<text  x="686.56" y="1167.5" ></text>
+</g>
+<g >
+<title>[unknown] (28 samples, 1.73%)</title><rect x="682.1" y="1349" width="20.4" height="15.0" fill="rgb(228,39,13)" rx="2" ry="2" />
+<text  x="685.10" y="1359.5" ></text>
+</g>
+<g >
+<title>__gmpn_popcount (1 samples, 0.06%)</title><rect x="712.7" y="2021" width="0.8" height="15.0" fill="rgb(245,141,1)" rx="2" ry="2" />
+<text  x="715.75" y="2031.5" ></text>
+</g>
+<g >
+<title>__memmove_avx_unaligned_erms (10 samples, 0.62%)</title><rect x="599.6" y="2005" width="7.3" height="15.0" fill="rgb(241,93,34)" rx="2" ry="2" />
+<text  x="602.64" y="2015.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (3 samples, 0.19%)</title><rect x="593.8" y="2005" width="2.2" height="15.0" fill="rgb(226,23,28)" rx="2" ry="2" />
+<text  x="596.80" y="2015.5" ></text>
+</g>
+<g >
+<title>__handle_mm_fault (2 samples, 0.12%)</title><rect x="1163.7" y="1973" width="1.5" height="15.0" fill="rgb(226,157,39)" rx="2" ry="2" />
+<text  x="1166.73" y="1983.5" ></text>
+</g>
+<g >
+<title>__memmove_avx_unaligned_erms (2 samples, 0.12%)</title><rect x="164.0" y="2021" width="1.4" height="15.0" fill="rgb(208,98,25)" rx="2" ry="2" />
+<text  x="166.98" y="2031.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (1 samples, 0.06%)</title><rect x="795.2" y="1877" width="0.7" height="15.0" fill="rgb(240,177,32)" rx="2" ry="2" />
+<text  x="798.21" y="1887.5" ></text>
+</g>
+<g >
+<title>_int_free (1 samples, 0.06%)</title><rect x="703.3" y="1973" width="0.7" height="15.0" fill="rgb(231,27,2)" rx="2" ry="2" />
+<text  x="706.26" y="1983.5" ></text>
+</g>
+<g >
+<title>__gmpn_scan0 (6 samples, 0.37%)</title><rect x="713.5" y="2021" width="4.4" height="15.0" fill="rgb(254,135,24)" rx="2" ry="2" />
+<text  x="716.48" y="2031.5" ></text>
+</g>
+<g >
+<title>Message::hash (1 samples, 0.06%)</title><rect x="104.1" y="2053" width="0.8" height="15.0" fill="rgb(245,194,48)" rx="2" ry="2" />
+<text  x="107.14" y="2063.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (1 samples, 0.06%)</title><rect x="808.3" y="1989" width="0.8" height="15.0" fill="rgb(226,111,3)" rx="2" ry="2" />
+<text  x="811.34" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="933" width="16.8" height="15.0" fill="rgb(210,166,1)" rx="2" ry="2" />
+<text  x="687.29" y="943.5" ></text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="485" width="16.1" height="15.0" fill="rgb(240,149,44)" rx="2" ry="2" />
+<text  x="688.02" y="495.5" ></text>
+</g>
+<g >
+<title>do_wp_page (1 samples, 0.06%)</title><rect x="790.8" y="1909" width="0.8" height="15.0" fill="rgb(243,150,43)" rx="2" ry="2" />
+<text  x="793.83" y="1919.5" ></text>
+</g>
+<g >
+<title>__memmove_avx_unaligned_erms (26 samples, 1.61%)</title><rect x="718.6" y="2021" width="19.0" height="15.0" fill="rgb(243,94,1)" rx="2" ry="2" />
+<text  x="721.58" y="2031.5" ></text>
+</g>
+<g >
+<title>exit_mmap (6 samples, 0.37%)</title><rect x="1150.6" y="1957" width="4.4" height="15.0" fill="rgb(213,99,32)" rx="2" ry="2" />
+<text  x="1153.59" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="533" width="16.1" height="15.0" fill="rgb(249,52,2)" rx="2" ry="2" />
+<text  x="688.02" y="543.5" ></text>
+</g>
+<g >
+<title>__handle_mm_fault (2 samples, 0.12%)</title><rect x="327.4" y="1941" width="1.5" height="15.0" fill="rgb(225,98,16)" rx="2" ry="2" />
+<text  x="330.44" y="1951.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (2 samples, 0.12%)</title><rect x="1163.7" y="2005" width="1.5" height="15.0" fill="rgb(251,53,53)" rx="2" ry="2" />
+<text  x="1166.73" y="2015.5" ></text>
+</g>
+<g >
+<title>Queue::push (8 samples, 0.49%)</title><rect x="444.2" y="2021" width="5.8" height="15.0" fill="rgb(254,137,13)" rx="2" ry="2" />
+<text  x="447.20" y="2031.5" ></text>
+</g>
+<g >
+<title>tbb::spin_rw_mutex_v3::internal_acquire_writer (1 samples, 0.06%)</title><rect x="828.0" y="2037" width="0.8" height="15.0" fill="rgb(223,185,11)" rx="2" ry="2" />
+<text  x="831.05" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (599 samples, 37.04%)</title><rect x="322.3" y="2037" width="437.1" height="15.0" fill="rgb(243,217,4)" rx="2" ry="2" />
+<text  x="325.33" y="2047.5" >[unknown]</text>
+</g>
+<g >
+<title>perf_pmu_enable.part.0 (5 samples, 0.31%)</title><rect x="760.2" y="1957" width="3.6" height="15.0" fill="rgb(224,127,39)" rx="2" ry="2" />
+<text  x="763.18" y="1967.5" ></text>
+</g>
+<g >
+<title>Task::continuous_feature_exchange (4 samples, 0.25%)</title><rect x="193.2" y="2053" width="2.9" height="15.0" fill="rgb(223,82,21)" rx="2" ry="2" />
+<text  x="196.17" y="2063.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, Tile, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, Tile&gt; &gt; &gt;::lookup (1 samples, 0.06%)</title><rect x="755.1" y="2021" width="0.7" height="15.0" fill="rgb(220,74,37)" rx="2" ry="2" />
+<text  x="758.07" y="2031.5" ></text>
+</g>
+<g >
+<title>free_unref_page_list (2 samples, 0.12%)</title><rect x="1153.5" y="1829" width="1.5" height="15.0" fill="rgb(230,140,42)" rx="2" ry="2" />
+<text  x="1156.51" y="1839.5" ></text>
+</g>
+<g >
+<title>[unknown] (30 samples, 1.86%)</title><rect x="681.4" y="1557" width="21.9" height="15.0" fill="rgb(217,32,16)" rx="2" ry="2" />
+<text  x="684.37" y="1567.5" >[..</text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="581" width="16.1" height="15.0" fill="rgb(243,57,13)" rx="2" ry="2" />
+<text  x="688.02" y="591.5" ></text>
+</g>
+<g >
+<title>Optimizer::load_children (9 samples, 0.56%)</title><rect x="137.7" y="2021" width="6.6" height="15.0" fill="rgb(216,64,46)" rx="2" ry="2" />
+<text  x="140.71" y="2031.5" ></text>
+</g>
+<g >
+<title>get_mem_cgroup_from_mm (2 samples, 0.12%)</title><rect x="229.7" y="1925" width="1.4" height="15.0" fill="rgb(210,207,35)" rx="2" ry="2" />
+<text  x="232.65" y="1935.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (1 samples, 0.06%)</title><rect x="790.8" y="1941" width="0.8" height="15.0" fill="rgb(214,33,10)" rx="2" ry="2" />
+<text  x="793.83" y="1951.5" ></text>
+</g>
+<g >
+<title>Bitmask::empty (1 samples, 0.06%)</title><rect x="466.8" y="2005" width="0.8" height="15.0" fill="rgb(212,193,40)" rx="2" ry="2" />
+<text  x="469.82" y="2015.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (1 samples, 0.06%)</title><rect x="1163.0" y="1989" width="0.7" height="15.0" fill="rgb(227,86,2)" rx="2" ry="2" />
+<text  x="1166.00" y="1999.5" ></text>
+</g>
+<g >
+<title>release_pages (1 samples, 0.06%)</title><rect x="1150.6" y="1893" width="0.7" height="15.0" fill="rgb(235,92,42)" rx="2" ry="2" />
+<text  x="1153.59" y="1903.5" ></text>
+</g>
+<g >
+<title>exc_page_fault (2 samples, 0.12%)</title><rect x="327.4" y="1989" width="1.5" height="15.0" fill="rgb(252,18,17)" rx="2" ry="2" />
+<text  x="330.44" y="1999.5" ></text>
+</g>
+<g >
+<title>mem_cgroup_charge_statistics.isra.0 (1 samples, 0.06%)</title><rect x="328.2" y="1893" width="0.7" height="15.0" fill="rgb(252,139,0)" rx="2" ry="2" />
+<text  x="331.17" y="1903.5" ></text>
+</g>
+<g >
+<title>mmput (6 samples, 0.37%)</title><rect x="1150.6" y="1973" width="4.4" height="15.0" fill="rgb(254,208,28)" rx="2" ry="2" />
+<text  x="1153.59" y="1983.5" ></text>
+</g>
+<g >
+<title>__x64_sys_execve (6 samples, 0.37%)</title><rect x="1185.6" y="2005" width="4.4" height="15.0" fill="rgb(211,18,44)" rx="2" ry="2" />
+<text  x="1188.62" y="2015.5" ></text>
+</g>
+<g >
+<title>_int_free (5 samples, 0.31%)</title><rect x="791.6" y="2037" width="3.6" height="15.0" fill="rgb(217,132,27)" rx="2" ry="2" />
+<text  x="794.56" y="2047.5" ></text>
+</g>
+<g >
+<title>__mod_lruvec_state (1 samples, 0.06%)</title><rect x="1152.1" y="1861" width="0.7" height="15.0" fill="rgb(224,188,22)" rx="2" ry="2" />
+<text  x="1155.05" y="1871.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (1 samples, 0.06%)</title><rect x="756.5" y="1957" width="0.8" height="15.0" fill="rgb(208,142,13)" rx="2" ry="2" />
+<text  x="759.53" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (28 samples, 1.73%)</title><rect x="682.1" y="1333" width="20.4" height="15.0" fill="rgb(248,169,10)" rx="2" ry="2" />
+<text  x="685.10" y="1343.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1093" width="17.5" height="15.0" fill="rgb(214,78,48)" rx="2" ry="2" />
+<text  x="686.56" y="1103.5" ></text>
+</g>
+<g >
+<title>__alloc_pages_nodemask (1 samples, 0.06%)</title><rect x="1163.0" y="1925" width="0.7" height="15.0" fill="rgb(206,174,44)" rx="2" ry="2" />
+<text  x="1166.00" y="1935.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="117" width="14.6" height="15.0" fill="rgb(253,67,6)" rx="2" ry="2" />
+<text  x="688.75" y="127.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (2 samples, 0.12%)</title><rect x="1163.7" y="2037" width="1.5" height="15.0" fill="rgb(209,68,28)" rx="2" ry="2" />
+<text  x="1166.73" y="2047.5" ></text>
+</g>
+<g >
+<title>__handle_mm_fault (2 samples, 0.12%)</title><rect x="363.2" y="1941" width="1.5" height="15.0" fill="rgb(220,43,3)" rx="2" ry="2" />
+<text  x="366.20" y="1951.5" ></text>
+</g>
+<g >
+<title>_dl_relocate_object (1 samples, 0.06%)</title><rect x="790.8" y="2005" width="0.8" height="15.0" fill="rgb(219,34,54)" rx="2" ry="2" />
+<text  x="793.83" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 1.79%)</title><rect x="682.1" y="1461" width="21.2" height="15.0" fill="rgb(234,25,0)" rx="2" ry="2" />
+<text  x="685.10" y="1471.5" ></text>
+</g>
+<g >
+<title>Bitmask::scan (1 samples, 0.06%)</title><rect x="123.1" y="2037" width="0.7" height="15.0" fill="rgb(229,52,3)" rx="2" ry="2" />
+<text  x="126.11" y="2047.5" ></text>
+</g>
+<g >
+<title>mem_cgroup_charge (1 samples, 0.06%)</title><rect x="1160.8" y="1941" width="0.7" height="15.0" fill="rgb(237,17,3)" rx="2" ry="2" />
+<text  x="1163.81" y="1951.5" ></text>
+</g>
+<g >
+<title>exc_page_fault (2 samples, 0.12%)</title><rect x="1163.7" y="2021" width="1.5" height="15.0" fill="rgb(220,187,2)" rx="2" ry="2" />
+<text  x="1166.73" y="2031.5" ></text>
+</g>
+<g >
+<title>free_pcp_prepare (1 samples, 0.06%)</title><rect x="1153.5" y="1813" width="0.7" height="15.0" fill="rgb(239,40,3)" rx="2" ry="2" />
+<text  x="1156.51" y="1823.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (2 samples, 0.12%)</title><rect x="327.4" y="2005" width="1.5" height="15.0" fill="rgb(227,82,47)" rx="2" ry="2" />
+<text  x="330.44" y="2015.5" ></text>
+</g>
+<g >
+<title>Tile::operator== (4 samples, 0.25%)</title><rect x="669.0" y="2005" width="2.9" height="15.0" fill="rgb(247,200,54)" rx="2" ry="2" />
+<text  x="671.96" y="2015.5" ></text>
+</g>
+<g >
+<title>load_elf_binary (1 samples, 0.06%)</title><rect x="795.2" y="1957" width="0.7" height="15.0" fill="rgb(251,98,45)" rx="2" ry="2" />
+<text  x="798.21" y="1967.5" ></text>
+</g>
+<g >
+<title>__cgroup_account_cputime (1 samples, 0.06%)</title><rect x="1128.7" y="1877" width="0.7" height="15.0" fill="rgb(239,29,50)" rx="2" ry="2" />
+<text  x="1131.70" y="1887.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="1045" width="16.8" height="15.0" fill="rgb(227,142,31)" rx="2" ry="2" />
+<text  x="687.29" y="1055.5" ></text>
+</g>
+<g >
+<title>__handle_mm_fault (2 samples, 0.12%)</title><rect x="229.7" y="1973" width="1.4" height="15.0" fill="rgb(233,17,48)" rx="2" ry="2" />
+<text  x="232.65" y="1983.5" ></text>
+</g>
+<g >
+<title>__pthread_getspecific (7 samples, 0.43%)</title><rect x="737.6" y="2021" width="5.1" height="15.0" fill="rgb(212,176,1)" rx="2" ry="2" />
+<text  x="740.56" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="133" width="14.6" height="15.0" fill="rgb(236,9,44)" rx="2" ry="2" />
+<text  x="688.75" y="143.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, std::vector&lt;int, std::allocator&lt;int&gt; &gt;, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, std::vector&lt;int, std::allocator&lt;int&gt; &gt; &gt; &gt; &gt;::lookup (2 samples, 0.12%)</title><rect x="181.5" y="2021" width="1.4" height="15.0" fill="rgb(220,224,54)" rx="2" ry="2" />
+<text  x="184.49" y="2031.5" ></text>
+</g>
+<g >
+<title>Bitmask::Bitmask (2 samples, 0.12%)</title><rect x="231.1" y="2037" width="1.5" height="15.0" fill="rgb(215,7,54)" rx="2" ry="2" />
+<text  x="234.11" y="2047.5" ></text>
+</g>
+<g >
+<title>__memmove_avx_unaligned_erms (1 samples, 0.06%)</title><rect x="160.3" y="2005" width="0.8" height="15.0" fill="rgb(208,105,51)" rx="2" ry="2" />
+<text  x="163.33" y="2015.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_priority_queue&lt;Message*, PriorityKeyComparator, tbb::scalable_allocator&lt;Message*&gt; &gt;::handle_operations (9 samples, 0.56%)</title><rect x="1175.4" y="2053" width="6.6" height="15.0" fill="rgb(206,24,1)" rx="2" ry="2" />
+<text  x="1178.41" y="2063.5" ></text>
+</g>
+<g >
+<title>__gmpn_popcount (5 samples, 0.31%)</title><rect x="596.0" y="2005" width="3.6" height="15.0" fill="rgb(211,3,50)" rx="2" ry="2" />
+<text  x="598.99" y="2015.5" ></text>
+</g>
+<g >
+<title>Bitmask::operator== (1 samples, 0.06%)</title><rect x="269.1" y="2037" width="0.7" height="15.0" fill="rgb(229,102,25)" rx="2" ry="2" />
+<text  x="272.06" y="2047.5" ></text>
+</g>
+<g >
+<title>scalable_free (1 samples, 0.06%)</title><rect x="1158.6" y="2053" width="0.8" height="15.0" fill="rgb(220,109,9)" rx="2" ry="2" />
+<text  x="1161.62" y="2063.5" ></text>
+</g>
+<g >
+<title>Task::create_children (221 samples, 13.67%)</title><rect x="450.0" y="2021" width="161.3" height="15.0" fill="rgb(208,67,23)" rx="2" ry="2" />
+<text  x="453.04" y="2031.5" >Task::create_children</text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="885" width="16.8" height="15.0" fill="rgb(251,82,34)" rx="2" ry="2" />
+<text  x="687.29" y="895.5" ></text>
+</g>
+<g >
+<title>Bitmask::bit_and (1 samples, 0.06%)</title><rect x="150.1" y="2005" width="0.7" height="15.0" fill="rgb(222,119,30)" rx="2" ry="2" />
+<text  x="153.11" y="2015.5" ></text>
+</g>
+<g >
+<title>__sched_text_start (1 samples, 0.06%)</title><rect x="1128.7" y="1941" width="0.7" height="15.0" fill="rgb(245,79,24)" rx="2" ry="2" />
+<text  x="1131.70" y="1951.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (2 samples, 0.12%)</title><rect x="229.7" y="1989" width="1.4" height="15.0" fill="rgb(216,136,8)" rx="2" ry="2" />
+<text  x="232.65" y="1999.5" ></text>
+</g>
+<g >
+<title>exc_page_fault (4 samples, 0.25%)</title><rect x="752.2" y="1989" width="2.9" height="15.0" fill="rgb(220,136,40)" rx="2" ry="2" />
+<text  x="755.15" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="261" width="14.6" height="15.0" fill="rgb(241,130,50)" rx="2" ry="2" />
+<text  x="688.75" y="271.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (1 samples, 0.06%)</title><rect x="675.5" y="1973" width="0.8" height="15.0" fill="rgb(252,125,32)" rx="2" ry="2" />
+<text  x="678.53" y="1983.5" ></text>
+</g>
+<g >
+<title>dl_main (1 samples, 0.06%)</title><rect x="790.8" y="2021" width="0.8" height="15.0" fill="rgb(210,36,6)" rx="2" ry="2" />
+<text  x="793.83" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (34 samples, 2.10%)</title><rect x="678.4" y="1813" width="24.9" height="15.0" fill="rgb(233,229,5)" rx="2" ry="2" />
+<text  x="681.45" y="1823.5" >[..</text>
+</g>
+<g >
+<title>__x64_sys_execve (1 samples, 0.06%)</title><rect x="795.2" y="2005" width="0.7" height="15.0" fill="rgb(251,195,32)" rx="2" ry="2" />
+<text  x="798.21" y="2015.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (2 samples, 0.12%)</title><rect x="1163.7" y="1989" width="1.5" height="15.0" fill="rgb(226,44,28)" rx="2" ry="2" />
+<text  x="1166.73" y="1999.5" ></text>
+</g>
+<g >
+<title>unmap_page_range (5 samples, 0.31%)</title><rect x="1151.3" y="1909" width="3.7" height="15.0" fill="rgb(230,99,45)" rx="2" ry="2" />
+<text  x="1154.32" y="1919.5" ></text>
+</g>
+<g >
+<title>[unknown] (34 samples, 2.10%)</title><rect x="678.4" y="1861" width="24.9" height="15.0" fill="rgb(228,91,43)" rx="2" ry="2" />
+<text  x="681.45" y="1871.5" >[..</text>
+</g>
+<g >
+<title>Tile::operator== (15 samples, 0.93%)</title><rect x="277.1" y="2037" width="10.9" height="15.0" fill="rgb(225,218,51)" rx="2" ry="2" />
+<text  x="280.09" y="2047.5" ></text>
+</g>
+<g >
+<title>ctx_resched (6 samples, 0.37%)</title><rect x="1185.6" y="1909" width="4.4" height="15.0" fill="rgb(229,130,21)" rx="2" ry="2" />
+<text  x="1188.62" y="1919.5" ></text>
+</g>
+<g >
+<title>__strlen_avx2 (3 samples, 0.19%)</title><rect x="1147.7" y="2053" width="2.2" height="15.0" fill="rgb(236,191,12)" rx="2" ry="2" />
+<text  x="1150.67" y="2063.5" ></text>
+</g>
+<g >
+<title>__mprotect (3 samples, 0.19%)</title><rect x="1144.8" y="2053" width="2.1" height="15.0" fill="rgb(224,224,30)" rx="2" ry="2" />
+<text  x="1147.76" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (21 samples, 1.30%)</title><rect x="685.0" y="405" width="15.3" height="15.0" fill="rgb(235,212,35)" rx="2" ry="2" />
+<text  x="688.02" y="415.5" ></text>
+</g>
+<g >
+<title>Bitmask::initialize (4 samples, 0.25%)</title><rect x="467.6" y="2005" width="2.9" height="15.0" fill="rgb(206,49,21)" rx="2" ry="2" />
+<text  x="470.55" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1109" width="17.5" height="15.0" fill="rgb(241,201,2)" rx="2" ry="2" />
+<text  x="686.56" y="1119.5" ></text>
+</g>
+<g >
+<title>Message::Message (1 samples, 0.06%)</title><rect x="272.7" y="2037" width="0.7" height="15.0" fill="rgb(225,93,38)" rx="2" ry="2" />
+<text  x="275.71" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (45 samples, 2.78%)</title><rect x="671.9" y="2005" width="32.8" height="15.0" fill="rgb(211,41,20)" rx="2" ry="2" />
+<text  x="674.88" y="2015.5" >[u..</text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="277" width="14.6" height="15.0" fill="rgb(218,49,43)" rx="2" ry="2" />
+<text  x="688.75" y="287.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (2 samples, 0.12%)</title><rect x="363.2" y="1973" width="1.5" height="15.0" fill="rgb(225,157,15)" rx="2" ry="2" />
+<text  x="366.20" y="1983.5" ></text>
+</g>
+<g >
+<title>[gosdt] (13 samples, 0.80%)</title><rect x="211.4" y="2053" width="9.5" height="15.0" fill="rgb(240,214,20)" rx="2" ry="2" />
+<text  x="214.41" y="2063.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (1 samples, 0.06%)</title><rect x="799.6" y="2021" width="0.7" height="15.0" fill="rgb(241,0,44)" rx="2" ry="2" />
+<text  x="802.59" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="501" width="16.1" height="15.0" fill="rgb(208,122,25)" rx="2" ry="2" />
+<text  x="688.02" y="511.5" ></text>
+</g>
+<g >
+<title>exc_page_fault (1 samples, 0.06%)</title><rect x="751.4" y="1989" width="0.8" height="15.0" fill="rgb(233,17,2)" rx="2" ry="2" />
+<text  x="754.42" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="949" width="16.8" height="15.0" fill="rgb(214,187,17)" rx="2" ry="2" />
+<text  x="687.29" y="959.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, Task, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, Task&gt; &gt; &gt;::lookup (2 samples, 0.12%)</title><rect x="749.2" y="2021" width="1.5" height="15.0" fill="rgb(228,3,24)" rx="2" ry="2" />
+<text  x="752.23" y="2031.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (12 samples, 0.74%)</title><rect x="222.4" y="2053" width="8.7" height="15.0" fill="rgb(219,215,45)" rx="2" ry="2" />
+<text  x="225.36" y="2063.5" ></text>
+</g>
+<g >
+<title>[gosdt] (1 samples, 0.06%)</title><rect x="625.2" y="2021" width="0.7" height="15.0" fill="rgb(225,161,25)" rx="2" ry="2" />
+<text  x="628.18" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (34 samples, 2.10%)</title><rect x="678.4" y="1877" width="24.9" height="15.0" fill="rgb(254,137,1)" rx="2" ry="2" />
+<text  x="681.45" y="1887.5" >[..</text>
+</g>
+<g >
+<title>__memmove_avx_unaligned_erms (2 samples, 0.12%)</title><rect x="701.1" y="1285" width="1.4" height="15.0" fill="rgb(220,42,31)" rx="2" ry="2" />
+<text  x="704.07" y="1295.5" ></text>
+</g>
+<g >
+<title>[unknown] (28 samples, 1.73%)</title><rect x="682.1" y="1301" width="20.4" height="15.0" fill="rgb(244,10,45)" rx="2" ry="2" />
+<text  x="685.10" y="1311.5" ></text>
+</g>
+<g >
+<title>exec_binprm (6 samples, 0.37%)</title><rect x="1185.6" y="1973" width="4.4" height="15.0" fill="rgb(241,75,18)" rx="2" ry="2" />
+<text  x="1188.62" y="1983.5" ></text>
+</g>
+<g >
+<title>intel_pmu_enable_all (5 samples, 0.31%)</title><rect x="1186.4" y="1861" width="3.6" height="15.0" fill="rgb(242,28,48)" rx="2" ry="2" />
+<text  x="1189.35" y="1871.5" ></text>
+</g>
+<g >
+<title>__logf_fma (3 samples, 0.19%)</title><rect x="158.1" y="2005" width="2.2" height="15.0" fill="rgb(220,6,1)" rx="2" ry="2" />
+<text  x="161.14" y="2015.5" ></text>
+</g>
+<g >
+<title>do_syscall_64 (6 samples, 0.37%)</title><rect x="1150.6" y="2037" width="4.4" height="15.0" fill="rgb(209,59,37)" rx="2" ry="2" />
+<text  x="1153.59" y="2047.5" ></text>
+</g>
+<g >
+<title>[gosdt] (6 samples, 0.37%)</title><rect x="288.0" y="2037" width="4.4" height="15.0" fill="rgb(206,179,3)" rx="2" ry="2" />
+<text  x="291.03" y="2047.5" ></text>
+</g>
+<g >
+<title>do_anonymous_page (2 samples, 0.12%)</title><rect x="1163.7" y="1957" width="1.5" height="15.0" fill="rgb(220,172,5)" rx="2" ry="2" />
+<text  x="1166.73" y="1967.5" ></text>
+</g>
+<g >
+<title>__handle_mm_fault (1 samples, 0.06%)</title><rect x="790.8" y="1925" width="0.8" height="15.0" fill="rgb(214,214,25)" rx="2" ry="2" />
+<text  x="793.83" y="1935.5" ></text>
+</g>
+<g >
+<title>Bitmask::operator= (3 samples, 0.19%)</title><rect x="150.8" y="2005" width="2.2" height="15.0" fill="rgb(208,179,14)" rx="2" ry="2" />
+<text  x="153.84" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (30 samples, 1.86%)</title><rect x="681.4" y="1541" width="21.9" height="15.0" fill="rgb(249,57,19)" rx="2" ry="2" />
+<text  x="684.37" y="1551.5" >[..</text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="869" width="16.8" height="15.0" fill="rgb(216,49,17)" rx="2" ry="2" />
+<text  x="687.29" y="879.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (41 samples, 2.54%)</title><rect x="292.4" y="2037" width="29.9" height="15.0" fill="rgb(239,153,34)" rx="2" ry="2" />
+<text  x="295.41" y="2047.5" >[l..</text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="597" width="16.1" height="15.0" fill="rgb(227,138,33)" rx="2" ry="2" />
+<text  x="688.02" y="607.5" ></text>
+</g>
+<g >
+<title>[unknown] (33 samples, 2.04%)</title><rect x="679.2" y="1765" width="24.1" height="15.0" fill="rgb(247,69,24)" rx="2" ry="2" />
+<text  x="682.18" y="1775.5" >[..</text>
+</g>
+<g >
+<title>schedule_tail (5 samples, 0.31%)</title><rect x="760.2" y="2005" width="3.6" height="15.0" fill="rgb(251,178,21)" rx="2" ry="2" />
+<text  x="763.18" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="389" width="14.6" height="15.0" fill="rgb(227,63,50)" rx="2" ry="2" />
+<text  x="688.75" y="399.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (2 samples, 0.12%)</title><rect x="162.5" y="2021" width="1.5" height="15.0" fill="rgb(245,154,2)" rx="2" ry="2" />
+<text  x="165.52" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="101" width="14.6" height="15.0" fill="rgb(221,13,39)" rx="2" ry="2" />
+<text  x="688.75" y="111.5" ></text>
+</g>
+<g >
+<title>do_anonymous_page (2 samples, 0.12%)</title><rect x="363.2" y="1925" width="1.5" height="15.0" fill="rgb(246,60,2)" rx="2" ry="2" />
+<text  x="366.20" y="1935.5" ></text>
+</g>
+<g >
+<title>__x64_sys_exit_group (6 samples, 0.37%)</title><rect x="1150.6" y="2021" width="4.4" height="15.0" fill="rgb(223,147,44)" rx="2" ry="2" />
+<text  x="1153.59" y="2031.5" ></text>
+</g>
+<g >
+<title>pte_alloc_one (1 samples, 0.06%)</title><rect x="795.2" y="1797" width="0.7" height="15.0" fill="rgb(220,29,48)" rx="2" ry="2" />
+<text  x="798.21" y="1807.5" ></text>
+</g>
+<g >
+<title>[unknown] (57 samples, 3.53%)</title><rect x="665.3" y="2021" width="41.6" height="15.0" fill="rgb(236,171,3)" rx="2" ry="2" />
+<text  x="668.31" y="2031.5" >[un..</text>
+</g>
+<g >
+<title>alloc_pages_vma (2 samples, 0.12%)</title><rect x="752.9" y="1909" width="1.4" height="15.0" fill="rgb(237,63,10)" rx="2" ry="2" />
+<text  x="755.88" y="1919.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 1.79%)</title><rect x="682.1" y="1493" width="21.2" height="15.0" fill="rgb(227,88,49)" rx="2" ry="2" />
+<text  x="685.10" y="1503.5" ></text>
+</g>
+<g >
+<title>do_syscall_64 (6 samples, 0.37%)</title><rect x="1185.6" y="2021" width="4.4" height="15.0" fill="rgb(253,34,22)" rx="2" ry="2" />
+<text  x="1188.62" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="341" width="14.6" height="15.0" fill="rgb(254,88,16)" rx="2" ry="2" />
+<text  x="688.75" y="351.5" ></text>
+</g>
+<g >
+<title>get_page_from_freelist (1 samples, 0.06%)</title><rect x="1163.0" y="1909" width="0.7" height="15.0" fill="rgb(243,167,15)" rx="2" ry="2" />
+<text  x="1166.00" y="1919.5" ></text>
+</g>
+<g >
+<title>Task::Task (17 samples, 1.05%)</title><rect x="148.7" y="2021" width="12.4" height="15.0" fill="rgb(242,182,42)" rx="2" ry="2" />
+<text  x="151.65" y="2031.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt; &gt; &gt; &gt;::lookup (1 samples, 0.06%)</title><rect x="751.4" y="2021" width="0.8" height="15.0" fill="rgb(233,91,0)" rx="2" ry="2" />
+<text  x="754.42" y="2031.5" ></text>
+</g>
+<g >
+<title>__prepare_exit_to_usermode (1 samples, 0.06%)</title><rect x="63.3" y="1973" width="0.7" height="15.0" fill="rgb(251,51,25)" rx="2" ry="2" />
+<text  x="66.27" y="1983.5" ></text>
+</g>
+<g >
+<title>Tile::hash (2 samples, 0.12%)</title><rect x="612.8" y="2021" width="1.4" height="15.0" fill="rgb(221,59,32)" rx="2" ry="2" />
+<text  x="615.77" y="2031.5" ></text>
+</g>
+<g >
+<title>Message::hash (1 samples, 0.06%)</title><rect x="673.3" y="1989" width="0.8" height="15.0" fill="rgb(205,6,25)" rx="2" ry="2" />
+<text  x="676.34" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="1029" width="16.8" height="15.0" fill="rgb(207,198,11)" rx="2" ry="2" />
+<text  x="687.29" y="1039.5" ></text>
+</g>
+<g >
+<title>scalable_free (1 samples, 0.06%)</title><rect x="744.1" y="2021" width="0.8" height="15.0" fill="rgb(245,14,7)" rx="2" ry="2" />
+<text  x="747.12" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (32 samples, 1.98%)</title><rect x="679.9" y="1637" width="23.4" height="15.0" fill="rgb(231,101,22)" rx="2" ry="2" />
+<text  x="682.91" y="1647.5" >[..</text>
+</g>
+<g >
+<title>[unknown] (34 samples, 2.10%)</title><rect x="678.4" y="1781" width="24.9" height="15.0" fill="rgb(247,51,38)" rx="2" ry="2" />
+<text  x="681.45" y="1791.5" >[..</text>
+</g>
+<g >
+<title>Task::update (1 samples, 0.06%)</title><rect x="161.1" y="2021" width="0.7" height="15.0" fill="rgb(251,194,36)" rx="2" ry="2" />
+<text  x="164.06" y="2031.5" ></text>
+</g>
+<g >
+<title>page_remove_rmap (2 samples, 0.12%)</title><rect x="1151.3" y="1877" width="1.5" height="15.0" fill="rgb(243,96,8)" rx="2" ry="2" />
+<text  x="1154.32" y="1887.5" ></text>
+</g>
+<g >
+<title>Dataset::summary (52 samples, 3.22%)</title><rect x="507.7" y="1989" width="37.9" height="15.0" fill="rgb(251,133,24)" rx="2" ry="2" />
+<text  x="510.69" y="1999.5" >Dat..</text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="293" width="14.6" height="15.0" fill="rgb(239,227,33)" rx="2" ry="2" />
+<text  x="688.75" y="303.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt; &gt; &gt; &gt;::clear (9 samples, 0.56%)</title><rect x="1165.2" y="2053" width="6.6" height="15.0" fill="rgb(246,185,42)" rx="2" ry="2" />
+<text  x="1168.19" y="2063.5" ></text>
+</g>
+<g >
+<title>[gosdt] (3 samples, 0.19%)</title><rect x="545.6" y="1989" width="2.2" height="15.0" fill="rgb(218,167,5)" rx="2" ry="2" />
+<text  x="548.63" y="1999.5" ></text>
+</g>
+<g >
+<title>malloc (5 samples, 0.31%)</title><rect x="1155.0" y="2053" width="3.6" height="15.0" fill="rgb(238,13,26)" rx="2" ry="2" />
+<text  x="1157.97" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (34 samples, 2.10%)</title><rect x="678.4" y="1845" width="24.9" height="15.0" fill="rgb(235,91,34)" rx="2" ry="2" />
+<text  x="681.45" y="1855.5" >[..</text>
+</g>
+<g >
+<title>ret_from_fork (5 samples, 0.31%)</title><rect x="760.2" y="2021" width="3.6" height="15.0" fill="rgb(223,134,1)" rx="2" ry="2" />
+<text  x="763.18" y="2031.5" ></text>
+</g>
+<g >
+<title>zap_pte_range.isra.0 (5 samples, 0.31%)</title><rect x="1151.3" y="1893" width="3.7" height="15.0" fill="rgb(226,134,40)" rx="2" ry="2" />
+<text  x="1154.32" y="1903.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (1 samples, 0.06%)</title><rect x="751.4" y="1957" width="0.8" height="15.0" fill="rgb(230,113,28)" rx="2" ry="2" />
+<text  x="754.42" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="613" width="16.1" height="15.0" fill="rgb(241,51,12)" rx="2" ry="2" />
+<text  x="688.02" y="623.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (1 samples, 0.06%)</title><rect x="790.8" y="1957" width="0.8" height="15.0" fill="rgb(235,112,7)" rx="2" ry="2" />
+<text  x="793.83" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="853" width="16.8" height="15.0" fill="rgb(254,96,43)" rx="2" ry="2" />
+<text  x="687.29" y="863.5" ></text>
+</g>
+<g >
+<title>[unknown] (36 samples, 2.23%)</title><rect x="677.0" y="1957" width="26.3" height="15.0" fill="rgb(228,183,10)" rx="2" ry="2" />
+<text  x="679.99" y="1967.5" >[..</text>
+</g>
+<g >
+<title>[unknown] (29 samples, 1.79%)</title><rect x="682.1" y="1509" width="21.2" height="15.0" fill="rgb(247,85,11)" rx="2" ry="2" />
+<text  x="685.10" y="1519.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (1 samples, 0.06%)</title><rect x="679.9" y="1621" width="0.7" height="15.0" fill="rgb(214,192,24)" rx="2" ry="2" />
+<text  x="682.91" y="1631.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (1 samples, 0.06%)</title><rect x="674.8" y="1989" width="0.7" height="15.0" fill="rgb(211,17,40)" rx="2" ry="2" />
+<text  x="677.80" y="1999.5" ></text>
+</g>
+<g >
+<title>do_syscall_64 (1 samples, 0.06%)</title><rect x="1149.9" y="2021" width="0.7" height="15.0" fill="rgb(244,27,5)" rx="2" ry="2" />
+<text  x="1152.86" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="901" width="16.8" height="15.0" fill="rgb(238,161,54)" rx="2" ry="2" />
+<text  x="687.29" y="911.5" ></text>
+</g>
+<g >
+<title>__gmpn_and_n (36 samples, 2.23%)</title><rect x="841.9" y="2053" width="26.3" height="15.0" fill="rgb(229,16,54)" rx="2" ry="2" />
+<text  x="844.91" y="2063.5" >_..</text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="805" width="16.8" height="15.0" fill="rgb(233,207,36)" rx="2" ry="2" />
+<text  x="687.29" y="815.5" ></text>
+</g>
+<g >
+<title>free_pages_and_swap_cache (3 samples, 0.19%)</title><rect x="1152.8" y="1861" width="2.2" height="15.0" fill="rgb(210,154,31)" rx="2" ry="2" />
+<text  x="1155.78" y="1871.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="1013" width="16.8" height="15.0" fill="rgb(251,176,49)" rx="2" ry="2" />
+<text  x="687.29" y="1023.5" ></text>
+</g>
+<g >
+<title>__gmpn_nior_n (4 samples, 0.25%)</title><rect x="709.8" y="2021" width="2.9" height="15.0" fill="rgb(244,53,12)" rx="2" ry="2" />
+<text  x="712.83" y="2031.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (1 samples, 0.06%)</title><rect x="790.8" y="1989" width="0.8" height="15.0" fill="rgb(249,84,23)" rx="2" ry="2" />
+<text  x="793.83" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="677" width="16.8" height="15.0" fill="rgb(234,195,41)" rx="2" ry="2" />
+<text  x="687.29" y="687.5" ></text>
+</g>
+<g >
+<title>Optimizer::signal_exploiters (1 samples, 0.06%)</title><rect x="183.7" y="2037" width="0.7" height="15.0" fill="rgb(221,60,31)" rx="2" ry="2" />
+<text  x="186.68" y="2047.5" ></text>
+</g>
+<g >
+<title>all (1,617 samples, 100%)</title><rect x="10.0" y="2085" width="1180.0" height="15.0" fill="rgb(205,79,47)" rx="2" ry="2" />
+<text  x="13.00" y="2095.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (4 samples, 0.25%)</title><rect x="752.2" y="1973" width="2.9" height="15.0" fill="rgb(234,199,46)" rx="2" ry="2" />
+<text  x="755.15" y="1983.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::concurrent_vector&lt;std::tuple&lt;unsigned int, float, float&gt;, tbb::scalable_allocator&lt;std::tuple&lt;unsigned int, float, float&gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::concurrent_vector&lt;std::tuple&lt;unsigned int, float, float&gt;, tbb::scalable_allocator&lt;std::tuple&lt;unsigned int, float, float&gt; &gt; &gt; &gt; &gt; &gt;::lookup (1 samples, 0.06%)</title><rect x="804.0" y="2037" width="0.7" height="15.0" fill="rgb(240,224,11)" rx="2" ry="2" />
+<text  x="806.96" y="2047.5" ></text>
+</g>
+<g >
+<title>finish_task_switch (5 samples, 0.31%)</title><rect x="760.2" y="1989" width="3.6" height="15.0" fill="rgb(248,68,3)" rx="2" ry="2" />
+<text  x="763.18" y="1999.5" ></text>
+</g>
+<g >
+<title>scalable_malloc (2 samples, 0.12%)</title><rect x="744.9" y="2021" width="1.4" height="15.0" fill="rgb(208,84,43)" rx="2" ry="2" />
+<text  x="747.85" y="2031.5" ></text>
+</g>
+<g >
+<title>__alloc_pages_nodemask (1 samples, 0.06%)</title><rect x="1163.7" y="1925" width="0.8" height="15.0" fill="rgb(234,78,23)" rx="2" ry="2" />
+<text  x="1166.73" y="1935.5" ></text>
+</g>
+<g >
+<title>Bitmask::bit_or (4 samples, 0.25%)</title><rect x="258.8" y="2037" width="3.0" height="15.0" fill="rgb(213,115,32)" rx="2" ry="2" />
+<text  x="261.84" y="2047.5" ></text>
+</g>
+<g >
+<title>__handle_mm_fault (1 samples, 0.06%)</title><rect x="751.4" y="1941" width="0.8" height="15.0" fill="rgb(253,155,36)" rx="2" ry="2" />
+<text  x="754.42" y="1951.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="1061" width="16.8" height="15.0" fill="rgb(220,14,22)" rx="2" ry="2" />
+<text  x="687.29" y="1071.5" ></text>
+</g>
+<g >
+<title>try_charge (1 samples, 0.06%)</title><rect x="736.1" y="1893" width="0.7" height="15.0" fill="rgb(247,0,46)" rx="2" ry="2" />
+<text  x="739.10" y="1903.5" ></text>
+</g>
+<g >
+<title>alloc_pages_vma (1 samples, 0.06%)</title><rect x="1163.0" y="1941" width="0.7" height="15.0" fill="rgb(228,1,35)" rx="2" ry="2" />
+<text  x="1166.00" y="1951.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, Task, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, Task&gt; &gt; &gt;::allocate_node_move_construct (1 samples, 0.06%)</title><rect x="799.6" y="2037" width="0.7" height="15.0" fill="rgb(208,194,34)" rx="2" ry="2" />
+<text  x="802.59" y="2047.5" ></text>
+</g>
+<g >
+<title>__count_memcg_events (1 samples, 0.06%)</title><rect x="756.5" y="1941" width="0.8" height="15.0" fill="rgb(245,100,34)" rx="2" ry="2" />
+<text  x="759.53" y="1951.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, std::vector&lt;int, std::allocator&lt;int&gt; &gt;, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, std::vector&lt;int, std::allocator&lt;int&gt; &gt; &gt; &gt; &gt;::rehash_bucket (4 samples, 0.25%)</title><rect x="810.5" y="2037" width="3.0" height="15.0" fill="rgb(237,88,39)" rx="2" ry="2" />
+<text  x="813.53" y="2047.5" ></text>
+</g>
+<g >
+<title>Tile::operator== (10 samples, 0.62%)</title><rect x="617.9" y="2021" width="7.3" height="15.0" fill="rgb(224,62,7)" rx="2" ry="2" />
+<text  x="620.88" y="2031.5" ></text>
+</g>
+<g >
+<title>perf_event_exec (6 samples, 0.37%)</title><rect x="1185.6" y="1925" width="4.4" height="15.0" fill="rgb(226,46,11)" rx="2" ry="2" />
+<text  x="1188.62" y="1935.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (1 samples, 0.06%)</title><rect x="751.4" y="1973" width="0.8" height="15.0" fill="rgb(227,114,49)" rx="2" ry="2" />
+<text  x="754.42" y="1983.5" ></text>
+</g>
+<g >
+<title>Bitmask::bit_and (36 samples, 2.23%)</title><rect x="232.6" y="2037" width="26.2" height="15.0" fill="rgb(220,126,21)" rx="2" ry="2" />
+<text  x="235.57" y="2047.5" >B..</text>
+</g>
+<g >
+<title>tbb::interface5::internal::concurrent_unordered_base&lt;tbb::interface5::concurrent_unordered_map_traits&lt;Tile, std::pair&lt;Bitmask, float&gt;, tbb::interface5::internal::hash_compare&lt;Tile, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt; &gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt;, false&gt; &gt;::internal_insert&lt;tbb::internal::bool_constant&lt;true&gt;, tbb::internal::bool_constant&lt;true&gt;, std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; (2 samples, 0.12%)</title><rect x="821.5" y="2037" width="1.4" height="15.0" fill="rgb(253,108,17)" rx="2" ry="2" />
+<text  x="824.48" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (35 samples, 2.16%)</title><rect x="677.7" y="1893" width="25.6" height="15.0" fill="rgb(249,208,40)" rx="2" ry="2" />
+<text  x="680.72" y="1903.5" >[..</text>
+</g>
+<g >
+<title>std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;::_M_construct&lt;char*&gt; (1 samples, 0.06%)</title><rect x="798.1" y="2037" width="0.8" height="15.0" fill="rgb(250,79,30)" rx="2" ry="2" />
+<text  x="801.13" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="565" width="16.1" height="15.0" fill="rgb(238,208,40)" rx="2" ry="2" />
+<text  x="688.02" y="575.5" ></text>
+</g>
+<g >
+<title>exc_page_fault (2 samples, 0.12%)</title><rect x="1160.1" y="2021" width="1.4" height="15.0" fill="rgb(235,44,25)" rx="2" ry="2" />
+<text  x="1163.08" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="357" width="14.6" height="15.0" fill="rgb(223,106,1)" rx="2" ry="2" />
+<text  x="688.75" y="367.5" ></text>
+</g>
+<g >
+<title>free_pages_and_swap_cache (1 samples, 0.06%)</title><rect x="1150.6" y="1909" width="0.7" height="15.0" fill="rgb(208,64,52)" rx="2" ry="2" />
+<text  x="1153.59" y="1919.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (1 samples, 0.06%)</title><rect x="756.5" y="2005" width="0.8" height="15.0" fill="rgb(249,210,24)" rx="2" ry="2" />
+<text  x="759.53" y="2015.5" ></text>
+</g>
+<g >
+<title>put_prev_task_fair (1 samples, 0.06%)</title><rect x="1128.7" y="1925" width="0.7" height="15.0" fill="rgb(205,57,44)" rx="2" ry="2" />
+<text  x="1131.70" y="1935.5" ></text>
+</g>
+<g >
+<title>Optimizer::store_children (5 samples, 0.31%)</title><rect x="144.3" y="2021" width="3.6" height="15.0" fill="rgb(253,32,45)" rx="2" ry="2" />
+<text  x="147.27" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (30 samples, 1.86%)</title><rect x="681.4" y="1589" width="21.9" height="15.0" fill="rgb(236,142,48)" rx="2" ry="2" />
+<text  x="684.37" y="1599.5" >[..</text>
+</g>
+<g >
+<title>exc_page_fault (2 samples, 0.12%)</title><rect x="229.7" y="2021" width="1.4" height="15.0" fill="rgb(249,159,54)" rx="2" ry="2" />
+<text  x="232.65" y="2031.5" ></text>
+</g>
+<g >
+<title>Bitmask::operator= (6 samples, 0.37%)</title><rect x="364.7" y="2021" width="4.3" height="15.0" fill="rgb(228,22,48)" rx="2" ry="2" />
+<text  x="367.66" y="2031.5" ></text>
+</g>
+<g >
+<title>Task::feature_exchange (17 samples, 1.05%)</title><rect x="196.1" y="2053" width="12.4" height="15.0" fill="rgb(216,40,22)" rx="2" ry="2" />
+<text  x="199.09" y="2063.5" ></text>
+</g>
+<g >
+<title>Bitmask::Bitmask (9 samples, 0.56%)</title><rect x="322.3" y="2021" width="6.6" height="15.0" fill="rgb(232,63,22)" rx="2" ry="2" />
+<text  x="325.33" y="2031.5" ></text>
+</g>
+<g >
+<title>do_anonymous_page (2 samples, 0.12%)</title><rect x="229.7" y="1957" width="1.4" height="15.0" fill="rgb(233,172,45)" rx="2" ry="2" />
+<text  x="232.65" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="149" width="14.6" height="15.0" fill="rgb(208,122,49)" rx="2" ry="2" />
+<text  x="688.75" y="159.5" ></text>
+</g>
+<g >
+<title>__gmpn_scan1 (1 samples, 0.06%)</title><rect x="185.1" y="2037" width="0.8" height="15.0" fill="rgb(219,56,16)" rx="2" ry="2" />
+<text  x="188.14" y="2047.5" ></text>
+</g>
+<g >
+<title>Bitmask::scan (10 samples, 0.62%)</title><rect x="89.5" y="2053" width="7.3" height="15.0" fill="rgb(212,73,53)" rx="2" ry="2" />
+<text  x="92.54" y="2063.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::internal::concurrent_unordered_base&lt;tbb::interface5::concurrent_unordered_map_traits&lt;Tile, std::pair&lt;Bitmask, float&gt;, tbb::interface5::internal::hash_compare&lt;Tile, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt; &gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt;, false&gt; &gt;::internal_insert&lt;tbb::internal::bool_constant&lt;true&gt;, tbb::internal::bool_constant&lt;true&gt;, std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; (5 samples, 0.31%)</title><rect x="1182.0" y="2053" width="3.6" height="15.0" fill="rgb(237,214,30)" rx="2" ry="2" />
+<text  x="1184.97" y="2063.5" ></text>
+</g>
+<g >
+<title>sync_regs (1 samples, 0.06%)</title><rect x="748.5" y="2005" width="0.7" height="15.0" fill="rgb(210,116,26)" rx="2" ry="2" />
+<text  x="751.50" y="2015.5" ></text>
+</g>
+<g >
+<title>tbb::spin_rw_mutex_v3::scoped_lock::release (2 samples, 0.12%)</title><rect x="185.9" y="2037" width="1.4" height="15.0" fill="rgb(217,158,48)" rx="2" ry="2" />
+<text  x="188.87" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="725" width="16.8" height="15.0" fill="rgb(238,201,54)" rx="2" ry="2" />
+<text  x="687.29" y="735.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1269" width="17.5" height="15.0" fill="rgb(232,11,31)" rx="2" ry="2" />
+<text  x="686.56" y="1279.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 1.79%)</title><rect x="682.1" y="1429" width="21.2" height="15.0" fill="rgb(245,112,14)" rx="2" ry="2" />
+<text  x="685.10" y="1439.5" ></text>
+</g>
+<g >
+<title>Optimizer::dispatch (82 samples, 5.07%)</title><rect x="123.8" y="2037" width="59.9" height="15.0" fill="rgb(211,221,29)" rx="2" ry="2" />
+<text  x="126.84" y="2047.5" >Optimi..</text>
+</g>
+<g >
+<title>exc_page_fault (1 samples, 0.06%)</title><rect x="790.8" y="1973" width="0.8" height="15.0" fill="rgb(236,136,44)" rx="2" ry="2" />
+<text  x="793.83" y="1983.5" ></text>
+</g>
+<g >
+<title>__alloc_pages_nodemask (1 samples, 0.06%)</title><rect x="363.2" y="1893" width="0.7" height="15.0" fill="rgb(237,134,50)" rx="2" ry="2" />
+<text  x="366.20" y="1903.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (4 samples, 0.25%)</title><rect x="752.2" y="2005" width="2.9" height="15.0" fill="rgb(209,49,41)" rx="2" ry="2" />
+<text  x="755.15" y="2015.5" ></text>
+</g>
+<g >
+<title>Tile::hash (2 samples, 0.12%)</title><rect x="210.0" y="2053" width="1.4" height="15.0" fill="rgb(232,95,7)" rx="2" ry="2" />
+<text  x="212.95" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (35 samples, 2.16%)</title><rect x="677.7" y="1925" width="25.6" height="15.0" fill="rgb(251,74,40)" rx="2" ry="2" />
+<text  x="680.72" y="1935.5" >[..</text>
+</g>
+<g >
+<title>exc_page_fault (2 samples, 0.12%)</title><rect x="363.2" y="1989" width="1.5" height="15.0" fill="rgb(247,200,53)" rx="2" ry="2" />
+<text  x="366.20" y="1999.5" ></text>
+</g>
+<g >
+<title>exec_binprm (1 samples, 0.06%)</title><rect x="795.2" y="1973" width="0.7" height="15.0" fill="rgb(215,9,38)" rx="2" ry="2" />
+<text  x="798.21" y="1983.5" ></text>
+</g>
+<g >
+<title>do_anonymous_page (1 samples, 0.06%)</title><rect x="328.2" y="1925" width="0.7" height="15.0" fill="rgb(251,56,15)" rx="2" ry="2" />
+<text  x="331.17" y="1935.5" ></text>
+</g>
+<g >
+<title>__handle_mm_fault (1 samples, 0.06%)</title><rect x="1163.0" y="1973" width="0.7" height="15.0" fill="rgb(235,220,30)" rx="2" ry="2" />
+<text  x="1166.00" y="1983.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, std::vector&lt;int, std::allocator&lt;int&gt; &gt;, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, std::vector&lt;int, std::allocator&lt;int&gt; &gt; &gt; &gt; &gt;::rehash_bucket (1 samples, 0.06%)</title><rect x="1174.7" y="2053" width="0.7" height="15.0" fill="rgb(213,106,39)" rx="2" ry="2" />
+<text  x="1177.68" y="2063.5" ></text>
+</g>
+<g >
+<title>alloc_pages_current (1 samples, 0.06%)</title><rect x="795.2" y="1781" width="0.7" height="15.0" fill="rgb(217,165,20)" rx="2" ry="2" />
+<text  x="798.21" y="1791.5" ></text>
+</g>
+<g >
+<title>__memset_avx2_unaligned_erms (1 samples, 0.06%)</title><rect x="606.9" y="2005" width="0.8" height="15.0" fill="rgb(212,135,16)" rx="2" ry="2" />
+<text  x="609.93" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (31 samples, 1.92%)</title><rect x="680.6" y="1621" width="22.7" height="15.0" fill="rgb(207,140,52)" rx="2" ry="2" />
+<text  x="683.64" y="1631.5" >[..</text>
+</g>
+<g >
+<title>__clear_user (1 samples, 0.06%)</title><rect x="795.2" y="1925" width="0.7" height="15.0" fill="rgb(233,141,18)" rx="2" ry="2" />
+<text  x="798.21" y="1935.5" ></text>
+</g>
+<g >
+<title>[unknown] (34 samples, 2.10%)</title><rect x="678.4" y="1797" width="24.9" height="15.0" fill="rgb(251,47,35)" rx="2" ry="2" />
+<text  x="681.45" y="1807.5" >[..</text>
+</g>
+<g >
+<title>__do_execve_file.isra.0 (6 samples, 0.37%)</title><rect x="1185.6" y="1989" width="4.4" height="15.0" fill="rgb(238,204,27)" rx="2" ry="2" />
+<text  x="1188.62" y="1999.5" ></text>
+</g>
+<g >
+<title>Bitmask::hash (11 samples, 0.68%)</title><rect x="126.0" y="2021" width="8.1" height="15.0" fill="rgb(216,6,33)" rx="2" ry="2" />
+<text  x="129.03" y="2031.5" ></text>
+</g>
+<g >
+<title>Tile::operator= (5 samples, 0.31%)</title><rect x="614.2" y="2021" width="3.7" height="15.0" fill="rgb(221,112,2)" rx="2" ry="2" />
+<text  x="617.23" y="2031.5" ></text>
+</g>
+<g >
+<title>Bitmask::hash (15 samples, 0.93%)</title><rect x="342.0" y="2021" width="11.0" height="15.0" fill="rgb(238,188,23)" rx="2" ry="2" />
+<text  x="345.03" y="2031.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (1 samples, 0.06%)</title><rect x="1149.9" y="2037" width="0.7" height="15.0" fill="rgb(249,104,27)" rx="2" ry="2" />
+<text  x="1152.86" y="2047.5" ></text>
+</g>
+<g >
+<title>__x64_sys_exit_group (1 samples, 0.06%)</title><rect x="1149.9" y="2005" width="0.7" height="15.0" fill="rgb(214,61,2)" rx="2" ry="2" />
+<text  x="1152.86" y="2015.5" ></text>
+</g>
+<g >
+<title>__gmpn_popcount (1 samples, 0.06%)</title><rect x="184.4" y="2037" width="0.7" height="15.0" fill="rgb(220,222,23)" rx="2" ry="2" />
+<text  x="187.41" y="2047.5" ></text>
+</g>
+<g >
+<title>_int_free (1 samples, 0.06%)</title><rect x="702.5" y="1349" width="0.8" height="15.0" fill="rgb(250,223,34)" rx="2" ry="2" />
+<text  x="705.53" y="1359.5" ></text>
+</g>
+<g >
+<title>update_curr (1 samples, 0.06%)</title><rect x="1128.7" y="1893" width="0.7" height="15.0" fill="rgb(228,168,2)" rx="2" ry="2" />
+<text  x="1131.70" y="1903.5" ></text>
+</g>
+<g >
+<title>Bitmask::data (7 samples, 0.43%)</title><rect x="332.5" y="2021" width="5.2" height="15.0" fill="rgb(242,92,8)" rx="2" ry="2" />
+<text  x="335.55" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="213" width="14.6" height="15.0" fill="rgb(213,56,46)" rx="2" ry="2" />
+<text  x="688.75" y="223.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, std::vector&lt;int, std::allocator&lt;int&gt; &gt;, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, std::vector&lt;int, std::allocator&lt;int&gt; &gt; &gt; &gt; &gt;::rehash_bucket (1 samples, 0.06%)</title><rect x="757.3" y="2021" width="0.7" height="15.0" fill="rgb(229,35,2)" rx="2" ry="2" />
+<text  x="760.26" y="2031.5" ></text>
+</g>
+<g >
+<title>clear_user (1 samples, 0.06%)</title><rect x="795.2" y="1941" width="0.7" height="15.0" fill="rgb(247,9,6)" rx="2" ry="2" />
+<text  x="798.21" y="1951.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (6 samples, 0.37%)</title><rect x="1185.6" y="2037" width="4.4" height="15.0" fill="rgb(221,161,22)" rx="2" ry="2" />
+<text  x="1188.62" y="2047.5" ></text>
+</g>
+<g >
+<title>do_exit (6 samples, 0.37%)</title><rect x="1150.6" y="1989" width="4.4" height="15.0" fill="rgb(236,33,3)" rx="2" ry="2" />
+<text  x="1153.59" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="517" width="16.1" height="15.0" fill="rgb(243,102,8)" rx="2" ry="2" />
+<text  x="688.02" y="527.5" ></text>
+</g>
+<g >
+<title>Bitmask::~Bitmask (6 samples, 0.37%)</title><rect x="418.7" y="2021" width="4.3" height="15.0" fill="rgb(253,155,27)" rx="2" ry="2" />
+<text  x="421.66" y="2031.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, Tile, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, Tile&gt; &gt; &gt;::rehash_bucket (1 samples, 0.06%)</title><rect x="1172.5" y="2053" width="0.7" height="15.0" fill="rgb(241,133,35)" rx="2" ry="2" />
+<text  x="1175.49" y="2063.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, Tile, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, Tile&gt; &gt; &gt;::lookup (1 samples, 0.06%)</title><rect x="705.4" y="2005" width="0.8" height="15.0" fill="rgb(208,102,47)" rx="2" ry="2" />
+<text  x="708.45" y="2015.5" ></text>
+</g>
+<g >
+<title>__pthread_getspecific (1 samples, 0.06%)</title><rect x="790.1" y="2037" width="0.7" height="15.0" fill="rgb(234,99,27)" rx="2" ry="2" />
+<text  x="793.10" y="2047.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, Tile, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, Tile&gt; &gt; &gt;::lookup (11 samples, 0.68%)</title><rect x="173.5" y="2021" width="8.0" height="15.0" fill="rgb(228,44,3)" rx="2" ry="2" />
+<text  x="176.46" y="2031.5" ></text>
+</g>
+<g >
+<title>__gmpn_nior_n (33 samples, 2.04%)</title><rect x="766.0" y="2037" width="24.1" height="15.0" fill="rgb(230,205,44)" rx="2" ry="2" />
+<text  x="769.02" y="2047.5" >_..</text>
+</g>
+<g >
+<title>Message::hash (2 samples, 0.12%)</title><rect x="424.5" y="2021" width="1.5" height="15.0" fill="rgb(251,143,1)" rx="2" ry="2" />
+<text  x="427.50" y="2031.5" ></text>
+</g>
+<g >
+<title>__sched_text_start (1 samples, 0.06%)</title><rect x="63.3" y="1941" width="0.7" height="15.0" fill="rgb(220,89,14)" rx="2" ry="2" />
+<text  x="66.27" y="1951.5" ></text>
+</g>
+<g >
+<title>__do_fault (1 samples, 0.06%)</title><rect x="795.2" y="1813" width="0.7" height="15.0" fill="rgb(239,20,28)" rx="2" ry="2" />
+<text  x="798.21" y="1823.5" ></text>
+</g>
+<g >
+<title>tbb::spin_rw_mutex_v3::internal_acquire_reader (1 samples, 0.06%)</title><rect x="182.9" y="2021" width="0.8" height="15.0" fill="rgb(232,28,36)" rx="2" ry="2" />
+<text  x="185.95" y="2031.5" ></text>
+</g>
+<g >
+<title>mem_cgroup_charge (1 samples, 0.06%)</title><rect x="328.2" y="1909" width="0.7" height="15.0" fill="rgb(227,173,6)" rx="2" ry="2" />
+<text  x="331.17" y="1919.5" ></text>
+</g>
+<g >
+<title>pthread_self (2 samples, 0.12%)</title><rect x="795.9" y="2037" width="1.5" height="15.0" fill="rgb(217,133,47)" rx="2" ry="2" />
+<text  x="798.94" y="2047.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (1 samples, 0.06%)</title><rect x="1163.0" y="2037" width="0.7" height="15.0" fill="rgb(224,219,49)" rx="2" ry="2" />
+<text  x="1166.00" y="2047.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, Task, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, Task&gt; &gt; &gt;::clear (1 samples, 0.06%)</title><rect x="700.3" y="421" width="0.8" height="15.0" fill="rgb(250,30,40)" rx="2" ry="2" />
+<text  x="703.34" y="431.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (2 samples, 0.12%)</title><rect x="229.7" y="2005" width="1.4" height="15.0" fill="rgb(213,210,28)" rx="2" ry="2" />
+<text  x="232.65" y="2015.5" ></text>
+</g>
+<g >
+<title>Optimizer::signal_exploiters (17 samples, 1.05%)</title><rect x="431.8" y="2021" width="12.4" height="15.0" fill="rgb(222,35,23)" rx="2" ry="2" />
+<text  x="434.79" y="2031.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, Tile, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, Tile&gt; &gt; &gt;::lookup (1 samples, 0.06%)</title><rect x="209.2" y="2037" width="0.8" height="15.0" fill="rgb(234,16,4)" rx="2" ry="2" />
+<text  x="212.22" y="2047.5" ></text>
+</g>
+<g >
+<title>tbb::spin_rw_mutex_v3::internal_upgrade (7 samples, 0.43%)</title><rect x="836.8" y="2037" width="5.1" height="15.0" fill="rgb(224,183,54)" rx="2" ry="2" />
+<text  x="839.80" y="2047.5" ></text>
+</g>
+<g >
+<title>unmap_single_vma (5 samples, 0.31%)</title><rect x="1151.3" y="1925" width="3.7" height="15.0" fill="rgb(247,211,29)" rx="2" ry="2" />
+<text  x="1154.32" y="1935.5" ></text>
+</g>
+<g >
+<title>__do_execve_file.isra.0 (1 samples, 0.06%)</title><rect x="795.2" y="1989" width="0.7" height="15.0" fill="rgb(232,224,25)" rx="2" ry="2" />
+<text  x="798.21" y="1999.5" ></text>
+</g>
+<g >
+<title>__gmpn_and_n (3 samples, 0.19%)</title><rect x="155.9" y="2005" width="2.2" height="15.0" fill="rgb(233,214,38)" rx="2" ry="2" />
+<text  x="158.95" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="773" width="16.8" height="15.0" fill="rgb(205,228,42)" rx="2" ry="2" />
+<text  x="687.29" y="783.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1189" width="17.5" height="15.0" fill="rgb(234,228,22)" rx="2" ry="2" />
+<text  x="686.56" y="1199.5" ></text>
+</g>
+<g >
+<title>Optimizer::store_self (1 samples, 0.06%)</title><rect x="147.9" y="2021" width="0.8" height="15.0" fill="rgb(246,17,31)" rx="2" ry="2" />
+<text  x="150.92" y="2031.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt; &gt; &gt; &gt;::rehash_bucket (2 samples, 0.12%)</title><rect x="806.2" y="2037" width="1.4" height="15.0" fill="rgb(215,28,12)" rx="2" ry="2" />
+<text  x="809.15" y="2047.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, Tile, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, Tile&gt; &gt; &gt;::lookup (2 samples, 0.12%)</title><rect x="807.6" y="2037" width="1.5" height="15.0" fill="rgb(222,78,11)" rx="2" ry="2" />
+<text  x="810.61" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (28 samples, 1.73%)</title><rect x="682.1" y="1317" width="20.4" height="15.0" fill="rgb(210,87,3)" rx="2" ry="2" />
+<text  x="685.10" y="1327.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator&lt;std::pair&lt;Message*, bool&gt; &gt; &gt;::rehash_bucket (1 samples, 0.06%)</title><rect x="704.0" y="1989" width="0.7" height="15.0" fill="rgb(242,55,33)" rx="2" ry="2" />
+<text  x="706.99" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (36 samples, 2.23%)</title><rect x="677.0" y="1941" width="26.3" height="15.0" fill="rgb(225,48,50)" rx="2" ry="2" />
+<text  x="679.99" y="1951.5" >[..</text>
+</g>
+<g >
+<title>[unknown] (33 samples, 2.04%)</title><rect x="679.2" y="1717" width="24.1" height="15.0" fill="rgb(230,24,35)" rx="2" ry="2" />
+<text  x="682.18" y="1727.5" >[..</text>
+</g>
+<g >
+<title>Bitmask::initialize (16 samples, 0.99%)</title><rect x="353.0" y="2021" width="11.7" height="15.0" fill="rgb(222,92,37)" rx="2" ry="2" />
+<text  x="355.98" y="2031.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (2 samples, 0.12%)</title><rect x="363.2" y="1957" width="1.5" height="15.0" fill="rgb(235,110,43)" rx="2" ry="2" />
+<text  x="366.20" y="1967.5" ></text>
+</g>
+<g >
+<title>gosdt (1,611 samples, 99.63%)</title><rect x="10.0" y="2069" width="1175.6" height="15.0" fill="rgb(215,43,4)" rx="2" ry="2" />
+<text  x="13.00" y="2079.5" >gosdt</text>
+</g>
+<g >
+<title>do_user_addr_fault (2 samples, 0.12%)</title><rect x="327.4" y="1973" width="1.5" height="15.0" fill="rgb(238,112,15)" rx="2" ry="2" />
+<text  x="330.44" y="1983.5" ></text>
+</g>
+<g >
+<title>do_fault (1 samples, 0.06%)</title><rect x="795.2" y="1829" width="0.7" height="15.0" fill="rgb(232,29,7)" rx="2" ry="2" />
+<text  x="798.21" y="1839.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::internal::concurrent_unordered_base&lt;tbb::interface5::concurrent_unordered_map_traits&lt;Tile, std::pair&lt;Bitmask, float&gt;, tbb::interface5::internal::hash_compare&lt;Tile, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt; &gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt;, false&gt; &gt;::internal_insert&lt;tbb::internal::bool_constant&lt;true&gt;, tbb::internal::bool_constant&lt;true&gt;, std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; (1 samples, 0.06%)</title><rect x="706.2" y="2005" width="0.7" height="15.0" fill="rgb(211,1,31)" rx="2" ry="2" />
+<text  x="709.18" y="2015.5" ></text>
+</g>
+<g >
+<title>update_load_avg (1 samples, 0.06%)</title><rect x="63.3" y="1893" width="0.7" height="15.0" fill="rgb(234,127,9)" rx="2" ry="2" />
+<text  x="66.27" y="1903.5" ></text>
+</g>
+<g >
+<title>Bitmask::~Bitmask (1 samples, 0.06%)</title><rect x="136.2" y="2021" width="0.8" height="15.0" fill="rgb(209,44,16)" rx="2" ry="2" />
+<text  x="139.25" y="2031.5" ></text>
+</g>
+<g >
+<title>alloc_pages_vma (1 samples, 0.06%)</title><rect x="363.2" y="1909" width="0.7" height="15.0" fill="rgb(235,55,53)" rx="2" ry="2" />
+<text  x="366.20" y="1919.5" ></text>
+</g>
+<g >
+<title>__gmpn_and_n (30 samples, 1.86%)</title><rect x="547.8" y="1989" width="21.9" height="15.0" fill="rgb(221,59,27)" rx="2" ry="2" />
+<text  x="550.82" y="1999.5" >_..</text>
+</g>
+<g >
+<title>put_prev_task_fair (1 samples, 0.06%)</title><rect x="63.3" y="1925" width="0.7" height="15.0" fill="rgb(215,224,17)" rx="2" ry="2" />
+<text  x="66.27" y="1935.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="645" width="16.8" height="15.0" fill="rgb(235,8,41)" rx="2" ry="2" />
+<text  x="687.29" y="655.5" ></text>
+</g>
+<g >
+<title>Queue::pop (1 samples, 0.06%)</title><rect x="682.8" y="1269" width="0.8" height="15.0" fill="rgb(205,223,6)" rx="2" ry="2" />
+<text  x="685.83" y="1279.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (1 samples, 0.06%)</title><rect x="685.0" y="389" width="0.7" height="15.0" fill="rgb(232,84,53)" rx="2" ry="2" />
+<text  x="688.02" y="399.5" ></text>
+</g>
+<g >
+<title>alloc_pages_vma (1 samples, 0.06%)</title><rect x="1163.7" y="1941" width="0.8" height="15.0" fill="rgb(209,109,35)" rx="2" ry="2" />
+<text  x="1166.73" y="1951.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (1 samples, 0.06%)</title><rect x="808.3" y="1973" width="0.8" height="15.0" fill="rgb(248,152,18)" rx="2" ry="2" />
+<text  x="811.34" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (6 samples, 0.37%)</title><rect x="1185.6" y="2053" width="4.4" height="15.0" fill="rgb(250,11,5)" rx="2" ry="2" />
+<text  x="1188.62" y="2063.5" ></text>
+</g>
+<g >
+<title>load_elf_binary (6 samples, 0.37%)</title><rect x="1185.6" y="1957" width="4.4" height="15.0" fill="rgb(209,15,33)" rx="2" ry="2" />
+<text  x="1188.62" y="1967.5" ></text>
+</g>
+<g >
+<title>Bitmask::empty (6 samples, 0.37%)</title><rect x="337.7" y="2021" width="4.3" height="15.0" fill="rgb(253,104,8)" rx="2" ry="2" />
+<text  x="340.66" y="2031.5" ></text>
+</g>
+<g >
+<title>Bitmask::hash (10 samples, 0.62%)</title><rect x="261.8" y="2037" width="7.3" height="15.0" fill="rgb(220,77,3)" rx="2" ry="2" />
+<text  x="264.76" y="2047.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt; &gt; &gt; &gt;::allocate_node_default_construct (1 samples, 0.06%)</title><rect x="750.7" y="2021" width="0.7" height="15.0" fill="rgb(208,49,30)" rx="2" ry="2" />
+<text  x="753.69" y="2031.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, std::vector&lt;int, std::allocator&lt;int&gt; &gt;, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, std::vector&lt;int, std::allocator&lt;int&gt; &gt; &gt; &gt; &gt;::allocate_node_move_construct (1 samples, 0.06%)</title><rect x="1173.2" y="2053" width="0.7" height="15.0" fill="rgb(246,105,31)" rx="2" ry="2" />
+<text  x="1176.22" y="2063.5" ></text>
+</g>
+<g >
+<title>Queue::pop (1 samples, 0.06%)</title><rect x="273.4" y="2037" width="0.8" height="15.0" fill="rgb(231,87,31)" rx="2" ry="2" />
+<text  x="276.44" y="2047.5" ></text>
+</g>
+<g >
+<title>tlb_finish_mmu (1 samples, 0.06%)</title><rect x="1150.6" y="1941" width="0.7" height="15.0" fill="rgb(254,95,14)" rx="2" ry="2" />
+<text  x="1153.59" y="1951.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (2 samples, 0.12%)</title><rect x="1160.1" y="2037" width="1.4" height="15.0" fill="rgb(242,168,1)" rx="2" ry="2" />
+<text  x="1163.08" y="2047.5" ></text>
+</g>
+<g >
+<title>__count_memcg_events (1 samples, 0.06%)</title><rect x="328.2" y="1877" width="0.7" height="15.0" fill="rgb(226,4,46)" rx="2" ry="2" />
+<text  x="331.17" y="1887.5" ></text>
+</g>
+<g >
+<title>Dataset::subset (10 samples, 0.62%)</title><rect x="96.8" y="2053" width="7.3" height="15.0" fill="rgb(248,29,41)" rx="2" ry="2" />
+<text  x="99.84" y="2063.5" ></text>
+</g>
+<g >
+<title>schedule (1 samples, 0.06%)</title><rect x="63.3" y="1957" width="0.7" height="15.0" fill="rgb(222,33,15)" rx="2" ry="2" />
+<text  x="66.27" y="1967.5" ></text>
+</g>
+<g >
+<title>do_anonymous_page (2 samples, 0.12%)</title><rect x="1160.1" y="1957" width="1.4" height="15.0" fill="rgb(230,65,36)" rx="2" ry="2" />
+<text  x="1163.08" y="1967.5" ></text>
+</g>
+<g >
+<title>_exit (1 samples, 0.06%)</title><rect x="1149.9" y="2053" width="0.7" height="15.0" fill="rgb(206,10,46)" rx="2" ry="2" />
+<text  x="1152.86" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1173" width="17.5" height="15.0" fill="rgb(248,136,48)" rx="2" ry="2" />
+<text  x="686.56" y="1183.5" ></text>
+</g>
+<g >
+<title>__clone (6 samples, 0.37%)</title><rect x="759.4" y="2037" width="4.4" height="15.0" fill="rgb(249,164,37)" rx="2" ry="2" />
+<text  x="762.45" y="2047.5" ></text>
+</g>
+<g >
+<title>Task::prune_features (3 samples, 0.19%)</title><rect x="274.2" y="2037" width="2.2" height="15.0" fill="rgb(207,191,2)" rx="2" ry="2" />
+<text  x="277.17" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="757" width="16.8" height="15.0" fill="rgb(244,134,21)" rx="2" ry="2" />
+<text  x="687.29" y="767.5" ></text>
+</g>
+<g >
+<title>__gmpn_nior_n (7 samples, 0.43%)</title><rect x="569.7" y="1989" width="5.1" height="15.0" fill="rgb(238,63,18)" rx="2" ry="2" />
+<text  x="572.72" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="245" width="14.6" height="15.0" fill="rgb(226,177,3)" rx="2" ry="2" />
+<text  x="688.75" y="255.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, Tile, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, Tile&gt; &gt; &gt;::rehash_bucket (2 samples, 0.12%)</title><rect x="809.1" y="2037" width="1.4" height="15.0" fill="rgb(216,203,32)" rx="2" ry="2" />
+<text  x="812.07" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="453" width="16.1" height="15.0" fill="rgb(254,105,34)" rx="2" ry="2" />
+<text  x="688.02" y="463.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, std::vector&lt;int, std::allocator&lt;int&gt; &gt;, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, std::vector&lt;int, std::allocator&lt;int&gt; &gt; &gt; &gt; &gt;::allocate_node_move_construct (1 samples, 0.06%)</title><rect x="756.5" y="2021" width="0.8" height="15.0" fill="rgb(253,121,3)" rx="2" ry="2" />
+<text  x="759.53" y="2031.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, Task, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, Task&gt; &gt; &gt;::allocate_node_move_construct (3 samples, 0.19%)</title><rect x="747.0" y="2021" width="2.2" height="15.0" fill="rgb(246,197,8)" rx="2" ry="2" />
+<text  x="750.04" y="2031.5" ></text>
+</g>
+<g >
+<title>Bitmask::Bitmask (4 samples, 0.25%)</title><rect x="461.7" y="2005" width="2.9" height="15.0" fill="rgb(240,163,28)" rx="2" ry="2" />
+<text  x="464.71" y="2015.5" ></text>
+</g>
+<g >
+<title>__gmpn_and_n (4 samples, 0.25%)</title><rect x="706.9" y="2021" width="2.9" height="15.0" fill="rgb(234,83,29)" rx="2" ry="2" />
+<text  x="709.91" y="2031.5" ></text>
+</g>
+<g >
+<title>__gmpn_popcount (315 samples, 19.48%)</title><rect x="899.6" y="2053" width="229.8" height="15.0" fill="rgb(236,194,47)" rx="2" ry="2" />
+<text  x="902.56" y="2063.5" >__gmpn_popcount</text>
+</g>
+<g >
+<title>exc_page_fault (1 samples, 0.06%)</title><rect x="808.3" y="2005" width="0.8" height="15.0" fill="rgb(248,108,20)" rx="2" ry="2" />
+<text  x="811.34" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (21 samples, 1.30%)</title><rect x="685.0" y="421" width="15.3" height="15.0" fill="rgb(226,2,50)" rx="2" ry="2" />
+<text  x="688.02" y="431.5" ></text>
+</g>
+<g >
+<title>__pthread_getspecific (5 samples, 0.31%)</title><rect x="607.7" y="2005" width="3.6" height="15.0" fill="rgb(231,163,43)" rx="2" ry="2" />
+<text  x="610.66" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="69" width="14.6" height="15.0" fill="rgb(206,79,23)" rx="2" ry="2" />
+<text  x="688.75" y="79.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1221" width="17.5" height="15.0" fill="rgb(228,224,5)" rx="2" ry="2" />
+<text  x="686.56" y="1231.5" ></text>
+</g>
+<g >
+<title>Bitmask::initialize (1 samples, 0.06%)</title><rect x="72.8" y="2053" width="0.7" height="15.0" fill="rgb(226,118,43)" rx="2" ry="2" />
+<text  x="75.76" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (33 samples, 2.04%)</title><rect x="679.2" y="1733" width="24.1" height="15.0" fill="rgb(242,16,37)" rx="2" ry="2" />
+<text  x="682.18" y="1743.5" >[..</text>
+</g>
+<g >
+<title>[unknown] (29 samples, 1.79%)</title><rect x="682.1" y="1381" width="21.2" height="15.0" fill="rgb(207,206,23)" rx="2" ry="2" />
+<text  x="685.10" y="1391.5" ></text>
+</g>
+<g >
+<title>__memmove_avx_unaligned_erms (15 samples, 0.93%)</title><rect x="1133.8" y="2053" width="11.0" height="15.0" fill="rgb(215,104,9)" rx="2" ry="2" />
+<text  x="1136.81" y="2063.5" ></text>
+</g>
+<g >
+<title>get_page_from_freelist (1 samples, 0.06%)</title><rect x="1160.1" y="1909" width="0.7" height="15.0" fill="rgb(219,75,18)" rx="2" ry="2" />
+<text  x="1163.08" y="1919.5" ></text>
+</g>
+<g >
+<title>Tile::hash (1 samples, 0.06%)</title><rect x="161.8" y="2021" width="0.7" height="15.0" fill="rgb(220,18,0)" rx="2" ry="2" />
+<text  x="164.79" y="2031.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (2 samples, 0.12%)</title><rect x="1160.1" y="2005" width="1.4" height="15.0" fill="rgb(237,158,11)" rx="2" ry="2" />
+<text  x="1163.08" y="2015.5" ></text>
+</g>
+<g >
+<title>exc_page_fault (1 samples, 0.06%)</title><rect x="747.8" y="1989" width="0.7" height="15.0" fill="rgb(212,131,36)" rx="2" ry="2" />
+<text  x="750.77" y="1999.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (54 samples, 3.34%)</title><rect x="625.9" y="2021" width="39.4" height="15.0" fill="rgb(235,81,40)" rx="2" ry="2" />
+<text  x="628.91" y="2031.5" >[li..</text>
+</g>
+<g >
+<title>handle_mm_fault (1 samples, 0.06%)</title><rect x="747.8" y="1957" width="0.7" height="15.0" fill="rgb(208,1,1)" rx="2" ry="2" />
+<text  x="750.77" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="437" width="16.1" height="15.0" fill="rgb(227,146,52)" rx="2" ry="2" />
+<text  x="688.02" y="447.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, Task, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, Task&gt; &gt; &gt;::lookup (2 samples, 0.12%)</title><rect x="1161.5" y="2053" width="1.5" height="15.0" fill="rgb(250,86,32)" rx="2" ry="2" />
+<text  x="1164.54" y="2063.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_priority_queue&lt;Message*, PriorityKeyComparator, tbb::scalable_allocator&lt;Message*&gt; &gt;::handle_operations (1 samples, 0.06%)</title><rect x="813.5" y="2037" width="0.7" height="15.0" fill="rgb(210,91,38)" rx="2" ry="2" />
+<text  x="816.45" y="2047.5" ></text>
+</g>
+<g >
+<title>do_anonymous_page (3 samples, 0.19%)</title><rect x="752.9" y="1925" width="2.2" height="15.0" fill="rgb(247,156,21)" rx="2" ry="2" />
+<text  x="755.88" y="1935.5" ></text>
+</g>
+<g >
+<title>Bitmask::rscan (6 samples, 0.37%)</title><rect x="85.2" y="2053" width="4.3" height="15.0" fill="rgb(215,195,1)" rx="2" ry="2" />
+<text  x="88.16" y="2063.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt; &gt; &gt; &gt;::lookup (1 samples, 0.06%)</title><rect x="805.4" y="2037" width="0.8" height="15.0" fill="rgb(254,126,46)" rx="2" ry="2" />
+<text  x="808.42" y="2047.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::internal::concurrent_unordered_base&lt;tbb::interface5::concurrent_unordered_map_traits&lt;Tile, std::pair&lt;Bitmask, float&gt;, tbb::interface5::internal::hash_compare&lt;Tile, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt; &gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt;, false&gt; &gt;::init_bucket (10 samples, 0.62%)</title><rect x="814.2" y="2037" width="7.3" height="15.0" fill="rgb(209,120,44)" rx="2" ry="2" />
+<text  x="817.18" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (33 samples, 2.04%)</title><rect x="679.2" y="1685" width="24.1" height="15.0" fill="rgb(249,191,50)" rx="2" ry="2" />
+<text  x="682.18" y="1695.5" >[..</text>
+</g>
+<g >
+<title>x86_pmu_enable (5 samples, 0.31%)</title><rect x="1186.4" y="1877" width="3.6" height="15.0" fill="rgb(239,34,14)" rx="2" ry="2" />
+<text  x="1189.35" y="1887.5" ></text>
+</g>
+<g >
+<title>tbb::spin_rw_mutex_v3::internal_acquire_reader (7 samples, 0.43%)</title><rect x="822.9" y="2037" width="5.1" height="15.0" fill="rgb(238,217,31)" rx="2" ry="2" />
+<text  x="825.94" y="2047.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator&lt;std::pair&lt;Message*, bool&gt; &gt; &gt;::rehash_bucket (1 samples, 0.06%)</title><rect x="746.3" y="2021" width="0.7" height="15.0" fill="rgb(252,133,2)" rx="2" ry="2" />
+<text  x="749.31" y="2031.5" ></text>
+</g>
+<g >
+<title>_dl_sysdep_start (1 samples, 0.06%)</title><rect x="790.8" y="2037" width="0.8" height="15.0" fill="rgb(245,29,16)" rx="2" ry="2" />
+<text  x="793.83" y="2047.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (2 samples, 0.12%)</title><rect x="327.4" y="1957" width="1.5" height="15.0" fill="rgb(216,151,4)" rx="2" ry="2" />
+<text  x="330.44" y="1967.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (19 samples, 1.18%)</title><rect x="686.5" y="37" width="13.8" height="15.0" fill="rgb(231,12,21)" rx="2" ry="2" />
+<text  x="689.47" y="47.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="661" width="16.8" height="15.0" fill="rgb(206,78,14)" rx="2" ry="2" />
+<text  x="687.29" y="671.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, std::vector&lt;int, std::allocator&lt;int&gt; &gt;, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, std::vector&lt;int, std::allocator&lt;int&gt; &gt; &gt; &gt; &gt;::clear (1 samples, 0.06%)</title><rect x="1173.9" y="2053" width="0.8" height="15.0" fill="rgb(246,93,34)" rx="2" ry="2" />
+<text  x="1176.95" y="2063.5" ></text>
+</g>
+<g >
+<title>up_read (1 samples, 0.06%)</title><rect x="736.8" y="1973" width="0.8" height="15.0" fill="rgb(246,119,49)" rx="2" ry="2" />
+<text  x="739.83" y="1983.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (1 samples, 0.06%)</title><rect x="756.5" y="1973" width="0.8" height="15.0" fill="rgb(232,79,0)" rx="2" ry="2" />
+<text  x="759.53" y="1983.5" ></text>
+</g>
+<g >
+<title>Bitmask::bit_and (14 samples, 0.87%)</title><rect x="480.0" y="1989" width="10.2" height="15.0" fill="rgb(236,150,11)" rx="2" ry="2" />
+<text  x="482.96" y="1999.5" ></text>
+</g>
+<g >
+<title>__alloc_pages_nodemask (1 samples, 0.06%)</title><rect x="1160.1" y="1925" width="0.7" height="15.0" fill="rgb(216,113,16)" rx="2" ry="2" />
+<text  x="1163.08" y="1935.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="165" width="14.6" height="15.0" fill="rgb(243,192,42)" rx="2" ry="2" />
+<text  x="688.75" y="175.5" ></text>
+</g>
+<g >
+<title>__memmove_avx_unaligned_erms (7 samples, 0.43%)</title><rect x="588.7" y="1989" width="5.1" height="15.0" fill="rgb(238,38,40)" rx="2" ry="2" />
+<text  x="591.69" y="1999.5" ></text>
+</g>
+<g >
+<title>idtentry_exit_cond_rcu (1 samples, 0.06%)</title><rect x="63.3" y="2005" width="0.7" height="15.0" fill="rgb(230,192,39)" rx="2" ry="2" />
+<text  x="66.27" y="2015.5" ></text>
+</g>
+<g >
+<title>__alloc_pages_nodemask (2 samples, 0.12%)</title><rect x="752.9" y="1893" width="1.4" height="15.0" fill="rgb(206,217,47)" rx="2" ry="2" />
+<text  x="755.88" y="1903.5" ></text>
+</g>
+<g >
+<title>Task::Task (164 samples, 10.14%)</title><rect x="474.1" y="2005" width="119.7" height="15.0" fill="rgb(216,7,42)" rx="2" ry="2" />
+<text  x="477.12" y="2015.5" >Task::Task</text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt; &gt; &gt; &gt;::allocate_node_default_construct (2 samples, 0.12%)</title><rect x="1163.7" y="2053" width="1.5" height="15.0" fill="rgb(220,63,40)" rx="2" ry="2" />
+<text  x="1166.73" y="2063.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (1 samples, 0.06%)</title><rect x="751.4" y="2005" width="0.8" height="15.0" fill="rgb(232,145,42)" rx="2" ry="2" />
+<text  x="754.42" y="2015.5" ></text>
+</g>
+<g >
+<title>exc_page_fault (1 samples, 0.06%)</title><rect x="1163.0" y="2021" width="0.7" height="15.0" fill="rgb(235,58,7)" rx="2" ry="2" />
+<text  x="1166.00" y="2031.5" ></text>
+</g>
+<g >
+<title>common_interrupt (1 samples, 0.06%)</title><rect x="63.3" y="2021" width="0.7" height="15.0" fill="rgb(206,21,13)" rx="2" ry="2" />
+<text  x="66.27" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="85" width="14.6" height="15.0" fill="rgb(253,99,51)" rx="2" ry="2" />
+<text  x="688.75" y="95.5" ></text>
+</g>
+<g >
+<title>__logf_fma (10 samples, 0.62%)</title><rect x="581.4" y="1989" width="7.3" height="15.0" fill="rgb(229,91,26)" rx="2" ry="2" />
+<text  x="584.39" y="1999.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (1 samples, 0.06%)</title><rect x="684.3" y="613" width="0.7" height="15.0" fill="rgb(215,125,52)" rx="2" ry="2" />
+<text  x="687.29" y="623.5" ></text>
+</g>
+<g >
+<title>prepare_exit_to_usermode (1 samples, 0.06%)</title><rect x="63.3" y="1989" width="0.7" height="15.0" fill="rgb(205,49,31)" rx="2" ry="2" />
+<text  x="66.27" y="1999.5" ></text>
+</g>
+<g >
+<title>tlb_flush_mmu (1 samples, 0.06%)</title><rect x="1150.6" y="1925" width="0.7" height="15.0" fill="rgb(211,207,42)" rx="2" ry="2" />
+<text  x="1153.59" y="1935.5" ></text>
+</g>
+<g >
+<title>do_anonymous_page (1 samples, 0.06%)</title><rect x="736.1" y="1925" width="0.7" height="15.0" fill="rgb(247,159,0)" rx="2" ry="2" />
+<text  x="739.10" y="1935.5" ></text>
+</g>
+<g >
+<title>begin_new_exec (6 samples, 0.37%)</title><rect x="1185.6" y="1941" width="4.4" height="15.0" fill="rgb(205,227,15)" rx="2" ry="2" />
+<text  x="1188.62" y="1951.5" ></text>
+</g>
+<g >
+<title>do_anonymous_page (1 samples, 0.06%)</title><rect x="1163.0" y="1957" width="0.7" height="15.0" fill="rgb(244,131,20)" rx="2" ry="2" />
+<text  x="1166.00" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (33 samples, 2.04%)</title><rect x="679.2" y="1749" width="24.1" height="15.0" fill="rgb(244,71,0)" rx="2" ry="2" />
+<text  x="682.18" y="1759.5" >[..</text>
+</g>
+<g >
+<title>mem_cgroup_charge (1 samples, 0.06%)</title><rect x="1164.5" y="1941" width="0.7" height="15.0" fill="rgb(230,81,12)" rx="2" ry="2" />
+<text  x="1167.46" y="1951.5" ></text>
+</g>
+<g >
+<title>Bitmask::scan_range (7 samples, 0.43%)</title><rect x="413.5" y="2021" width="5.2" height="15.0" fill="rgb(212,142,52)" rx="2" ry="2" />
+<text  x="416.55" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="229" width="14.6" height="15.0" fill="rgb(238,76,0)" rx="2" ry="2" />
+<text  x="688.75" y="239.5" ></text>
+</g>
+<g >
+<title>clear_page_erms (1 samples, 0.06%)</title><rect x="1160.1" y="1893" width="0.7" height="15.0" fill="rgb(217,145,15)" rx="2" ry="2" />
+<text  x="1163.08" y="1903.5" ></text>
+</g>
+<g >
+<title>Bitmask::bit_and (23 samples, 1.42%)</title><rect x="16.6" y="2053" width="16.8" height="15.0" fill="rgb(234,211,17)" rx="2" ry="2" />
+<text  x="19.57" y="2063.5" ></text>
+</g>
+<g >
+<title>__pthread_getspecific (1 samples, 0.06%)</title><rect x="1146.9" y="2053" width="0.8" height="15.0" fill="rgb(239,10,46)" rx="2" ry="2" />
+<text  x="1149.94" y="2063.5" ></text>
+</g>
+<g >
+<title>copy_page (1 samples, 0.06%)</title><rect x="790.8" y="1893" width="0.8" height="15.0" fill="rgb(226,61,31)" rx="2" ry="2" />
+<text  x="793.83" y="1903.5" ></text>
+</g>
+<g >
+<title>perf_pmu_enable.part.0 (5 samples, 0.31%)</title><rect x="1186.4" y="1893" width="3.6" height="15.0" fill="rgb(205,36,48)" rx="2" ry="2" />
+<text  x="1189.35" y="1903.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt; &gt; &gt; &gt;::lookup (4 samples, 0.25%)</title><rect x="170.5" y="2021" width="3.0" height="15.0" fill="rgb(230,111,47)" rx="2" ry="2" />
+<text  x="173.54" y="2031.5" ></text>
+</g>
+<g >
+<title>Bitmask::bit_or (3 samples, 0.19%)</title><rect x="328.9" y="2021" width="2.2" height="15.0" fill="rgb(240,115,36)" rx="2" ry="2" />
+<text  x="331.90" y="2031.5" ></text>
+</g>
+<g >
+<title>__gmpn_ior_n (3 samples, 0.19%)</title><rect x="763.8" y="2037" width="2.2" height="15.0" fill="rgb(251,129,39)" rx="2" ry="2" />
+<text  x="766.83" y="2047.5" ></text>
+</g>
+<g >
+<title>Bitmask::count (42 samples, 2.60%)</title><rect x="33.4" y="2053" width="30.6" height="15.0" fill="rgb(218,125,31)" rx="2" ry="2" />
+<text  x="36.35" y="2063.5" >Bi..</text>
+</g>
+<g >
+<title>__perf_event_task_sched_in (5 samples, 0.31%)</title><rect x="760.2" y="1973" width="3.6" height="15.0" fill="rgb(245,194,2)" rx="2" ry="2" />
+<text  x="763.18" y="1983.5" ></text>
+</g>
+<g >
+<title>do_exit (1 samples, 0.06%)</title><rect x="1149.9" y="1973" width="0.7" height="15.0" fill="rgb(236,79,27)" rx="2" ry="2" />
+<text  x="1152.86" y="1983.5" ></text>
+</g>
+<g >
+<title>[libtbb.so.2] (2 samples, 0.12%)</title><rect x="220.9" y="2053" width="1.5" height="15.0" fill="rgb(238,48,1)" rx="2" ry="2" />
+<text  x="223.90" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="181" width="14.6" height="15.0" fill="rgb(246,167,6)" rx="2" ry="2" />
+<text  x="688.75" y="191.5" ></text>
+</g>
+<g >
+<title>Bitmask::count (18 samples, 1.11%)</title><rect x="490.2" y="1989" width="13.1" height="15.0" fill="rgb(242,139,32)" rx="2" ry="2" />
+<text  x="493.17" y="1999.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (1 samples, 0.06%)</title><rect x="795.2" y="1909" width="0.7" height="15.0" fill="rgb(222,221,15)" rx="2" ry="2" />
+<text  x="798.21" y="1919.5" ></text>
+</g>
+<g >
+<title>do_group_exit (1 samples, 0.06%)</title><rect x="1149.9" y="1989" width="0.7" height="15.0" fill="rgb(252,167,32)" rx="2" ry="2" />
+<text  x="1152.86" y="1999.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, Tile, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, Tile&gt; &gt; &gt;::allocate_node_move_construct (4 samples, 0.25%)</title><rect x="752.2" y="2021" width="2.9" height="15.0" fill="rgb(236,65,17)" rx="2" ry="2" />
+<text  x="755.15" y="2031.5" ></text>
+</g>
+<g >
+<title>Tile::operator== (1 samples, 0.06%)</title><rect x="674.1" y="1989" width="0.7" height="15.0" fill="rgb(242,15,47)" rx="2" ry="2" />
+<text  x="677.07" y="1999.5" ></text>
+</g>
+<g >
+<title>Optimizer::link_to_parent (1 samples, 0.06%)</title><rect x="137.0" y="2021" width="0.7" height="15.0" fill="rgb(240,206,21)" rx="2" ry="2" />
+<text  x="139.98" y="2031.5" ></text>
+</g>
+<g >
+<title>Optimizer::iterate (93 samples, 5.75%)</title><rect x="119.5" y="2053" width="67.8" height="15.0" fill="rgb(229,192,6)" rx="2" ry="2" />
+<text  x="122.46" y="2063.5" >Optimiz..</text>
+</g>
+<g >
+<title>Message::Message (1 samples, 0.06%)</title><rect x="676.3" y="1957" width="0.7" height="15.0" fill="rgb(241,65,18)" rx="2" ry="2" />
+<text  x="679.26" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1141" width="17.5" height="15.0" fill="rgb(243,114,32)" rx="2" ry="2" />
+<text  x="686.56" y="1151.5" ></text>
+</g>
+<g >
+<title>get_page_from_freelist (1 samples, 0.06%)</title><rect x="363.2" y="1877" width="0.7" height="15.0" fill="rgb(213,201,19)" rx="2" ry="2" />
+<text  x="366.20" y="1887.5" ></text>
+</g>
+<g >
+<title>__handle_mm_fault (1 samples, 0.06%)</title><rect x="736.1" y="1941" width="0.7" height="15.0" fill="rgb(240,167,33)" rx="2" ry="2" />
+<text  x="739.10" y="1951.5" ></text>
+</g>
+<g >
+<title>Bitmask::hash (12 samples, 0.74%)</title><rect x="64.0" y="2053" width="8.8" height="15.0" fill="rgb(249,146,33)" rx="2" ry="2" />
+<text  x="67.00" y="2063.5" ></text>
+</g>
+<g >
+<title>__handle_mm_fault (1 samples, 0.06%)</title><rect x="795.2" y="1845" width="0.7" height="15.0" fill="rgb(233,138,21)" rx="2" ry="2" />
+<text  x="798.21" y="1855.5" ></text>
+</g>
+<g >
+<title>__handle_mm_fault (1 samples, 0.06%)</title><rect x="747.8" y="1941" width="0.7" height="15.0" fill="rgb(247,125,0)" rx="2" ry="2" />
+<text  x="750.77" y="1951.5" ></text>
+</g>
+<g >
+<title>__alloc_pages_nodemask (1 samples, 0.06%)</title><rect x="795.2" y="1765" width="0.7" height="15.0" fill="rgb(243,183,36)" rx="2" ry="2" />
+<text  x="798.21" y="1775.5" ></text>
+</g>
+<g >
+<title>sysmalloc (3 samples, 0.19%)</title><rect x="1159.4" y="2053" width="2.1" height="15.0" fill="rgb(253,21,16)" rx="2" ry="2" />
+<text  x="1162.35" y="2063.5" ></text>
+</g>
+<g >
+<title>Dataset::summary (2 samples, 0.12%)</title><rect x="472.7" y="2005" width="1.4" height="15.0" fill="rgb(227,178,53)" rx="2" ry="2" />
+<text  x="475.66" y="2015.5" ></text>
+</g>
+<g >
+<title>__update_load_avg_se (1 samples, 0.06%)</title><rect x="63.3" y="1877" width="0.7" height="15.0" fill="rgb(207,212,26)" rx="2" ry="2" />
+<text  x="66.27" y="1887.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="837" width="16.8" height="15.0" fill="rgb(220,18,23)" rx="2" ry="2" />
+<text  x="687.29" y="847.5" ></text>
+</g>
+<g >
+<title>clear_page_erms (1 samples, 0.06%)</title><rect x="363.2" y="1861" width="0.7" height="15.0" fill="rgb(226,108,27)" rx="2" ry="2" />
+<text  x="366.20" y="1871.5" ></text>
+</g>
+<g >
+<title>put_prev_entity (1 samples, 0.06%)</title><rect x="63.3" y="1909" width="0.7" height="15.0" fill="rgb(216,215,52)" rx="2" ry="2" />
+<text  x="66.27" y="1919.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Message*, bool, MembershipKeyHashCompare, tbb::scalable_allocator&lt;std::pair&lt;Message*, bool&gt; &gt; &gt;::rehash_bucket (1 samples, 0.06%)</title><rect x="798.9" y="2037" width="0.7" height="15.0" fill="rgb(211,171,40)" rx="2" ry="2" />
+<text  x="801.86" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="325" width="14.6" height="15.0" fill="rgb(214,206,24)" rx="2" ry="2" />
+<text  x="688.75" y="335.5" ></text>
+</g>
+<g >
+<title>asm_common_interrupt (1 samples, 0.06%)</title><rect x="63.3" y="2037" width="0.7" height="15.0" fill="rgb(216,169,47)" rx="2" ry="2" />
+<text  x="66.27" y="2047.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (1 samples, 0.06%)</title><rect x="736.1" y="1973" width="0.7" height="15.0" fill="rgb(239,163,17)" rx="2" ry="2" />
+<text  x="739.10" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1125" width="17.5" height="15.0" fill="rgb(226,110,10)" rx="2" ry="2" />
+<text  x="686.56" y="1135.5" ></text>
+</g>
+<g >
+<title>prepare_exit_to_usermode (1 samples, 0.06%)</title><rect x="1128.7" y="1989" width="0.7" height="15.0" fill="rgb(229,16,25)" rx="2" ry="2" />
+<text  x="1131.70" y="1999.5" ></text>
+</g>
+<g >
+<title>do_group_exit (6 samples, 0.37%)</title><rect x="1150.6" y="2005" width="4.4" height="15.0" fill="rgb(228,105,2)" rx="2" ry="2" />
+<text  x="1153.59" y="2015.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, Tile, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, Tile&gt; &gt; &gt;::rehash_bucket (1 samples, 0.06%)</title><rect x="755.8" y="2021" width="0.7" height="15.0" fill="rgb(227,138,0)" rx="2" ry="2" />
+<text  x="758.80" y="2031.5" ></text>
+</g>
+<g >
+<title>do_anonymous_page (1 samples, 0.06%)</title><rect x="747.8" y="1925" width="0.7" height="15.0" fill="rgb(206,0,53)" rx="2" ry="2" />
+<text  x="750.77" y="1935.5" ></text>
+</g>
+<g >
+<title>unmap_vmas (5 samples, 0.31%)</title><rect x="1151.3" y="1941" width="3.7" height="15.0" fill="rgb(249,54,42)" rx="2" ry="2" />
+<text  x="1154.32" y="1951.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1237" width="17.5" height="15.0" fill="rgb(215,176,5)" rx="2" ry="2" />
+<text  x="686.56" y="1247.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="997" width="16.8" height="15.0" fill="rgb(218,90,2)" rx="2" ry="2" />
+<text  x="687.29" y="1007.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::concurrent_vector&lt;std::tuple&lt;unsigned int, float, float&gt;, tbb::scalable_allocator&lt;std::tuple&lt;unsigned int, float, float&gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::concurrent_vector&lt;std::tuple&lt;unsigned int, float, float&gt;, tbb::scalable_allocator&lt;std::tuple&lt;unsigned int, float, float&gt; &gt; &gt; &gt; &gt; &gt;::allocate_node_default_construct (1 samples, 0.06%)</title><rect x="1163.0" y="2053" width="0.7" height="15.0" fill="rgb(220,101,51)" rx="2" ry="2" />
+<text  x="1166.00" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="693" width="16.8" height="15.0" fill="rgb(213,195,20)" rx="2" ry="2" />
+<text  x="687.29" y="703.5" ></text>
+</g>
+<g >
+<title>[unknown] (37 samples, 2.29%)</title><rect x="676.3" y="1973" width="27.0" height="15.0" fill="rgb(222,223,27)" rx="2" ry="2" />
+<text  x="679.26" y="1983.5" >[..</text>
+</g>
+<g >
+<title>[unknown] (29 samples, 1.79%)</title><rect x="682.1" y="1397" width="21.2" height="15.0" fill="rgb(254,85,21)" rx="2" ry="2" />
+<text  x="685.10" y="1407.5" ></text>
+</g>
+<g >
+<title>[unknown] (837 samples, 51.76%)</title><rect x="231.1" y="2053" width="610.8" height="15.0" fill="rgb(246,9,10)" rx="2" ry="2" />
+<text  x="234.11" y="2063.5" >[unknown]</text>
+</g>
+<g >
+<title>Tile::operator= (1 samples, 0.06%)</title><rect x="685.7" y="37" width="0.8" height="15.0" fill="rgb(247,184,33)" rx="2" ry="2" />
+<text  x="688.75" y="47.5" ></text>
+</g>
+<g >
+<title>try_charge (1 samples, 0.06%)</title><rect x="1164.5" y="1925" width="0.7" height="15.0" fill="rgb(211,42,17)" rx="2" ry="2" />
+<text  x="1167.46" y="1935.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (1 samples, 0.06%)</title><rect x="795.2" y="2037" width="0.7" height="15.0" fill="rgb(238,77,18)" rx="2" ry="2" />
+<text  x="798.21" y="2047.5" ></text>
+</g>
+<g >
+<title>asm_common_interrupt (1 samples, 0.06%)</title><rect x="1128.7" y="2037" width="0.7" height="15.0" fill="rgb(216,5,35)" rx="2" ry="2" />
+<text  x="1131.70" y="2047.5" ></text>
+</g>
+<g >
+<title>__gmpn_scan1 (1 samples, 0.06%)</title><rect x="717.9" y="2021" width="0.7" height="15.0" fill="rgb(225,152,44)" rx="2" ry="2" />
+<text  x="720.85" y="2031.5" ></text>
+</g>
+<g >
+<title>__gmpn_scan1 (6 samples, 0.37%)</title><rect x="1129.4" y="2053" width="4.4" height="15.0" fill="rgb(208,179,14)" rx="2" ry="2" />
+<text  x="1132.43" y="2063.5" ></text>
+</g>
+<g >
+<title>Tile::operator== (1 samples, 0.06%)</title><rect x="677.7" y="1877" width="0.7" height="15.0" fill="rgb(231,66,44)" rx="2" ry="2" />
+<text  x="680.72" y="1887.5" ></text>
+</g>
+<g >
+<title>__prepare_exit_to_usermode (1 samples, 0.06%)</title><rect x="1128.7" y="1973" width="0.7" height="15.0" fill="rgb(251,58,10)" rx="2" ry="2" />
+<text  x="1131.70" y="1983.5" ></text>
+</g>
+<g >
+<title>scalable_free (2 samples, 0.12%)</title><rect x="165.4" y="2021" width="1.5" height="15.0" fill="rgb(251,206,12)" rx="2" ry="2" />
+<text  x="168.44" y="2031.5" ></text>
+</g>
+<g >
+<title>Bitmask::get (2 samples, 0.12%)</title><rect x="124.6" y="2021" width="1.4" height="15.0" fill="rgb(228,229,36)" rx="2" ry="2" />
+<text  x="127.57" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="965" width="16.8" height="15.0" fill="rgb(210,41,37)" rx="2" ry="2" />
+<text  x="687.29" y="975.5" ></text>
+</g>
+<g >
+<title>mem_cgroup_charge (1 samples, 0.06%)</title><rect x="736.1" y="1909" width="0.7" height="15.0" fill="rgb(227,14,20)" rx="2" ry="2" />
+<text  x="739.10" y="1919.5" ></text>
+</g>
+<g >
+<title>exc_page_fault (1 samples, 0.06%)</title><rect x="795.2" y="1893" width="0.7" height="15.0" fill="rgb(209,195,28)" rx="2" ry="2" />
+<text  x="798.21" y="1903.5" ></text>
+</g>
+<g >
+<title>[unknown] (33 samples, 2.04%)</title><rect x="679.2" y="1669" width="24.1" height="15.0" fill="rgb(206,91,37)" rx="2" ry="2" />
+<text  x="682.18" y="1679.5" >[..</text>
+</g>
+<g >
+<title>Queue::push (3 samples, 0.19%)</title><rect x="191.0" y="2053" width="2.2" height="15.0" fill="rgb(215,59,1)" rx="2" ry="2" />
+<text  x="193.98" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="741" width="16.8" height="15.0" fill="rgb(233,121,23)" rx="2" ry="2" />
+<text  x="687.29" y="751.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::concurrent_vector&lt;std::tuple&lt;unsigned int, float, float&gt;, tbb::scalable_allocator&lt;std::tuple&lt;unsigned int, float, float&gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::concurrent_vector&lt;std::tuple&lt;unsigned int, float, float&gt;, tbb::scalable_allocator&lt;std::tuple&lt;unsigned int, float, float&gt; &gt; &gt; &gt; &gt; &gt;::lookup (3 samples, 0.19%)</title><rect x="168.4" y="2021" width="2.1" height="15.0" fill="rgb(249,121,16)" rx="2" ry="2" />
+<text  x="171.35" y="2031.5" ></text>
+</g>
+<g >
+<title>Bitmask::scan_range (2 samples, 0.12%)</title><rect x="269.8" y="2037" width="1.4" height="15.0" fill="rgb(219,80,32)" rx="2" ry="2" />
+<text  x="272.79" y="2047.5" ></text>
+</g>
+<g >
+<title>page_add_new_anon_rmap (1 samples, 0.06%)</title><rect x="754.3" y="1909" width="0.8" height="15.0" fill="rgb(253,207,48)" rx="2" ry="2" />
+<text  x="757.34" y="1919.5" ></text>
+</g>
+<g >
+<title>[unknown] (22 samples, 1.36%)</title><rect x="685.0" y="469" width="16.1" height="15.0" fill="rgb(235,130,24)" rx="2" ry="2" />
+<text  x="688.02" y="479.5" ></text>
+</g>
+<g >
+<title>Bitmask::operator= (3 samples, 0.19%)</title><rect x="134.1" y="2021" width="2.1" height="15.0" fill="rgb(238,204,47)" rx="2" ry="2" />
+<text  x="137.06" y="2031.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (2 samples, 0.12%)</title><rect x="736.1" y="2005" width="1.5" height="15.0" fill="rgb(209,175,22)" rx="2" ry="2" />
+<text  x="739.10" y="2015.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, Task, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, Task&gt; &gt; &gt;::lookup (5 samples, 0.31%)</title><rect x="800.3" y="2037" width="3.7" height="15.0" fill="rgb(237,17,31)" rx="2" ry="2" />
+<text  x="803.32" y="2047.5" ></text>
+</g>
+<g >
+<title>[libtbbmalloc.so.2] (1 samples, 0.06%)</title><rect x="680.6" y="1605" width="0.8" height="15.0" fill="rgb(234,1,51)" rx="2" ry="2" />
+<text  x="683.64" y="1615.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (1 samples, 0.06%)</title><rect x="795.2" y="1861" width="0.7" height="15.0" fill="rgb(231,178,42)" rx="2" ry="2" />
+<text  x="798.21" y="1871.5" ></text>
+</g>
+<g >
+<title>put_prev_entity (1 samples, 0.06%)</title><rect x="1128.7" y="1909" width="0.7" height="15.0" fill="rgb(220,209,12)" rx="2" ry="2" />
+<text  x="1131.70" y="1919.5" ></text>
+</g>
+<g >
+<title>Task::lowerbound (1 samples, 0.06%)</title><rect x="611.3" y="2021" width="0.7" height="15.0" fill="rgb(221,213,16)" rx="2" ry="2" />
+<text  x="614.31" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 1.79%)</title><rect x="682.1" y="1477" width="21.2" height="15.0" fill="rgb(221,138,6)" rx="2" ry="2" />
+<text  x="685.10" y="1487.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="197" width="14.6" height="15.0" fill="rgb(231,181,50)" rx="2" ry="2" />
+<text  x="688.75" y="207.5" ></text>
+</g>
+<g >
+<title>mem_cgroup_charge (2 samples, 0.12%)</title><rect x="229.7" y="1941" width="1.4" height="15.0" fill="rgb(249,141,11)" rx="2" ry="2" />
+<text  x="232.65" y="1951.5" ></text>
+</g>
+<g >
+<title>[unknown] (30 samples, 1.86%)</title><rect x="681.4" y="1605" width="21.9" height="15.0" fill="rgb(252,166,45)" rx="2" ry="2" />
+<text  x="684.37" y="1615.5" >[..</text>
+</g>
+<g >
+<title>asm_exc_page_fault (2 samples, 0.12%)</title><rect x="363.2" y="2005" width="1.5" height="15.0" fill="rgb(249,147,31)" rx="2" ry="2" />
+<text  x="366.20" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (33 samples, 2.04%)</title><rect x="679.2" y="1701" width="24.1" height="15.0" fill="rgb(211,144,43)" rx="2" ry="2" />
+<text  x="682.18" y="1711.5" >[..</text>
+</g>
+<g >
+<title>__handle_mm_fault (2 samples, 0.12%)</title><rect x="1160.1" y="1973" width="1.4" height="15.0" fill="rgb(239,220,26)" rx="2" ry="2" />
+<text  x="1163.08" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 1.79%)</title><rect x="682.1" y="1413" width="21.2" height="15.0" fill="rgb(230,70,1)" rx="2" ry="2" />
+<text  x="685.10" y="1423.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="709" width="16.8" height="15.0" fill="rgb(219,4,29)" rx="2" ry="2" />
+<text  x="687.29" y="719.5" ></text>
+</g>
+<g >
+<title>__gmpn_popcount (9 samples, 0.56%)</title><rect x="574.8" y="1989" width="6.6" height="15.0" fill="rgb(253,135,44)" rx="2" ry="2" />
+<text  x="577.82" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1253" width="17.5" height="15.0" fill="rgb(226,2,3)" rx="2" ry="2" />
+<text  x="686.56" y="1263.5" ></text>
+</g>
+<g >
+<title>Bitmask::hash (5 samples, 0.31%)</title><rect x="665.3" y="2005" width="3.7" height="15.0" fill="rgb(215,196,38)" rx="2" ry="2" />
+<text  x="668.31" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (33 samples, 2.04%)</title><rect x="679.2" y="1653" width="24.1" height="15.0" fill="rgb(206,224,8)" rx="2" ry="2" />
+<text  x="682.18" y="1663.5" >[..</text>
+</g>
+<g >
+<title>Queue::pop (5 samples, 0.31%)</title><rect x="187.3" y="2053" width="3.7" height="15.0" fill="rgb(228,61,1)" rx="2" ry="2" />
+<text  x="190.33" y="2063.5" ></text>
+</g>
+<g >
+<title>Bitmask::operator= (6 samples, 0.37%)</title><rect x="503.3" y="1989" width="4.4" height="15.0" fill="rgb(241,47,40)" rx="2" ry="2" />
+<text  x="506.31" y="1999.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::interface5::concurrent_unordered_map&lt;Tile, std::pair&lt;Bitmask, float&gt;, std::hash&lt;Tile&gt;, std::equal_to&lt;Tile&gt;, tbb::scalable_allocator&lt;std::pair&lt;Tile const, std::pair&lt;Bitmask, float&gt; &gt; &gt; &gt; &gt; &gt; &gt;::allocate_node_default_construct (1 samples, 0.06%)</title><rect x="804.7" y="2037" width="0.7" height="15.0" fill="rgb(240,72,36)" rx="2" ry="2" />
+<text  x="807.69" y="2047.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (1 samples, 0.06%)</title><rect x="747.8" y="1973" width="0.7" height="15.0" fill="rgb(244,119,7)" rx="2" ry="2" />
+<text  x="750.77" y="1983.5" ></text>
+</g>
+<g >
+<title>__handle_mm_fault (3 samples, 0.19%)</title><rect x="752.9" y="1941" width="2.2" height="15.0" fill="rgb(216,63,11)" rx="2" ry="2" />
+<text  x="755.88" y="1951.5" ></text>
+</g>
+<g >
+<title>Bitmask::operator= (16 samples, 0.99%)</title><rect x="73.5" y="2053" width="11.7" height="15.0" fill="rgb(226,173,51)" rx="2" ry="2" />
+<text  x="76.49" y="2063.5" ></text>
+</g>
+<g >
+<title>scalable_malloc (1 samples, 0.06%)</title><rect x="797.4" y="2037" width="0.7" height="15.0" fill="rgb(206,137,35)" rx="2" ry="2" />
+<text  x="800.40" y="2047.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;Tile, tbb::concurrent_vector&lt;std::tuple&lt;unsigned int, float, float&gt;, tbb::scalable_allocator&lt;std::tuple&lt;unsigned int, float, float&gt; &gt; &gt;, GraphVertexHashComparator, tbb::scalable_allocator&lt;std::pair&lt;Tile const, tbb::concurrent_vector&lt;std::tuple&lt;unsigned int, float, float&gt;, tbb::scalable_allocator&lt;std::tuple&lt;unsigned int, float, float&gt; &gt; &gt; &gt; &gt; &gt;::lookup (1 samples, 0.06%)</title><rect x="704.7" y="2005" width="0.7" height="15.0" fill="rgb(239,160,6)" rx="2" ry="2" />
+<text  x="707.72" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 1.79%)</title><rect x="682.1" y="1365" width="21.2" height="15.0" fill="rgb(207,222,3)" rx="2" ry="2" />
+<text  x="685.10" y="1375.5" ></text>
+</g>
+<g >
+<title>idtentry_exit_cond_rcu (1 samples, 0.06%)</title><rect x="1128.7" y="2005" width="0.7" height="15.0" fill="rgb(215,139,1)" rx="2" ry="2" />
+<text  x="1131.70" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (24 samples, 1.48%)</title><rect x="683.6" y="1205" width="17.5" height="15.0" fill="rgb(224,187,0)" rx="2" ry="2" />
+<text  x="686.56" y="1215.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 1.42%)</title><rect x="684.3" y="789" width="16.8" height="15.0" fill="rgb(211,229,45)" rx="2" ry="2" />
+<text  x="687.29" y="799.5" ></text>
+</g>
+<g >
+<title>common_interrupt (1 samples, 0.06%)</title><rect x="1128.7" y="2021" width="0.7" height="15.0" fill="rgb(206,159,29)" rx="2" ry="2" />
+<text  x="1131.70" y="2031.5" ></text>
+</g>
+<g >
+<title>Task::send_explorers (2 samples, 0.12%)</title><rect x="208.5" y="2053" width="1.5" height="15.0" fill="rgb(241,223,46)" rx="2" ry="2" />
+<text  x="211.49" y="2063.5" ></text>
+</g>
+<g >
+<title>exc_page_fault (2 samples, 0.12%)</title><rect x="736.1" y="1989" width="1.5" height="15.0" fill="rgb(241,53,50)" rx="2" ry="2" />
+<text  x="739.10" y="1999.5" ></text>
+</g>
+<g >
+<title>Task::support (1 samples, 0.06%)</title><rect x="612.0" y="2021" width="0.8" height="15.0" fill="rgb(252,43,39)" rx="2" ry="2" />
+<text  x="615.04" y="2031.5" ></text>
+</g>
+<g >
+<title>clear_page_erms (1 samples, 0.06%)</title><rect x="1163.0" y="1893" width="0.7" height="15.0" fill="rgb(235,2,7)" rx="2" ry="2" />
+<text  x="1166.00" y="1903.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (1 samples, 0.06%)</title><rect x="747.8" y="2005" width="0.7" height="15.0" fill="rgb(248,90,22)" rx="2" ry="2" />
+<text  x="750.77" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (20 samples, 1.24%)</title><rect x="685.7" y="53" width="14.6" height="15.0" fill="rgb(252,28,45)" rx="2" ry="2" />
+<text  x="688.75" y="63.5" ></text>
+</g>
+<g >
+<title>handle_mm_fault (1 samples, 0.06%)</title><rect x="736.1" y="1957" width="0.7" height="15.0" fill="rgb(218,42,32)" rx="2" ry="2" />
+<text  x="739.10" y="1967.5" ></text>
+</g>
+<g >
+<title>free_unref_page_commit (1 samples, 0.06%)</title><rect x="1154.2" y="1813" width="0.8" height="15.0" fill="rgb(224,63,23)" rx="2" ry="2" />
+<text  x="1157.24" y="1823.5" ></text>
+</g>
+<g >
+<title>malloc (2 samples, 0.12%)</title><rect x="742.7" y="2021" width="1.4" height="15.0" fill="rgb(234,151,42)" rx="2" ry="2" />
+<text  x="745.67" y="2031.5" ></text>
+</g>
+<g >
+<title>sync_regs (1 samples, 0.06%)</title><rect x="750.7" y="2005" width="0.7" height="15.0" fill="rgb(232,109,21)" rx="2" ry="2" />
+<text  x="753.69" y="2015.5" ></text>
+</g>
+<g >
+<title>perf (6 samples, 0.37%)</title><rect x="1185.6" y="2069" width="4.4" height="15.0" fill="rgb(218,23,43)" rx="2" ry="2" />
+<text  x="1188.62" y="2079.5" ></text>
+</g>
+<g >
+<title>Message::operator&lt; (20 samples, 1.24%)</title><rect x="104.9" y="2053" width="14.6" height="15.0" fill="rgb(243,186,50)" rx="2" ry="2" />
+<text  x="107.87" y="2063.5" ></text>
+</g>
+<g >
+<title>asm_exc_page_fault (1 samples, 0.06%)</title><rect x="808.3" y="2021" width="0.8" height="15.0" fill="rgb(238,55,10)" rx="2" ry="2" />
+<text  x="811.34" y="2031.5" ></text>
+</g>
+<g >
+<title>Bitmask::scan (7 samples, 0.43%)</title><rect x="408.4" y="2021" width="5.1" height="15.0" fill="rgb(208,70,47)" rx="2" ry="2" />
+<text  x="411.44" y="2031.5" ></text>
+</g>
+<g >
+<title>tlb_flush_mmu (3 samples, 0.19%)</title><rect x="1152.8" y="1877" width="2.2" height="15.0" fill="rgb(249,172,45)" rx="2" ry="2" />
+<text  x="1155.78" y="1887.5" ></text>
+</g>
+<g >
+<title>tbb::interface5::concurrent_hash_map&lt;std::pair&lt;Tile, int&gt;, Tile, GraphChildHashComparator, tbb::scalable_allocator&lt;std::pair&lt;std::pair&lt;Tile, int&gt; const, Tile&gt; &gt; &gt;::lookup (1 samples, 0.06%)</title><rect x="1171.8" y="2053" width="0.7" height="15.0" fill="rgb(244,65,10)" rx="2" ry="2" />
+<text  x="1174.76" y="2063.5" ></text>
+</g>
+<g >
+<title>exc_page_fault (1 samples, 0.06%)</title><rect x="756.5" y="1989" width="0.8" height="15.0" fill="rgb(248,50,30)" rx="2" ry="2" />
+<text  x="759.53" y="1999.5" ></text>
+</g>
+<g >
+<title>acct_collect (1 samples, 0.06%)</title><rect x="1149.9" y="1957" width="0.7" height="15.0" fill="rgb(246,197,14)" rx="2" ry="2" />
+<text  x="1152.86" y="1967.5" ></text>
+</g>
+<g >
+<title>do_user_addr_fault (1 samples, 0.06%)</title><rect x="1163.0" y="2005" width="0.7" height="15.0" fill="rgb(230,184,49)" rx="2" ry="2" />
+<text  x="1166.00" y="2015.5" ></text>
+</g>
+</g>
+</svg>
