@@ -29,3 +29,6 @@ gosdt_test
 #folders aux
 doc/docs/
 .idea/
+
+#flamegraph
+.data
