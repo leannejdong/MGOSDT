@@ -126,7 +126,17 @@ Describes how to install and use the library with details on project structure.
 ## Installing Dependencies
 Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
 
-## Build Process 
+## Build with CMake
+```shell
+mkdir buildc
+cd buildc
+cmake ..
+make
+make test
+```
+
+
+## Build with Autotool 
 (You'd need `sudo`. It will create files that are owned by root)
  - **Check Updates to the Dependency Tests or Makefile** 
    ```
@@ -148,7 +158,7 @@ Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
    ```
    gosdt dataset.csv config.json
    ```
-## Re-build Process 
+### Re-build Process 
 (Be mindful that if you use `sudo`, files created will be owned by root)
 
 - **Clean up**
@@ -172,7 +182,7 @@ Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
     sudo ./autobuild --install
     ```
   
-## Re-build test 
+### Re-build test 
 (without changing configuration via modifying
 `configure.ac` or `Makefile.am`)
 <!---
