@@ -29,6 +29,8 @@ gosdt_test
 #folders aux
 doc/docs/
 .idea/
+buildc
+cmake-build-debug
 
 #flamegraph
 .data
