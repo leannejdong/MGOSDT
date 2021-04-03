@@ -1,14 +1,17 @@
 #include "queue.hpp"
+#include<memory>
 
 Queue::Queue(void) {
     return;
 }
 
 Queue::~Queue(void) {
+    std::cerr << "In Queue destructor, queue size =" << queue.size() << "\n";
     return;
 }
 
 bool Queue::push(Message const & message) {
+   // std::shared_ptr<message_type> internal_message = std::make_shared<message_type>();
     message_type * internal_message = new message_type();
     * internal_message = message;
 
