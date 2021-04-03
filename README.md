@@ -135,6 +135,17 @@ make
 make test
 ```
 
+### Run
+```
+./gosdt dataset.csv config.json
+```
+
+### Run test suite
+```
+./gosdt_test
+
+```
+
 
 ## Build with Autotool 
 (You'd need `sudo`. It will create files that are owned by root)
