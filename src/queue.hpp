@@ -71,11 +71,25 @@ public:
     // @modifes message: message will be overwritten with a copy the content of the received message
     bool pop(Message & message);
 
+    void operator=(const Queue &) = delete;
+    Queue &operator=(Queue &&arg)
+    {
+      if (arg.queue.size() != 0) {
+        std::cerr << "In Queue::operator=, arg.queue is not empty\n";
+        abort();
+      }
+      if (queue.size() != 0) {
+        std::cerr << "In Queue::operator=, queue is not empty\n";
+        abort();
+      }
+      return *this;
+    }
 private:
     // map containing uniquely identified messages that are currently in queue
     membership_table_type membership;
 
     queue_type queue; // queue containing pending messages
 };
+
 
 #endif

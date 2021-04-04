@@ -27,7 +27,7 @@ public:
 
     // Local state to which each thread has exclusive access to a single entry
     static std::vector< LocalState > locals;
-
+    static void clearQueue(Queue &queue);
     static void initialize(std::istream & data_source, unsigned int workers = 1);
     static void reset(void);
 };

@@ -6,6 +6,12 @@ Queue State::queue = Queue();
 std::vector< LocalState > State::locals = std::vector< LocalState >();
 int State::status = 0;
 
+void State::clearQueue(Queue &queue) {
+    while(queue.size()!=0){
+      Message m;
+      queue.pop(m);
+    }
+}
 void State::initialize(std::istream & data_source, unsigned int workers) {
     State::dataset.load(data_source);
     State::graph = Graph();
@@ -18,6 +24,7 @@ void State::initialize(std::istream & data_source, unsigned int workers) {
 
 void State::reset(void) {
     State::graph = Graph();
+    clearQueue(State::queue);
     State::queue = Queue();
     State::locals.clear();
     State::dataset.clear();
