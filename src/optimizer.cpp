@@ -20,8 +20,6 @@ Optimizer::~Optimizer(void) {
 
 void Optimizer::load(std::istream & data_source) { State::initialize(data_source, Configuration::worker_limit); }
 
-void Optimizer::reset(void) { State::reset(); }
-
 void Optimizer::initialize(void) {
     // Initialize Profile Output
     if (Configuration::profile != "") {
@@ -43,6 +41,7 @@ void Optimizer::initialize(void) {
     return;
 }
 
+void Optimizer::reset(void) { State::reset(); }
 
 void Optimizer::objective_boundary(float * lowerbound, float * upperbound) const {
     * lowerbound = this -> global_lowerbound;
