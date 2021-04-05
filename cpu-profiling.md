@@ -79,7 +79,7 @@ So tracking down a memory leak is a mtter of tracing the pointers' ownership. We
 As we see in the godbolt example, the rule is generally inferred. In contrast, when we work with smart pointers, the ownership is specified by type. See more info on 
 [ownership semantic](https://www.modernescpp.com/index.php/no-new-new).
 
-According to our ASAN report, the source of leak came from 
+According to our ASAN report, one source of leak came from the fact messages are not completely deleted in the queue before re-assignment.  
 ```cpp
 bool Queue::push(Message const & message) {
     message_type * internal_message = new message_type();
@@ -194,9 +194,97 @@ void State::clearQueue(Queue &queue) {
     }
 }
 ```
-in `state.cpp`. Finally we rebuilt and we see that the leaks detected from ASAN gone completely.
+in `state.cpp`, where the method `.pop()` is defined in `queue.cpp` as
+```cpp
+bool Queue::pop(Message & message) {
+    message_type * internal_message;
+    if (this -> queue.try_pop(internal_message)) {
+        this -> membership.erase(internal_message); // remove membership
+        message = * internal_message;
+    //    std::cerr << "Delete message " << internal_message << "\n";
+        delete internal_message;
+    //    std::cerr << "Delete message " << internal_message << "\n";
 
+        return true;
+    } else {
+        return false;
+    }
+}
+```
+Finally we rebuilt the experiment and see that the leaks detected from ASAN are removed completely.
 
-
-
-
+One other source of leak comes from again the manual management in `optimizer.hpp`. We removed the leak by replacing 
+raw pointers with shared pointers. For instance, in `src/optimizer.cpp`.
+```cpp
+void models(key_type const & identifier, std::unordered_set< Model * > & results, bool leaf = false);
+```
+with 
+```cpp
+void models(key_type const & identifier, std::unordered_set<std::shared_ptr<Model>> & results, bool leaf = false);
+```
+In `src/optimizer/diagnosis/false_convergence.hpp`. We replaced
+```cpp
+std::unordered_set< Model * > results;
+```
+with 
+```cpp
+std::unordered_set<std::shared_ptr<Model> > results;
+```
+and in `src/optimizer/extraction/models.hpp`, we replaced 
+```cpp
+std::unordered_set< Model *, std::hash< Model * >, std::equal_to< Model * > > local_results;
+```
+with 
+```cpp
+std::unordered_set<std::shared_ptr<Model>, std::hash<std::shared_ptr<Model>>, std::equal_to<std::shared_ptr<Model>>> local_results;
+```
+and
+```cpp
+void Optimizer::models(key_type const & identifier, std::unordered_set< Model *, std::hash< Model * >, std::equal_to< Model * > > & results, bool leaf)
+```
+is replaced with 
+```cpp
+void Optimizer::models(key_type const & identifier, std::unordered_set<std::shared_ptr<Model>> & results, bool leaf)
+```
+and
+```cpp
+Model * model = new Model(std::shared_ptr<Bitmask>(new Bitmask(task.capture_set())));
+```
+is replaced with 
+```cpp
+std::shared_ptr<Model> model = std::make_shared<Model>(std::make_shared<Bitmask>(task.capture_set()));
+```
+and
+```cpp
+Model(std::shared_ptr<Bitmask>(new Bitmask(positive_subset))));
+Model * model = new Model(feature, negative, positive);
+```
+is replaced with 
+```cpp
+auto positive = std::make_shared<Model>(std::make_shared<Bitmask>(positive_subset));
+std::shared_ptr<Model> model = std::make_shared<Model>(feature, negative, positive);
+```
+and
+```cpp
+std::shared_ptr<Model> negative(new Model(std::shared_ptr<Bitmask>(new Bitmask(negative_subset))));
+```
+is replaced with 
+```cpp
+auto negative = std::make_shared<Model>(std::make_shared<Bitmask>(negative_subset));
+```
+and
+```cpp
+Model * model = new Model(feature, negative, positive);
+```
+with 
+```cpp
+std::shared_ptr<Model> model = std::make_shared<Model>(feature, negative, positive);
+```
+and
+```cpp
+Model * model = new Model(feature, negative, positive);
+```
+with 
+```cpp
+std::shared_ptr<Model> model = std::make_shared<Model>(feature, negative, positive);
+```
