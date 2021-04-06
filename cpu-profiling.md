@@ -51,6 +51,9 @@ if we are trying to make your code faster.
 
 ## Comparison against data structures
 
+With compilation option
+`-std=c++17 -O2 -g -Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align -Wnon-virtual-dtor -Woverloaded-virtual`
+
 * Binary decision tree configuration
 
 ```
@@ -58,16 +61,16 @@ time ./gosdt m2.csv experiments/configurations/debug.json
 ```
 
 ```
-real	0m0.909s
-user	0m0.862s
-sys	0m0.048s
+real	0m0.490s
+user	0m0.474s
+sys	0m0.016s
 ```
 * n-ary decision tree configuration
 
 ```
-real	0m0.929s
-user	0m0.905s
-sys	0m0.025s
+real	0m0.450s
+user	0m0.434s
+sys	    0m0.016s
 ```
 
 # Memory Leaks clean-up

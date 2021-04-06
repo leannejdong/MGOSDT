@@ -7,12 +7,12 @@ find_package(TBB COMPONENTS tbbmalloc tbbmalloc_proxy tbb_preview)
 enable_testing()
 
 #add_compile_options(-pg)
-
+#add_compile_options(-std=c++17 -O2 -g -Wall -Wextra -pedantic)
 add_compile_options(-std=c++17 -O2 -g -Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align -Wnon-virtual-dtor -Woverloaded-virtual)
 #add_compile_options(-Werror -fdiagnostics-color=auto)
 add_compile_options(-fdiagnostics-color=auto)
-add_compile_options(-g -fsanitize=address -fno-omit-frame-pointer)
-add_link_options(-g -fsanitize=address)
+#add_compile_options(-g -fsanitize=address -fno-omit-frame-pointer)
+#add_link_options(-g -fsanitize=address)
 
 add_library(${PROJECT_NAME}_lib 
 	src/types.hpp 
