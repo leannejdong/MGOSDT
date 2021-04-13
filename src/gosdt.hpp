@@ -24,8 +24,8 @@
 
 using json = nlohmann::json;
 
-// The main interface of the library
-// Note that the algorithm behaviour is modified using the static configuration object using the Configuration class
+/// The main interface of the library
+/// Note that the algorithm behaviour is modified using the static configuration object using the Configuration class
 class GOSDT {
     public:
         GOSDT(void);
@@ -36,31 +36,31 @@ class GOSDT {
         static unsigned int iterations;
         static unsigned int status;
 
-        // @param config_source: string stream containing a JSON object of configuration parameters
-        // @note: See the Configuration class for details about each parameter
+        /// @param config_source: string stream containing a JSON object of configuration parameters
+        /// @note: See the Configuration class for details about each parameter
         static void configure(std::istream & config_source);
 
-        // @require: The CSV must contain a header.
-        // @require: Scientific notation is currently not supported by the parser, use long form decimal notation
-        // @require: All rows must have the same number of entries
-        // @require: all entries are comma-separated
-        // @require: Wrapping quotations are not stripped
-        // @param data_source: string containing a CSV of training_data
-        // @modifies result: Contains a JSON array of all optimal models extracted
+        /// @require: The CSV must contain a header.
+        /// @require: Scientific notation is currently not supported by the parser, use long form decimal notation
+        /// @require: All rows must have the same number of entries
+        /// @require: all entries are comma-separated
+        /// @require: Wrapping quotations are not stripped
+        /// @param data_source: string containing a CSV of training_data
+        /// @modifies result: Contains a JSON array of all optimal models extracted
         void fit(std::istream & data_source, std::string & result);
 
-        // @require: The CSV must contain a header.
-        // @require: Scientific notation is currently not supported by the parser, use long form decimal notation
-        // @require: All rows must have the same number of entries
-        // @require: all entries are comma-separated
-        // @require: Wrapping quotations are not stripped
-        // @param data_source: string containing a CSV of training_data
-        // @modifies models: Set of models extracted from the optimization
+        /// @require: The CSV must contain a header.
+        /// @require: Scientific notation is currently not supported by the parser, use long form decimal notation
+        /// @require: All rows must have the same number of entries
+        /// @require: all entries are comma-separated
+        /// @require: Wrapping quotations are not stripped
+        /// @param data_source: string containing a CSV of training_data
+        /// @modifies models: Set of models extracted from the optimization
         void fit(std::istream & data_source, std::unordered_set< Model > & models);
     private:
-        // @param id: The worker ID of the current thread
-        // @param optimizer: optimizer object which will assign work to the thread
-        // @modifies return_reference: reference for returning values to the main thread
+        /// @param id: The worker ID of the current thread
+        /// @param optimizer: optimizer object which will assign work to the thread
+        /// @modifies return_reference: reference for returning values to the main thread
         static void work(int const id, Optimizer & optimizer, int & return_reference);
 };
 

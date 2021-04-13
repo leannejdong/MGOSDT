@@ -70,7 +70,7 @@ sys	0m0.016s
 ```
 real	0m0.450s
 user	0m0.434s
-sys	    0m0.016s
+sys	0m0.016s
 ```
 
 # Memory Leaks clean-up

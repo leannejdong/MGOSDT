@@ -1,4 +1,4 @@
-
+/// This wrapper function calls the set of optimal trees via the root key which identifies the root of the dependency graph
 void Optimizer::models(std::unordered_set< Model > & results) {
     if (Configuration::model_limit == 0) { return; }
     std::unordered_set<std::shared_ptr<Model>, std::hash<std::shared_ptr<Model>>, std::equal_to<std::shared_ptr<Model>>> local_results;
@@ -21,8 +21,7 @@ void Optimizer::models(std::unordered_set< Model > & results) {
     // std::cout << "Local Size: " << local_results.size() << std::endl;
     // std::cout << "Result Size: " << results.size() << std::endl;
 }
-
-//void Optimizer::models(key_type const & identifier, std::unordered_set< Model *, std::hash< Model * >, std::equal_to< Model * > > & results, bool leaf) {
+/// The function creates the set of optimal trees
 void Optimizer::models(key_type const & identifier, std::unordered_set<std::shared_ptr<Model>> & results, bool leaf){
     vertex_accessor task_accessor;
     if (State::graph.vertices.find(task_accessor, identifier) == false) { return; }
@@ -30,6 +29,7 @@ void Optimizer::models(key_type const & identifier, std::unordered_set<std::shar
     // std::cout << "Base Condition: " << task.base_objective() << " <= " << task.upperbound() << " = " << (int)(task.base_objective() <= task.upperbound()) << std::endl;
 
     // std::cout << "Capture: " << task.capture_set().to_string() << std::endl;
+    /// The predicate considers if cutting the subtree short with a stump would result in an optimal tree
     if (task.base_objective() <= task.upperbound() + std::numeric_limits<float>::epsilon()) {
         // || (Configuration::rule_list && task.capture_set().count() != task.capture_set().size())) {
         // std::cout << "Stump" << std::endl;
@@ -46,7 +46,10 @@ void Optimizer::models(key_type const & identifier, std::unordered_set<std::shar
 
     bound_accessor bounds;
     if (!State::graph.bounds.find(bounds, identifier)) { return; }
-
+/// from this onward, we consider each feature that could be used based on their optimal scores. If a feature is
+/// selected for resulting in an optimal tree, the function recurses onto the left and right subsets of the data to find
+/// the optimal subtrees to plug into the left and right side. If there are multiple equally good left subtrees(and right subtrees)
+/// then all possible left-right pair are generated
     for (bound_iterator iterator = bounds -> second.begin(); iterator != bounds -> second.end(); ++iterator) {
         // std::cout << "Bound" << std::endl;
 
