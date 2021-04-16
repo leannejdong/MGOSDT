@@ -14,11 +14,11 @@
 
 #include "integrity_violation.hpp"
 
-typedef unsigned long bitblock; // Type used to store binary bits
-typedef unsigned short rangeblock; // Type used to chunk the binary bits into  precomputable sequences
-typedef char codeblock; // Type used to store run-length codes for each precomputable sequence
+using bitblock = uint64_t; // Type used to store binary bits
+using rangeblock = uint16_t; // Type used to chunk the binary bits into  precomputable sequences
+using codeblock = char; // Type used to store run-length codes for each precomputable sequence
 
-typedef boost::dynamic_bitset< unsigned long long > dynamic_bitset;
+using dynamic_bitset = boost::dynamic_bitset< unsigned long long >;
 
 // This declaration acts as both a function module and a container class
 // The static class methods implements a function module providing operations on arrays of type bitblock, which can be allocated on the stack
