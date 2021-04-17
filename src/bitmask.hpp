@@ -19,11 +19,11 @@ using rangeblock = uint16_t; // Type used to chunk the binary bits into  precomp
 using codeblock = char; // Type used to store run-length codes for each precomputable sequence
 
 using dynamic_bitset = boost::dynamic_bitset< unsigned long long >;
-
-// This declaration acts as both a function module and a container class
-// The static class methods implements a function module providing operations on arrays of type bitblock, which can be allocated on the stack
-// The non-static class methods implementes a heap-allocated equivalent, which supports the same methods
-// @note: Many of the binary operations assume that operands have the same length
+/// We define a function module as a collection of functions
+/// This declaration acts as both a function module and a container class
+/// The static class methods implements a function module providing operations on arrays of type bitblock, which can be allocated on the stack
+/// The non-static class methods implements a heap-allocated equivalence, which supports the same methods
+/// @note: Many of the binary operations assume that operands have the same length
 class Bitmask {
 public:
     static const bitblock ranges_per_code; // Number of ranges that can be encoded using a single codeblock
@@ -152,10 +152,10 @@ public:
     static std::vector< size_t > hashes; // Precomputed hashes in rangeblock-sized sequences
     static std::vector< char > counts; // Precomputed population counts in rangeblock-sized sequences
 
-    static void precompute(void); // Perform the one-time precomputation for rangeblock-sized sequences
+    static void precompute(); // Perform the one-time precomputation for rangeblock-sized sequences
     static void benchmark(unsigned int size); // Run a benchmark for a bitmask of the given size
 
-    Bitmask(void);
+    Bitmask();
     // Construction from a single fill-value and size
     Bitmask(unsigned int size, bool fill = false, bitblock * local_buffer=NULL);
     // Construction by copying from a stack-based bitblock array
@@ -165,7 +165,7 @@ public:
     // Construction by copying from another instance
     Bitmask(Bitmask const & source, bitblock * local_buffer=NULL);
 
-    ~Bitmask(void);
+    ~Bitmask();
 
     // Initialize attributes and allocate memory (if needed) for this instance
     void initialize(unsigned int size, bitblock * local_buffer=NULL);
@@ -181,19 +181,19 @@ public:
     Bitmask & operator=(Bitmask const & other);
 
     // @returns a pointer to the blocks of this instance
-    bitblock * data(void) const;
+    bitblock * data() const;
 
     // @returns the number of bits represented by this instance
-    unsigned int size(void) const;
+    unsigned int size() const;
 
     // @returns the number of bits representable by this instance
-    unsigned int capacity(void) const;
+    unsigned int capacity() const;
 
     // @returns the number of bits set to 1
-    unsigned int count(void) const;
+    unsigned int count() const;
 
     // @returns estimates the number of contiguous ranges of 1's
-    unsigned int words(void) const;
+    unsigned int words() const;
 
     // @param start: the bit index to start scanning from
     // @param value the value of the bit to scan for
@@ -214,10 +214,10 @@ public:
     bool rscan_range(bool value, int & begin, int & end) const;
 
     // @returns true if and only if all bits are set to 0
-    bool empty(void) const;
+    bool empty() const;
 
     // @returns true if and only if all bits are set to 1
-    bool full(void) const;
+    bool full() const;
 
     // @param blocks: the second operand vector of blocks of bits
     // @param flip: whether or not to treat the bits of this instance as flipped before applying the operation
@@ -230,10 +230,10 @@ public:
     void bit_or(Bitmask const & other, bool flip = false) const;
 
     // @modifes: sets every bit to zero
-    void clear(void);
+    void clear();
 
     // @modifes: sets every bit to one
-    void fill(void);
+    void fill();
 
     // @param blocks: an array of bitblocks containing bits to be compared
     // @returns whether the bits match up to the size of this instance
@@ -277,9 +277,9 @@ public:
     std::string to_string(bool reverse = false) const;
 
     // @returns true if the content of the object passes the null pointer check
-    bool valid(void) const;
+    bool valid() const;
     // @throws an exception if this object contains a null pointer
-    void validate(void) const;
+    void validate() const;
 
     // @requires the new_size must be less that _max_blocks * bits_per_block. (i.e. the maximum capacity set during construction)
     // @modifies _size: modified to the new size
@@ -300,7 +300,7 @@ private:
     bool shallow = false;
 };
 
-// Overrides for STD containers
+// Explicit template specialization
 namespace std {
     template <>
     struct hash< Bitmask > {

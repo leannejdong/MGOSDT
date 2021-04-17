@@ -342,7 +342,7 @@ std::string Bitmask::to_string(bitblock * const blocks, unsigned int size, bool 
     return bitstring;
 };
 
-void Bitmask::precompute(void) {
+void Bitmask::precompute() {
     if (Bitmask::precomputed) { return; }
     Bitmask::precomputed = true;
     std::map< rangeblock, std::vector<char> > collection;
@@ -424,7 +424,7 @@ void Bitmask::precompute(void) {
 // ** Class Definition **
 // **********************
 
-Bitmask::Bitmask(void) {}
+Bitmask::Bitmask() {}
 
 Bitmask::Bitmask(unsigned int size, bool filler, bitblock * local_buffer) {
     initialize(size, local_buffer);
@@ -471,7 +471,7 @@ Bitmask::Bitmask(Bitmask const & source, bitblock * local_buffer) {
     Bitmask::clean(this->content, this->_used_blocks, this->_offset);
 }
 
-Bitmask::~Bitmask(void) {
+Bitmask::~Bitmask() {
     if (this -> shallow == false && valid()) {
         Bitmask::allocator.deallocate(this -> content, this -> _max_blocks);
     }
@@ -546,7 +546,7 @@ Bitmask & Bitmask::operator=(Bitmask const & other) {
     return * this;
 }
 
-bitblock * Bitmask::data(void) const {
+bitblock * Bitmask::data() const {
     if (Bitmask::integrity_check && !valid()) {
         std::stringstream reason;
         reason << "Accessing invalid data";
@@ -594,12 +594,12 @@ void Bitmask::set(unsigned int index, bool value) {
     }
 }
 
-unsigned int Bitmask::size(void) const { return this -> _size; }
+unsigned int Bitmask::size() const { return this -> _size; }
 
-unsigned int Bitmask::capacity(void) const { return this -> _max_blocks * Bitmask::bits_per_block; }
+unsigned int Bitmask::capacity() const { return this -> _max_blocks * Bitmask::bits_per_block; }
 
 
-unsigned int Bitmask::count(void) const {
+unsigned int Bitmask::count() const {
     if (Bitmask::integrity_check && !valid()) {
         std::stringstream reason;
         reason << "Accessing invalid data";
@@ -608,7 +608,7 @@ unsigned int Bitmask::count(void) const {
     return mpn_popcount(this -> content, this -> _used_blocks);
 }
 
-bool Bitmask::empty(void) const {
+bool Bitmask::empty() const {
     if (Bitmask::integrity_check && !valid()) {
         std::stringstream reason;
         reason << "Accessing invalid data";
@@ -617,7 +617,7 @@ bool Bitmask::empty(void) const {
     return mpn_zero_p(this -> content, this -> _used_blocks);
 }
 
-bool Bitmask::full(void) const {
+bool Bitmask::full() const {
     if (Bitmask::integrity_check && !valid()) {
         std::stringstream reason;
         reason << "Accessing invalid data";
@@ -715,7 +715,7 @@ int Bitmask::rscan(int start, bool value) const {
     }
 }
 
-unsigned int Bitmask::words(void) const {
+unsigned int Bitmask::words() const {
     if (this -> _size == 0) { return 0; }
     if (Bitmask::integrity_check && !valid()) {
         std::stringstream reason;
@@ -828,7 +828,7 @@ void Bitmask::bit_xor(Bitmask const & other, bool flip) const {
     }
 };
 
-void Bitmask::clear(void) {
+void Bitmask::clear() {
     if (this -> _size == 0) { return; }
     bitblock * blocks = this -> content;
     for (unsigned int i = 0; i < this -> _used_blocks; ++i) {
@@ -836,7 +836,7 @@ void Bitmask::clear(void) {
     }
 }
 
-void Bitmask::fill(void) {
+void Bitmask::fill() {
     if (this -> _size == 0) { return; }
     bitblock * blocks = this -> content;
     for (unsigned int i = 0; i < this -> _used_blocks; ++i) {
@@ -933,7 +933,7 @@ std::string Bitmask::to_string(bool reverse) const {
     return Bitmask::to_string(this -> content, this -> _size);
 }
 
-bool Bitmask::valid(void) const {
+bool Bitmask::valid() const {
     return this -> content != NULL;
 }
 
