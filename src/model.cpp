@@ -1,6 +1,6 @@
 #include "model.hpp"
 
-Model::Model(void) {}
+Model::Model() {}
 
 Model::Model(std::shared_ptr<Bitmask> capture_set) {
     std::string prediction_name, prediction_type, prediction_value;
@@ -39,13 +39,13 @@ Model::Model(unsigned int binary_feature_index, std::shared_ptr<Model> negative,
     this -> terminal = false;
 }
 
-Model::~Model(void) {}
+Model::~Model() {}
 
 void Model::identify(Tile const & identifier) {
     this -> identifier = identifier;
 }
 
-bool Model::identified(void) { return this -> identifier.content().size() > 0; }
+bool Model::identified() { return this -> identifier.content().size() > 0; }
 
 void Model::translate_self(translation_type const & translation) {
     this -> self_translator = translation;
@@ -96,18 +96,19 @@ void Model::partitions(std::vector< Bitmask * > & sorted_addresses) const {
     return;
 };
 
-size_t const Model::hash(void) const {
+size_t const Model::hash() const {
     // std::cout << "hash functiion entry" << std::endl;
 
     std::vector< Bitmask * > addresses;
     partitions(addresses);
     size_t seed = addresses.size();
-    // std::cout << "final partition size: " << addresses.size() << std::endl;
-    for (auto it = addresses.begin(); it != addresses.end(); ++it) {
-        // std::cout << "partition: " << (**it).to_string() << std::endl;
-        seed ^=  ((**it).hash()) + 0x9e3779b9 + (seed<<6) + (seed>>2);
+    // std::cout << "final partition size: " << addresses.size() << "\n";
+    //for (auto it = addresses.begin(); it != addresses.end(); ++it) {
+    for (auto &a : addresses) {
+        // std::cout << "partition: " << (**it).to_string() << "\n";
+        seed ^=  ((*a).hash()) + 0x9e3779b9 + (seed<<6) + (seed>>2); // combining hashes
     }
-    // std::cout << "hash: " << seed << std::endl;
+    //std::cout << "hash: " << seed << "\n";
     return seed;
 }
 
@@ -131,7 +132,7 @@ bool const Model::operator==(Model const & other) const {
     }
 }
 
-float Model::loss(void) const {
+float Model::loss() const {
     // Currently a stub, need to implement
     if (this -> terminal) {
         return this -> _loss;
@@ -140,7 +141,7 @@ float Model::loss(void) const {
     }
 }
 
-float Model::complexity(void) const {
+float Model::complexity() const {
     // Currently a stub, need to implement
     if (this -> terminal) {
         return this -> _complexity;

@@ -14,7 +14,7 @@
 
 #include "integrity_violation.hpp"
 
-using bitblock = uint64_t; // Type used to store binary bits
+using bitblock = uint64_t; // Type used to store bits
 using rangeblock = uint16_t; // Type used to chunk the binary bits into  precomputable sequences
 using codeblock = char; // Type used to store run-length codes for each precomputable sequence
 

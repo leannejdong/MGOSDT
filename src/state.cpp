@@ -22,7 +22,7 @@ void State::initialize(std::istream & data_source, unsigned int workers) {
     }
 }
 
-void State::reset(void) {
+void State::reset() {
     State::graph = Graph();
     clearQueue(State::queue);
     State::queue = Queue();

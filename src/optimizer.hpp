@@ -32,32 +32,32 @@ using json = nlohmann::json;
 
 class Optimizer {
 public:
-    Optimizer(void);
-    ~Optimizer(void);
+    Optimizer();
+    ~Optimizer();
 
     void load(std::istream & data_source);
 
-    void initialize(void);
-    void reset(void);
+    void initialize();
+    void reset();
 
     // @modifies lowerbound: the lowerbound on the global objective
     // @modifies upperbound: the upperbound on the global objective
     void objective_boundary(float * lowerbound, float * upperbound) const;
 
     // @returns the current difference between the global upperbound and the global lowerbound
-    float uncertainty(void) const;
+    float uncertainty() const;
 
     // @returns true of the algorithm has reached a termination condition
-    bool complete(void) const;
+    bool complete() const;
 
     // @returns the size fo the dependency graph
-    unsigned int size(void) const;
+    unsigned int size() const;
 
     // @returns the real time spend in the optimization
-    float elapsed(void) const;
+    float elapsed() const;
 
     // @returns true if the configured time limit has been reached
-    bool timeout(void) const;
+    bool timeout() const;
 
     // @param id: ID of the requesting worker thread
     // @returns true if an update occured to the global objective boundary
@@ -75,11 +75,11 @@ public:
 
     // Print diagnostic trace for detected non-convergence of algorithm
     // Non-convergence is defined as the algorithm not terminating when it should have
-    void diagnose_non_convergence(void); 
+    void diagnose_non_convergence();
 
     // Print diagnositic trace for detected false-convergence of algorithm
     // False-convergence is defined as a premature termination of the algorithm
-    void diagnose_false_convergence(void);
+    void diagnose_false_convergence();
 private:
 
     // Timing State
@@ -126,8 +126,8 @@ private:
     // @modifies results: internal set of extracted models
     void models(key_type const & identifier, std::unordered_set<std::shared_ptr<Model>> & results, bool leaf = false);
 
-    void print(void) const;
-    void profile(void);
+    void print() const;
+    void profile();
 
     // Diagnostics
     bool diagnose_non_convergence(key_type const & set);

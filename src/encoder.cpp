@@ -1,13 +1,13 @@
 #include "encoder.hpp"
 
-Encoder::Encoder(void) {}
+Encoder::Encoder() {}
 
 // Construct an encoder which converts a non-binary data set into a binary-encoded dataset
 Encoder::Encoder(std::istream & input) {
     std::vector< std::vector< std::string > > tokens;
     tokenize(input, tokens); // Produce string tokens from the input
     parse(tokens); // Parse the tokens to infer the type of each feature
-    build(); // Build a set of encoding rules for each featuree
+    build(); // Build a set of encoding rules for each feature
 
     // reindex has been disabled since it interferes with the binary search of the new ordinal feature bound
     // reindex(tokens); // Determine an efficient ordering of encoding rules
@@ -214,7 +214,7 @@ void Encoder::limit_precision(std::vector< std::set< std::string > > & values) c
 //     reference: is a string representing a reference value that relates to the observed feature
 // Note that all values are in string representation since we don't know the type at compile time
 
-void Encoder::build(void) {
+void Encoder::build() {
     const unsigned int n = this -> number_of_rows;
     const unsigned int m = this -> number_of_columns;
     std::vector< std::set< std::string > > const & values = this -> values;
@@ -480,19 +480,19 @@ void Encoder::target_value(unsigned int value_index, std::string & value) const 
 void Encoder::target_type(std::string & value) const {
     value = this -> codex[this -> number_of_binary_columns - this -> number_of_binary_targets].second[0];
 }
+// any const before the fn name relates to the return type of the fn; the const after the parameters indicates that the member function won't modify this
+std::vector< Bitmask > const & Encoder::read_binary_rows() const { return this -> binary_rows; }
 
-std::vector< Bitmask > const & Encoder::read_binary_rows(void) const { return this -> binary_rows; }
+unsigned int Encoder::samples() const { return this -> number_of_rows; }
 
-unsigned int Encoder::samples(void) const { return this -> number_of_rows; }
+unsigned int Encoder::features() const { return this -> number_of_columns - 1; }
 
-unsigned int Encoder::features(void) const { return this -> number_of_columns - 1; }
+unsigned int Encoder::targets() const { return 1; }
 
-unsigned int Encoder::targets(void) const { return 1; }
-
-unsigned int Encoder::binary_features(void) const {
+unsigned int Encoder::binary_features() const {
     return this -> number_of_binary_columns - this -> number_of_binary_targets;
 }
 
-unsigned int Encoder::binary_targets(void) const {
+unsigned int Encoder::binary_targets() const {
     return this -> number_of_binary_targets;
 }

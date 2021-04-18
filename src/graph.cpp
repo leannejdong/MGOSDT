@@ -1,8 +1,8 @@
 #include "graph.hpp"
 
-Graph::Graph(void) {}
+Graph::Graph() {}
 
-Graph::~Graph(void) {}
+Graph::~Graph() {}
 
 // bool Graph::exists(key_type const & key) const {
 //     return this -> vertices.count(key) != 0;
@@ -189,7 +189,7 @@ Graph::~Graph(void) {}
 //     return true;
 // }
 
-void Graph::clear(void) {
+void Graph::clear() {
     this -> vertices.clear();
     this -> edges.clear();
     this -> translations.clear();
@@ -199,6 +199,6 @@ void Graph::clear(void) {
     return;
 }
 
-unsigned int Graph::size(void) const {
+unsigned int Graph::size() const {
     return this -> vertices.size();
 }

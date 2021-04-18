@@ -29,7 +29,7 @@ public:
     static std::vector< LocalState > locals;
     static void clearQueue(Queue &queue);
     static void initialize(std::istream & data_source, unsigned int workers = 1);
-    static void reset(void);
+    static void reset();
 };
 
 #endif

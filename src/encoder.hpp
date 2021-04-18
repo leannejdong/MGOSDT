@@ -35,7 +35,7 @@
 //  - Categorical: Any value that fails all other inference conditions
 class Encoder {
 public:
-    Encoder(void);
+    Encoder();
     // @require input csv must satisfy the following preconditions:
     //  - file starts with a header row
     //  - elements are not quote-wrapped
@@ -55,17 +55,17 @@ public:
     // @return matrix of string elements of the csv
     // std::vector< std::vector< std::string > > const & read_rows(void) const;
     // @return matrix of bit elements of the binary csv
-    std::vector< Bitmask > const & read_binary_rows(void) const;
+    std::vector< Bitmask > const & read_binary_rows() const;
     // @return the number of features read as input
-    unsigned int features(void) const;
+    unsigned int features() const;
     // @return the number of targets read as input
-    unsigned int targets(void) const;
+    unsigned int targets() const;
     // @return the number of features after encoding
-    unsigned int binary_features(void) const;
+    unsigned int binary_features() const;
     // @return the number of targets after encoding
-    unsigned int binary_targets(void) const;
+    unsigned int binary_targets() const;
     // @return the number of samples in the dataset
-    unsigned int samples(void) const;
+    unsigned int samples() const;
 
     // Returns: the pre-encode feature index and the offset to the binary feature generated
     // @param encoded_column_index: the index of the binary feature
@@ -164,7 +164,7 @@ private:
     void limit_precision(std::vector< std::set< std::string > > & values) const;
 
     // @modifies this -> codex: initializes a vector of vectors (see definition for codex structure)
-    void build(void);
+    void build();
 
     // @param rows: csv of tokens
     // @param binary_rows: vector of bitmasks representing a binary data set in row-major order

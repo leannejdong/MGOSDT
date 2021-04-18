@@ -23,7 +23,7 @@ using json = nlohmann::json;
 // Container for holding classification model extracted from the dependency graph
 class Model {
 public:    
-    Model(void);
+    Model();
     // Constructor for terminal node in a model
     // @param set: shared pointer to a bitmask that identifies the captured set of data points
     Model(std::shared_ptr<Bitmask> set);
@@ -34,13 +34,13 @@ public:
     // @param positive: shared pointer to the model acting as the right subtree
     Model(unsigned int binary_feature_index, std::shared_ptr<Model> negative, std::shared_ptr<Model> positive);
 
-    ~Model(void);
+    ~Model();
 
     // Hash generated from the leaf set of model
-    size_t const hash(void) const;
+    size_t const hash() const;
 
     void identify(key_type const & indentifier);
-    bool identified(void);
+    bool identified();
 
     void translate_self(translation_type const & translation);
     void translate_negatives(translation_type const & translation);
@@ -58,10 +58,10 @@ public:
     void predict(Bitmask const & sample, std::string & prediction) const;
 
     // @returns: the training loss incurred by this model
-    float loss(void) const;
+    float loss() const;
 
     // @returns: the complexity penalty incurred by this model
-    float complexity(void) const;
+    float complexity() const;
 
     // @modifies node: JSON object representation of this model
     void to_json(json &node) const;

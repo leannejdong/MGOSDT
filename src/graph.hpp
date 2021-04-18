@@ -118,8 +118,8 @@ public:
     adjacency_table edges;
     bound_table bounds;
 
-    Graph(void);
-    ~Graph(void);
+    Graph();
+    ~Graph();
 
     // bool exists(key_type const & key) const;
     
@@ -143,9 +143,9 @@ public:
 
     bool erase(key_type const & key, bool disconnect = true);
     bool disconnect(key_type const & arent, key_type const & child);
-    void clear(void);
+    void clear();
 
-    unsigned int size(void) const;
+    unsigned int size() const;
 };
 
 #endif

@@ -1,11 +1,11 @@
 #include "queue.hpp"
 //#include<memory>
 
-Queue::Queue(void) {
+Queue::Queue() {
     return;
 }
 
-Queue::~Queue(void) {
+Queue::~Queue() {
     if (queue.size() !=0) {
       std::cerr << "In Queue destructor, queue size =" << queue.size() << "\n";
       abort();
@@ -31,9 +31,9 @@ bool Queue::push(Message const & message) {
     }
 }
 
-bool Queue::empty(void) const { return size() == 0; }
+bool Queue::empty() const { return size() == 0; }
 
-unsigned int Queue::size(void) const { return this -> queue.size(); }
+unsigned int Queue::size() const { return this -> queue.size(); }
 
 
 bool Queue::pop(Message & message) {

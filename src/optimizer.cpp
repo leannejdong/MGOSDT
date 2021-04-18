@@ -7,11 +7,11 @@
 #include "optimizer/dispatch/dispatch.hpp"
 #include "optimizer/extraction/models.hpp"
 
-Optimizer::Optimizer(void) {
+Optimizer::Optimizer() {
     return;
 }
 
-Optimizer::~Optimizer(void) {
+Optimizer::~Optimizer() {
     State::reset();
     return;
 }
@@ -20,7 +20,7 @@ Optimizer::~Optimizer(void) {
 
 void Optimizer::load(std::istream & data_source) { State::initialize(data_source, Configuration::worker_limit); }
 
-void Optimizer::initialize(void) {
+void Optimizer::initialize() {
     // Initialize Profile Output
     if (Configuration::profile != "") {
         std::ofstream profile_output(Configuration::profile);
@@ -41,34 +41,34 @@ void Optimizer::initialize(void) {
     return;
 }
 
-void Optimizer::reset(void) { State::reset(); }
+void Optimizer::reset() { State::reset(); }
 
 void Optimizer::objective_boundary(float * lowerbound, float * upperbound) const {
     * lowerbound = this -> global_lowerbound;
     * upperbound = this -> global_upperbound;
 }
 
-float Optimizer::uncertainty(void) const {
+float Optimizer::uncertainty() const {
     float const epsilon = std::numeric_limits<float>::epsilon();
     float value = this -> global_upperbound - this -> global_lowerbound;
     return value < epsilon ? 0 : value;
 }
 
-float Optimizer::elapsed(void) const {
+float Optimizer::elapsed() const {
     auto now = tbb::tick_count::now();
     float duration = (now - this -> start_time).seconds();
     return duration;
 }
 
-bool Optimizer::timeout(void) const {
+bool Optimizer::timeout() const {
     return (Configuration::time_limit > 0 && elapsed() > Configuration::time_limit);
 }
 
-bool Optimizer::complete(void) const {
+bool Optimizer::complete() const {
     return uncertainty() == 0;
 }
 
-unsigned int Optimizer::size(void) const {
+unsigned int Optimizer::size() const {
     return State::graph.size();
 }
 
@@ -101,7 +101,7 @@ bool Optimizer::iterate(unsigned int id) {
     return this -> active;
 }
 
-void Optimizer::print(void) const {
+void Optimizer::print() const {
     if (Configuration::verbose) { // print progress to standard output
         float lowerbound, upperbound;
         objective_boundary(& lowerbound, & upperbound);
@@ -114,7 +114,7 @@ void Optimizer::print(void) const {
     }
 }
 
-void Optimizer::profile(void) {
+void Optimizer::profile() {
     if (Configuration::profile != "") {
         std::ofstream profile_output(Configuration::profile, std::ios_base::app);
         float lowerbound, upperbound;

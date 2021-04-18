@@ -51,8 +51,8 @@ typedef tbb::concurrent_hash_map< message_type *, bool, MembershipKeyHashCompare
 
 class Queue {
 public:
-    Queue(void);
-    ~Queue(void);
+    Queue();
+    ~Queue();
 
     // @param message: a message to be sent from one vertex to another
     // @returns true if the message was successfully enqueued and not rejected by the membership filter
@@ -60,10 +60,10 @@ public:
     bool push(Message const & message);
     
     // @returns whether queue is empty
-    bool empty(void) const;
+    bool empty() const;
 
     // @returns the size of the queue
-    unsigned int size(void) const;
+    unsigned int size() const;
 
     // @requires message: the 4th item of message must contain an instance of identifier_type with the correct amount of pre-allocated memory to copy assign into
     // @param message: a tuple containing the bitmask address, blocks
