@@ -103,10 +103,10 @@ size_t const Model::hash() const {
     partitions(addresses);
     size_t seed = addresses.size();
     // std::cout << "final partition size: " << addresses.size() << "\n";
-    //for (auto it = addresses.begin(); it != addresses.end(); ++it) {
+    //for (auto it = addresses.begin(); it != addresses.end(); ++it) { // it was an iterator, *it is a ptr, **it is what the ptr points to
     for (auto &a : addresses) {
         // std::cout << "partition: " << (**it).to_string() << "\n";
-        seed ^=  ((*a).hash()) + 0x9e3779b9 + (seed<<6) + (seed>>2); // combining hashes
+        seed ^=  ((*a).hash()) + 0x9e3779b9 + (seed<<6) + (seed>>2); // combining hashes. Here, a is a ptr, *a is what the ptr ptrs to
     }
     //std::cout << "hash: " << seed << "\n";
     return seed;
