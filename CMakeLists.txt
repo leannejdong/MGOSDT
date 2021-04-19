@@ -80,12 +80,14 @@ target_link_libraries(${PROJECT_NAME}
 		${PROJECT_NAME}_lib
 )
 
-add_executable(${PROJECT_NAME}_test 
+add_executable(${PROJECT_NAME}_test
+	test/test.hpp
 	test/test_bitmask.hpp 
 	test/test_index.hpp 
 	test/test_queue.hpp 
 	test/test_consistency.hpp 
-	test/main.cpp
+	#test/main.cpp
+	test/test.cpp
 )
 
 set_target_properties(${PROJECT_NAME}_test PROPERTIES OUTPUT_NAME ${PROJECT_SOURCE_DIR}/${PROJECT_NAME}_test)

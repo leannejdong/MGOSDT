@@ -4,7 +4,7 @@
 #include <map>
 #include <set>
 #include <string>
-#include <stdlib.h>
+#include <cstdlib>
 #include <iostream>
 #include <algorithm>
 #include <memory>
