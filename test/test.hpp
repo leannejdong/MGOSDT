@@ -13,7 +13,7 @@
 #include <iomanip>
 #include <alloca.h>
 
-#include <assert.h>
+#include <cassert>
 
 #include "../include/json/json.hpp"
 
@@ -61,7 +61,7 @@ int expect(int expectation, int reality, std::string message, std::string contex
 int expect(float expectation, float reality, std::string message, std::string context = "") {
     float const epsilon = std::numeric_limits<float>::epsilon();    
     if (std::abs(expectation - reality) >= epsilon) {
-        std::cout << std::setprecision(15) << error_message(expectation, reality, message, context) << std::endl;
+        std::cout << std::setprecision(15) << error_message(expectation, reality, message, context) << "\n";
         return 1;
     } else {
         return 0;

@@ -4,6 +4,12 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include "../src/model.hpp"
+#include "test.hpp"
+#include "test_bitmask.hpp"
+#include "test_index.hpp"
+#include "test_queue.hpp"
+#include "test_consistency.hpp"
+#include "test_model.hpp"
 
 //int factorial(int number) { return number <= 1 ? number : factorial(number - 1) * number; }
 //
@@ -50,8 +56,22 @@ constexpr auto source =
 
 
 TEST_CASE(" testing the summarize function") {
-    auto inputs = nlohmann::json::parse(source);
-    Model model;
-    model.summarize(inputs);
-    std::cout << inputs.dump(4) << "\n";
+    test_model();
 }
+
+TEST_CASE(" testing bitmask class"){
+    CHECK(!test_bitmask());
+}
+
+TEST_CASE(" testing index class"){
+    CHECK(!test_index());
+}
+
+TEST_CASE(" testing queue class"){
+    CHECK(!test_queue());
+}
+
+
+
+
+

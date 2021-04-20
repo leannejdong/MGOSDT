@@ -3,6 +3,7 @@
 #include "test_index.hpp"
 #include "test_queue.hpp"
 #include "test_consistency.hpp"
+
 /*! The try-catch block provides some logic how to run a test.
  * It runs the test inside a try block.
  * Adds the number of failures.
@@ -15,7 +16,7 @@
  */
 int main() {
     int failures = 0;
-    std::map< std::string, int (*)(void) > units;
+    std::map< std::string, int (*)(void) > units; //create a map called units which maps test names to test functions
     units["Bitmask"] = test_bitmask;
     units["Index"] = test_index;
     units["Queue"] = test_queue;
@@ -39,4 +40,6 @@ int main() {
         std::cout << "\033[1;31m" << failures << " Tests Failed" << "\033[0m" << "\n";
         return 1;
     }
+
 }
+

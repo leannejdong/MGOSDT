@@ -85,9 +85,10 @@ add_executable(${PROJECT_NAME}_test
 	test/test_bitmask.hpp 
 	test/test_index.hpp 
 	test/test_queue.hpp 
-	test/test_consistency.hpp 
-	#test/main.cpp
-	test/test.cpp
+	test/test_consistency.hpp
+	test/test_model.hpp
+	test/main.cpp
+	#test/test.cpp
 )
 
 set_target_properties(${PROJECT_NAME}_test PROPERTIES OUTPUT_NAME ${PROJECT_SOURCE_DIR}/${PROJECT_NAME}_test)
