@@ -8,7 +8,7 @@
     "tile_limit": 1,
     "model_limit": 1,
 
-    "verbose": false,
+    "verbose": true,
     "diagnostics": false,
     "balance": true,
     "non_binary": true,

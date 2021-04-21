@@ -35,11 +35,11 @@ static void test_model(){
             "        },"
             "        \"type\": \"integral\" "
             "    }";
-    auto inputs = nlohmann::json::parse(source);
+    json inputs = nlohmann::json::parse(source);
     Model model;
     model.summarize(inputs);
     //std::cout << inputs.dump(4) << "\n";
-
+// parse it! Whenever converting a text string into a json object
     json expect = json::parse(R"(
                {
                         "children": [

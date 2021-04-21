@@ -1,0 +1,1250 @@
+Generalized Optimal Sparse Decision Tree
+Using data set: tic-tac-toe.csv
+Using configuration: {
+  "balance": true,
+  "cancellation": true,
+  "continuous_feature_exchange": true,
+  "costs": "",
+  "diagnostics": false,
+  "feature_exchange": true,
+  "feature_transform": true,
+  "look_ahead": true,
+  "model": "",
+  "model_limit": 1,
+  "non_binary": true,
+  "precision_limit": 0,
+  "profile": "",
+  "regularization": 0.009999999776482582,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 86400,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: top-left-square
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 1, Feature Name: top-middle-square
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 2, Feature Name: top-right-square
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 3, Feature Name: middle-left-square
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 4, Feature Name: middle-middle-square
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 5, Feature Name: middle-right-square
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 6, Feature Name: bottom-left-square
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 7, Feature Name: bottom-middle-square
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 8, Feature Name: bottom-right-square
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 9, Feature Name: Class
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 958 x 10
+Binary Dataset Dimension: 958 x 29
+Dataset Dimensions: 958 x 27 x 2
+Starting Optimization
+Time: 0.000715979, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1, Queue Size: 54
+Time: 2.50857, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 6983, Queue Size: 269609
+Time: 4.36238, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 13349, Queue Size: 488767
+Time: 6.18585, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 19199, Queue Size: 677449
+Time: 7.93737, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 25063, Queue Size: 856647
+Time: 9.6499, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 30796, Queue Size: 1025875
+Time: 11.3502, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 36363, Queue Size: 1175999
+Time: 13.0139, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 41881, Queue Size: 1321101
+Time: 14.6445, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 47111, Queue Size: 1453681
+Time: 16.2711, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 52560, Queue Size: 1589635
+Time: 17.8562, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 57734, Queue Size: 1704732
+Time: 19.4641, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 62966, Queue Size: 1825506
+Time: 21.0278, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 68080, Queue Size: 1941344
+Time: 22.5551, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 73051, Queue Size: 2043583
+Time: 24.1005, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 78009, Queue Size: 2146234
+Time: 25.6219, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 83003, Queue Size: 2247718
+Time: 27.1456, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 88007, Queue Size: 2346303
+Time: 28.6267, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 92923, Queue Size: 2435791
+Time: 30.0883, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 97873, Queue Size: 2516291
+Time: 31.5793, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 102934, Queue Size: 2613236
+Time: 33.0218, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 107661, Queue Size: 2689393
+Time: 34.4714, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 112579, Queue Size: 2776392
+Time: 35.8982, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 117467, Queue Size: 2857937
+Time: 37.2954, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 122339, Queue Size: 2928552
+Time: 38.7179, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 127027, Queue Size: 2997537
+Time: 40.1054, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 131885, Queue Size: 3067804
+Time: 41.4261, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 136283, Queue Size: 3120039
+Time: 42.8386, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 141213, Queue Size: 3192095
+Time: 44.1591, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 146093, Queue Size: 3243872
+Time: 45.5344, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 150664, Queue Size: 3301604
+Time: 46.8734, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 155367, Queue Size: 3358395
+Time: 48.2393, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 159873, Queue Size: 3416308
+Time: 49.5809, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 164294, Queue Size: 3471760
+Time: 50.8854, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 168651, Queue Size: 3518688
+Time: 52.2168, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 173443, Queue Size: 3576617
+Time: 53.5343, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 178034, Queue Size: 3629988
+Time: 54.7851, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 182497, Queue Size: 3675971
+Time: 56.0447, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 186760, Queue Size: 3714413
+Time: 57.3404, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 191087, Queue Size: 3751469
+Time: 58.6373, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 195835, Queue Size: 3802852
+Time: 59.904, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 200128, Queue Size: 3847641
+Time: 61.1673, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 204475, Queue Size: 3890773
+Time: 62.4162, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 208984, Queue Size: 3932522
+Time: 63.6417, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 213282, Queue Size: 3966543
+Time: 64.8821, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 217613, Queue Size: 3999665
+Time: 66.1548, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 222221, Queue Size: 4043440
+Time: 67.396, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 226621, Queue Size: 4083548
+Time: 68.6529, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 230903, Queue Size: 4120448
+Time: 69.8709, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 235056, Queue Size: 4150258
+Time: 71.0741, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 239436, Queue Size: 4181061
+Time: 72.3206, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 243603, Queue Size: 4211007
+Time: 73.5187, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 247932, Queue Size: 4238354
+Time: 74.7315, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 252384, Queue Size: 4268163
+Time: 75.9021, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 256594, Queue Size: 4293281
+Time: 77.0935, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 260703, Queue Size: 4316249
+Time: 78.2617, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 265091, Queue Size: 4340063
+Time: 79.4789, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 269170, Queue Size: 4367334
+Time: 80.6634, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 273248, Queue Size: 4387801
+Time: 81.8241, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 277535, Queue Size: 4412337
+Time: 82.9904, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 281924, Queue Size: 4439492
+Time: 84.1478, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 286224, Queue Size: 4463106
+Time: 85.3292, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 290412, Queue Size: 4486959
+Time: 86.5217, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 294464, Queue Size: 4507536
+Time: 87.6496, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 298637, Queue Size: 4522702
+Time: 88.7607, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 302822, Queue Size: 4537247
+Time: 89.911, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 306489, Queue Size: 4546693
+Time: 91.0636, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 310621, Queue Size: 4565679
+Time: 92.1713, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 314938, Queue Size: 4587302
+Time: 93.2784, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 319083, Queue Size: 4606926
+Time: 94.4768, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 323115, Queue Size: 4629386
+Time: 95.5895, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 327193, Queue Size: 4646883
+Time: 96.6597, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 331375, Queue Size: 4660438
+Time: 97.7778, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 335601, Queue Size: 4677379
+Time: 98.9266, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 339827, Queue Size: 4695533
+Time: 99.9856, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 343987, Queue Size: 4706029
+Time: 101.138, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 347691, Queue Size: 4719769
+Time: 102.186, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 351951, Queue Size: 4731461
+Time: 103.311, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 355910, Queue Size: 4749751
+Time: 104.384, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 360157, Queue Size: 4766224
+Time: 105.404, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 364474, Queue Size: 4778007
+Time: 106.535, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 368619, Queue Size: 4793598
+Time: 107.5, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 372899, Queue Size: 4797029
+Time: 108.641, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 376524, Queue Size: 4810741
+Time: 109.647, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 380814, Queue Size: 4814635
+Time: 110.728, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 384913, Queue Size: 4826645
+Time: 111.768, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 389026, Queue Size: 4839757
+Time: 112.79, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 393020, Queue Size: 4846145
+Time: 113.898, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 397029, Queue Size: 4859716
+Time: 114.899, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 401239, Queue Size: 4864867
+Time: 116, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 405050, Queue Size: 4871874
+Time: 117.07, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 409004, Queue Size: 4882409
+Time: 118.171, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 412893, Queue Size: 4891102
+Time: 119.163, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 417038, Queue Size: 4895133
+Time: 120.269, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 420838, Queue Size: 4906240
+Time: 121.288, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 424611, Queue Size: 4911135
+Time: 122.345, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 428512, Queue Size: 4917674
+Time: 123.354, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 432695, Queue Size: 4926722
+Time: 124.436, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 436526, Queue Size: 4938468
+Time: 125.41, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 440584, Queue Size: 4939870
+Time: 126.535, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 444357, Queue Size: 4955381
+Time: 127.468, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 448651, Queue Size: 4956322
+Time: 128.547, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 452465, Queue Size: 4965160
+Time: 129.547, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 456450, Queue Size: 4965670
+Time: 130.609, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 460232, Queue Size: 4973290
+Time: 131.616, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 463971, Queue Size: 4976635
+Time: 132.67, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 467778, Queue Size: 4981392
+Time: 133.668, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 471552, Queue Size: 4987074
+Time: 134.624, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 475447, Queue Size: 4985759
+Time: 135.697, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 479018, Queue Size: 4988291
+Time: 136.724, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 482689, Queue Size: 4993101
+Time: 137.691, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 486264, Queue Size: 4991813
+Time: 138.778, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 490187, Queue Size: 5002597
+Time: 139.685, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 494127, Queue Size: 4999694
+Time: 140.702, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 497929, Queue Size: 5007435
+Time: 141.731, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 501742, Queue Size: 5014428
+Time: 142.656, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 505727, Queue Size: 5014284
+Time: 143.689, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 509237, Queue Size: 5014952
+Time: 144.678, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 512786, Queue Size: 5015027
+Time: 145.61, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 516442, Queue Size: 5012018
+Time: 146.668, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 520041, Queue Size: 5018240
+Time: 147.593, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 523768, Queue Size: 5014275
+Time: 148.597, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 527602, Queue Size: 5017111
+Time: 149.636, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 531345, Queue Size: 5024071
+Time: 150.524, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 535444, Queue Size: 5021577
+Time: 151.508, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 539145, Queue Size: 5022444
+Time: 152.478, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 542902, Queue Size: 5022996
+Time: 153.359, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 546896, Queue Size: 5020666
+Time: 154.423, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 550504, Queue Size: 5028124
+Time: 155.379, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 554065, Queue Size: 5025985
+Time: 156.287, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 558225, Queue Size: 5023519
+Time: 157.314, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 561328, Queue Size: 5021328
+Time: 158.227, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 564955, Queue Size: 5020149
+Time: 159.141, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 568802, Queue Size: 5015067
+Time: 160.14, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 572029, Queue Size: 5012870
+Time: 161.182, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 575770, Queue Size: 5017612
+Time: 162.034, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 579644, Queue Size: 5010837
+Time: 162.964, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 583283, Queue Size: 5007364
+Time: 163.979, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 586843, Queue Size: 5007000
+Time: 164.964, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 590361, Queue Size: 5006919
+Time: 165.788, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 594038, Queue Size: 5000812
+Time: 166.753, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 597654, Queue Size: 4998956
+Time: 167.784, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 601415, Queue Size: 5006537
+Time: 168.65, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 605241, Queue Size: 5002701
+Time: 169.641, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 608983, Queue Size: 4999366
+Time: 170.641, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 612525, Queue Size: 5000621
+Time: 171.587, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 615851, Queue Size: 4995430
+Time: 172.445, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 619726, Queue Size: 4991214
+Time: 173.432, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 623078, Queue Size: 4988385
+Time: 174.424, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 626201, Queue Size: 4984941
+Time: 175.278, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 629957, Queue Size: 4978758
+Time: 176.216, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 633712, Queue Size: 4978882
+Time: 177.187, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 637077, Queue Size: 4973871
+Time: 178.184, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 640802, Queue Size: 4978190
+Time: 179.01, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 644460, Queue Size: 4972613
+Time: 179.91, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 648150, Queue Size: 4967774
+Time: 180.845, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 651693, Queue Size: 4961851
+Time: 181.762, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 655434, Queue Size: 4962018
+Time: 182.606, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 659175, Queue Size: 4956031
+Time: 183.514, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 662474, Queue Size: 4950199
+Time: 184.529, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 666151, Queue Size: 4952903
+Time: 185.45, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 669532, Queue Size: 4947796
+Time: 186.268, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 673150, Queue Size: 4940915
+Time: 187.192, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 676619, Queue Size: 4935284
+Time: 188.161, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 680092, Queue Size: 4934721
+Time: 189.094, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 683088, Queue Size: 4928687
+Time: 189.847, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 687091, Queue Size: 4921147
+Time: 190.761, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 690466, Queue Size: 4915628
+Time: 191.742, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 693985, Queue Size: 4914158
+Time: 192.674, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 697460, Queue Size: 4908396
+Time: 193.428, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 701381, Queue Size: 4899390
+Time: 194.31, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 705163, Queue Size: 4892781
+Time: 195.229, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 708634, Queue Size: 4887564
+Time: 196.181, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 712106, Queue Size: 4887323
+Time: 196.97, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 715962, Queue Size: 4880644
+Time: 197.917, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 719147, Queue Size: 4874655
+Time: 198.87, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 722504, Queue Size: 4871506
+Time: 199.768, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 725941, Queue Size: 4866819
+Time: 200.504, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 729558, Queue Size: 4858710
+Time: 201.402, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 733076, Queue Size: 4852786
+Time: 202.336, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 736433, Queue Size: 4846504
+Time: 203.279, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 740082, Queue Size: 4845075
+Time: 204.102, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 743630, Queue Size: 4837105
+Time: 204.96, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 747327, Queue Size: 4829859
+Time: 205.863, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 750226, Queue Size: 4821028
+Time: 206.793, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 753720, Queue Size: 4819462
+Time: 207.667, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 757418, Queue Size: 4813728
+Time: 208.48, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 761309, Queue Size: 4807354
+Time: 209.416, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 764878, Queue Size: 4801072
+Time: 210.342, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 768319, Queue Size: 4798349
+Time: 211.237, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 771685, Queue Size: 4794981
+Time: 212.02, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 775565, Queue Size: 4788548
+Time: 212.871, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 778985, Queue Size: 4781490
+Time: 213.762, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 782434, Queue Size: 4776779
+Time: 214.672, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 785821, Queue Size: 4771286
+Time: 215.497, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 789211, Queue Size: 4762296
+Time: 216.285, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 792825, Queue Size: 4753679
+Time: 217.123, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 796225, Queue Size: 4745761
+Time: 218.059, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 799557, Queue Size: 4741263
+Time: 218.951, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 802906, Queue Size: 4737123
+Time: 219.685, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 806455, Queue Size: 4728511
+Time: 220.499, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 809991, Queue Size: 4720497
+Time: 221.32, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 813474, Queue Size: 4714326
+Time: 222.253, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 816592, Queue Size: 4709150
+Time: 223.101, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 820002, Queue Size: 4700891
+Time: 223.83, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 824006, Queue Size: 4692602
+Time: 224.679, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 827764, Queue Size: 4685589
+Time: 225.501, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 830931, Queue Size: 4677194
+Time: 226.426, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 834351, Queue Size: 4675360
+Time: 227.282, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 837606, Queue Size: 4667710
+Time: 228.035, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 841231, Queue Size: 4659348
+Time: 228.85, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 844627, Queue Size: 4651318
+Time: 229.664, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 848103, Queue Size: 4642985
+Time: 230.575, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 851413, Queue Size: 4636404
+Time: 231.398, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 854968, Queue Size: 4628727
+Time: 232.092, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 858550, Queue Size: 4619967
+Time: 232.927, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 862053, Queue Size: 4612696
+Time: 233.766, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 865584, Queue Size: 4606938
+Time: 234.652, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 868884, Queue Size: 4601766
+Time: 235.471, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 872254, Queue Size: 4593155
+Time: 236.121, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 876231, Queue Size: 4584353
+Time: 236.947, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 879648, Queue Size: 4576878
+Time: 237.807, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 882999, Queue Size: 4569217
+Time: 238.691, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 886277, Queue Size: 4561680
+Time: 239.507, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 889256, Queue Size: 4553077
+Time: 240.22, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 893078, Queue Size: 4544874
+Time: 241.052, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 896319, Queue Size: 4537794
+Time: 241.836, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 899684, Queue Size: 4528840
+Time: 242.734, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 903027, Queue Size: 4524371
+Time: 243.602, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 906085, Queue Size: 4518478
+Time: 244.323, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 909887, Queue Size: 4509879
+Time: 245.09, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 913287, Queue Size: 4501299
+Time: 245.927, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 916526, Queue Size: 4493035
+Time: 246.751, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 919920, Queue Size: 4485196
+Time: 247.64, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 922787, Queue Size: 4477073
+Time: 248.451, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 926136, Queue Size: 4468329
+Time: 249.22, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 929305, Queue Size: 4459670
+Time: 249.975, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 932621, Queue Size: 4450767
+Time: 250.814, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 935744, Queue Size: 4442382
+Time: 251.631, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 939021, Queue Size: 4435796
+Time: 252.5, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 942151, Queue Size: 4428413
+Time: 253.293, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 945461, Queue Size: 4419733
+Time: 253.984, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 948999, Queue Size: 4410340
+Time: 254.757, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 952402, Queue Size: 4401666
+Time: 255.573, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 955810, Queue Size: 4392742
+Time: 256.413, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 958820, Queue Size: 4385079
+Time: 257.264, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 961754, Queue Size: 4377035
+Time: 258.062, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 964732, Queue Size: 4367765
+Time: 258.748, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 968134, Queue Size: 4358824
+Time: 259.546, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 971388, Queue Size: 4349906
+Time: 260.326, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 974673, Queue Size: 4341109
+Time: 261.195, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 977780, Queue Size: 4333294
+Time: 262.01, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 980759, Queue Size: 4324461
+Time: 262.702, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 984619, Queue Size: 4315616
+Time: 263.396, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 988309, Queue Size: 4306880
+Time: 264.21, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 991336, Queue Size: 4298109
+Time: 265.01, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 994393, Queue Size: 4289153
+Time: 265.873, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 997360, Queue Size: 4282073
+Time: 266.694, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1000314, Queue Size: 4273268
+Time: 267.493, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1003581, Queue Size: 4265164
+Time: 268.22, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1006721, Queue Size: 4255772
+Time: 268.858, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1010577, Queue Size: 4246448
+Time: 269.69, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1013806, Queue Size: 4238177
+Time: 270.483, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1016610, Queue Size: 4228783
+Time: 271.243, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1019697, Queue Size: 4219942
+Time: 272.095, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1022796, Queue Size: 4211870
+Time: 272.874, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1025777, Queue Size: 4202838
+Time: 273.529, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1029260, Queue Size: 4193711
+Time: 274.209, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1032854, Queue Size: 4184451
+Time: 275.049, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1035803, Queue Size: 4175216
+Time: 275.808, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1039013, Queue Size: 4166170
+Time: 276.64, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1041868, Queue Size: 4157917
+Time: 277.472, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1044911, Queue Size: 4149416
+Time: 278.269, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1047943, Queue Size: 4140529
+Time: 279.05, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1051068, Queue Size: 4131271
+Time: 279.704, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1054989, Queue Size: 4122086
+Time: 280.434, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1058286, Queue Size: 4112914
+Time: 281.262, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1061001, Queue Size: 4103797
+Time: 282.052, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1063841, Queue Size: 4094834
+Time: 282.846, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1066937, Queue Size: 4086333
+Time: 283.664, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1070106, Queue Size: 4078208
+Time: 284.425, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1073141, Queue Size: 4068739
+Time: 285.096, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1077047, Queue Size: 4059425
+Time: 285.834, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1080376, Queue Size: 4050227
+Time: 286.652, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1083601, Queue Size: 4041284
+Time: 287.45, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1086609, Queue Size: 4032157
+Time: 288.248, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1089599, Queue Size: 4023408
+Time: 289.071, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1092606, Queue Size: 4014113
+Time: 289.837, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1095682, Queue Size: 4004887
+Time: 290.563, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1098413, Queue Size: 3995443
+Time: 291.164, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1102088, Queue Size: 3986040
+Time: 291.967, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1105066, Queue Size: 3977246
+Time: 292.743, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1108200, Queue Size: 3967830
+Time: 293.485, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1111234, Queue Size: 3958216
+Time: 294.298, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1114079, Queue Size: 3950125
+Time: 295.116, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1117031, Queue Size: 3941736
+Time: 295.876, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1119995, Queue Size: 3932481
+Time: 296.516, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1123571, Queue Size: 3923323
+Time: 297.22, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1126943, Queue Size: 3913987
+Time: 298.011, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1130146, Queue Size: 3904789
+Time: 298.791, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1132945, Queue Size: 3895279
+Time: 299.553, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1135950, Queue Size: 3886918
+Time: 300.356, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1138924, Queue Size: 3877599
+Time: 301.144, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1141906, Queue Size: 3868053
+Time: 301.867, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1144550, Queue Size: 3858560
+Time: 302.473, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1148382, Queue Size: 3849573
+Time: 303.271, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1151552, Queue Size: 3840211
+Time: 304.038, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1154575, Queue Size: 3831051
+Time: 304.787, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1157525, Queue Size: 3821666
+Time: 305.576, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1160458, Queue Size: 3812741
+Time: 306.358, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1163330, Queue Size: 3803415
+Time: 307.071, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1166290, Queue Size: 3793850
+Time: 307.712, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1169921, Queue Size: 3784619
+Time: 308.388, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1173233, Queue Size: 3775043
+Time: 309.183, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1176158, Queue Size: 3765513
+Time: 309.905, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1179434, Queue Size: 3755948
+Time: 310.637, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1182469, Queue Size: 3746649
+Time: 311.433, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1185384, Queue Size: 3737420
+Time: 312.194, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1188530, Queue Size: 3728141
+Time: 312.888, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1191611, Queue Size: 3718704
+Time: 313.48, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1195339, Queue Size: 3709380
+Time: 314.171, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1198641, Queue Size: 3699837
+Time: 314.924, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1201968, Queue Size: 3690445
+Time: 315.673, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1204705, Queue Size: 3680742
+Time: 316.419, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1207686, Queue Size: 3671337
+Time: 317.212, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1210813, Queue Size: 3662137
+Time: 318.005, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1213421, Queue Size: 3652580
+Time: 318.715, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1216111, Queue Size: 3643133
+Time: 319.389, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1219579, Queue Size: 3633971
+Time: 319.95, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1223218, Queue Size: 3624499
+Time: 320.723, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1225999, Queue Size: 3615107
+Time: 321.483, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1229028, Queue Size: 3605775
+Time: 322.209, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1231933, Queue Size: 3596126
+Time: 322.92, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1234963, Queue Size: 3586879
+Time: 323.702, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1237919, Queue Size: 3577490
+Time: 324.465, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1240747, Queue Size: 3567943
+Time: 325.144, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1244006, Queue Size: 3558371
+Time: 325.767, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1247756, Queue Size: 3549397
+Time: 326.364, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1251234, Queue Size: 3539796
+Time: 327.136, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1254459, Queue Size: 3530331
+Time: 327.869, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1257557, Queue Size: 3520965
+Time: 328.62, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1260746, Queue Size: 3511327
+Time: 329.33, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1263854, Queue Size: 3501865
+Time: 330.105, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1266820, Queue Size: 3492710
+Time: 330.883, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1269633, Queue Size: 3483102
+Time: 331.576, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1272637, Queue Size: 3473493
+Time: 332.167, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1276541, Queue Size: 3464407
+Time: 332.811, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1279942, Queue Size: 3454772
+Time: 333.573, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1282958, Queue Size: 3445645
+Time: 334.279, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1286053, Queue Size: 3436104
+Time: 335.023, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1288705, Queue Size: 3426503
+Time: 335.747, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1291579, Queue Size: 3416901
+Time: 336.488, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1294510, Queue Size: 3407492
+Time: 337.187, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1297308, Queue Size: 3397838
+Time: 337.821, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1300710, Queue Size: 3388679
+Time: 338.387, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1304429, Queue Size: 3379101
+Time: 339.124, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1307564, Queue Size: 3369566
+Time: 339.865, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1310436, Queue Size: 3360060
+Time: 340.579, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1313339, Queue Size: 3350340
+Time: 341.269, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1316385, Queue Size: 3340781
+Time: 341.995, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1319435, Queue Size: 3331352
+Time: 342.713, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1322196, Queue Size: 3321773
+Time: 343.425, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1325004, Queue Size: 3312288
+Time: 344.004, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1328685, Queue Size: 3303127
+Time: 344.623, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1332022, Queue Size: 3293457
+Time: 345.359, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1335126, Queue Size: 3283878
+Time: 346.064, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1338015, Queue Size: 3274294
+Time: 346.782, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1340840, Queue Size: 3264646
+Time: 347.47, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1343634, Queue Size: 3255040
+Time: 348.183, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1346686, Queue Size: 3245496
+Time: 348.903, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1349542, Queue Size: 3235899
+Time: 349.569, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1352806, Queue Size: 3226460
+Time: 350.137, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1356440, Queue Size: 3217147
+Time: 350.828, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1359757, Queue Size: 3207586
+Time: 351.531, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1362913, Queue Size: 3198073
+Time: 352.251, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1365746, Queue Size: 3188371
+Time: 352.923, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1368717, Queue Size: 3178958
+Time: 353.643, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1371730, Queue Size: 3169443
+Time: 354.346, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1374598, Queue Size: 3159831
+Time: 355.028, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1377403, Queue Size: 3150092
+Time: 355.614, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1380928, Queue Size: 3141101
+Time: 356.226, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1384182, Queue Size: 3131508
+Time: 356.963, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1387080, Queue Size: 3121956
+Time: 357.668, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1390119, Queue Size: 3112404
+Time: 358.403, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1392873, Queue Size: 3102661
+Time: 359.078, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1395726, Queue Size: 3093142
+Time: 359.794, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1398522, Queue Size: 3083636
+Time: 360.52, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1401291, Queue Size: 3073890
+Time: 361.206, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1404055, Queue Size: 3064300
+Time: 361.842, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1407200, Queue Size: 3055053
+Time: 362.418, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1410536, Queue Size: 3045622
+Time: 363.095, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1413565, Queue Size: 3035940
+Time: 363.822, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1416454, Queue Size: 3026251
+Time: 364.525, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1419304, Queue Size: 3016669
+Time: 365.206, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1421998, Queue Size: 3007114
+Time: 365.904, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1424770, Queue Size: 2997491
+Time: 366.631, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1427535, Queue Size: 2988076
+Time: 367.334, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1430197, Queue Size: 2978306
+Time: 367.996, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1433222, Queue Size: 2968713
+Time: 368.562, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1436568, Queue Size: 2959786
+Time: 369.14, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1439836, Queue Size: 2950183
+Time: 369.85, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1442768, Queue Size: 2940705
+Time: 370.531, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1445463, Queue Size: 2931098
+Time: 371.23, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1448212, Queue Size: 2921351
+Time: 371.873, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1451227, Queue Size: 2911875
+Time: 372.608, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1453920, Queue Size: 2902183
+Time: 373.323, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1456520, Queue Size: 2892569
+Time: 373.99, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1459564, Queue Size: 2882983
+Time: 374.582, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1463002, Queue Size: 2873928
+Time: 375.093, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1466601, Queue Size: 2864523
+Time: 375.777, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1469423, Queue Size: 2854863
+Time: 376.455, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1472333, Queue Size: 2845331
+Time: 377.133, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1474979, Queue Size: 2835640
+Time: 377.793, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1477828, Queue Size: 2826116
+Time: 378.496, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1480667, Queue Size: 2816493
+Time: 379.205, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1483382, Queue Size: 2806981
+Time: 379.893, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1485874, Queue Size: 2797191
+Time: 380.52, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1488880, Queue Size: 2787618
+Time: 381.105, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1492114, Queue Size: 2778702
+Time: 381.643, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1495701, Queue Size: 2769186
+Time: 382.328, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1498540, Queue Size: 2759589
+Time: 382.988, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1501576, Queue Size: 2750230
+Time: 383.66, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1504511, Queue Size: 2740486
+Time: 384.311, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1507474, Queue Size: 2730907
+Time: 384.997, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1510490, Queue Size: 2721421
+Time: 385.685, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1513318, Queue Size: 2711715
+Time: 386.321, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1515951, Queue Size: 2702134
+Time: 386.945, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1518960, Queue Size: 2693023
+Time: 387.482, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1522324, Queue Size: 2683697
+Time: 388.099, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1525397, Queue Size: 2674152
+Time: 388.803, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1528137, Queue Size: 2664463
+Time: 389.47, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1530985, Queue Size: 2655044
+Time: 390.138, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1533714, Queue Size: 2645259
+Time: 390.809, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1536149, Queue Size: 2635686
+Time: 391.492, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1538635, Queue Size: 2626202
+Time: 392.158, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1541522, Queue Size: 2616572
+Time: 392.77, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1544528, Queue Size: 2607004
+Time: 393.301, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1547884, Queue Size: 2598083
+Time: 393.86, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1551198, Queue Size: 2588476
+Time: 394.57, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1553937, Queue Size: 2578841
+Time: 395.218, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1556764, Queue Size: 2569332
+Time: 395.892, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1559376, Queue Size: 2559654
+Time: 396.518, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1562254, Queue Size: 2550126
+Time: 397.195, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1565026, Queue Size: 2540584
+Time: 397.874, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1567721, Queue Size: 2530920
+Time: 398.487, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1570577, Queue Size: 2521395
+Time: 399.025, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1573966, Queue Size: 2512705
+Time: 399.547, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1577414, Queue Size: 2503166
+Time: 400.198, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1580287, Queue Size: 2493542
+Time: 400.858, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1582951, Queue Size: 2484147
+Time: 401.508, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1585641, Queue Size: 2474382
+Time: 402.11, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1588612, Queue Size: 2464860
+Time: 402.793, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1591366, Queue Size: 2455302
+Time: 403.46, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1594057, Queue Size: 2445687
+Time: 404.083, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1596737, Queue Size: 2436274
+Time: 404.707, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1599618, Queue Size: 2426829
+Time: 405.219, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1603327, Queue Size: 2417927
+Time: 405.745, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1606614, Queue Size: 2408423
+Time: 406.396, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1609370, Queue Size: 2398796
+Time: 407.03, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1612199, Queue Size: 2389407
+Time: 407.664, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1614872, Queue Size: 2379683
+Time: 408.282, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1617603, Queue Size: 2370223
+Time: 408.952, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1620290, Queue Size: 2360777
+Time: 409.6, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1623229, Queue Size: 2351090
+Time: 410.219, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1625791, Queue Size: 2341700
+Time: 410.83, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1628468, Queue Size: 2331951
+Time: 411.338, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1632093, Queue Size: 2323269
+Time: 411.836, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1635520, Queue Size: 2313664
+Time: 412.486, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1638288, Queue Size: 2304115
+Time: 413.151, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1640938, Queue Size: 2294728
+Time: 413.799, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1643546, Queue Size: 2285085
+Time: 414.442, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1646273, Queue Size: 2275398
+Time: 415.032, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1649196, Queue Size: 2265968
+Time: 415.695, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1651872, Queue Size: 2256540
+Time: 416.348, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1654313, Queue Size: 2246898
+Time: 416.96, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1656681, Queue Size: 2237520
+Time: 417.555, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1659472, Queue Size: 2228217
+Time: 418.059, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1662973, Queue Size: 2219228
+Time: 418.621, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1666034, Queue Size: 2209638
+Time: 419.273, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1668600, Queue Size: 2200062
+Time: 419.907, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1671489, Queue Size: 2190682
+Time: 420.566, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1674084, Queue Size: 2180957
+Time: 421.199, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1676743, Queue Size: 2171429
+Time: 421.791, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1679432, Queue Size: 2161931
+Time: 422.445, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1682173, Queue Size: 2152464
+Time: 423.087, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1684594, Queue Size: 2142869
+Time: 423.706, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1687139, Queue Size: 2133318
+Time: 424.221, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1690509, Queue Size: 2124769
+Time: 424.691, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1694102, Queue Size: 2115306
+Time: 425.318, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1696918, Queue Size: 2105825
+Time: 425.957, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1699707, Queue Size: 2096427
+Time: 426.576, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1702343, Queue Size: 2086697
+Time: 427.186, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1704896, Queue Size: 2077282
+Time: 427.799, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1707687, Queue Size: 2067711
+Time: 428.43, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1710419, Queue Size: 2058158
+Time: 429.025, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1712944, Queue Size: 2048828
+Time: 429.633, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1715548, Queue Size: 2039152
+Time: 430.117, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1718792, Queue Size: 2030624
+Time: 430.626, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1722144, Queue Size: 2021099
+Time: 431.255, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1724795, Queue Size: 2011547
+Time: 431.861, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1727460, Queue Size: 2002200
+Time: 432.488, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1730195, Queue Size: 1992532
+Time: 433.072, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1732950, Queue Size: 1983095
+Time: 433.669, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1735744, Queue Size: 1973581
+Time: 434.283, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1738324, Queue Size: 1963921
+Time: 434.859, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1740882, Queue Size: 1954696
+Time: 435.45, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1743548, Queue Size: 1945264
+Time: 435.902, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1747479, Queue Size: 1936873
+Time: 436.426, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1750743, Queue Size: 1927373
+Time: 437.037, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1753519, Queue Size: 1917886
+Time: 437.642, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1756273, Queue Size: 1908699
+Time: 438.229, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1758987, Queue Size: 1898980
+Time: 438.833, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1761611, Queue Size: 1889331
+Time: 439.427, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1764407, Queue Size: 1880060
+Time: 440.056, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1766963, Queue Size: 1870565
+Time: 440.678, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1769579, Queue Size: 1860899
+Time: 441.259, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1772220, Queue Size: 1851435
+Time: 441.815, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1775366, Queue Size: 1842697
+Time: 442.298, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1778892, Queue Size: 1833658
+Time: 442.835, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1781961, Queue Size: 1824185
+Time: 443.436, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1784673, Queue Size: 1814628
+Time: 444.022, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1787327, Queue Size: 1805278
+Time: 444.619, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1789880, Queue Size: 1795618
+Time: 445.131, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1792705, Queue Size: 1786456
+Time: 445.778, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1795259, Queue Size: 1776899
+Time: 446.398, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1798027, Queue Size: 1767372
+Time: 447.007, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1800403, Queue Size: 1758162
+Time: 447.605, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1803120, Queue Size: 1748678
+Time: 448.132, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1806440, Queue Size: 1740193
+Time: 448.693, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1809384, Queue Size: 1730683
+Time: 449.321, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1811840, Queue Size: 1721095
+Time: 449.897, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1814737, Queue Size: 1711894
+Time: 450.472, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1817475, Queue Size: 1702191
+Time: 451.006, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1820236, Queue Size: 1692832
+Time: 451.616, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1822916, Queue Size: 1683455
+Time: 452.21, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1825318, Queue Size: 1673890
+Time: 452.77, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1828189, Queue Size: 1664560
+Time: 453.302, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1831283, Queue Size: 1656000
+Time: 453.759, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1834707, Queue Size: 1646989
+Time: 454.264, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1837727, Queue Size: 1637570
+Time: 454.871, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1840141, Queue Size: 1628226
+Time: 455.452, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1842766, Queue Size: 1618547
+Time: 456.001, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1845668, Queue Size: 1609317
+Time: 456.563, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1848498, Queue Size: 1599774
+Time: 457.155, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1851397, Queue Size: 1590253
+Time: 457.74, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1853877, Queue Size: 1581063
+Time: 458.315, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1856123, Queue Size: 1571476
+Time: 458.864, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1859112, Queue Size: 1562941
+Time: 459.369, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1862609, Queue Size: 1554005
+Time: 459.901, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1865599, Queue Size: 1544527
+Time: 460.493, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1868261, Queue Size: 1534968
+Time: 461.075, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1870636, Queue Size: 1525845
+Time: 461.65, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1873052, Queue Size: 1516154
+Time: 462.16, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1875728, Queue Size: 1507067
+Time: 462.757, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1878308, Queue Size: 1497685
+Time: 463.34, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1881037, Queue Size: 1488100
+Time: 463.904, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1883764, Queue Size: 1478867
+Time: 464.447, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1886812, Queue Size: 1469822
+Time: 464.954, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1890048, Queue Size: 1461132
+Time: 465.502, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1893144, Queue Size: 1451817
+Time: 466.077, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1895972, Queue Size: 1442637
+Time: 466.625, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1898820, Queue Size: 1433008
+Time: 467.182, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1901552, Queue Size: 1423736
+Time: 467.77, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1904049, Queue Size: 1414454
+Time: 468.353, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1906988, Queue Size: 1405059
+Time: 468.925, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1909590, Queue Size: 1396058
+Time: 469.479, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1912487, Queue Size: 1386365
+Time: 469.927, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1915856, Queue Size: 1378492
+Time: 470.376, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1919274, Queue Size: 1369277
+Time: 470.98, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1922037, Queue Size: 1359809
+Time: 471.56, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1925068, Queue Size: 1350668
+Time: 472.112, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1927921, Queue Size: 1340970
+Time: 472.667, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1930498, Queue Size: 1331837
+Time: 473.255, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1933350, Queue Size: 1322575
+Time: 473.828, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1935838, Queue Size: 1312953
+Time: 474.414, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1938415, Queue Size: 1303990
+Time: 474.972, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1941215, Queue Size: 1294963
+Time: 475.464, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1944849, Queue Size: 1286704
+Time: 475.981, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1948067, Queue Size: 1277430
+Time: 476.568, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1950811, Queue Size: 1268151
+Time: 477.156, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1953611, Queue Size: 1258691
+Time: 477.71, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1956228, Queue Size: 1249449
+Time: 478.267, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1959042, Queue Size: 1240116
+Time: 478.821, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1962030, Queue Size: 1230723
+Time: 479.388, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1964823, Queue Size: 1221764
+Time: 479.963, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1967707, Queue Size: 1212063
+Time: 480.422, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1971331, Queue Size: 1204367
+Time: 480.906, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1974528, Queue Size: 1195117
+Time: 481.493, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1977136, Queue Size: 1185779
+Time: 482.049, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1979767, Queue Size: 1176651
+Time: 482.581, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1982659, Queue Size: 1167033
+Time: 483.085, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1985665, Queue Size: 1157963
+Time: 483.692, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1988365, Queue Size: 1148704
+Time: 484.267, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1991101, Queue Size: 1139625
+Time: 484.85, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1993738, Queue Size: 1130048
+Time: 485.321, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 1997132, Queue Size: 1122482
+Time: 485.809, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2000377, Queue Size: 1113353
+Time: 486.388, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2002965, Queue Size: 1104448
+Time: 486.955, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2005710, Queue Size: 1094796
+Time: 487.479, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2008343, Queue Size: 1085719
+Time: 488.018, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2011239, Queue Size: 1076402
+Time: 488.607, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2014009, Queue Size: 1067316
+Time: 489.152, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2016925, Queue Size: 1058302
+Time: 489.7, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2019708, Queue Size: 1049564
+Time: 490.158, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2023176, Queue Size: 1041218
+Time: 490.667, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2025948, Queue Size: 1031964
+Time: 491.231, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2028697, Queue Size: 1023249
+Time: 491.826, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2031570, Queue Size: 1013532
+Time: 492.36, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2034259, Queue Size: 1004603
+Time: 492.934, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2037101, Queue Size: 995340
+Time: 493.5, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2039838, Queue Size: 986267
+Time: 494.032, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2042700, Queue Size: 977287
+Time: 494.557, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2045519, Queue Size: 968534
+Time: 495.018, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2049256, Queue Size: 960053
+Time: 495.558, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2052081, Queue Size: 951123
+Time: 496.12, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2055053, Queue Size: 942012
+Time: 496.665, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2057871, Queue Size: 933079
+Time: 497.182, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2060535, Queue Size: 924152
+Time: 497.757, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2063380, Queue Size: 914754
+Time: 498.288, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2065929, Queue Size: 905836
+Time: 498.746, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2069559, Queue Size: 898322
+Time: 499.222, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2072705, Queue Size: 889242
+Time: 499.772, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2075446, Queue Size: 880606
+Time: 500.309, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2078439, Queue Size: 871637
+Time: 500.81, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2081366, Queue Size: 862614
+Time: 501.329, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2083897, Queue Size: 853657
+Time: 501.839, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2086678, Queue Size: 844710
+Time: 502.309, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2089664, Queue Size: 837279
+Time: 502.771, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2092654, Queue Size: 828193
+Time: 503.306, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2095323, Queue Size: 819538
+Time: 503.863, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2098253, Queue Size: 810485
+Time: 504.356, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2101169, Queue Size: 801516
+Time: 504.892, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2103837, Queue Size: 792603
+Time: 505.379, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2106560, Queue Size: 784267
+Time: 505.816, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2110118, Queue Size: 776566
+Time: 506.302, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2112745, Queue Size: 767643
+Time: 506.84, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2115725, Queue Size: 758919
+Time: 507.343, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2118773, Queue Size: 750159
+Time: 507.863, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2121456, Queue Size: 741414
+Time: 508.346, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2124092, Queue Size: 733048
+Time: 508.841, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2126953, Queue Size: 724738
+Time: 509.283, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2130461, Queue Size: 716295
+Time: 509.79, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2133029, Queue Size: 708043
+Time: 510.278, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2136035, Queue Size: 699334
+Time: 510.756, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2138840, Queue Size: 690874
+Time: 511.218, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2141510, Queue Size: 682674
+Time: 511.698, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2144516, Queue Size: 674988
+Time: 512.147, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2147782, Queue Size: 666244
+Time: 512.623, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2150218, Queue Size: 657959
+Time: 513.132, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2153205, Queue Size: 649390
+Time: 513.606, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2156254, Queue Size: 640627
+Time: 514.07, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2158503, Queue Size: 632965
+Time: 514.545, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2161610, Queue Size: 624690
+Time: 514.982, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2165086, Queue Size: 616798
+Time: 515.46, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2167359, Queue Size: 608590
+Time: 515.938, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2170523, Queue Size: 600247
+Time: 516.41, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2172992, Queue Size: 592033
+Time: 516.863, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2175911, Queue Size: 584269
+Time: 517.316, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2178925, Queue Size: 577167
+Time: 517.757, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2182282, Queue Size: 568420
+Time: 518.22, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2184524, Queue Size: 560877
+Time: 518.668, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2187078, Queue Size: 552633
+Time: 519.153, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2189656, Queue Size: 544789
+Time: 519.58, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2192682, Queue Size: 536727
+Time: 520.023, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2195840, Queue Size: 529865
+Time: 520.459, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2197957, Queue Size: 521967
+Time: 520.911, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2201017, Queue Size: 514200
+Time: 521.345, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2203139, Queue Size: 506435
+Time: 521.772, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2205663, Queue Size: 498993
+Time: 522.194, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2208830, Queue Size: 492355
+Time: 522.61, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2211570, Queue Size: 484283
+Time: 523.047, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2213917, Queue Size: 476760
+Time: 523.491, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2215850, Queue Size: 469661
+Time: 523.93, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2218294, Queue Size: 462335
+Time: 524.365, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2221283, Queue Size: 455669
+Time: 524.766, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2223330, Queue Size: 448041
+Time: 525.203, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2225822, Queue Size: 441057
+Time: 525.596, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2227358, Queue Size: 434136
+Time: 526.02, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2230310, Queue Size: 426685
+Time: 526.437, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2233018, Queue Size: 419987
+Time: 526.815, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2234543, Queue Size: 413384
+Time: 527.201, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2237034, Queue Size: 406235
+Time: 527.57, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2238551, Queue Size: 400165
+Time: 527.989, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2241112, Queue Size: 393712
+Time: 528.344, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2242623, Queue Size: 386787
+Time: 528.763, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2245155, Queue Size: 380042
+Time: 529.087, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2246104, Queue Size: 373900
+Time: 529.479, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2248183, Queue Size: 367747
+Time: 529.873, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2250459, Queue Size: 361297
+Time: 530.207, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2251405, Queue Size: 355394
+Time: 530.567, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2252899, Queue Size: 349405
+Time: 530.889, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2254496, Queue Size: 343819
+Time: 531.249, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2256739, Queue Size: 338130
+Time: 531.559, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2257570, Queue Size: 333047
+Time: 531.902, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2259251, Queue Size: 327144
+Time: 532.16, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2259663, Queue Size: 322133
+Time: 532.539, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2262005, Queue Size: 317213
+Time: 532.807, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2262887, Queue Size: 311877
+Time: 533.135, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2264295, Queue Size: 306788
+Time: 533.367, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2264483, Queue Size: 302226
+Time: 533.667, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2265919, Queue Size: 297198
+Time: 534.003, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2267761, Queue Size: 292386
+Time: 534.251, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2268237, Queue Size: 287963
+Time: 534.534, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2269309, Queue Size: 283212
+Time: 534.741, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2269387, Queue Size: 279075
+Time: 534.992, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2270289, Queue Size: 275134
+Time: 535.264, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2271337, Queue Size: 270731
+Time: 535.483, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2271625, Queue Size: 266630
+Time: 535.751, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2272437, Queue Size: 262576
+Time: 535.943, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2272557, Queue Size: 258836
+Time: 536.149, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2273053, Queue Size: 254907
+Time: 536.43, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2274445, Queue Size: 250884
+Time: 536.62, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2274501, Queue Size: 247264
+Time: 536.85, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2275157, Queue Size: 243500
+Time: 537.031, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2275157, Queue Size: 239736
+Time: 537.183, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2275237, Queue Size: 236459
+Time: 537.442, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2276204, Queue Size: 233061
+Time: 537.633, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2276593, Queue Size: 229246
+Time: 537.794, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2276601, Queue Size: 225930
+Time: 537.991, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2276934, Queue Size: 222508
+Time: 538.149, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2276934, Queue Size: 219247
+Time: 538.285, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2276942, Queue Size: 216274
+Time: 538.499, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2277416, Queue Size: 213232
+Time: 538.67, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2277648, Queue Size: 209933
+Time: 538.82, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2277648, Queue Size: 206800
+Time: 538.989, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2277892, Queue Size: 203805
+Time: 539.125, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2277900, Queue Size: 200990
+Time: 539.268, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2277900, Queue Size: 198018
+Time: 539.391, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2277900, Queue Size: 195272
+Time: 539.575, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278161, Queue Size: 192472
+Time: 539.742, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278332, Queue Size: 189465
+Time: 539.885, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278332, Queue Size: 186600
+Time: 540.022, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278332, Queue Size: 184009
+Time: 540.171, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278452, Queue Size: 181206
+Time: 540.312, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278452, Queue Size: 178238
+Time: 540.434, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278452, Queue Size: 175504
+Time: 540.553, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278452, Queue Size: 173184
+Time: 540.724, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 170487
+Time: 540.847, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 167870
+Time: 540.973, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 165205
+Time: 541.115, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 162847
+Time: 541.25, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 160462
+Time: 541.37, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 157969
+Time: 541.486, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 155619
+Time: 541.598, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 153453
+Time: 541.725, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 150973
+Time: 541.847, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 148665
+Time: 541.973, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 146427
+Time: 542.09, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 144324
+Time: 542.218, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 142102
+Time: 542.336, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 139880
+Time: 542.449, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 137711
+Time: 542.557, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 135871
+Time: 542.656, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 133709
+Time: 542.783, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 131812
+Time: 542.896, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 129669
+Time: 543.021, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 127822
+Time: 543.143, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 125867
+Time: 543.262, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 124003
+Time: 543.382, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 122116
+Time: 543.485, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 120306
+Time: 543.612, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 118404
+Time: 543.729, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 116629
+Time: 543.844, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 114933
+Time: 543.949, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 113235
+Time: 544.076, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 111546
+Time: 544.198, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 109926
+Time: 544.299, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 108229
+Time: 544.398, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 106613
+Time: 544.528, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 104945
+Time: 544.65, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 103432
+Time: 544.755, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 101946
+Time: 544.885, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 100402
+Time: 545.002, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 98982
+Time: 545.106, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 97513
+Time: 545.209, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 95972
+Time: 545.309, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 94466
+Time: 545.43, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 93077
+Time: 545.53, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 91727
+Time: 545.629, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 90395
+Time: 545.743, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 89087
+Time: 545.86, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 87753
+Time: 545.954, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 86466
+Time: 546.053, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 85061
+Time: 546.148, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 83648
+Time: 546.265, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 82310
+Time: 546.361, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 81075
+Time: 546.462, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 79884
+Time: 546.562, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 78575
+Time: 546.673, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 77398
+Time: 546.767, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 76089
+Time: 546.868, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 74817
+Time: 546.951, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 73474
+Time: 547.061, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 72136
+Time: 547.169, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 70946
+Time: 547.257, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 69793
+Time: 547.356, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 68635
+Time: 547.458, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 67510
+Time: 547.551, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 66412
+Time: 547.639, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 65342
+Time: 547.721, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 64050
+Time: 547.804, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 62827
+Time: 547.903, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 61714
+Time: 547.995, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 60616
+Time: 548.078, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 59462
+Time: 548.167, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 58340
+Time: 548.264, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 57258
+Time: 548.357, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 56234
+Time: 548.431, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 55176
+Time: 548.51, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 53928
+Time: 548.583, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 52657
+Time: 548.685, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 51639
+Time: 548.76, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 50772
+Time: 548.84, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 49838
+Time: 548.918, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 48822
+Time: 549, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 47891
+Time: 549.092, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 47084
+Time: 549.165, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 46042
+Time: 549.242, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 45157
+Time: 549.314, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 43935
+Time: 549.393, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 42904
+Time: 549.489, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 41983
+Time: 549.567, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 41099
+Time: 549.65, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 40224
+Time: 549.717, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 39122
+Time: 549.809, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 38283
+Time: 549.884, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 37428
+Time: 549.957, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 36480
+Time: 550.038, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 35473
+Time: 550.103, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 34330
+Time: 550.188, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 33467
+Time: 550.27, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 32610
+Time: 550.341, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 31715
+Time: 550.415, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 30835
+Time: 550.488, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 29936
+Time: 550.57, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 29201
+Time: 550.638, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 28389
+Time: 550.706, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 27535
+Time: 550.77, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 26164
+Time: 550.84, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 25342
+Time: 550.918, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 24650
+Time: 550.981, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 23808
+Time: 551.059, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 22990
+Time: 551.122, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 22095
+Time: 551.196, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 21320
+Time: 551.267, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 20602
+Time: 551.331, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 19815
+Time: 551.399, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 18631
+Time: 551.469, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 17750
+Time: 551.547, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 17124
+Time: 551.606, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 16274
+Time: 551.669, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 15292
+Time: 551.734, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 14432
+Time: 551.803, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 13669
+Time: 551.872, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 12879
+Time: 551.936, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 11758
+Time: 552.003, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 11158
+Time: 552.063, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 10524
+Time: 552.13, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 9862
+Time: 552.19, Objective: [0.04, 0.349054], Boundary: 0.309054, Graph Size: 2278740, Queue Size: 9003
+Time: 552.252, Objective: [0.04, 0.288846], Boundary: 0.248846, Graph Size: 2278740, Queue Size: 8326
+Time: 552.255, Objective: [0.04, 0.288846], Boundary: 0.248846, Graph Size: 2278740, Queue Size: 8291
+Time: 552.312, Objective: [0.04, 0.288846], Boundary: 0.248846, Graph Size: 2278740, Queue Size: 7160
+Time: 552.373, Objective: [0.04, 0.288846], Boundary: 0.248846, Graph Size: 2278740, Queue Size: 6213
+Time: 552.433, Objective: [0.04, 0.288846], Boundary: 0.248846, Graph Size: 2278740, Queue Size: 5544
+Time: 552.493, Objective: [0.04, 0.288846], Boundary: 0.248846, Graph Size: 2278740, Queue Size: 4808
+Time: 552.551, Objective: [0.04, 0.288846], Boundary: 0.248846, Graph Size: 2278740, Queue Size: 3816
+Time: 552.612, Objective: [0.04, 0.288846], Boundary: 0.248846, Graph Size: 2278740, Queue Size: 2886
+Time: 552.622, Objective: [0.04, 0.271415], Boundary: 0.231415, Graph Size: 2278740, Queue Size: 2748
+Time: 552.671, Objective: [0.04, 0.271415], Boundary: 0.231415, Graph Size: 2278740, Queue Size: 1871
+Time: 552.727, Objective: [0.04, 0.271415], Boundary: 0.231415, Graph Size: 2278740, Queue Size: 981
+Time: 552.731, Objective: [0.04, 0.26322], Boundary: 0.22322, Graph Size: 2278740, Queue Size: 897
+Time: 552.767, Objective: [0.115497, 0.26322], Boundary: 0.147723, Graph Size: 2278740, Queue Size: 205
+Time: 552.775, Objective: [0.132326, 0.26322], Boundary: 0.130894, Graph Size: 2278740, Queue Size: 12
+Time: 552.776, Objective: [0.26322, 0.26322], Boundary: 0, Graph Size: 2278740, Queue Size: 1
+Optimization Complete
+Training Duration: 552.906 seconds
+Number of Iterations: 8678889 iterations
+Size of Graph: 2278740 nodes
+Objective Boundary: [0.26322, 0.26322]
+Optimality Gap: 0
+Models Generated: 1
+Loss: 0.0932195
+Complexity: 0.17
+checking...
+[
+  {
+    "children": [
+      {
+        "in": "o",
+        "then": {
+          "children": [
+            {
+              "in": "x",
+              "then": {
+                "children": [
+                  {
+                    "in": "x",
+                    "then": {
+                      "children": [
+                        {
+                          "in": "x",
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.0,
+                            "name": "Class",
+                            "prediction": 1
+                          }
+                        },
+                        {
+                          "in": "default",
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.00958466436713934,
+                            "name": "Class",
+                            "prediction": 0
+                          }
+                        }
+                      ],
+                      "feature": 1,
+                      "name": "top-middle-square",
+                      "type": "categorical"
+                    }
+                  },
+                  {
+                    "in": "default",
+                    "then": {
+                      "children": [
+                        {
+                          "in": "x",
+                          "then": {
+                            "children": [
+                              {
+                                "in": "x",
+                                "then": {
+                                  "complexity": 0.009999999776482582,
+                                  "loss": 0.0,
+                                  "name": "Class",
+                                  "prediction": 1
+                                }
+                              },
+                              {
+                                "in": "default",
+                                "then": {
+                                  "complexity": 0.009999999776482582,
+                                  "loss": 0.0,
+                                  "name": "Class",
+                                  "prediction": 0
+                                }
+                              }
+                            ],
+                            "feature": 6,
+                            "name": "bottom-left-square",
+                            "type": "categorical"
+                          }
+                        },
+                        {
+                          "in": "default",
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.00479233218356967,
+                            "name": "Class",
+                            "prediction": 0
+                          }
+                        }
+                      ],
+                      "feature": 3,
+                      "name": "middle-left-square",
+                      "type": "categorical"
+                    }
+                  }
+                ],
+                "feature": 2,
+                "name": "top-right-square",
+                "type": "categorical"
+              }
+            },
+            {
+              "in": "default",
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.048722043633461,
+                "name": "Class",
+                "prediction": 0
+              }
+            }
+          ],
+          "feature": 0,
+          "name": "top-left-square",
+          "type": "categorical"
+        }
+      },
+      {
+        "in": "default",
+        "then": {
+          "children": [
+            {
+              "in": "o",
+              "then": {
+                "children": [
+                  {
+                    "in": "o",
+                    "then": {
+                      "children": [
+                        {
+                          "in": "o",
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.0,
+                            "name": "Class",
+                            "prediction": 0
+                          }
+                        },
+                        {
+                          "in": "default",
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.0060240961611270905,
+                            "name": "Class",
+                            "prediction": 1
+                          }
+                        }
+                      ],
+                      "feature": 2,
+                      "name": "top-right-square",
+                      "type": "categorical"
+                    }
+                  },
+                  {
+                    "in": "default",
+                    "then": {
+                      "children": [
+                        {
+                          "in": "o",
+                          "then": {
+                            "children": [
+                              {
+                                "in": "o",
+                                "then": {
+                                  "complexity": 0.009999999776482582,
+                                  "loss": 0.0,
+                                  "name": "Class",
+                                  "prediction": 0
+                                }
+                              },
+                              {
+                                "in": "default",
+                                "then": {
+                                  "complexity": 0.009999999776482582,
+                                  "loss": 0.0015060240402817726,
+                                  "name": "Class",
+                                  "prediction": 1
+                                }
+                              }
+                            ],
+                            "feature": 6,
+                            "name": "bottom-left-square",
+                            "type": "categorical"
+                          }
+                        },
+                        {
+                          "in": "default",
+                          "then": {
+                            "complexity": 0.009999999776482582,
+                            "loss": 0.012048192322254181,
+                            "name": "Class",
+                            "prediction": 1
+                          }
+                        }
+                      ],
+                      "feature": 3,
+                      "name": "middle-left-square",
+                      "type": "categorical"
+                    }
+                  }
+                ],
+                "feature": 1,
+                "name": "top-middle-square",
+                "type": "categorical"
+              }
+            },
+            {
+              "in": "default",
+              "then": {
+                "children": [
+                  {
+                    "in": "o",
+                    "then": {
+                      "children": [
+                        {
+                          "in": "o",
+                          "then": {
+                            "children": [
+                              {
+                                "in": "o",
+                                "then": {
+                                  "complexity": 0.009999999776482582,
+                                  "loss": 0.0,
+                                  "name": "Class",
+                                  "prediction": 0
+                                }
+                              },
+                              {
+                                "in": "default",
+                                "then": {
+                                  "complexity": 0.009999999776482582,
+                                  "loss": 0.007530120201408863,
+                                  "name": "Class",
+                                  "prediction": 1
+                                }
+                              }
+                            ],
+                            "feature": 5,
+                            "name": "middle-right-square",
+                            "type": "categorical"
+                          }
+                        },
+                        {
+                          "in": "default",
+                          "then": {
+                            "children": [
+                              {
+                                "in": "o",
+                                "then": {
+                                  "children": [
+                                    {
+                                      "in": "o",
+                                      "then": {
+                                        "complexity": 0.009999999776482582,
+                                        "loss": 0.0,
+                                        "name": "Class",
+                                        "prediction": 0
+                                      }
+                                    },
+                                    {
+                                      "in": "default",
+                                      "then": {
+                                        "complexity": 0.009999999776482582,
+                                        "loss": 0.0030120480805635452,
+                                        "name": "Class",
+                                        "prediction": 1
+                                      }
+                                    }
+                                  ],
+                                  "feature": 7,
+                                  "name": "bottom-middle-square",
+                                  "type": "categorical"
+                                }
+                              },
+                              {
+                                "in": "default",
+                                "then": {
+                                  "complexity": 0.009999999776482582,
+                                  "loss": 0.0,
+                                  "name": "Class",
+                                  "prediction": 1
+                                }
+                              }
+                            ],
+                            "feature": 6,
+                            "name": "bottom-left-square",
+                            "type": "categorical"
+                          }
+                        }
+                      ],
+                      "feature": 2,
+                      "name": "top-right-square",
+                      "type": "categorical"
+                    }
+                  },
+                  {
+                    "in": "default",
+                    "then": {
+                      "complexity": 0.009999999776482582,
+                      "loss": 0.0,
+                      "name": "Class",
+                      "prediction": 1
+                    }
+                  }
+                ],
+                "feature": 8,
+                "name": "bottom-right-square",
+                "type": "categorical"
+              }
+            }
+          ],
+          "feature": 0,
+          "name": "top-left-square",
+          "type": "categorical"
+        }
+      }
+    ],
+    "feature": 4,
+    "name": "middle-middle-square",
+    "type": "categorical"
+  }
+]

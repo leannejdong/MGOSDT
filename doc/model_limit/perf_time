@@ -1,0 +1,41 @@
+leanne@tensorbook:~/Dev/mgosdt$ time ./gosdt m2.csv experiments/configurations/debug.json >doc/model_limit/m2.txt 2>&1
+
+real	0m0.472s
+user	0m0.456s
+sys	0m0.017s
+leanne@tensorbook:~/Dev/mgosdt$ time ./gosdt m2.csv experiments/configurations/debug.json >doc/model_limit/m2_bin.txt 2>&1
+
+real	0m0.480s
+user	0m0.472s
+sys	0m0.009s
+leanne@tensorbook:~/Dev/mgosdt$ time ./gosdt syn5.txt experiments/configurations/debug.json >doc/model_limit/syn5_bin.txt 2>&1
+
+real	0m0.008s
+user	0m0.008s
+sys	0m0.000s
+leanne@tensorbook:~/Dev/mgosdt$ time ./gosdt syn5.txt experiments/configurations/debug.json >doc/model_limit/syn5.txt 2>&1
+
+real	0m0.008s
+user	0m0.004s
+sys	0m0.004s
+leanne@tensorbook:~/Dev/mgosdt$ time ./gosdt pokerc4.csv experiments/configurations/debug.json >doc/model_limit/pokerc4.txt 2>&1
+
+real	0m0.240s
+user	0m0.225s
+sys	0m0.008s
+leanne@tensorbook:~/Dev/mgosdt$ time ./gosdt pokerc4.csv experiments/configurations/debug.json >doc/model_limit/pokerc4_bin.txt 2>&1
+
+real	0m0.235s
+user	0m0.231s
+sys	0m0.004s
+leanne@tensorbook:~/Dev/mgosdt$ time ./gosdt pokerc2.csv experiments/configurations/debug.json >doc/model_limit/pokerc2_bin.txt 2>&1
+
+real	0m0.091s
+user	0m0.085s
+sys	0m0.004s
+leanne@tensorbook:~/Dev/mgosdt$ time ./gosdt pokerc2.csv experiments/configurations/debug.json >doc/model_limit/pokerc2.txt 2>&1
+
+real	0m0.086s
+user	0m0.085s
+sys	0m0.001s
+

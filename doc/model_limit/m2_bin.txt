@@ -1,0 +1,222 @@
+Generalized Optimal Sparse Decision Tree
+Using data set: m2.csv
+Using configuration: {
+  "balance": true,
+  "cancellation": true,
+  "continuous_feature_exchange": true,
+  "costs": "",
+  "diagnostics": false,
+  "feature_exchange": true,
+  "feature_transform": true,
+  "look_ahead": true,
+  "model": "",
+  "model_limit": 1,
+  "non_binary": false,
+  "precision_limit": 0,
+  "profile": "",
+  "regularization": 0.009999999776482582,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 86400,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: a1
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 1, Feature Name: a2
+  Inferred Type: Integral, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 2, Feature Name: a3
+  Inferred Type: Integral, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 3, Feature Name: a4
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: a5
+  Inferred Type: Integral, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 5, Feature Name: a6
+  Inferred Type: Integral, Empirical Cardinality: 4, Optionality: 0
+Feature Index: 6, Feature Name: class
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 601 x 7
+Binary Dataset Dimension: 601 x 17
+Dataset Dimensions: 601 x 15 x 2
+Starting Optimization
+Time: 0.00026281, Objective: [0.179635, 0.497276], Boundary: 0.317641, Graph Size: 1, Queue Size: 22
+Time: 0.221618, Objective: [0.179635, 0.497276], Boundary: 0.317641, Graph Size: 3846, Queue Size: 14877
+Time: 0.366518, Objective: [0.179635, 0.497276], Boundary: 0.317641, Graph Size: 6386, Queue Size: 5990
+Time: 0.446232, Objective: [0.179635, 0.497276], Boundary: 0.317641, Graph Size: 7645, Queue Size: 490
+Time: 0.451646, Objective: [0.179635, 0.471052], Boundary: 0.291418, Graph Size: 7645, Queue Size: 178
+Time: 0.452667, Objective: [0.179635, 0.455825], Boundary: 0.27619, Graph Size: 7645, Queue Size: 131
+Time: 0.452995, Objective: [0.179635, 0.420986], Boundary: 0.241351, Graph Size: 7645, Queue Size: 119
+Time: 0.453839, Objective: [0.179635, 0.399463], Boundary: 0.219828, Graph Size: 7645, Queue Size: 86
+Time: 0.453929, Objective: [0.179635, 0.392735], Boundary: 0.213101, Graph Size: 7645, Queue Size: 82
+Time: 0.45462, Objective: [0.26448, 0.392735], Boundary: 0.128256, Graph Size: 7645, Queue Size: 33
+Time: 0.454754, Objective: [0.281207, 0.392735], Boundary: 0.111528, Graph Size: 7645, Queue Size: 26
+Time: 0.454951, Objective: [0.304491, 0.392735], Boundary: 0.0882447, Graph Size: 7645, Queue Size: 14
+Time: 0.454999, Objective: [0.392735, 0.392735], Boundary: 0, Graph Size: 7645, Queue Size: 7
+Optimization Complete
+Training Duration: 0.455 seconds
+Number of Iterations: 33717 iterations
+Size of Graph: 7645 nodes
+Objective Boundary: [0.392735, 0.392735]
+Optimality Gap: 0
+Models Generated: 1
+Loss: 0.272735
+Complexity: 0.12
+checking...
+[
+  {
+    "false": {
+      "false": {
+        "complexity": 0.009999999776482582,
+        "loss": 0.09634551405906677,
+        "name": "class",
+        "prediction": 0
+      },
+      "feature": 1,
+      "name": "a2",
+      "reference": 2,
+      "relation": ">=",
+      "true": {
+        "false": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.04152823984622955,
+          "name": "class",
+          "prediction": 0
+        },
+        "feature": 5,
+        "name": "a6",
+        "reference": 2,
+        "relation": ">=",
+        "true": {
+          "false": {
+            "false": {
+              "complexity": 0.009999999776482582,
+              "loss": 0.011627906933426857,
+              "name": "class",
+              "prediction": 0
+            },
+            "feature": 2,
+            "name": "a3",
+            "reference": 2,
+            "relation": ">=",
+            "true": {
+              "false": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "class",
+                "prediction": 0
+              },
+              "feature": 4,
+              "name": "a5",
+              "reference": 2,
+              "relation": ">=",
+              "true": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "class",
+                "prediction": 1
+              },
+              "type": "integral"
+            },
+            "type": "integral"
+          },
+          "feature": 3,
+          "name": "a4",
+          "reference": 2,
+          "relation": "==",
+          "true": {
+            "complexity": 0.009999999776482582,
+            "loss": 0.06833333522081375,
+            "name": "class",
+            "prediction": 1
+          },
+          "type": "integral"
+        },
+        "type": "integral"
+      },
+      "type": "integral"
+    },
+    "feature": 0,
+    "name": "a1",
+    "reference": 1,
+    "relation": "==",
+    "true": {
+      "false": {
+        "complexity": 0.009999999776482582,
+        "loss": 0.02500000037252903,
+        "name": "class",
+        "prediction": 1
+      },
+      "feature": 2,
+      "name": "a3",
+      "reference": 2,
+      "relation": ">=",
+      "true": {
+        "false": {
+          "false": {
+            "complexity": 0.009999999776482582,
+            "loss": 0.0,
+            "name": "class",
+            "prediction": 1
+          },
+          "feature": 4,
+          "name": "a5",
+          "reference": 2,
+          "relation": ">=",
+          "true": {
+            "false": {
+              "complexity": 0.009999999776482582,
+              "loss": 0.0,
+              "name": "class",
+              "prediction": 1
+            },
+            "feature": 1,
+            "name": "a2",
+            "reference": 2,
+            "relation": ">=",
+            "true": {
+              "false": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "class",
+                "prediction": 1
+              },
+              "feature": 5,
+              "name": "a6",
+              "reference": 2,
+              "relation": ">=",
+              "true": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "class",
+                "prediction": 0
+              },
+              "type": "integral"
+            },
+            "type": "integral"
+          },
+          "type": "integral"
+        },
+        "feature": 3,
+        "name": "a4",
+        "reference": 2,
+        "relation": "==",
+        "true": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.029900331050157547,
+          "name": "class",
+          "prediction": 0
+        },
+        "type": "integral"
+      },
+      "type": "integral"
+    },
+    "type": "integral"
+  }
+]
