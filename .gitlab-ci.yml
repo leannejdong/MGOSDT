@@ -10,6 +10,7 @@ build:
     - cd build
     - cmake ..
     - make
+    - ctest
   artifacts:
     paths:
       - build
@@ -21,7 +22,8 @@ test:
   dependencies:
     - build
   script:
-    - cd build
+ #   - cd build
+ #   - make
     - ctest
   artifacts:
     paths:
