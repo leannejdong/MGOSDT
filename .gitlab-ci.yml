@@ -1,0 +1,25 @@
+image: ubuntu:latest
+
+build:
+  stage: build
+  script:
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make
+  artifacts:
+    paths:
+      - build
+
+
+# run tests using the binary built before
+test:
+  stage: test
+  dependencies:
+    - build
+  script:
+    - ctest
+  artifacts:
+    paths:
+      - build
+
