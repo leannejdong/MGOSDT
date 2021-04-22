@@ -21,6 +21,7 @@ test:
   dependencies:
     - build
   script:
+    - cd build
     - ctest
   artifacts:
     paths:
