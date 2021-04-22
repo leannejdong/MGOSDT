@@ -1,5 +1,6 @@
 image: ubuntu:latest
-
+before_script:
+  - apt update && apt install -y g++ git cmake
 build:
   stage: build
   script:
