@@ -1,8 +1,6 @@
 image: ubuntu:latest
 before_script:
-  - apt-get update && apt install -y g++ git cmake
-##  - apt-get update --yes
-##  - apt-get install --yes cmake
+  - apt-get update && apt install -y --no-install-recommends g++ git cmake
 build:
   stage: build
   script:
