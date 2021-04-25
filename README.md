@@ -42,7 +42,7 @@ For examples of dataset files, refer to `experiments/datasets/compas/binned.csv`
 For an example configuration file, refer to `experiments/configurations/compas.json`.
 For documentation on the configuration file, refer to [**Dependency Installation**](/doc/configuration.md)
 
-<!---
+
 ## As a Python Library with C++ Extensions
 ### Build and Installation
 ```
@@ -100,7 +100,7 @@ training_accuracy = model.score(X, y)
 print("Training Accuracy: {}".format(training_accuracy))
 print(model.tree)
 ```
--->
+
 
 ---
 
