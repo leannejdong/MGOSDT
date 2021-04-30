@@ -31,6 +31,6 @@ doc/docs/
 .idea/
 buildc
 cmake-build-debug
-
+venv
 #flamegraph
 .data

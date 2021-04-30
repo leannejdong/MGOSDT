@@ -43,7 +43,7 @@ For an example configuration file, refer to `experiments/configurations/compas.j
 For documentation on the configuration file, refer to [**Dependency Installation**](/doc/configuration.md)
 
 
-## As a Python Library with C++ Extensions
+## Calling MGOSDT from a Python Interpreter
 ### Build and Installation
 ```
 ./autobuild --install-python
