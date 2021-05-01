@@ -4,7 +4,8 @@ import math
 import time
 import pickle
 from itertools import product, compress
-from gmpy2 import mpz
+from gmpy import mpz  # use gmpy for native python run
+#from gmpy2 import mpz
 import sklearn.tree
 import sklearn.metrics
 
