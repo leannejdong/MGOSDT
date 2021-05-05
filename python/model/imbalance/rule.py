@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Aug  3 22:33:17 2019
-
-@author: chudi
+@author: leanne
 """
-import gmpy
-from gmpy import mpz  # use gmpy for native python run
-#from gmpy2 import mpz
+import gmpy2
+#from gmpy import mpz  # use gmpy for native python run
+from gmpy2 import mpz
 import re
 import copy
 import numpy as np
