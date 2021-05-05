@@ -1,0 +1,83 @@
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "continuous_feature_exchange": true,
+  "costs": "",
+  "diagnostics": false,
+  "feature_exchange": true,
+  "feature_transform": true,
+  "look_ahead": true,
+  "model": "",
+  "model_limit": 1,
+  "non_binary": false,
+  "precision_limit": 0,
+  "profile": "",
+  "regularization": 0.03999999910593033,
+  "rule_list": false,
+  "similar_support": true,
+  "stack_limit": 0,
+  "time_limit": 3600,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: sepal_length
+  Inferred Type: Rational, Empirical Cardinality: 35, Optionality: 0
+Feature Index: 1, Feature Name: sepal_width
+  Inferred Type: Rational, Empirical Cardinality: 23, Optionality: 0
+Feature Index: 2, Feature Name: petal_length
+  Inferred Type: Rational, Empirical Cardinality: 43, Optionality: 0
+Feature Index: 3, Feature Name: petal_width
+  Inferred Type: Rational, Empirical Cardinality: 22, Optionality: 0
+Feature Index: 4, Feature Name: class
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Original Dataset Dimension: 150 x 5
+Binary Dataset Dimension: 150 x 122
+Dataset Dimensions: 150 x 119 x 3
+Starting Optimization
+Time: 0.00127607, Objective: [0.12, 0.413333], Boundary: 0.293333, Graph Size: 1, Queue Size: 126
+Time: 1.84668, Objective: [0.12, 0.413333], Boundary: 0.293333, Graph Size: 4110, Queue Size: 57257
+Time: 3.37463, Objective: [0.12, 0.413333], Boundary: 0.293333, Graph Size: 7285, Queue Size: 65351
+Time: 4.79984, Objective: [0.12, 0.413333], Boundary: 0.293333, Graph Size: 9761, Queue Size: 65123
+Time: 6.15108, Objective: [0.12, 0.413333], Boundary: 0.293333, Graph Size: 11796, Queue Size: 59369
+Time: 7.44118, Objective: [0.12, 0.413333], Boundary: 0.293333, Graph Size: 13702, Queue Size: 52378
+Time: 8.65536, Objective: [0.12, 0.413333], Boundary: 0.293333, Graph Size: 15742, Queue Size: 44524
+Time: 9.80838, Objective: [0.12, 0.413333], Boundary: 0.293333, Graph Size: 17776, Queue Size: 35389
+Time: 10.8702, Objective: [0.12, 0.413333], Boundary: 0.293333, Graph Size: 19815, Queue Size: 26135
+Time: 11.8809, Objective: [0.12, 0.413333], Boundary: 0.293333, Graph Size: 22050, Queue Size: 16744
+Time: 12.7302, Objective: [0.12, 0.413333], Boundary: 0.293333, Graph Size: 24509, Queue Size: 7360
+Time: 13.1283, Objective: [0.16, 0.16], Boundary: 0, Graph Size: 26169, Queue Size: 1217
+Optimization Complete
+Training Duration: 13.128 seconds
+Number of Iterations: 107437 iterations
+Size of Graph: 26169 nodes
+Objective Boundary: [0.16, 0.16]
+Optimality Gap: 0
+Models Generated: 1
+Loss: 0.04
+Complexity: 0.12
+Execution Time: 13.128000259399414
+Training Accuracy: 0.96
+Size: 3
+Loss: 0.040000000000000036
+Risk: 0.16000000000000014
+if 2.45 <= petal_length and 1.65 <= petal_width then:
+    predicted class: Iris-virginica
+    misclassification penalty: 0.013
+    complexity penalty: 0.04
+
+else if 2.45 <= petal_length and petal_width < 1.65 then:
+    predicted class: Iris-versicolor
+    misclassification penalty: 0.027
+    complexity penalty: 0.04
+
+else if petal_length < 2.45 then:
+    predicted class: Iris-setosa
+    misclassification penalty: 0.0
+    complexity penalty: 0.04
+[ $petal_length  \ge  2.45$ [ $petal_width  \ge  1.65$ [ $class$ [ $Iris-virginica$ ] ] [ $class$ [ $Iris-versicolor$ ] ] ] [ $class$ [ $Iris-setosa$ ] ] ]

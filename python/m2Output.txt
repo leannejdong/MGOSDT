@@ -1,0 +1,69 @@
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "continuous_feature_exchange": true,
+  "costs": "",
+  "diagnostics": false,
+  "feature_exchange": true,
+  "feature_transform": true,
+  "look_ahead": true,
+  "model": "",
+  "model_limit": 1,
+  "non_binary": false,
+  "precision_limit": 0,
+  "profile": "",
+  "regularization": 0.10000000149011612,
+  "rule_list": false,
+  "similar_support": true,
+  "stack_limit": 0,
+  "time_limit": 3600,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: sepal_length
+  Inferred Type: Rational, Empirical Cardinality: 35, Optionality: 0
+Feature Index: 1, Feature Name: sepal_width
+  Inferred Type: Rational, Empirical Cardinality: 23, Optionality: 0
+Feature Index: 2, Feature Name: petal_length
+  Inferred Type: Rational, Empirical Cardinality: 43, Optionality: 0
+Feature Index: 3, Feature Name: petal_width
+  Inferred Type: Rational, Empirical Cardinality: 22, Optionality: 0
+Feature Index: 4, Feature Name: class
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Original Dataset Dimension: 150 x 5
+Binary Dataset Dimension: 150 x 122
+Dataset Dimensions: 150 x 119 x 3
+Starting Optimization
+Time: 0.00115829, Objective: [0.3, 0.533333], Boundary: 0.233333, Graph Size: 1, Queue Size: 126
+Time: 0.436847, Objective: [0.34, 0.34], Boundary: 0, Graph Size: 1571, Queue Size: 13
+Optimization Complete
+Training Duration: 0.436 seconds
+Number of Iterations: 2662 iterations
+Size of Graph: 1571 nodes
+Objective Boundary: [0.34, 0.34]
+Optimality Gap: 0
+Models Generated: 1
+Loss: 0.04
+Complexity: 0.3
+Execution Time: 0.4359999895095825
+Training Accuracy: 0.96
+if 2.45 <= petal_length and 1.65 <= petal_width then:
+    predicted class: Iris-virginica
+    misclassification penalty: 0.013
+    complexity penalty: 0.1
+
+else if 2.45 <= petal_length and petal_width < 1.65 then:
+    predicted class: Iris-versicolor
+    misclassification penalty: 0.027
+    complexity penalty: 0.1
+
+else if petal_length < 2.45 then:
+    predicted class: Iris-setosa
+    misclassification penalty: 0.0
+    complexity penalty: 0.1
