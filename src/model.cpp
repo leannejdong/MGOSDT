@@ -190,12 +190,9 @@ void Model::summarize(json & node) const {
         node["children"] = {json::object(), json::object()};
         node["children"][0]["then"] = node["true"];
         node["children"][1]["then"] = node["false"];
-        if (integral) {
-            node["children"][0]["in"] = { node["reference"], nullptr };
-            node["children"][1]["in"] = { nullptr, node["reference"]  };
-        } else if (rational) {
-            node["children"][0]["in"] = { node["reference"], nullptr };
-            node["children"][1]["in"] = { nullptr, node["reference"]  };
+        if (integral || rational) {
+            node["children"][0]["in"] = {node["reference"], nullptr};
+            node["children"][1]["in"] = {nullptr, node["reference"]};
         } else if (categorical) {
             node["children"][0]["in"] = node["reference"];
             node["children"][1]["in"] = "default";
