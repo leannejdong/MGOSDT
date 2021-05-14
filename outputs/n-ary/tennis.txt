@@ -1,0 +1,130 @@
+Generalized Optimal Sparse Decision Tree
+Using data set: experiments/datasets/tennis/tennis.csv
+Using configuration: {
+  "balance": true,
+  "cancellation": true,
+  "continuous_feature_exchange": true,
+  "costs": "",
+  "diagnostics": false,
+  "feature_exchange": true,
+  "feature_transform": true,
+  "look_ahead": true,
+  "model": "",
+  "model_limit": 1,
+  "non_binary": true,
+  "precision_limit": 0,
+  "profile": "",
+  "regularization": 0.009999999776482582,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 86400,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: outlook
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 1, Feature Name: temp
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Feature Index: 2, Feature Name: humidity
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: wind
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: play
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 14 x 5
+Binary Dataset Dimension: 14 x 10
+Dataset Dimensions: 14 x 8 x 2
+Starting Optimization
+Time: 0.00018267, Objective: [0.03, 0.286667], Boundary: 0.256667, Graph Size: 1, Queue Size: 16
+Time: 0.0027665, Objective: [0.04, 0.05], Boundary: 0.01, Graph Size: 121, Queue Size: 83
+Time: 0.00331251, Objective: [0.05, 0.05], Boundary: 0, Graph Size: 131, Queue Size: 22
+Optimization Complete
+Training Duration: 0.003 seconds
+Number of Iterations: 349 iterations
+Size of Graph: 131 nodes
+Objective Boundary: [0.05, 0.05]
+Optimality Gap: 0
+Models Generated: 1
+Loss: 0
+Complexity: 0.05
+[
+  {
+    "children": [
+      {
+        "in": "Overcast",
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.0,
+          "name": "play",
+          "prediction": "Yes"
+        }
+      },
+      {
+        "in": "Rain",
+        "then": {
+          "children": [
+            {
+              "in": "Weak",
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "play",
+                "prediction": "Yes"
+              }
+            },
+            {
+              "in": "default",
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "play",
+                "prediction": "No"
+              }
+            }
+          ],
+          "feature": 3,
+          "name": "wind",
+          "type": "categorical"
+        }
+      },
+      {
+        "in": "default",
+        "then": {
+          "children": [
+            {
+              "in": "Normal",
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "play",
+                "prediction": "Yes"
+              }
+            },
+            {
+              "in": "default",
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.0,
+                "name": "play",
+                "prediction": "No"
+              }
+            }
+          ],
+          "feature": 2,
+          "name": "humidity",
+          "type": "categorical"
+        }
+      }
+    ],
+    "feature": 0,
+    "name": "outlook",
+    "type": "categorical"
+  }
+]
