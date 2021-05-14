@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 from model.gosdt import GOSDT
 
-dataframe = pd.DataFrame(pd.read_csv("/home/leanne/Dev/mgosdt/experiments/datasets/iris/data.csv"))
+#dataframe = pd.DataFrame(pd.read_csv("/home/leanne/Dev/mgosdt/experiments/datasets/iris/data.csv"))
+dataframe = pd.DataFrame(pd.read_csv("/home/leanne/Dev/mgosdt/experiments/datasets/tennis/tennis.csv"))
 
 X = dataframe[dataframe.columns[:-1]]
 y = dataframe[dataframe.columns[-1:]]

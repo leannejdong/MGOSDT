@@ -5,7 +5,9 @@
 #include <sstream>
 
 #include "bitmask.hpp"
-
+/// Tiling is when we divide a loop into a set of parallel tasks of a suitable granularity.
+/// In general, tiling means we apply multiple steps on a small piece of our problem instead of
+/// running each step on the whole problem one after the other.
 // Container for tiles which represent an equivalence class of data sets
 class Tile {
 public:

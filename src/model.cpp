@@ -233,7 +233,7 @@ void Model::summarize(json & node) const {
                 new_children.push_back(unpromoted_child);
             }
         }
-        node["children"] = new_children; // Overwrite previous list fo children
+        node["children"] = new_children; // Overwrite previous array of children
     } else {
         // Is a leaf node
         // No transformation
