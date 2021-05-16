@@ -72,6 +72,7 @@ public:
 
     void summarize(json & node) const;
     void intersect(json & src, json & dest) const;
+    void moveKeysToChildren(json &node) const;
 
     // @param spacing: number of spaces to used in the indentation format
     // @modifies serialization: string representation of the JSON object representation of this model

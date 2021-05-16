@@ -162,6 +162,33 @@ void Model::serialize(std::string & serialization, int const spacing) const {
     return;
 }
 
+void Model::moveKeysToChildren(json &node) const{
+    if(node.contains("feature")){
+        moveKeysToChildren(node["true"]);
+        moveKeysToChildren(node["false"]);
+
+        // Check feature domain type
+        bool integral = node["type"] == "integral";
+        bool rational = node["type"] == "rational";
+        bool categorical = node ["type"] == "categorical";
+
+        node["children"] = {json::object(), json::object()};
+        node["children"][0]["then"] = node["true"];
+        node["children"][1]["then"] = node["false"];
+        if (integral || rational) {
+            node["children"][0]["in"] = {node["reference"]};
+            node["children"][1]["in"] = { nullptr, node["reference"]  };
+        } else if (categorical) {
+            node["children"][0]["in"] = node["reference"];
+            node["children"][1]["in"] = "default";
+        }
+        node.erase("reference");
+        node.erase("relation");
+        node.erase("true");
+        node.erase("false");
+    }
+}
+
 void Model::intersect(json & src, json & dest) const {
 
     if (!src[0].is_null() && !dest[0].is_null()) {
@@ -178,42 +205,20 @@ void Model::intersect(json & src, json & dest) const {
 
 
 void Model::summarize(json & node) const {
-    if (node.contains("feature")) {
-        summarize(node["true"]);
-        summarize(node["false"]);
 
         // Check feature domain type
         bool integral = node["type"] == "integral";
         bool rational = node["type"] == "rational";
         bool categorical = node ["type"] == "categorical";
 
-        node["children"] = {json::object(), json::object()};
-        node["children"][0]["then"] = node["true"];
-        node["children"][1]["then"] = node["false"];
-        if (integral || rational) {
-            node["children"][0]["in"] = {node["reference"], nullptr};
-            node["children"][1]["in"] = {nullptr, node["reference"]};
-        } else if (categorical) {
-            node["children"][0]["in"] = node["reference"];
-            node["children"][1]["in"] = "default";
-        }
-        node.erase("reference");
-        node.erase("relation");
-        node.erase("true");
-        node.erase("false");
+        moveKeysToChildren(node);
 
         json new_children = json::array();
-//        for (json::iterator it = node["children"].begin(); it != node["children"].end(); ++it) {
-//            json & condition = (* it)["in"];
-//            json & child = (* it)["then"];
         for (auto &c : node["children"]) {
                  json & condition = c["in"];
                  json & child = c["then"];
             if (child.contains("feature") && child["feature"] == node["feature"]) {
                 // Child has grand children and child feature matches parent feature
-  //              for (json::iterator sub_it = child["children"].begin(); sub_it != child["children"].end(); ++sub_it) {
-  //                  json & subcondition = (* sub_it)["in"];
-  //                  json & grandchild = (* sub_it)["then"];
                 for (auto &sc : child["children"]) {
                     json & subcondition = sc["in"];
                     json & grandchild = sc["then"];
@@ -234,10 +239,6 @@ void Model::summarize(json & node) const {
             }
         }
         node["children"] = new_children; // Overwrite previous array of children
-    } else {
-        // Is a leaf node
-        // No transformation
-    }
 }
 
 void Model::to_json(json & node) const {
