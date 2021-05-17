@@ -203,42 +203,47 @@ void Model::intersect(json & src, json & dest) const {
     }
 }
 
+void Model::childPromotion(json &node) const{
+    // Check feature domain type
+    bool integral = node["type"] == "integral";
+    bool rational = node["type"] == "rational";
+    bool categorical = node ["type"] == "categorical";
+
+    json new_children = json::array();
+    for (auto &c : node["children"]) {
+        json & condition = c["in"];
+        json & child = c["then"];
+        if (child.contains("feature") && child["feature"] == node["feature"]) {
+            // Child has grand children and child feature matches parent feature
+            for (auto &sc : child["children"]) {
+                json & subcondition = sc["in"];
+                json & grandchild = sc["then"];
+                if (integral || rational) {
+                    // Promote grandchild into child
+                    json promoted_condition = { subcondition[0], subcondition[1] };
+                    //intersect(condition, promoted_condition);
+                    intersect(condition, promoted_condition);
+
+                    json promoted_child = { { "in", promoted_condition }, { "then", grandchild } };
+                    new_children.push_back(promoted_child);
+                } else if (categorical) {
+                    json promoted_child = { { "in", subcondition }, { "then", grandchild } };
+                    new_children.push_back(promoted_child);
+                }
+            }
+        } else { //re-insert
+            json unpromoted_child = { { "in", condition }, { "then", child } };
+            new_children.push_back(unpromoted_child);
+        }
+    }
+    node["children"] = new_children; // Overwrite previous list fo children
+
+}
+
 
 void Model::summarize(json & node) const {
-
-        // Check feature domain type
-        bool integral = node["type"] == "integral";
-        bool rational = node["type"] == "rational";
-        bool categorical = node ["type"] == "categorical";
-
-        moveKeysToChildren(node);
-
-        json new_children = json::array();
-        for (auto &c : node["children"]) {
-                 json & condition = c["in"];
-                 json & child = c["then"];
-            if (child.contains("feature") && child["feature"] == node["feature"]) {
-                // Child has grand children and child feature matches parent feature
-                for (auto &sc : child["children"]) {
-                    json & subcondition = sc["in"];
-                    json & grandchild = sc["then"];
-                    if (integral || rational) {
-                        // Promote grandchild into child
-                        json promoted_condition = { subcondition[0], subcondition[1] };
-                        intersect(condition, promoted_condition);
-                        json promoted_child = { { "in", promoted_condition }, { "then", grandchild } };
-                        new_children.push_back(promoted_child);
-                    } else if (categorical) {
-                        json promoted_child = { { "in", subcondition }, { "then", grandchild } };
-                        new_children.push_back(promoted_child);
-                    }
-                }
-            } else { //re-insert
-                json unpromoted_child = { { "in", condition }, { "then", child } };
-                new_children.push_back(unpromoted_child);
-            }
-        }
-        node["children"] = new_children; // Overwrite previous array of children
+    moveKeysToChildren(node);
+    childPromotion(node);
 }
 
 void Model::to_json(json & node) const {
