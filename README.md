@@ -18,7 +18,7 @@ Under development!
 Guide for end-users who want to use the library without modification.
 
 Describes how to install and use the library as a stand-alone command-line program or as an embedded extension in a larger project.
-Currently unsupported as a Python extension.
+We do partially support Python extension.
 
 ## Installing Dependencies
 Refer to [**Dependency Installation**](#dependencies)
