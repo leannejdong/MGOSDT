@@ -41,7 +41,7 @@ class GOSDT {
         static void configure(std::istream & config_source);
 
         /// @require: The CSV must contain a header.
-        /// @require: Scientific notation is currently not supported by the parser, use long form decimal notation
+        /// @require: Scientific notation is currently unsupported by the parser, use long form decimal notation
         /// @require: All rows must have the same number of entries
         /// @require: all entries are comma-separated
         /// @require: Wrapping quotations are not stripped

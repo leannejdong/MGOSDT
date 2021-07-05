@@ -99,7 +99,7 @@ void GOSDT::fit(std::istream & data_source, std::unordered_set< Model > & models
             }
         }
 
-        optimizer.models(models);
+        optimizer.models(models);//calls the set of optimal trees via the root key which identifies the root of the dependency graph
 
         if (Configuration::model_limit > 0 && models.size() == 0) {
             GOSDT::status = 1;

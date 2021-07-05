@@ -73,6 +73,121 @@ user	0m0.434s
 sys	0m0.016s
 ```
 
+## Checking if multithreading is working by monitoring the process list and CPU activity of the machine
+
+Worker limit 1:
+
+We use `perf` to measure cpu utilization of the program. First we check cpu cycle. 
+
+Run `perf stat -e cpu-clock ./gosdt syn3.txt config.json` we see,
+
+```
+ Performance counter stats for './gosdt syn3.txt config.json':
+
+              6.86 msec cpu-clock                 #    0.903 CPUs utilized
+
+       0.007593314 seconds time elapsed
+
+       0.000000000 seconds user
+       0.007704000 seconds sys
+```
+
+Run `perf stat -e task-clock ./gosdt syn3.txt config.json`
+
+```
+ Performance counter stats for './gosdt syn3.txt config.json':
+
+              2.79 msec task-clock                #    0.873 CPUs utilized
+
+       0.003201288 seconds time elapsed
+
+       0.003225000 seconds user
+       0.000000000 seconds sys
+
+```
+
+Worker limit 2:
+
+`perf stat -e cpu-clock ./gosdt syn3.txt config.json`
+
+```
+ Performance counter stats for './gosdt syn3.txt config.json':
+
+              7.93 msec cpu-clock                 #    0.989 CPUs utilized
+
+       0.008018268 seconds time elapsed
+
+       0.004388000 seconds user
+       0.004388000 seconds sys
+
+```
+
+`perf stat -e task-clock ./gosdt syn3.txt config.json`
+
+```
+ Performance counter stats for './gosdt syn3.txt config.json':
+
+              4.08 msec task-clock                #    0.984 CPUs utilized
+
+       0.004148685 seconds time elapsed
+
+       0.000000000 seconds user
+       0.004570000 seconds sys
+```
+
+Worker limit 4:
+
+`perf stat -e cpu-clock ./gosdt syn3.txt config.json`
+
+```
+ Performance counter stats for './gosdt syn3.txt config.json':
+
+              4.42 msec cpu-clock                 #    1.196 CPUs utilized
+
+       0.003693244 seconds time elapsed
+
+       0.004924000 seconds user
+       0.000000000 seconds sys
+```
+
+`perf stat -e task-clock ./gosdt syn3.txt config.json`
+
+```
+ Performance counter stats for './gosdt syn3.txt config.json':
+
+              3.37 msec task-clock                #    1.112 CPUs utilized
+
+       0.003034541 seconds time elapsed
+
+       0.003874000 seconds user
+       0.000000000 seconds sys
+```
+
+Worker limit 8:
+
+`perf stat -e cpu-clock ./gosdt syn3.txt config.json`
+
+```
+              9.60 msec cpu-clock                 #    1.383 CPUs utilized
+
+       0.006939648 seconds time elapsed
+
+       0.000000000 seconds user
+       0.012185000 seconds sys
+
+```
+`perf stat -e task-clock ./gosdt syn3.txt config.json`
+
+```
+ Performance counter stats for './gosdt syn3.txt config.json':
+
+              7.26 msec task-clock                #    1.041 CPUs utilized
+
+       0.006974898 seconds time elapsed
+
+       0.008857000 seconds user
+       0.000000000 seconds sys
+```
 # Memory Leaks clean-up
 
 A leak occurs when the last pointer to allocated memory is destroyed or re-assigned without the memory being deallocated.

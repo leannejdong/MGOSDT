@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
 	
 	if ((standard_input && argc == 2) || (!standard_input && argc == 3)) {
 		// Use custom configuration if provided
-		std::ifstream configuration(argv[argc - 1]);
+		std::ifstream configuration(argv[argc - 1]);  // argc = 3, so argv[2], so configuration(config.json)
 		Configuration::configure(configuration);
 	}
 
@@ -40,5 +40,17 @@ int main(int argc, char *argv[]) {
 		model.fit(data, result);
 	}
 	if (Configuration::model == "" || Configuration::verbose) { std::cout << result << std::endl; }
+
+    std::cout << "There are " << argc << " arguments:\n";
+    for(int count{0}; count < argc; ++count){
+        std::cout << count << ' ' << argv[count] << '\n';
+    }
 	return 0;
 }
+
+/*!
+ * the program is trying to check to see if any data is available on stdin,
+ * and if it is, it calls model.fit() with cin,
+ * otherwise it opens a file based on the path given on the command line
+ * and calls model.fit() with that instead
+ */
