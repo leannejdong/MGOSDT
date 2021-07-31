@@ -34,7 +34,11 @@ sudo perf script -i syn5.data | /home/leanne/FlameGraph/stackcollapse-perf.pl | 
 ```
 ![Frame Graph for Synthetic dataset 2](syn5.svg)
 
+# Background(memory organization): Cache, Cache lines, Cache  misses
 
+A CPU cache is a hardware cache used by the central processing unit (CPU) of a computer to reduce the average cost (time or energy) to access data from the main memory. A cache is a smaller, faster memory, located closer to a processor core, which stores copies of the data from frequently used main memory locations. Most CPUs have a hierarchy of multiple cache levels (L1, L2, often L3, and rarely even L4), with separate instruction-specific and data-specific caches at level 1. A Cache line is the unit of data transfer between the cache and main memory. A cache miss is a failed attempt to read or write a piece of data in the cache, which results in a main memory access with much longer latency. 
+
+A CPU cache is a hardware cache used by the central processing unit (CPU) of a computer to reduce the average cost (time or energy) to access data from the main memory.[1] A cache is a smaller, faster memory, located closer to a processor core, which stores copies of the data from frequently used main memory locations. Most CPUs have a hierarchy of multiple cache levels (L1, L2, often L3, and rarely even L4), with separate instruction-specific and data-specific caches at level 1. 
 # Performance measurement 
 
 First, it worth mentioning we have fixed numerous memory leaks in the original GOSDT codes. Hence we now have a more efficient CPU memory usage. All Our experiments Base on Monk2 dataset based on our leaked free version.
@@ -75,13 +79,15 @@ sys	0m0.016s
 
 ## Checking if multithreading is working by monitoring the process list and CPU activity of the machine
 
+Dataset: syn3.txt
+
 Worker limit 1:
 
 We use `perf` to measure cpu utilization of the program. First we check cpu cycle. 
 
 Run `perf stat -e cpu-clock ./gosdt syn3.txt config.json` we see,
 
-```
+```shell
  Performance counter stats for './gosdt syn3.txt config.json':
 
               6.86 msec cpu-clock                 #    0.903 CPUs utilized
@@ -94,7 +100,7 @@ Run `perf stat -e cpu-clock ./gosdt syn3.txt config.json` we see,
 
 Run `perf stat -e task-clock ./gosdt syn3.txt config.json`
 
-```
+```shell
  Performance counter stats for './gosdt syn3.txt config.json':
 
               2.79 msec task-clock                #    0.873 CPUs utilized
@@ -110,7 +116,7 @@ Worker limit 2:
 
 `perf stat -e cpu-clock ./gosdt syn3.txt config.json`
 
-```
+```shell
  Performance counter stats for './gosdt syn3.txt config.json':
 
               7.93 msec cpu-clock                 #    0.989 CPUs utilized
@@ -124,7 +130,7 @@ Worker limit 2:
 
 `perf stat -e task-clock ./gosdt syn3.txt config.json`
 
-```
+```shell
  Performance counter stats for './gosdt syn3.txt config.json':
 
               4.08 msec task-clock                #    0.984 CPUs utilized
@@ -139,7 +145,7 @@ Worker limit 4:
 
 `perf stat -e cpu-clock ./gosdt syn3.txt config.json`
 
-```
+```shell
  Performance counter stats for './gosdt syn3.txt config.json':
 
               4.42 msec cpu-clock                 #    1.196 CPUs utilized
@@ -152,7 +158,7 @@ Worker limit 4:
 
 `perf stat -e task-clock ./gosdt syn3.txt config.json`
 
-```
+```shell
  Performance counter stats for './gosdt syn3.txt config.json':
 
               3.37 msec task-clock                #    1.112 CPUs utilized
@@ -167,7 +173,7 @@ Worker limit 8:
 
 `perf stat -e cpu-clock ./gosdt syn3.txt config.json`
 
-```
+```shell
               9.60 msec cpu-clock                 #    1.383 CPUs utilized
 
        0.006939648 seconds time elapsed
@@ -178,7 +184,7 @@ Worker limit 8:
 ```
 `perf stat -e task-clock ./gosdt syn3.txt config.json`
 
-```
+```shell
  Performance counter stats for './gosdt syn3.txt config.json':
 
               7.26 msec task-clock                #    1.041 CPUs utilized
@@ -187,6 +193,45 @@ Worker limit 8:
 
        0.008857000 seconds user
        0.000000000 seconds sys
+```
+The `real` time is the wall clock. The `user` time is the task cycles spending in user space. The `sys` time is the task cycles spent in kernel space, 
+but in the context of the task.
+As we see the task-clock gets bigger as worker limit increases. This could due to the fact more threads will be competing for same resource,
+the busier the cpu will be. This doesn't necessarily make the total time shorter.
+
+It seems we could measure performance using task cycles/total time.
+
+The cpu-clock is based on the total time spent on the cpu. The task-clock is based on only the time spent on other tasks, it has a per thread granularity.
+Some programmers think that it makes sense to count both cpu and task clock on a task( cpu clock basically the same as wall-time).
+
+Dataset: iris.csv
+
+worker limit 2:
+
+```shell
+leanne@tensorbook:~/Dev/mgosdt$ perf stat -e cpu-clock ./gosdt iris.csv config.json
+
+ Performance counter stats for './gosdt iris.csv config.json':
+
+        499,617.19 msec cpu-clock                 #    1.991 CPUs utilized          
+
+     250.890151014 seconds time elapsed
+
+     498.411540000 seconds user
+       1.203950000 seconds sys
+```
+
+```shell
+leanne@tensorbook:~/Dev/mgosdt$ perf stat -e task-clock ./gosdt iris.csv config.json
+
+ Performance counter stats for './gosdt iris.csv config.json':
+
+        501,788.87 msec task-clock                #    1.992 CPUs utilized          
+
+     251.927912096 seconds time elapsed
+
+     500.555086000 seconds user
+       1.231938000 seconds sys
 ```
 # Memory Leaks clean-up
 
