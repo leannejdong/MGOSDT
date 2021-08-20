@@ -21,9 +21,9 @@
 
 #include "integrity_violation.hpp"
 #include "optimizer.hpp"
+namespace mgosdt{
 
 using json = nlohmann::json;
-namespace mgosdt{
     /// The main interface of the library
     /// Note that the algorithm behaviour is modified using the static configuration object using the Configuration class
     class GOSDT {
