@@ -10,7 +10,7 @@ int test_consistency(void) {
         std::stringstream buffer;
         buffer << expectation.rdbuf();
 
-        GOSDT model;
+        mgosdt::GOSDT model;
         std::string result;
         model.fit(data, result);
 
@@ -24,7 +24,7 @@ int test_consistency(void) {
         std::stringstream buffer;
         buffer << expectation.rdbuf();
 
-        GOSDT model;
+        mgosdt::GOSDT model;
         std::string result;
         model.fit(data, result);
 
@@ -38,7 +38,7 @@ int test_consistency(void) {
         std::stringstream buffer;
         buffer << expectation.rdbuf();
 
-        GOSDT model;
+        mgosdt::GOSDT model;
         std::string result;
         model.fit(data, result);
 
@@ -52,7 +52,7 @@ int test_consistency(void) {
         std::stringstream buffer;
         buffer << expectation.rdbuf();
 
-        GOSDT model;
+        mgosdt::GOSDT model;
         std::string result;
         model.fit(data, result);
 
