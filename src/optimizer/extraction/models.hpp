@@ -5,7 +5,7 @@ void Optimizer::models(std::unordered_set< Model > & results) {
     models(this -> root, local_results);
     // std::cout << "Local Size: " << local_results.size() << std::endl;
     // std::cout << "Result Size: " << results.size() << std::endl;
-    // Copy into final results
+    /// Copy into final results
     for (auto iterator = local_results.begin(); iterator != local_results.end(); ++iterator) {
 
         // std::pair< std::unordered_set<Model>::iterator, bool > insertion = results.insert(Model());

@@ -40,55 +40,55 @@ public:
     void initialize();
     void reset();
 
-    // @modifies lowerbound: the lowerbound on the global objective
-    // @modifies upperbound: the upperbound on the global objective
+    /// @modifies lowerbound: the lowerbound on the global objective
+    /// @modifies upperbound: the upperbound on the global objective
     void objective_boundary(float * lowerbound, float * upperbound) const;
 
-    // @returns the current difference between the global upperbound and the global lowerbound
+    /// @returns the current difference between the global upperbound and the global lowerbound
     float uncertainty() const;
 
-    // @returns true of the algorithm has reached a termination condition
+    /// @returns true of the algorithm has reached a termination condition
     bool complete() const;
 
-    // @returns the size fo the dependency graph
+    /// @returns the size fo the dependency graph
     unsigned int size() const;
 
-    // @returns the real time spend in the optimization
+    /// @returns the real time spend in the optimization
     float elapsed() const;
 
-    // @returns true if the configured time limit has been reached
+    /// @returns true if the configured time limit has been reached
     bool timeout() const;
 
-    // @param id: ID of the requesting worker thread
-    // @returns true if an update occured to the global objective boundary
+    /// @param id: ID of the requesting worker thread
+    /// @returns true if an update occured to the global objective boundary
     bool iterate(unsigned int id);
 
-    // @modifies results: stores all potentially optimal models in results
-    // @note: if the global optimality gap is non-zero, then results contains only models that fall within the optimality gap
-    // @note: if the global optimality gap is non-zero, there is no gaurantee that results necessarily contains the optimal model
+    /// @modifies results: stores all potentially optimal models in results
+    /// @note: if the global optimality gap is non-zero, then results contains only models that fall within the optimality gap
+    /// @note: if the global optimality gap is non-zero, there is no gaurantee that results necessarily contains the optimal model
     void models(std::unordered_set< Model > & results);
 
-    // Generates snapshot data for trace visualization
+    /// Generates snapshot data for trace visualization
     void diagnostic_trace(int iteration, key_type const & focal_point);
-    // Generates snapshot data for trace-tree visualization
+    /// Generates snapshot data for trace-tree visualization
     void diagnostic_tree(int iteration);
 
-    // Print diagnostic trace for detected non-convergence of algorithm
-    // Non-convergence is defined as the algorithm not terminating when it should have
+    /// Print diagnostic trace for detected non-convergence of algorithm
+    /// Non-convergence is defined as the algorithm not terminating when it should have
     void diagnose_non_convergence();
 
-    // Print diagnositic trace for detected false-convergence of algorithm
-    // False-convergence is defined as a premature termination of the algorithm
+    /// Print diagnositic trace for detected false-convergence of algorithm
+    /// False-convergence is defined as a premature termination of the algorithm
     void diagnose_false_convergence();
 private:
 
-    // Timing State
+    /// Timing State
     tbb::tick_count start_time; // starting time of optimization
     unsigned long ticks = 0; // Number of ticks passed
     unsigned long tick_duration = 10000; // Number of iterations per tick
     bool active = true; // Flag indicating whether the optimization is still active
 
-    // Analytics State
+    /// Analytics State
     Tile root; // Root indicator
     std::vector<int> translator; // Root indicator
 
@@ -101,9 +101,9 @@ private:
 
     float cart(Bitmask const & capture_set, Bitmask const & feature_set, unsigned int id) const;
 
-    // @param message: message to handle
-    // @param id: id of the worker thread that is handling this message
-    // @returns true if the optimization is still active
+    /// @param message: message to handle
+    /// @param id: id of the worker thread that is handling this message
+    /// @returns true if the optimization is still active
     bool dispatch(Message const & message, unsigned int id);
 
     bool store_self(Tile const & identifier, Task const & task, vertex_accessor & self);

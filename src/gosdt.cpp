@@ -3,20 +3,20 @@
 #define _DEBUG true
 #define THROTTLE false
 
-float GOSDT::time = 0.0;
-unsigned int GOSDT::size = 0;
-unsigned int GOSDT::iterations = 0;
-unsigned int GOSDT::status = 0;
+float mgosdt::GOSDT::time = 0.0;
+unsigned int mgosdt::GOSDT::size = 0;
+unsigned int mgosdt::GOSDT::iterations = 0;
+unsigned int mgosdt::GOSDT::status = 0;
 
-GOSDT::GOSDT(void) {}
+mgosdt::GOSDT::GOSDT(void) {}
 
-GOSDT::~GOSDT(void) {
+mgosdt::GOSDT::~GOSDT(void) {
     return;
 }
 
-void GOSDT::configure(std::istream & config_source) { Configuration::configure(config_source); }
+void mgosdt::GOSDT::configure(std::istream & config_source) { Configuration::configure(config_source); }
 
-void GOSDT::fit(std::istream & data_source, std::string & result) {
+void mgosdt::GOSDT::fit(std::istream & data_source, std::string & result) {
     std::unordered_set< Model > models;
     fit(data_source, models);
     json output = json::array();
@@ -29,7 +29,7 @@ void GOSDT::fit(std::istream & data_source, std::string & result) {
     result = output.dump(2);
 }
 
-void GOSDT::fit(std::istream & data_source, std::unordered_set< Model > & models) {
+void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > & models) {
     if(Configuration::verbose) { std::cout << "Using configuration: " << Configuration::to_string(2) << std::endl; }
 
     if(Configuration::verbose) { std::cout << "Initializing Optimization Framework" << std::endl; }
@@ -138,7 +138,7 @@ void GOSDT::fit(std::istream & data_source, std::unordered_set< Model > & models
     // }
 }
 
-void GOSDT::work(int const id, Optimizer & optimizer, int & return_reference) {
+void mgosdt::GOSDT::work(int const id, Optimizer & optimizer, int & return_reference) {
     unsigned int iterations = 0;
     try {
         while (optimizer.iterate(id)) { iterations += 1; }

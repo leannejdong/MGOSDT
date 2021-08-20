@@ -129,50 +129,50 @@ void Optimizer::profile() {
     }
 }
 
-float Optimizer::cart(Bitmask const & capture_set, Bitmask const & feature_set, unsigned int id) const {
-    Bitmask left(State::dataset.height());
-    Bitmask right(State::dataset.height());
-    float potential, min_loss, max_loss, base_info;
-    unsigned int target_index;
-    State::dataset.summary(capture_set, base_info, potential, min_loss, max_loss, target_index, id);
-    float base_risk = max_loss + Configuration::regularization;
-
-    if (max_loss - min_loss < Configuration::regularization
-        || 1.0 - min_loss < Configuration::regularization
-        || (potential < 2 * Configuration::regularization && (1.0 - max_loss) < Configuration::regularization)
-        || feature_set.empty()) {
-        return base_risk;
-    }
-
-    int information_maximizer = -1;
-    float information_gain = 0;
-    for (int j_begin = 0, j_end = 0; feature_set.scan_range(true, j_begin, j_end); j_begin = j_end) {
-        for (int j = j_begin; j < j_end; ++j) {
-            float left_info, right_info;
-            left = capture_set;
-            right = capture_set;
-            State::dataset.subset(j, false, left);
-            State::dataset.subset(j, true, right);
-
-            if (left.empty() || right.empty()) { continue; }
-
-            State::dataset.summary(capture_set, left_info, potential, min_loss, max_loss, target_index, id);
-            State::dataset.summary(capture_set, right_info, potential, min_loss, max_loss, target_index, id);
-
-            float gain = left_info + right_info - base_info;
-            if (gain > information_gain) {
-                information_maximizer = j;
-                information_gain = gain;
-            }
-        }
-    }
-
-    if (information_maximizer == -1) { return base_risk; }
-
-    left = capture_set;
-    right = capture_set;
-    State::dataset.subset(information_maximizer, false, left);
-    State::dataset.subset(information_maximizer, true, right);
-    float risk = cart(left, feature_set, id) + cart(right, feature_set, id);
-    return std::min(risk, base_risk);
-}
+//float Optimizer::cart(Bitmask const & capture_set, Bitmask const & feature_set, unsigned int id) const {
+//    Bitmask left(State::dataset.height());
+//    Bitmask right(State::dataset.height());
+//    float potential, min_loss, max_loss, base_info;
+//    unsigned int target_index;
+//    State::dataset.summary(capture_set, base_info, potential, min_loss, max_loss, target_index, id);
+//    float base_risk = max_loss + Configuration::regularization;
+//
+//    if (max_loss - min_loss < Configuration::regularization
+//        || 1.0 - min_loss < Configuration::regularization
+//        || (potential < 2 * Configuration::regularization && (1.0 - max_loss) < Configuration::regularization)
+//        || feature_set.empty()) {
+//        return base_risk;
+//    }
+//
+//    int information_maximizer = -1;
+//    float information_gain = 0;
+//    for (int j_begin = 0, j_end = 0; feature_set.scan_range(true, j_begin, j_end); j_begin = j_end) {
+//        for (int j = j_begin; j < j_end; ++j) {
+//            float left_info, right_info;
+//            left = capture_set;
+//            right = capture_set;
+//            State::dataset.subset(j, false, left);
+//            State::dataset.subset(j, true, right);
+//
+//            if (left.empty() || right.empty()) { continue; }
+//
+//            State::dataset.summary(capture_set, left_info, potential, min_loss, max_loss, target_index, id);
+//            State::dataset.summary(capture_set, right_info, potential, min_loss, max_loss, target_index, id);
+//
+//            float gain = left_info + right_info - base_info;
+//            if (gain > information_gain) {
+//                information_maximizer = j;
+//                information_gain = gain;
+//            }
+//        }
+//    }
+//
+//    if (information_maximizer == -1) { return base_risk; }
+//
+//    left = capture_set;
+//    right = capture_set;
+//    State::dataset.subset(information_maximizer, false, left);
+//    State::dataset.subset(information_maximizer, true, right);
+//    float risk = cart(left, feature_set, id) + cart(right, feature_set, id);
+//    return std::min(risk, base_risk);
+//}

@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 		std::cout << "Using data set: " << argv[1] << std::endl;
 	}
 	std::string result;
-	GOSDT model;
+	mgosdt::GOSDT model;
 	if (standard_input) {
 		model.fit(std::cin, result);
 	} else {

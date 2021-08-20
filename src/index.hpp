@@ -27,20 +27,20 @@ typedef boost::numeric::ublas::vector< bitblock > blasmask;
 // multiple vectors are stored in this container so that ranges don't need to be recomputed for each vector
 class Index {
 public:
-    static void precompute(void);
-    void benchmark(void) const;
+    static void precompute();
+    void benchmark() const;
 
-    Index(void);
+    Index();
     // @param source: vector of floating points to sum over (efficiently)
     Index(std::vector< std::vector< float > > const & source);
-    ~Index(void);
+    ~Index();
 
     // @param indicator: mask of bits indicating which elements are relevant to the vector sum
     // @returns the total of all elements associated to bits that were set to 1
     void sum(Bitmask const & indicator, float * accumulator) const;
 
     // @returns string representation of original floating points (used for inspection)
-    std::string to_string(void) const;
+    std::string to_string() const;
 
 private:
     // Copy of the original floating points
@@ -56,7 +56,7 @@ private:
     unsigned int num_blocks;
 
     // Initialize the OpenCL implementation to perform our sum in parallel
-    void initialize_kernel(void);
+    void initialize_kernel();
 
     // @param indicator: array of blocks of bits indicating which elements are relevant to the vector sum
     // @returns the total of all elements associated to bits that were set to 1

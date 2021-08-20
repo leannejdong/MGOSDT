@@ -23,10 +23,10 @@
 #include "optimizer.hpp"
 
 using json = nlohmann::json;
-
-/// The main interface of the library
-/// Note that the algorithm behaviour is modified using the static configuration object using the Configuration class
-class GOSDT {
+namespace mgosdt{
+    /// The main interface of the library
+    /// Note that the algorithm behaviour is modified using the static configuration object using the Configuration class
+    class GOSDT {
     public:
         GOSDT(void);
         ~GOSDT(void);
@@ -62,6 +62,8 @@ class GOSDT {
         /// @param optimizer: optimizer object which will assign work to the thread
         /// @modifies return_reference: reference for returning values to the main thread
         static void work(int const id, Optimizer & optimizer, int & return_reference);
-};
+    };
+}
+
 
 #endif

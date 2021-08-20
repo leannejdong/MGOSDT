@@ -47,7 +47,7 @@ private:
     unsigned int _width;
 };
 
-// Overrides for STD containers
+// template specialization for stl containers
 namespace std {
     template <>
     struct hash< Tile > {
