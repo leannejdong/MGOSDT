@@ -1,7 +1,6 @@
-# GOSDTMultiway Documentation
-A Multiway split extension of [Generalized Optimal Sparse Decision Tree](https://arxiv.org/pdf/2006.08690.pdf).
-
-Under development!
+# MGOSDT Documentation
+MGOSDT is a Command Line Application for Multiway Sparse Decision Tree Optimization. It can be viewed as 
+a Multiway split extension of [Generalized Optimal Sparse Decision Tree](https://arxiv.org/pdf/2006.08690.pdf).
 
 # Table of Content
 - [Usage](#usage)
