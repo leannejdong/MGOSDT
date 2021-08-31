@@ -135,12 +135,75 @@ make
 make test
 ```
 
-### Run
+## Run
 ```
-./gosdt dataset.csv config.json
+./gosdt iris.csv config.json
 ```
 
+Output
+```json
+[
+  {
+    "children": [
+      {
+        "in": [
+          2.45
+        ],
+        "then": {
+          "children": [
+            {
+              "in": [
+                1.65
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.013333333656191826,
+                "name": "class",
+                "prediction": "Iris-virginica"
+              }
+            },
+            {
+              "in": [
+                null,
+                1.65
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.026666667312383652,
+                "name": "class",
+                "prediction": "Iris-versicolor"
+              }
+            }
+          ],
+          "feature": 3,
+          "name": "petal_width",
+          "type": "rational"
+        }
+      },
+      {
+        "in": [
+          null,
+          2.45
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.0,
+          "name": "class",
+          "prediction": "Iris-setosa"
+        }
+      }
+    ],
+    "feature": 2,
+    "name": "petal_length",
+    "type": "rational"
+  }
+]
+
+```
+![iris-tree](iris.jpg)
+
 ### Run test suite
+
 ```
 ./gosdt_test
 
@@ -148,6 +211,7 @@ make test
 
 
 ## Build with Autotool 
+
 (You'd need `sudo`. It will create files that are owned by root)
  - **Check Updates to the Dependency Tests or Makefile** 
    ```
