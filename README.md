@@ -200,7 +200,7 @@ Output
 ]
 
 ```
-![iris-tree](iris.jpg)
+![iris-tree](iris_nary.png)
 
 ### Run test suite
 
