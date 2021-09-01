@@ -125,13 +125,14 @@ Describes how to install and use the library with details on project structure.
 ## Installing Dependencies
 Refer to [**Dependency Installation**](/doc/dependencies.md##Installation)
 
-## Build with CMake
+## Build and install with CMake
 ```shell
 mkdir buildc
 cd buildc
 cmake ..
 make
 make test
+make install
 ```
 
 ## Run

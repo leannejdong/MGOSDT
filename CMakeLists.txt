@@ -1,3 +1,4 @@
+#set(CMAKE_INSTALL_PREFIX install)
 project(gosdt)
 cmake_minimum_required(VERSION 3.8.0 FATAL_ERROR)
 
@@ -111,3 +112,4 @@ message("${PROJECT_NAME} configured to run on:  ${CMAKE_SYSTEM_NAME} ${TARGETBIT
 message("${PROJECT_NAME} will be built in:      ${CMAKE_BINARY_DIR}")
 message("${PROJECT_NAME} will be installed in:  ${CMAKE_INSTALL_PREFIX}")
 message("\n")
+install(DIRECTORY src DESTINATION /usr/lib/mgosdt)

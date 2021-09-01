@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/gosdt.dir/src/main.cpp.o  -o /home/leanne/Dev/mgosdt/gosdt  libgosdt_lib.a -ltbb -ltbbmalloc -lpthread -lgmp 
