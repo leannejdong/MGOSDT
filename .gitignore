@@ -32,5 +32,7 @@ doc/docs/
 buildc
 cmake-build-debug
 venv
+build
+buildc
 #flamegraph
 .data
