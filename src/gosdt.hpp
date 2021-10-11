@@ -50,10 +50,10 @@ using json = nlohmann::json;
         /// @modifies models: Set of models extracted from the optimization
         void fit(std::istream & data_source, std::unordered_set< Model > & models);
     private:
-        float time;
-        unsigned int size;
-        unsigned int iterations;
-        unsigned int status;
+        float time = 0.0;
+        unsigned int size = 0;
+        unsigned int iterations = 0;
+        unsigned int status = 1;
 
         /// @param id: The worker ID of the current thread
         /// @param optimizer: optimizer object which will assign work to the thread

@@ -3,11 +3,6 @@
 #define _DEBUG true
 #define THROTTLE false
 
-float mgosdt::GOSDT::time = 0.0;
-unsigned int mgosdt::GOSDT::size = 0;
-unsigned int mgosdt::GOSDT::iterations = 0;
-unsigned int mgosdt::GOSDT::status = 0;
-
 void mgosdt::GOSDT::configure(std::istream & config_source) { Configuration::configure(config_source); }
 
 void mgosdt::GOSDT::fit(std::istream & data_source, std::string & result) {
@@ -15,7 +10,6 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::string & result) {
     fit(data_source, models);
     json output = json::array();
     for (auto& model: models) {
-        // Model model = * iterator;
         json object = json::object();
         model.to_json(object);
         output.push_back(object);
@@ -53,7 +47,6 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
         }
         #endif
     }
-//    for (auto iterator = workers.begin(); iterator != workers.end(); ++iterator) { (* iterator).join(); } // Wait for the thread pool to terminate
 
     for (auto &thread: workers) {
         thread.join();
@@ -85,7 +78,6 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
     // try 
     { // Model Extraction
         if (!optimizer.complete()) {
-            GOSDT::status = 1;
             if (Configuration::diagnostics) {
                 std::cout << "Non-convergence Detected. Beginning Diagnosis" << std::endl;
                 optimizer.diagnose_non_convergence();
@@ -123,7 +115,7 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
             if(Configuration::verbose) { std::cout << "Storing Models in: " << Configuration::model << std::endl; }
             std::ofstream out(Configuration::model);
             out << result;
-            out.close();
+            //out.close();
         }
     }
     //  catch (IntegrityViolation exception) {
@@ -137,7 +129,6 @@ void mgosdt::GOSDT::work(int const id, Optimizer & optimizer, int & return_refer
     try {
         while (optimizer.iterate(id)) { iterations += 1; }
     } catch( IntegrityViolation exception ) {
-        GOSDT::status = 1;
         std::cout << exception.to_string() << std::endl;
         throw std::move(exception);
     }
