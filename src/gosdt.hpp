@@ -28,12 +28,6 @@ using json = nlohmann::json;
     /// Note that the algorithm behaviour is modified using the static configuration object using the Configuration class
     class GOSDT {
     public:
-
-        static float time;
-        static unsigned int size;
-        static unsigned int iterations;
-        static unsigned int status;
-
         /// @param config_source: string stream containing a JSON object of configuration parameters
         /// @note: See the Configuration class for details about each parameter
         static void configure(std::istream & config_source);
@@ -56,6 +50,11 @@ using json = nlohmann::json;
         /// @modifies models: Set of models extracted from the optimization
         void fit(std::istream & data_source, std::unordered_set< Model > & models);
     private:
+        float time;
+        unsigned int size;
+        unsigned int iterations;
+        unsigned int status;
+
         /// @param id: The worker ID of the current thread
         /// @param optimizer: optimizer object which will assign work to the thread
         /// @modifies return_reference: reference for returning values to the main thread
