@@ -28,8 +28,6 @@ using json = nlohmann::json;
     /// Note that the algorithm behaviour is modified using the static configuration object using the Configuration class
     class GOSDT {
     public:
-        GOSDT(void);
-        ~GOSDT(void);
 
         static float time;
         static unsigned int size;
