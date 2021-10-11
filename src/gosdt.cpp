@@ -115,13 +115,8 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
             if(Configuration::verbose) { std::cout << "Storing Models in: " << Configuration::model << std::endl; }
             std::ofstream out(Configuration::model);
             out << result;
-            //out.close();
         }
     }
-    //  catch (IntegrityViolation exception) {
-    //     GOSDT::status = 1;
-    //     std::cout << exception.to_string() << std::endl;
-    // }
 }
 
 void mgosdt::GOSDT::work(int const id, Optimizer & optimizer, int & return_reference) {
