@@ -1,0 +1,749 @@
+desc: --depth=5 --alloc-fn=g_malloc --alloc-fn=g_realloc --alloc-fn=g_try_malloc --alloc-fn=g_malloc0 --alloc-fn=g_mem_chunk_alloc
+cmd: gosdt iris.csv experiments/configurations/debug.json
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=56816512157
+mem_heap_B=89341920
+mem_heap_extra_B=2974608
+mem_stacks_B=0
+heap_tree=detailed
+n2: 89341920 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 89164320 0x142207: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+  n2: 89116800 0x13C34B: Task::send_explorer(Task const&, float, int, unsigned int) (in /usr/local/bin/gosdt)
+   n1: 44559360 0x13DAF6: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 44559360 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 44559360 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+   n1: 44557440 0x13DA45: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 44557440 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 44557440 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+  n0: 47520 in 2 places, all below massif's threshold (1.00%)
+ n0: 177600 in 75 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=2
+#-----------
+time=104094704181
+mem_heap_B=133953120
+mem_heap_extra_B=4461648
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=155447380917
+mem_heap_B=169165680
+mem_heap_extra_B=5635400
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=232005213500
+mem_heap_B=208131840
+mem_heap_extra_B=6934272
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=275284853209
+mem_heap_B=224022240
+mem_heap_extra_B=7463952
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=328892513235
+mem_heap_B=236978640
+mem_heap_extra_B=7895832
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=375841950514
+mem_heap_B=248632080
+mem_heap_extra_B=8284280
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=419103772440
+mem_heap_B=259279680
+mem_heap_extra_B=8639200
+mem_stacks_B=0
+heap_tree=detailed
+n2: 259279680 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 259102080 0x142207: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+  n2: 258456000 0x13C34B: Task::send_explorer(Task const&, float, int, unsigned int) (in /usr/local/bin/gosdt)
+   n1: 129231840 0x13DA45: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 129231840 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 129231840 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+   n1: 129224160 0x13DAF6: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 129224160 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 129224160 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+  n0: 646080 in 2 places, all below massif's threshold (1.00%)
+ n0: 177600 in 75 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=9
+#-----------
+time=466193349667
+mem_heap_B=268997760
+mem_heap_extra_B=8963136
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=532006817585
+mem_heap_B=279597120
+mem_heap_extra_B=9316448
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=609344237273
+mem_heap_B=290053440
+mem_heap_extra_B=9664992
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=678842477495
+mem_heap_B=298770000
+mem_heap_extra_B=9955544
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=752094702274
+mem_heap_B=304382640
+mem_heap_extra_B=10142632
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=797448578226
+mem_heap_B=308519280
+mem_heap_extra_B=10280520
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=864181412925
+mem_heap_B=311648400
+mem_heap_extra_B=10384824
+mem_stacks_B=0
+heap_tree=peak
+n2: 311648400 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 311470800 0x142207: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+  n2: 309668880 0x13C34B: Task::send_explorer(Task const&, float, int, unsigned int) (in /usr/local/bin/gosdt)
+   n1: 154838160 0x13DAF6: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 154838160 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 154838160 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+   n1: 154830720 0x13DA45: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 154830720 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 154830720 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+  n0: 1801920 in 2 places, all below massif's threshold (1.00%)
+ n0: 177600 in 75 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=16
+#-----------
+time=929618961610
+mem_heap_B=312419040
+mem_heap_extra_B=10410512
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=985264057602
+mem_heap_B=312520800
+mem_heap_extra_B=10413904
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=1067199523086
+mem_heap_B=312696480
+mem_heap_extra_B=10419760
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=1118703168071
+mem_heap_B=310700160
+mem_heap_extra_B=10353216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=1155060353136
+mem_heap_B=309217440
+mem_heap_extra_B=10303792
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=1219321331451
+mem_heap_B=305796480
+mem_heap_extra_B=10189760
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=1298582233101
+mem_heap_B=298919520
+mem_heap_extra_B=9960528
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=1354547148138
+mem_heap_B=294573600
+mem_heap_extra_B=9815664
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=1417099454280
+mem_heap_B=287947680
+mem_heap_extra_B=9594800
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=1463186813596
+mem_heap_B=282710160
+mem_heap_extra_B=9420216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=1525178911917
+mem_heap_B=274032960
+mem_heap_extra_B=9130976
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=1563921315914
+mem_heap_B=267865920
+mem_heap_extra_B=8925408
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=1614283754032
+mem_heap_B=259565280
+mem_heap_extra_B=8648720
+mem_stacks_B=0
+heap_tree=detailed
+n2: 259565280 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n3: 259387680 0x142207: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+  n2: 254638080 0x13C34B: Task::send_explorer(Task const&, float, int, unsigned int) (in /usr/local/bin/gosdt)
+   n1: 127320960 0x13DAF6: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 127320960 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 127320960 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+   n1: 127317120 0x13DA45: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 127317120 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 127317120 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+  n2: 4749600 0x162528: Optimizer::signal_exploiters(tbb::interface5::concurrent_hash_map<Tile, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > >, GraphVertexHashComparator, tbb::scalable_allocator<std::pair<Tile const, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > > > > >::accessor&, Task&, unsigned int) (in /usr/local/bin/gosdt)
+   n1: 4749600 0x168FC7: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 4749600 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+     n0: 4749600 0x17BBB5: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 177600 in 75 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=29
+#-----------
+time=1695643891532
+mem_heap_B=244839600
+mem_heap_extra_B=8157864
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=1765384265042
+mem_heap_B=232270320
+mem_heap_extra_B=7738888
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=1811874009936
+mem_heap_B=223081920
+mem_heap_extra_B=7432608
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=1850616055311
+mem_heap_B=215380560
+mem_heap_extra_B=7175896
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=1893912055959
+mem_heap_B=207369840
+mem_heap_extra_B=6908872
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=1933272389931
+mem_heap_B=199447680
+mem_heap_extra_B=6644800
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=1980510581519
+mem_heap_B=189625200
+mem_heap_extra_B=6317384
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=2047421753993
+mem_heap_B=176350800
+mem_heap_extra_B=5874904
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=2102612700468
+mem_heap_B=165103440
+mem_heap_extra_B=5499992
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=2149629682682
+mem_heap_B=155631600
+mem_heap_extra_B=5184248
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=2196642233127
+mem_heap_B=145720560
+mem_heap_extra_B=4853880
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=2260813998237
+mem_heap_B=132679440
+mem_heap_extra_B=4419176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=2322396018342
+mem_heap_B=119785200
+mem_heap_extra_B=3989368
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=2385756175159
+mem_heap_B=106686240
+mem_heap_extra_B=3552736
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=2453203111968
+mem_heap_B=93071280
+mem_heap_extra_B=3098904
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=2508723041242
+mem_heap_B=82042560
+mem_heap_extra_B=2731280
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=2590371070340
+mem_heap_B=65931840
+mem_heap_extra_B=2194256
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=2626591848920
+mem_heap_B=58926960
+mem_heap_extra_B=1960760
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=2684544564664
+mem_heap_B=48088800
+mem_heap_extra_B=1599488
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=2742498210864
+mem_heap_B=37094160
+mem_heap_extra_B=1233000
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=2771474589416
+mem_heap_B=31763520
+mem_heap_extra_B=1055312
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=2774681651141
+mem_heap_B=31126320
+mem_heap_extra_B=1034072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=2777888226702
+mem_heap_B=30527760
+mem_heap_extra_B=1014120
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=2781094801525
+mem_heap_B=29894160
+mem_heap_extra_B=993000
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=2784301378516
+mem_heap_B=29361840
+mem_heap_extra_B=975256
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=2787507955006
+mem_heap_B=28768560
+mem_heap_extra_B=955480
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=2790714531932
+mem_heap_B=28148400
+mem_heap_extra_B=934808
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=2793921107105
+mem_heap_B=27501360
+mem_heap_extra_B=913240
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=57
+#-----------
+time=2797127683858
+mem_heap_B=26956080
+mem_heap_extra_B=895064
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=2800334260087
+mem_heap_B=26429040
+mem_heap_extra_B=877496
+mem_stacks_B=0
+heap_tree=detailed
+n2: 26429040 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n3: 26251440 0x142207: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+  n2: 14011680 0x162528: Optimizer::signal_exploiters(tbb::interface5::concurrent_hash_map<Tile, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > >, GraphVertexHashComparator, tbb::scalable_allocator<std::pair<Tile const, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > > > > >::accessor&, Task&, unsigned int) (in /usr/local/bin/gosdt)
+   n1: 14011440 0x168FC7: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 14011440 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+     n0: 14011440 0x17BBB5: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+   n0: 240 in 1 place, below massif's threshold (1.00%)
+  n2: 12239760 0x13C34B: Task::send_explorer(Task const&, float, int, unsigned int) (in /usr/local/bin/gosdt)
+   n1: 6122160 0x13DA45: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 6122160 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 6122160 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+   n1: 6117600 0x13DAF6: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 6117600 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 6117600 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 177600 in 75 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=59
+#-----------
+time=2803540837156
+mem_heap_B=25841760
+mem_heap_extra_B=857920
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=2806747412595
+mem_heap_B=25235760
+mem_heap_extra_B=837720
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=61
+#-----------
+time=2809953988972
+mem_heap_B=24642240
+mem_heap_extra_B=817936
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=2813160566406
+mem_heap_B=24053760
+mem_heap_extra_B=798320
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=2816367142894
+mem_heap_B=23434320
+mem_heap_extra_B=777672
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=64
+#-----------
+time=2819573868739
+mem_heap_B=22793040
+mem_heap_extra_B=756296
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=65
+#-----------
+time=2822780445694
+mem_heap_B=22248240
+mem_heap_extra_B=738136
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=2825987022660
+mem_heap_B=21667440
+mem_heap_extra_B=718776
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=67
+#-----------
+time=2829193598063
+mem_heap_B=20801280
+mem_heap_extra_B=689904
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=68
+#-----------
+time=2832400173215
+mem_heap_B=20401440
+mem_heap_extra_B=676576
+mem_stacks_B=0
+heap_tree=detailed
+n2: 20401440 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n3: 20223840 0x142207: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+  n2: 14263680 0x162528: Optimizer::signal_exploiters(tbb::interface5::concurrent_hash_map<Tile, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > >, GraphVertexHashComparator, tbb::scalable_allocator<std::pair<Tile const, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > > > > >::accessor&, Task&, unsigned int) (in /usr/local/bin/gosdt)
+   n1: 14263680 0x168FC7: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 14263680 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+     n0: 14263680 0x17BBB5: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+  n2: 5960160 0x13C34B: Task::send_explorer(Task const&, float, int, unsigned int) (in /usr/local/bin/gosdt)
+   n1: 2985840 0x13DA45: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 2985840 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 2985840 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+   n1: 2974320 0x13DAF6: Task::send_explorers(float, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 2974320 0x169012: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+     n0: 2974320 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 177600 in 75 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=69
+#-----------
+time=2835606749363
+mem_heap_B=19791360
+mem_heap_extra_B=656240
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=2838813324419
+mem_heap_B=19182960
+mem_heap_extra_B=635960
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=71
+#-----------
+time=2842019899395
+mem_heap_B=18637440
+mem_heap_extra_B=617776
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=72
+#-----------
+time=2845226484926
+mem_heap_B=18004800
+mem_heap_extra_B=596688
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=73
+#-----------
+time=2848433061891
+mem_heap_B=17366640
+mem_heap_extra_B=575416
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=74
+#-----------
+time=2851639661794
+mem_heap_B=16699440
+mem_heap_extra_B=553176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=75
+#-----------
+time=2854846238493
+mem_heap_B=15922800
+mem_heap_extra_B=527288
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=76
+#-----------
+time=2858052815274
+mem_heap_B=15023280
+mem_heap_extra_B=497320
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=77
+#-----------
+time=2861259511809
+mem_heap_B=13716480
+mem_heap_extra_B=453760
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=78
+#-----------
+time=2864466087976
+mem_heap_B=12008640
+mem_heap_extra_B=396832
+mem_stacks_B=0
+heap_tree=detailed
+n2: 12008640 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 11831040 0x142207: Queue::push(Message const&) (in /usr/local/bin/gosdt)
+  n2: 11740800 0x162528: Optimizer::signal_exploiters(tbb::interface5::concurrent_hash_map<Tile, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > >, GraphVertexHashComparator, tbb::scalable_allocator<std::pair<Tile const, tbb::interface5::concurrent_unordered_map<Tile, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, tbb::scalable_allocator<std::pair<Tile const, std::pair<Bitmask, float> > > > > > >::accessor&, Task&, unsigned int) (in /usr/local/bin/gosdt)
+   n1: 11740800 0x168FC7: Optimizer::dispatch(Message const&, unsigned int) (in /usr/local/bin/gosdt)
+    n1: 11740800 0x16FBB7: Optimizer::iterate(unsigned int) (in /usr/local/bin/gosdt)
+     n0: 11740800 0x17BBB5: GOSDT::work(int, Optimizer&, int&) (in /usr/local/bin/gosdt)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+  n0: 90240 in 2 places, all below massif's threshold (1.00%)
+ n0: 177600 in 75 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=79
+#-----------
+time=2867672696035
+mem_heap_B=7485120
+mem_heap_extra_B=246048
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=80
+#-----------
+time=2870879283859
+mem_heap_B=2531040
+mem_heap_extra_B=80912
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=81
+#-----------
+time=2874754745577
+mem_heap_B=191852
+mem_heap_extra_B=3716
+mem_stacks_B=0
+heap_tree=empty

@@ -1,0 +1,128 @@
+desc: --depth=5 --alloc-fn=g_malloc --alloc-fn=g_realloc --alloc-fn=g_try_malloc --alloc-fn=g_malloc0 --alloc-fn=g_mem_chunk_alloc
+cmd: gosdt iris.csv experiments/configurations/debug.json
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=3093037
+mem_heap_B=72704
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=3095200
+mem_heap_B=72736
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=3113700
+mem_heap_B=72824
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=3254035
+mem_heap_B=73864
+mem_heap_extra_B=40
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=3267018
+mem_heap_B=74336
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=3267503
+mem_heap_B=74336
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=peak
+n3: 74336 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x4A18C19: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+  n1: 72704 0x4011B89: call_init.part.0 (dl-init.c:72)
+   n1: 72704 0x4011C90: call_init (dl-init.c:30)
+    n1: 72704 0x4011C90: _dl_init (dl-init.c:119)
+     n1: 72704 0x4001139: ??? (in /usr/lib/x86_64-linux-gnu/ld-2.31.so)
+      n0: 72704 0x2: ???
+ n1: 1040 0x4D2BDC1: __new_exitfn (cxa_atexit.c:114)
+  n1: 1040 0x4D2BFA6: __internal_atexit (cxa_atexit.c:44)
+   n1: 1040 0x4D2BFA6: __cxa_atexit (cxa_atexit.c:70)
+    n1: 1040 0x17F9FC: __libc_csu_init (in /usr/local/bin/gosdt)
+     n0: 1040 0x4D0903F: (below main) (libc-start.c:264)
+ n0: 592 in 3 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=7
+#-----------
+time=3267503
+mem_heap_B=73864
+mem_heap_extra_B=40
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=3277048
+mem_heap_B=74888
+mem_heap_extra_B=48
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=3289626
+mem_heap_B=73848
+mem_heap_extra_B=40
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=3303385
+mem_heap_B=1144
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=3305342
+mem_heap_B=120
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=3306268
+mem_heap_B=32
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=3307514
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
