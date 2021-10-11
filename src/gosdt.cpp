@@ -8,11 +8,6 @@ unsigned int mgosdt::GOSDT::size = 0;
 unsigned int mgosdt::GOSDT::iterations = 0;
 unsigned int mgosdt::GOSDT::status = 0;
 
-mgosdt::GOSDT::GOSDT(void) {}
-
-mgosdt::GOSDT::~GOSDT(void) {
-    return;
-}
 
 void mgosdt::GOSDT::configure(std::istream & config_source) { Configuration::configure(config_source); }
 
