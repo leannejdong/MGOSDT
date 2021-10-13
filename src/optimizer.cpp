@@ -7,9 +7,9 @@
 #include "optimizer/dispatch/dispatch.hpp"
 #include "optimizer/extraction/models.hpp"
 
-Optimizer::Optimizer() {
-    return;
-}
+//Optimizer::Optimizer() {
+//    return;
+//}
 
 Optimizer::~Optimizer() {
     State::reset();

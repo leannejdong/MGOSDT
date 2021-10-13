@@ -4,7 +4,8 @@ cmake_minimum_required(VERSION 3.8.0 FATAL_ERROR)
 
 list(APPEND CMAKE_MODULE_PATH "/usr/share/cmake/Modules")
 find_package(TBB COMPONENTS tbbmalloc tbbmalloc_proxy tbb_preview)
-
+find_package(benchmark REQUIRED)
+find_package(Threads REQUIRED)
 enable_testing()
 
 #add_compile_options(-pg)
@@ -100,6 +101,8 @@ target_link_libraries(${PROJECT_NAME}_test
 )
 
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_SOURCE_DIR}/${PROJECT_NAME}_test WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+
+target_link_libraries(gosdt PRIVATE benchmark::benchmark Threads::Threads)
 
 if (${CMAKE_SIZEOF_VOID_P} EQUAL 4)
    set(TARGETBITS 32)

@@ -32,7 +32,7 @@ using json = nlohmann::json;
 
 class Optimizer {
 public:
-    Optimizer();
+    Optimizer() = default;
     ~Optimizer();
 
     void load(std::istream & data_source);
