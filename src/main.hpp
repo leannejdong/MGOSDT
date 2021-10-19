@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <sys/poll.h>
+#include <sys/types.h>
+#include <unistd.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>

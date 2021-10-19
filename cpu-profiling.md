@@ -14,11 +14,11 @@ A closely related concept is Benchmarking, which is more about comparing perform
 In our experiment, we run the experiments for datasets `syn3.txt`, `syn5.txt` and `m2.csv`. First we use `perf` to record the profiling information for our program.
 
 ```sh
-sudo perf record -g -o m2.data gosdt m2.csv experiments/configurations/debug.json
-sudo perf script -i m2.data | /home/leanne/FlameGraph/stackcollapse-perf.pl | /home/leanne/FlameGraph/flamegraph.pl >m2.svg
+sudo perf record -g -o iris.data gosdt iris.csv experiments/configurations/debug.json
+sudo perf script -i m2.data | /home/leanne/FlameGraph/stackcollapse-perf.pl | /home/leanne/FlameGraph/flamegraph.pl >iris.svg
 ```
 
-![Frame Graph for Monk2 data](m2.svg)
+![Frame Graph for Iris data](iris.svg)
 
 ```sh
 sudo perf record -g -o syn3.data gosdt syn3.txt experiments/configurations/debug.json

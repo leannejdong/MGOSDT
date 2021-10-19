@@ -19,7 +19,7 @@
   "stack_limit": 0,
   "tile_limit": 1,
   "time_limit": 1,
-  "worker_limit": 2,
+  "worker_limit": 1,
 
   "costs": "",
   "model": "",

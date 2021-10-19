@@ -1,0 +1,121 @@
+heaptrack output will be written to "/home/leanne/Dev/mgosdt/heaptrack.gosdt.35106.gz"
+/usr/local/lib/heaptrack/libheaptrack_preload.so
+starting application, this might take some time...
+Generalized Optimal Sparse Decision Tree
+Using data set: iris.csv
+Using configuration: {
+  "balance": true,
+  "cancellation": true,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "diagnostics": false,
+  "feature_exchange": true,
+  "feature_transform": true,
+  "look_ahead": true,
+  "model": "",
+  "model_limit": 1,
+  "non_binary": true,
+  "precision_limit": 0,
+  "profile": "",
+  "regularization": 0.009999999776482582,
+  "rule_list": false,
+  "similar_support": true,
+  "stack_limit": 0,
+  "time_limit": 1,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: sepal_length
+  Inferred Type: Rational, Empirical Cardinality: 35, Optionality: 0
+Feature Index: 1, Feature Name: sepal_width
+  Inferred Type: Rational, Empirical Cardinality: 23, Optionality: 0
+Feature Index: 2, Feature Name: petal_length
+  Inferred Type: Rational, Empirical Cardinality: 43, Optionality: 0
+Feature Index: 3, Feature Name: petal_width
+  Inferred Type: Rational, Empirical Cardinality: 22, Optionality: 0
+Feature Index: 4, Feature Name: class
+  Inferred Type: Categorical, Empirical Cardinality: 3, Optionality: 0
+Original Dataset Dimension: 150 x 5
+Binary Dataset Dimension: 150 x 122
+Dataset Dimensions: 150 x 119 x 3
+Starting Optimization
+Time: 0.00143575, Objective: [0.03, 0.353333], Boundary: 0.323333, Graph Size: 1, Queue Size: 134
+Time: 2.16202, Objective: [0.03, 0.353333], Boundary: 0.323333, Graph Size: 3840, Queue Size: 201564
+Optimization Complete
+Training Duration: 2.162 seconds
+Number of Iterations: 9999 iterations
+Size of Graph: 3840 nodes
+Objective Boundary: [0.03, 0.353333]
+Optimality Gap: 0.323333
+Models Generated: 1
+checking...
+[
+  {
+    "children": [
+      {
+        "in": 2.45,
+        "then": {
+          "children": [
+            {
+              "in": 1.65,
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.013333333656191826,
+                "name": "class",
+                "prediction": "Iris-virginica"
+              }
+            },
+            {
+              "in": [
+                null,
+                1.65
+              ],
+              "then": {
+                "complexity": 0.009999999776482582,
+                "loss": 0.026666667312383652,
+                "name": "class",
+                "prediction": "Iris-versicolor"
+              }
+            }
+          ],
+          "feature": 3,
+          "name": "petal_width",
+          "type": "rational"
+        }
+      },
+      {
+        "in": [
+          null,
+          2.45
+        ],
+        "then": {
+          "complexity": 0.009999999776482582,
+          "loss": 0.0,
+          "name": "class",
+          "prediction": "Iris-setosa"
+        }
+      }
+    ],
+    "feature": 2,
+    "name": "petal_length",
+    "type": "rational"
+  }
+]
+There are 3 arguments:
+0 ./gosdt
+1 iris.csv
+2 config.json
+pid_mgosdt: 35119
+heaptrack stats:
+	allocations:          	280828
+	leaked allocations:   	7
+	temporary allocations:	65751
+Heaptrack finished! Now run the following to investigate the data:
+
+  heaptrack --analyze "/home/leanne/Dev/mgosdt/heaptrack.gosdt.35106.gz"

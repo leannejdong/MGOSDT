@@ -45,6 +45,8 @@ int main(int argc, char *argv[]) {
     for(int count{0}; count < argc; ++count){
         std::cout << count << ' ' << argv[count] << '\n';
     }
+    pid_t pid = getpid();
+    std::cout << "pid_mgosdt: " << pid << "\n";
 	return 0;
 }
 

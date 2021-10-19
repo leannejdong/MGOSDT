@@ -10,7 +10,7 @@
 #include <sched.h>
 #include <unistd.h>
 #include <chrono>
-
+#include <future>
 #include <boost/dynamic_bitset.hpp>
 #include <vector>
 #include <string>
@@ -58,7 +58,8 @@ using json = nlohmann::json;
         /// @param id: The worker ID of the current thread
         /// @param optimizer: optimizer object which will assign work to the thread
         /// @modifies return_reference: reference for returning values to the main thread
-        static void work(int const id, Optimizer & optimizer, int & return_reference);
+        //static void work(int const id, Optimizer & optimizer, int & return_reference);
+        static int work(int const id, Optimizer & optimizer);
     };
 }
 

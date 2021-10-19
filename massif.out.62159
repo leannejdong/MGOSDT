@@ -1,0 +1,518 @@
+desc: (none)
+cmd: ./gosdt iris.csv config.json
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=3991771
+mem_heap_B=50415570
+mem_heap_extra_B=4174
+mem_stacks_B=0
+heap_tree=peak
+n2: 50415570 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 50331648 0x438DE2: io::LineReader::init(std::unique_ptr<io::ByteSourceBase, std::default_delete<io::ByteSourceBase> >) (include/csv/csv.h:350)
+  n1: 50331648 0x43833C: io::LineReader::LineReader(char const*, std::istream&) (include/csv/csv.h:411)
+   n1: 50331648 0x432D6D: Encoder::tokenize(std::istream&, std::vector<std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::allocator<std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > >&) (src/encoder.cpp:95)
+    n1: 50331648 0x4328EE: Encoder::Encoder(std::istream&) (src/encoder.cpp:8)
+     n1: 50331648 0x43D620: Dataset::construct_bitmasks(std::istream&) (src/dataset.cpp:49)
+      n1: 50331648 0x43D50B: Dataset::load(std::istream&) (src/dataset.cpp:16)
+       n1: 50331648 0x4567DE: State::initialize(std::istream&, unsigned int) (src/state.cpp:16)
+        n1: 50331648 0x41A9EE: mgosdt::GOSDT::fit(std::istream&, std::unordered_set<Model, std::hash<Model>, std::equal_to<Model>, std::allocator<Model> >&) (src/gosdt.cpp:25)
+         n1: 50331648 0x41A4E2: mgosdt::GOSDT::fit(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (src/gosdt.cpp:10)
+          n0: 50331648 0x40538E: main (src/main.cpp:40)
+ n0: 83922 in 36 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=2
+#-----------
+time=800481605
+mem_heap_B=2315874
+mem_heap_extra_B=73782
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=1587775125
+mem_heap_B=4356354
+mem_heap_extra_B=141798
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=2407299261
+mem_heap_B=6603474
+mem_heap_extra_B=216702
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=3109805433
+mem_heap_B=8029314
+mem_heap_extra_B=264230
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=3684692673
+mem_heap_B=9083874
+mem_heap_extra_B=299382
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=4597965869
+mem_heap_B=10404354
+mem_heap_extra_B=343398
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=5158149352
+mem_heap_B=11746674
+mem_heap_extra_B=388142
+mem_stacks_B=0
+heap_tree=detailed
+n2: 11746674 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 11568720 0x45EAC7: Queue::push(Message const&) (src/queue.cpp:18)
+  n2: 11565600 0x45D89E: Task::send_explorer(Task const&, float, int, unsigned int) (src/task.cpp:255)
+   n1: 5782800 0x45D2E9: Task::send_explorers(float, unsigned int) (src/task.cpp:221)
+    n1: 5782800 0x44D767: Optimizer::dispatch(Message const&, unsigned int) (src/optimizer/dispatch/dispatch.hpp:40)
+     n1: 5782800 0x4505DD: Optimizer::iterate(unsigned int) (src/optimizer.cpp:78)
+      n1: 5782800 0x41BA39: mgosdt::GOSDT::work(int, Optimizer&, int&) (src/gosdt.cpp:125)
+       n1: 5782800 0x4ACC6B3: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.29)
+        n1: 5782800 0x4947608: start_thread (pthread_create.c:477)
+         n0: 5782800 0x4E98292: clone (clone.S:95)
+   n1: 5782800 0x45D314: Task::send_explorers(float, unsigned int) (src/task.cpp:0)
+    n1: 5782800 0x44D767: Optimizer::dispatch(Message const&, unsigned int) (src/optimizer/dispatch/dispatch.hpp:40)
+     n1: 5782800 0x4505DD: Optimizer::iterate(unsigned int) (src/optimizer.cpp:78)
+      n1: 5782800 0x41BA39: mgosdt::GOSDT::work(int, Optimizer&, int&) (src/gosdt.cpp:125)
+       n1: 5782800 0x4ACC6B3: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.29)
+        n1: 5782800 0x4947608: start_thread (pthread_create.c:477)
+         n0: 5782800 0x4E98292: clone (clone.S:95)
+  n0: 3120 in 2 places, all below massif's threshold (1.00%)
+ n0: 177954 in 80 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=9
+#-----------
+time=5568738923
+mem_heap_B=12731874
+mem_heap_extra_B=420982
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=6241636812
+mem_heap_B=14067954
+mem_heap_extra_B=465518
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=7098868474
+mem_heap_B=15952674
+mem_heap_extra_B=528342
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=7567585407
+mem_heap_B=16834674
+mem_heap_extra_B=557742
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=8182072132
+mem_heap_B=18362994
+mem_heap_extra_B=608686
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=8872159994
+mem_heap_B=19692594
+mem_heap_extra_B=653006
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=9642249666
+mem_heap_B=21303474
+mem_heap_extra_B=706702
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=10318246760
+mem_heap_B=22741794
+mem_heap_extra_B=754646
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=10896080478
+mem_heap_B=23660034
+mem_heap_extra_B=785254
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=11330955039
+mem_heap_B=24172194
+mem_heap_extra_B=802326
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=11905471763
+mem_heap_B=25405314
+mem_heap_extra_B=843430
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=12484960086
+mem_heap_B=26467794
+mem_heap_extra_B=878846
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=13069165510
+mem_heap_B=27122034
+mem_heap_extra_B=900654
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=13793265679
+mem_heap_B=28521234
+mem_heap_extra_B=947294
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=14369998200
+mem_heap_B=29343954
+mem_heap_extra_B=974718
+mem_stacks_B=0
+heap_tree=detailed
+n2: 29343954 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 29166000 0x45EAC7: Queue::push(Message const&) (src/queue.cpp:18)
+  n2: 29156400 0x45D89E: Task::send_explorer(Task const&, float, int, unsigned int) (src/task.cpp:255)
+   n1: 14578560 0x45D314: Task::send_explorers(float, unsigned int) (src/task.cpp:0)
+    n1: 14578560 0x44D767: Optimizer::dispatch(Message const&, unsigned int) (src/optimizer/dispatch/dispatch.hpp:40)
+     n1: 14578560 0x4505DD: Optimizer::iterate(unsigned int) (src/optimizer.cpp:78)
+      n1: 14578560 0x41BA39: mgosdt::GOSDT::work(int, Optimizer&, int&) (src/gosdt.cpp:125)
+       n1: 14578560 0x4ACC6B3: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.29)
+        n1: 14578560 0x4947608: start_thread (pthread_create.c:477)
+         n0: 14578560 0x4E98292: clone (clone.S:95)
+   n1: 14577840 0x45D2E9: Task::send_explorers(float, unsigned int) (src/task.cpp:221)
+    n1: 14577840 0x44D767: Optimizer::dispatch(Message const&, unsigned int) (src/optimizer/dispatch/dispatch.hpp:40)
+     n1: 14577840 0x4505DD: Optimizer::iterate(unsigned int) (src/optimizer.cpp:78)
+      n1: 14577840 0x41BA39: mgosdt::GOSDT::work(int, Optimizer&, int&) (src/gosdt.cpp:125)
+       n1: 14577840 0x4ACC6B3: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.29)
+        n1: 14577840 0x4947608: start_thread (pthread_create.c:477)
+         n0: 14577840 0x4E98292: clone (clone.S:95)
+  n0: 9600 in 2 places, all below massif's threshold (1.00%)
+ n0: 177954 in 80 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=24
+#-----------
+time=14955250762
+mem_heap_B=30368754
+mem_heap_extra_B=1008878
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=15533389964
+mem_heap_B=30834354
+mem_heap_extra_B=1024398
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=16262437912
+mem_heap_B=31868034
+mem_heap_extra_B=1058854
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=16842920252
+mem_heap_B=32990274
+mem_heap_extra_B=1096262
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=17745091944
+mem_heap_B=34115154
+mem_heap_extra_B=1133758
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=18449790714
+mem_heap_B=35181714
+mem_heap_extra_B=1169310
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=18913800939
+mem_heap_B=35466114
+mem_heap_extra_B=1178790
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=19379927303
+mem_heap_B=36183474
+mem_heap_extra_B=1202702
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=19850978475
+mem_heap_B=36648114
+mem_heap_extra_B=1218190
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=20555681266
+mem_heap_B=37646994
+mem_heap_extra_B=1251486
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=21257474616
+mem_heap_B=38128194
+mem_heap_extra_B=1267526
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=21958224881
+mem_heap_B=39241794
+mem_heap_extra_B=1304646
+mem_stacks_B=0
+heap_tree=detailed
+n2: 39241794 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 39063840 0x45EAC7: Queue::push(Message const&) (src/queue.cpp:18)
+  n2: 39048720 0x45D89E: Task::send_explorer(Task const&, float, int, unsigned int) (src/task.cpp:255)
+   n1: 19524480 0x45D314: Task::send_explorers(float, unsigned int) (src/task.cpp:0)
+    n1: 19524480 0x44D767: Optimizer::dispatch(Message const&, unsigned int) (src/optimizer/dispatch/dispatch.hpp:40)
+     n1: 19524480 0x4505DD: Optimizer::iterate(unsigned int) (src/optimizer.cpp:78)
+      n1: 19524480 0x41BA39: mgosdt::GOSDT::work(int, Optimizer&, int&) (src/gosdt.cpp:125)
+       n1: 19524480 0x4ACC6B3: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.29)
+        n1: 19524480 0x4947608: start_thread (pthread_create.c:477)
+         n0: 19524480 0x4E98292: clone (clone.S:95)
+   n1: 19524240 0x45D2E9: Task::send_explorers(float, unsigned int) (src/task.cpp:221)
+    n1: 19524240 0x44D767: Optimizer::dispatch(Message const&, unsigned int) (src/optimizer/dispatch/dispatch.hpp:40)
+     n1: 19524240 0x4505DD: Optimizer::iterate(unsigned int) (src/optimizer.cpp:78)
+      n1: 19524240 0x41BA39: mgosdt::GOSDT::work(int, Optimizer&, int&) (src/gosdt.cpp:125)
+       n1: 19524240 0x4ACC6B3: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.29)
+        n1: 19524240 0x4947608: start_thread (pthread_create.c:477)
+         n0: 19524240 0x4E98292: clone (clone.S:95)
+  n0: 15120 in 2 places, all below massif's threshold (1.00%)
+ n0: 177954 in 80 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=36
+#-----------
+time=22426650541
+mem_heap_B=40022754
+mem_heap_extra_B=1330678
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=23127768148
+mem_heap_B=40906674
+mem_heap_extra_B=1360142
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=23597779294
+mem_heap_B=41613954
+mem_heap_extra_B=1383718
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=24064170422
+mem_heap_B=41980434
+mem_heap_extra_B=1395934
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=24532902603
+mem_heap_B=42799074
+mem_heap_extra_B=1423222
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=24997103636
+mem_heap_B=43245714
+mem_heap_extra_B=1438110
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=25463055288
+mem_heap_B=43845234
+mem_heap_extra_B=1458094
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=25934597441
+mem_heap_B=44230434
+mem_heap_extra_B=1470934
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=26641389151
+mem_heap_B=45407634
+mem_heap_extra_B=1510174
+mem_stacks_B=0
+heap_tree=detailed
+n2: 45407634 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 45229680 0x45EAC7: Queue::push(Message const&) (src/queue.cpp:18)
+  n2: 45210240 0x45D89E: Task::send_explorer(Task const&, float, int, unsigned int) (src/task.cpp:255)
+   n1: 22607520 0x45D2E9: Task::send_explorers(float, unsigned int) (src/task.cpp:221)
+    n1: 22607520 0x44D767: Optimizer::dispatch(Message const&, unsigned int) (src/optimizer/dispatch/dispatch.hpp:40)
+     n1: 22607520 0x4505DD: Optimizer::iterate(unsigned int) (src/optimizer.cpp:78)
+      n1: 22607520 0x41BA39: mgosdt::GOSDT::work(int, Optimizer&, int&) (src/gosdt.cpp:125)
+       n1: 22607520 0x4ACC6B3: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.29)
+        n1: 22607520 0x4947608: start_thread (pthread_create.c:477)
+         n0: 22607520 0x4E98292: clone (clone.S:95)
+   n1: 22602720 0x45D314: Task::send_explorers(float, unsigned int) (src/task.cpp:0)
+    n1: 22602720 0x44D767: Optimizer::dispatch(Message const&, unsigned int) (src/optimizer/dispatch/dispatch.hpp:40)
+     n1: 22602720 0x4505DD: Optimizer::iterate(unsigned int) (src/optimizer.cpp:78)
+      n1: 22602720 0x41BA39: mgosdt::GOSDT::work(int, Optimizer&, int&) (src/gosdt.cpp:125)
+       n1: 22602720 0x4ACC6B3: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.29)
+        n1: 22602720 0x4947608: start_thread (pthread_create.c:477)
+         n0: 22602720 0x4E98292: clone (clone.S:95)
+  n0: 19440 in 2 places, all below massif's threshold (1.00%)
+ n0: 177954 in 80 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=45
+#-----------
+time=27105587498
+mem_heap_B=45736434
+mem_heap_extra_B=1521134
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=27574780014
+mem_heap_B=46312674
+mem_heap_extra_B=1540342
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=28039367234
+mem_heap_B=47052114
+mem_heap_extra_B=1564990
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=28507741561
+mem_heap_B=48008274
+mem_heap_extra_B=1596862
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=28972284180
+mem_heap_B=35139558
+mem_heap_extra_B=1167874
+mem_stacks_B=0
+heap_tree=detailed
+n2: 35139558 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 34959600 0x45EAC7: Queue::push(Message const&) (src/queue.cpp:18)
+  n2: 34939200 0x45D89E: Task::send_explorer(Task const&, float, int, unsigned int) (src/task.cpp:255)
+   n1: 17470080 0x45D314: Task::send_explorers(float, unsigned int) (src/task.cpp:0)
+    n1: 17470080 0x44D767: Optimizer::dispatch(Message const&, unsigned int) (src/optimizer/dispatch/dispatch.hpp:40)
+     n1: 17470080 0x4505DD: Optimizer::iterate(unsigned int) (src/optimizer.cpp:78)
+      n1: 17470080 0x41BA39: mgosdt::GOSDT::work(int, Optimizer&, int&) (src/gosdt.cpp:125)
+       n1: 17470080 0x4ACC6B3: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.29)
+        n1: 17470080 0x4947608: start_thread (pthread_create.c:477)
+         n0: 17470080 0x4E98292: clone (clone.S:95)
+   n1: 17469120 0x45D2E9: Task::send_explorers(float, unsigned int) (src/task.cpp:221)
+    n1: 17469120 0x44D767: Optimizer::dispatch(Message const&, unsigned int) (src/optimizer/dispatch/dispatch.hpp:40)
+     n1: 17469120 0x4505DD: Optimizer::iterate(unsigned int) (src/optimizer.cpp:78)
+      n1: 17469120 0x41BA39: mgosdt::GOSDT::work(int, Optimizer&, int&) (src/gosdt.cpp:125)
+       n1: 17469120 0x4ACC6B3: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.29)
+        n1: 17469120 0x4947608: start_thread (pthread_create.c:477)
+         n0: 17469120 0x4E98292: clone (clone.S:95)
+  n0: 20400 in 2 places, all below massif's threshold (1.00%)
+ n0: 179958 in 95 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=50
+#-----------
+time=29382874477
+mem_heap_B=10682598
+mem_heap_extra_B=352642
+mem_stacks_B=0
+heap_tree=empty

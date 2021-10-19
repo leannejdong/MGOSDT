@@ -29,7 +29,7 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
     GOSDT::iterations = 0;
     GOSDT::status = 0;
 
-    std::vector< std::thread > workers;
+    std::vector< std::future<int> > workers;
     std::vector< int > iterations(Configuration::worker_limit);
 
     if(Configuration::verbose) { std::cout << "Starting Optimization" << std::endl; }
@@ -37,19 +37,20 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
 
     optimizer.initialize();
     for (unsigned int i = 0; i < Configuration::worker_limit; ++i) {
-        workers.emplace_back(work, i, std::ref(optimizer), std::ref(iterations[i]));
-        #ifndef __LINUX__
-        if (Configuration::worker_limit > 1) {
-            // If using Ubuntu Build, we can pin each thread to a specific CPU core to improve cache locality
-            cpu_set_t cpuset; CPU_ZERO(&cpuset); CPU_SET(i, &cpuset);
-            int error = pthread_setaffinity_np(workers[i].native_handle(), sizeof(cpu_set_t), &cpuset);
-            if (error != 0) { std::cerr << "Error calling pthread_setaffinity_np: " << error << "\n"; }
-        }
-        #endif
+        //workers.emplace_back(work, i, std::ref(optimizer), std::ref(iterations[i]));
+        workers.emplace_back(std::async(work, i, std::ref(optimizer)));
+//        #ifndef __LINUX__
+//        if (Configuration::worker_limit > 1) {
+//            // If using Ubuntu Build, we can pin each thread to a specific CPU core to improve cache locality
+//            cpu_set_t cpuset; CPU_ZERO(&cpuset); CPU_SET(i, &cpuset);
+//            int error = pthread_setaffinity_np(workers[i]/*.native_handle()*/, sizeof(cpu_set_t), &cpuset);
+//            if (error != 0) { std::cerr << "Error calling pthread_setaffinity_np: " << error << "\n"; }
+//        }
+       // #endif
     }
 
-    for (auto &thread: workers) {
-        thread.join();
+    for (auto &fut: workers) {
+        fut.wait();
     }
     auto stop = std::chrono::steady_clock::now(); // Stop measuring training time
     GOSDT::time = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() / 1000.0;
@@ -119,13 +120,24 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
     }
 }
 
-void mgosdt::GOSDT::work(int const id, Optimizer & optimizer, int & return_reference) {
+//void mgosdt::GOSDT::work(int const id, Optimizer & optimizer, int & return_reference) {
+//    unsigned int iterations = 0;
+//    try {
+//        while (optimizer.iterate(id)) { iterations += 1; }
+//    } catch( IntegrityViolation exception ) {
+//        std::cout << exception.to_string() << std::endl;
+//        throw std::move(exception);
+//    }
+//    return_reference = iterations;
+//}
+
+ int mgosdt::GOSDT::work(int const id, Optimizer & optimizer) {
     unsigned int iterations = 0;
     try {
         while (optimizer.iterate(id)) { iterations += 1; }
     } catch( IntegrityViolation exception ) {
-        std::cout << exception.to_string() << std::endl;
+        std::cout << exception.to_string() << "\n";
         throw std::move(exception);
     }
-    return_reference = iterations;
+    return iterations;
 }
