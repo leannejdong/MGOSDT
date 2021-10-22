@@ -16,6 +16,7 @@ add_compile_options(-fdiagnostics-color=auto)
 #add_compile_options(-D_GLIBCXX_DEBUG=1)
 #add_compile_options(-g -fsanitize=address -fno-omit-frame-pointer)
 #add_link_options(-g -fsanitize=address)
+#add_link_options(-g -fsanitize=thread)
 
 add_library(${PROJECT_NAME}_lib 
 	src/types.hpp 
