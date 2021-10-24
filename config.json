@@ -9,7 +9,7 @@
   "rule_list": false,
 
   "diagnostics": false,
-  "verbose": true,
+  "verbose": false,
   "regularization": 0.01,
   "uncertainty_tolerance": 0.0,
   "upperbound": 0.0,

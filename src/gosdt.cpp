@@ -37,16 +37,7 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
 
     optimizer.initialize();
     for (unsigned int i = 0; i < Configuration::worker_limit; ++i) {
-        //workers.emplace_back(work, i, std::ref(optimizer), std::ref(iterations[i]));
         workers.emplace_back(std::async(work, i, std::ref(optimizer)));
-//        #ifndef __LINUX__
-//        if (Configuration::worker_limit > 1) {
-//            // If using Ubuntu Build, we can pin each thread to a specific CPU core to improve cache locality
-//            cpu_set_t cpuset; CPU_ZERO(&cpuset); CPU_SET(i, &cpuset);
-//            int error = pthread_setaffinity_np(workers[i]/*.native_handle()*/, sizeof(cpu_set_t), &cpuset);
-//            if (error != 0) { std::cerr << "Error calling pthread_setaffinity_np: " << error << "\n"; }
-//        }
-       // #endif
     }
 
     for (auto &fut: workers) {

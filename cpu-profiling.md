@@ -11,17 +11,17 @@ In this project, we use a linux-based profiling tool [perf](https://perf.wiki.ke
 
 A closely related concept is Benchmarking, which is more about comparing performance. For example, one might use a profiling tool to figure out if a certain function takes a lot of time, then we change the function in a way we think will be faster, then we benchmark the old and new version and see how it differs in term of speed.
 
-In our experiment, we run the experiments for datasets `syn3.txt`, `syn5.txt` and `m2.csv`. First we use `perf` to record the profiling information for our program.
+In our experiment, we run the experiments for datasets `syn3.txt`, `syn5.txt` and `iris.csv`. First we use `perf` to record the profiling information for our program.
 
 ```sh
-sudo perf record -g -o iris.data gosdt iris.csv experiments/configurations/debug.json
-sudo perf script -i m2.data | /home/leanne/FlameGraph/stackcollapse-perf.pl | /home/leanne/FlameGraph/flamegraph.pl >iris.svg
+sudo perf record -g -o iris.data ./gosdt iris.csv config.json
+sudo perf script -i iris.data | /home/leanne/FlameGraph/stackcollapse-perf.pl | /home/leanne/FlameGraph/flamegraph.pl >iris.svg
 ```
 
 ![Frame Graph for Iris data](iris.svg)
 
 ```sh
-sudo perf record -g -o syn3.data gosdt syn3.txt experiments/configurations/debug.json
+sudo perf record -g -o syn3.data ./gosdt syn3.txt experiments/configurations/debug.json
 sudo perf script -i syn3.data | /home/leanne/FlameGraph/stackcollapse-perf.pl | /home/leanne/FlameGraph/flamegraph.pl >syn3.svg
 ```
 In flame graph, the highest-level stack frames are at the bottom. The tall spike means that the call-stack is very deep, that is, a lot of nested function calls. Having a wide function (relative to its sibling) means that it takes up most of the time of the parent function. At the very top, we typically have `main` which is more or less in all samples. And is always at the top of the callstack.
@@ -29,7 +29,7 @@ Put in a statistical sense, the `x-axis` is for the time series, while the `y`-a
 ![Frame Graph for Synthetic dataset 1](syn3.svg)
 
 ```sh
-sudo perf record -g -o syn5.data gosdt m2.csv experiments/configurations/debug.json
+sudo perf record -g -o syn5.data ./gosdt m2.csv experiments/configurations/debug.json
 sudo perf script -i syn5.data | /home/leanne/FlameGraph/stackcollapse-perf.pl | /home/leanne/FlameGraph/flamegraph.pl >syn5.svg
 ```
 ![Frame Graph for Synthetic dataset 2](syn5.svg)

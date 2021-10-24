@@ -96,7 +96,7 @@ private:
     float global_upperbound = std::numeric_limits<float>::max(); // Global upperbound of the objective
     float global_lowerbound = -std::numeric_limits<float>::max(); // Global lowerbound of the objective
     std::vector< unsigned int > work_distribution; // Distribution of work done for each percentile
-    unsigned int explore = 0.0; // Distributtion of work from downward message
+    unsigned int explore = 0.0; // Distribution of work from downward message
     unsigned int exploit = 0.0; // Distribution of work from upward message
 
     float cart(Bitmask const & capture_set, Bitmask const & feature_set, unsigned int id) const;
@@ -116,7 +116,7 @@ private:
 
     bool load_children(Task & task, Bitmask const & features, unsigned int id);
 
-    bool load_parents(Tile const & identifier, adjacency_accessor & parents);
+    static bool load_parents(Tile const & identifier, adjacency_accessor & parents);
 
     bool load_self(Tile const & identifier, vertex_accessor & self);
 

@@ -30,120 +30,120 @@ public:
     static const bitblock bits_per_range; // Number of bits in a single rangeblock
     static const bitblock bits_per_block; // Number of bits in a single bitblock
 
-    // @param blocks: the blocks containing bits
-    // @param size: the number of bits which are represented in blocks
-    // @modifies blocks will be set to have all bits be 1
+    /// @param blocks: the blocks containing bits
+    /// @param size: the number of bits which are represented in blocks
+    /// @modifies blocks will be set to have all bits be 1
     static void ones(bitblock * blocks, unsigned int size);
 
-    // @param blocks: the blocks containing bits
-    // @param size: the number of bits which are represented in blocks
-    // @modifies blocks will be set to have all bits be 0
+    /// @param blocks: the blocks containing bits
+    /// @param size: the number of bits which are represented in blocks
+    /// @modifies blocks will be set to have all bits be 0
     static void zeros(bitblock * blocks, unsigned int size);
 
-    // @param blocks: the blocks containing bits to copy
-    // @param other_blocks: the blocks which will be overwritten by the copy
-    // @param size: the number of bits which are represented in blocks
-    // @modifies other_blocks will be overwritten with the contents of blocks
+    /// @param blocks: the blocks containing bits to copy
+    /// @param other_blocks: the blocks which will be overwritten by the copy
+    /// @param size: the number of bits which are represented in blocks
+    /// @modifies other_blocks will be overwritten with the contents of blocks
     static void copy(bitblock * blocks, bitblock * other_blocks, unsigned int size);
 
-    // @param size: the number of bits to be represented
-    // @param number_of_blocks: pointer to store the number of blocks required to represent these bits
-    // @param block_offset: pointer to store the number of bits actually used in the last block
-    // @modifies number_of_bits: initialized with the number of blocks required to represent these bits
-    // @modifies block_offset: initialized with the number of bits actually used in the last block
+    /// @param size: the number of bits to be represented
+    /// @param number_of_blocks: pointer to store the number of blocks required to represent these bits
+    /// @param block_offset: pointer to store the number of bits actually used in the last block
+    /// @modifies number_of_bits: initialized with the number of blocks required to represent these bits
+    /// @modifies block_offset: initialized with the number of bits actually used in the last block
     static void block_layout(unsigned int size, unsigned int * number_of_blocks, unsigned int * block_offset);
 
-    // @param blocks: the blocks to sanitize / normalize
-    // @param number of blocks: the number of blocks present in blocks
-    // @param offset: the number of bits present in the final block
-    // @modifies blocks: the final block will have all unsused bits cleared
+    /// @param blocks: the blocks to sanitize / normalize
+    /// @param number of blocks: the number of blocks present in blocks
+    /// @param offset: the number of bits present in the final block
+    /// @modifies blocks: the final block will have all unsused bits cleared
     static void clean(bitblock * blocks, unsigned int number_of_blocks, unsigned int offset);
 
-    // @param blocks: the blocks from which to count the bits which are set to 1
-    // @param size: the number of bits which are represented in blocks
-    // @returns the number of represented bits which are set to 1
+    /// @param blocks: the blocks from which to count the bits which are set to 1
+    /// @param size: the number of bits which are represented in blocks
+    /// @returns the number of represented bits which are set to 1
     static unsigned int count(bitblock * blocks, unsigned int size);
 
-    // @param blocks: the blocks from which to compute the number of contiguous ranges of bits which are set to 1
-    // @param size: the number of bits which are represented in blocks
-    // @returns the estimated number of contiguous ranges of bits which are set to 1
-    // @note the this was originally an approximate method. I later altered this to an exact method :D
+    /// @param blocks: the blocks from which to compute the number of contiguous ranges of bits which are set to 1
+    /// @param size: the number of bits which are represented in blocks
+    /// @returns the estimated number of contiguous ranges of bits which are set to 1
+    /// @note the this was originally an approximate method. I later altered this to an exact method :D
     static unsigned int words(bitblock * blocks, unsigned int size);
 
-    // @param blocks: blocks which act as a vector of bits for a bit-wise logical and
-    // @param other_blocks: blocks which act as a vector of bits for a bit-wise logical and
-    // @param size: the number of bits which are represented in blocks and other_blocks
-    // @param flip: whether or not to interpret the bits of blocks as flipped before applying the bit-wise operation
-    // @modifies other_blocks: will be overwritten with the result
+    /// @param blocks: blocks which act as a vector of bits for a bit-wise logical and
+    /// @param other_blocks: blocks which act as a vector of bits for a bit-wise logical and
+    /// @param size: the number of bits which are represented in blocks and other_blocks
+    /// @param flip: whether or not to interpret the bits of blocks as flipped before applying the bit-wise operation
+    /// @modifies other_blocks: will be overwritten with the result
     static void bit_and(bitblock * blocks, bitblock * other_blocks, unsigned int size, bool flip = false);
     
-    // @param blocks: blocks which act as a vector of bits for a bit-wise logical or
-    // @param other_blocks: blocks which act as a vector of bits for a bit-wise logical or
-    // @param size: the number of bits which are represented in blocks and other_blocks
-    // @param flip: whether or not to interpret the bits of blocks as flipped before applying the bit-wise operation
-    // @modifies other_blocks: will be overwritten with the result
+    /// @param blocks: blocks which act as a vector of bits for a bit-wise logical or
+    /// @param other_blocks: blocks which act as a vector of bits for a bit-wise logical or
+    /// @param size: the number of bits which are represented in blocks and other_blocks
+    /// @param flip: whether or not to interpret the bits of blocks as flipped before applying the bit-wise operation
+    /// @modifies other_blocks: will be overwritten with the result
     static void bit_or(bitblock * blocks, bitblock * other_blocks, unsigned int size, bool flip = false);
 
-    // @param blocks: blocks which act as a vector of bits for a bit-wise logical xor
-    // @param other_blocks: blocks which act as a vector of bits for a bit-wise logical xor
-    // @param size: the number of bits which are represented in blocks and other_blocks
-    // @param flip: whether or not to interpret the bits of blocks as flipped before applying the bit-wise operation
-    // @modifies other_blocks: will be overwritten with the result
+    /// @param blocks: blocks which act as a vector of bits for a bit-wise logical xor
+    /// @param other_blocks: blocks which act as a vector of bits for a bit-wise logical xor
+    /// @param size: the number of bits which are represented in blocks and other_blocks
+    /// @param flip: whether or not to interpret the bits of blocks as flipped before applying the bit-wise operation
+    /// @modifies other_blocks: will be overwritten with the result
     static void bit_xor(bitblock * blocks, bitblock * other_blocks, unsigned int size, bool flip = false);
 
-    // @param blocks: blocks which act as a vector of bits for comparison
-    // @param other_blocks: blocks which act as a vector of bits for comparison
-    // @param size: the number of bits which are represented in blocks and other_blocks
-    // @param flip: whether or not to interpret the bits of blocks as flipped before applying the bit-wise operation
-    // @returns whether blocks is bit-wise equal to other_blocks
+    /// @param blocks: blocks which act as a vector of bits for comparison
+    /// @param other_blocks: blocks which act as a vector of bits for comparison
+    /// @param size: the number of bits which are represented in blocks and other_blocks
+    /// @param flip: whether or not to interpret the bits of blocks as flipped before applying the bit-wise operation
+    /// @returns whether blocks is bit-wise equal to other_blocks
     static bool equals(bitblock * const blocks, bitblock * const other_blocks, unsigned int size, bool flip = false);
 
-    // @param left: blocks which act as a vector of bits for comparison
-    // @param right: blocks which act as a vector of bits for comparison
-    // @param size: the number of bits which are represented in blocks and other_blocks
-    // @returns 0 if left == right, -1 if left < right, 1 if left > right
-    // @note this comparison uses bit 0 as the least significant bit (little endian)
+    /// @param left: blocks which act as a vector of bits for comparison
+    /// @param right: blocks which act as a vector of bits for comparison
+    /// @param size: the number of bits which are represented in blocks and other_blocks
+    /// @returns 0 if left == right, -1 if left < right, 1 if left > right
+    /// @note this comparison uses bit 0 as the least significant bit (little endian)
     static int compare(bitblock * const left, bitblock * const right, unsigned int size);
 
-    // @param left: blocks which will be compared with right
-    // @param right: blocks which will be compared with left
-    // @param size: the number of blocks to use during comparison
-    // @returns whether left is less (or greater) than right
-    // @note this comparison uses bit 0 as the least significant bit (little endian)
+    /// @param left: blocks which will be compared with right
+    /// @param right: blocks which will be compared with left
+    /// @param size: the number of blocks to use during comparison
+    /// @returns whether left is less (or greater) than right
+    /// @note this comparison uses bit 0 as the least significant bit (little endian)
     static bool less_than(bitblock * const left, bitblock * const right, unsigned int size);
     static bool greater_than(bitblock * const left, bitblock * const right, unsigned int size);
 
-    // @param blocks: blocks which contain bits to be hashed
-    // @param size: the number of bits which are represented in blocks
-    // @returns a hash value of blocks
+    /// @param blocks: blocks which contain bits to be hashed
+    /// @param size: the number of bits which are represented in blocks
+    /// @returns a hash value of blocks
     static size_t hash(bitblock * blocks, unsigned int size);
 
-    // @param blocks: blocks which contain bits to be read
-    // @param size: the number of bits which are represented in blocks
-    // @param index: index of the bit to be read
-    // @returns the bit at the provided index represented as either 1 or 0
+    /// @param blocks: blocks which contain bits to be read
+    /// @param size: the number of bits which are represented in blocks
+    /// @param index: index of the bit to be read
+    /// @returns the bit at the provided index represented as either 1 or 0
     static unsigned int get(bitblock * blocks, unsigned int size, unsigned int index);
 
-    // @param blocks: blocks which contain bits to be written
-    // @param size: the number of bits which are represented in blocks
-    // @param index: index of the bit to be written
-    // @param value: value to be written to at indexed position
-    // @modifies blocks: blocks will be modified at the specified index with the specified value
+    /// @param blocks: blocks which contain bits to be written
+    /// @param size: the number of bits which are represented in blocks
+    /// @param index: index of the bit to be written
+    /// @param value: value to be written to at indexed position
+    /// @modifies blocks: blocks will be modified at the specified index with the specified value
     static void set(bitblock * blocks, unsigned int size, unsigned int index, bool value = 1);
 
-    // @param blocks: blocks of bits to scan over
-    // @param size: the number of bits which are represented in blocks
-    // @param start: the starting index (inclusive) to scan for a bit that matches 'value'
-    // @returns: the index of the first bit that matches value
-    // @note: scan will search from 'start' towards more significant bits
-    // @note: rscan will search from 'start' towards less significant bits
+    /// @param blocks: blocks of bits to scan over
+    /// @param size: the number of bits which are represented in blocks
+    /// @param start: the starting index (inclusive) to scan for a bit that matches 'value'
+    /// @returns: the index of the first bit that matches value
+    /// @note: scan will search from 'start' towards more significant bits
+    /// @note: rscan will search from 'start' towards less significant bits
     static int scan(bitblock * blocks, int size, int start, bool value = 1);
     static int rscan(bitblock * blocks, int size, int start, bool value = 1);
 
-    // @param blocks: blocks which will be converted to string format
-    // @param size: the number of bits expected to convert
-    // @param reverse: whether to reverse the printed bit order
-    // @returns a string containing the bits in order of least significant to most significant
+    /// @param blocks: blocks which will be converted to string format
+    /// @param size: the number of bits expected to convert
+    /// @param reverse: whether to reverse the printed bit order
+    /// @returns a string containing the bits in order of least significant to most significant
     static std::string to_string(bitblock * blocks, unsigned int size, bool flip = false);
 
     static bool integrity_check; // Flag that indicates whether null pointer checks are performed on object instances
@@ -156,72 +156,72 @@ public:
     static void benchmark(unsigned int size); // Run a benchmark for a bitmask of the given size
 
     Bitmask();
-    // Construction from a single fill-value and size
+    /// Construction from a single fill-value and size
     Bitmask(unsigned int size, bool fill = false, bitblock * local_buffer=NULL);
-    // Construction by copying from a stack-based bitblock array
+    /// Construction by copying from a stack-based bitblock array
     Bitmask(bitblock * blocks, unsigned int block_count, bitblock * local_buffer=NULL);
-    // Construction by copying from a dynamic_bitset
+    /// Construction by copying from a dynamic_bitset
     Bitmask(dynamic_bitset const & source, bitblock * local_buffer=NULL);
-    // Construction by copying from another instance
+    /// Construction by copying from another instance
     Bitmask(Bitmask const & source, bitblock * local_buffer=NULL);
 
     ~Bitmask();
 
-    // Initialize attributes and allocate memory (if needed) for this instance
+    /// Initialize attributes and allocate memory (if needed) for this instance
     void initialize(unsigned int size, bitblock * local_buffer=NULL);
 
-    // @param dest_blocks: an array of bitblocks to store bits on
-    // @modifies dest_blocks: the contents of dest_blocks will be overwritten with a copy of the bits stored in this bitmask
+    /// @param dest_blocks: an array of bitblocks to store bits on
+    /// @modifies dest_blocks: the contents of dest_blocks will be overwritten with a copy of the bits stored in this bitmask
     void copy_to(bitblock * dest_blocks) const;
 
-    // @param dest_blocks: an array of bitblocks to copy bits from
-    // @modifies content: the instance member content will be overwritten with _size blocks of src_blocks
+    /// @param dest_blocks: an array of bitblocks to copy bits from
+    /// @modifies content: the instance member content will be overwritten with _size blocks of src_blocks
     void copy_from(bitblock * src_blocks);
-    // Aliases to copy_from
+    /// Aliases to copy_from
     Bitmask & operator=(Bitmask const & other);
 
-    // @returns a pointer to the blocks of this instance
+    /// @returns a pointer to the blocks of this instance
     bitblock * data() const;
 
-    // @returns the number of bits represented by this instance
+    /// @returns the number of bits represented by this instance
     unsigned int size() const;
 
-    // @returns the number of bits representable by this instance
+    /// @returns the number of bits representable by this instance
     unsigned int capacity() const;
 
-    // @returns the number of bits set to 1
+    /// @returns the number of bits set to 1
     unsigned int count() const;
 
-    // @returns estimates the number of contiguous ranges of 1's
+    /// @returns estimates the number of contiguous ranges of 1's
     unsigned int words() const;
 
-    // @param start: the bit index to start scanning from
-    // @param value the value of the bit to scan for
-    // @returns the index of the first bit that matches value, starting at (inclusive) the index 'start'.
-    // @note scan returns size if scan doesn't find any matches, -1 if rscan doesn't find any matches
-    // @note the scan implementation searches from start to most-significant bit
-    // @note the rscan implementation searches from start to least-significant bit
+    /// @param start: the bit index to start scanning from
+    /// @param value the value of the bit to scan for
+    /// @returns the index of the first bit that matches value, starting at (inclusive) the index 'start'.
+    /// @note scan returns size if scan doesn't find any matches, -1 if rscan doesn't find any matches
+    /// @note the scan implementation searches from start to most-significant bit
+    /// @note the rscan implementation searches from start to least-significant bit
     int scan(int start, bool value) const;
     int rscan(int start, bool value) const;
 
-    // @param value the value of the bit to scan for
-    // @param begin: the bit index to start scanning from
-    // @modifies begin: the index of the first bit in the scan that matches value
-    // @modifies end: the index of the first bit that doesn't match the value following the bit matched at 'begin'
-    // @return true if a range is found
-    // @note these implementations are for finding contiguous ranges of bits matching a specific value
+    /// @param value the value of the bit to scan for
+    /// @param begin: the bit index to start scanning from
+    /// @modifies begin: the index of the first bit in the scan that matches value
+    /// @modifies end: the index of the first bit that doesn't match the value following the bit matched at 'begin'
+    /// @return true if a range is found
+    /// @note these implementations are for finding contiguous ranges of bits matching a specific value
     bool scan_range(bool value, int & begin, int & end) const;
     bool rscan_range(bool value, int & begin, int & end) const;
 
-    // @returns true if and only if all bits are set to 0
+    /// @returns true if and only if all bits are set to 0
     bool empty() const;
 
-    // @returns true if and only if all bits are set to 1
+    /// @returns true if and only if all bits are set to 1
     bool full() const;
 
-    // @param blocks: the second operand vector of blocks of bits
-    // @param flip: whether or not to treat the bits of this instance as flipped before applying the operation
-    // @modifies blocks: blocks will be overwritten with the resulting bits
+    /// @param blocks: the second operand vector of blocks of bits
+    /// @param flip: whether or not to treat the bits of this instance as flipped before applying the operation
+    /// @modifies blocks: blocks will be overwritten with the resulting bits
     void bit_and(bitblock * blocks, bool flip = false) const;
     void bit_xor(bitblock * blocks, bool flip = false) const;
     void bit_or(bitblock * blocks, bool flip = false) const;
@@ -229,63 +229,63 @@ public:
     void bit_xor(Bitmask const & other, bool flip = false) const;
     void bit_or(Bitmask const & other, bool flip = false) const;
 
-    // @modifes: sets every bit to zero
+    /// @modifes: sets every bit to zero
     void clear();
 
-    // @modifes: sets every bit to one
+    /// @modifes: sets every bit to one
     void fill();
 
-    // @param blocks: an array of bitblocks containing bits to be compared
-    // @returns whether the bits match up to the size of this instance
+    /// @param blocks: an array of bitblocks containing bits to be compared
+    /// @returns whether the bits match up to the size of this instance
     bool operator==(bitblock * blocks) const;
 
-    // @param other: a bitmask containing an array of bitblocks containing bits to be compared
-    // @returns whether the bits match up to the size of this instance
+    /// @param other: a bitmask containing an array of bitblocks containing bits to be compared
+    /// @returns whether the bits match up to the size of this instance
     bool operator==(Bitmask const & other) const;
 
-    // @param other: another bitmask instance for comparison
-    // @returns whether the other bitmask is considered lesser
-    // @note the 0th bit is considered most significant when making this comparison
+    /// @param other: another bitmask instance for comparison
+    /// @returns whether the other bitmask is considered lesser
+    /// @note the 0th bit is considered most significant when making this comparison
     bool operator<(Bitmask const & other) const;
 
-    // @param other: another bitmask instance for comparison
-    // @returns whether the other bitmask is considered lesser
-    // @note the 0th bit is considered most significant when making this comparison
+    /// @param other: another bitmask instance for comparison
+    /// @returns whether the other bitmask is considered lesser
+    /// @note the 0th bit is considered most significant when making this comparison
     bool operator>(Bitmask const & other) const;
 
-    // Additional derived relational operators
+    /// Additional derived relational operators
     bool operator!=(Bitmask const & other) const;
     bool operator<=(Bitmask const & other) const;
     bool operator>=(Bitmask const & other) const;
 
-    // @returns the hash value of this bitmask
+    /// @returns the hash value of this bitmask
     size_t hash(bool bitwise = true) const;
 
-    // @param index: an index specifying which bit to read
-    // @returns: the accessed bit in the form of an integer
+    /// @param index: an index specifying which bit to read
+    /// @returns: the accessed bit in the form of an integer
     unsigned int get(unsigned int index) const;
-    // @note: aliases to get
+    /// @note: aliases to get
     unsigned int operator[](unsigned int index) const;
 
-    // @param index: an index specifying which bit to modify
-    // @param value: a boolean value specifying whether to set the bit to 1 or 0
+    /// @param index: an index specifying which bit to modify
+    /// @param value: a boolean value specifying whether to set the bit to 1 or 0
     void set(unsigned int index, bool value = true);
 
-    // @param reverse: reverses the sequence so that the 0th bit is on the right, as opposed to on the left (little endian)
-    // @returns a string representing the bit sequence with each bit represented as the character '1' or '0'
-    // @note default reverses the sequence so that bit-0 is the left most in the string
+    /// @param reverse: reverses the sequence so that the 0th bit is on the right, as opposed to on the left (little endian)
+    /// @returns a string representing the bit sequence with each bit represented as the character '1' or '0'
+    /// @note default reverses the sequence so that bit-0 is the left most in the string
     std::string to_string(bool reverse = false) const;
 
-    // @returns true if the content of the object passes the null pointer check
+    /// @returns true if the content of the object passes the null pointer check
     bool valid() const;
-    // @throws an exception if this object contains a null pointer
+    /// @throws an exception if this object contains a null pointer
     void validate() const;
 
-    // @requires the new_size must be less that _max_blocks * bits_per_block. (i.e. the maximum capacity set during construction)
-    // @modifies _size: modified to the new size
-    // @modifies _used_blocks: modified to the new number of used blocks
-    // @modifies _offset: modified to the new number of bits used in the last used block
-    // @note: resizing does not affect memory usage. allocated memory remain constant until this instance is deconstructed
+    /// @requires the new_size must be less that _max_blocks * bits_per_block. (i.e. the maximum capacity set during construction)
+    /// @modifies _size: modified to the new size
+    /// @modifies _used_blocks: modified to the new number of used blocks
+    /// @modifies _offset: modified to the new number of bits used in the last used block
+    /// @note: resizing does not affect memory usage. allocated memory remain constant until this instance is deconstructed
     void resize(unsigned int _new_size); // The number of bits actually being used (excludes leading zeros in final block)
 
 private:

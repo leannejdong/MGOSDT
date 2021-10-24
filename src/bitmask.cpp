@@ -1,8 +1,8 @@
 #include "bitmask.hpp"
 
-// ********************************
-// ** Function Module Definition **
-// ********************************
+/*! ********************************
+Function Module Definition **
+********************************/
 
 std::vector< std::vector<codeblock> > Bitmask::ranges = std::vector< std::vector<codeblock> >();
 std::vector<size_t> Bitmask::hashes = std::vector<size_t>();
@@ -19,9 +19,9 @@ tbb::scalable_allocator< bitblock > Bitmask::allocator = tbb::scalable_allocator
 bool Bitmask::integrity_check = true;
 bool Bitmask::precomputed = false;
 
-// @param blocks: the blocks containing bits
-// @param size: the number of bits which are represented in blocks
-// @modifies blocks will be set to have all bits be 1
+/// @param blocks: the blocks containing bits
+/// @param size: the number of bits which are represented in blocks
+/// @modifies blocks will be set to have all bits be 1
 void Bitmask::ones(bitblock * const blocks, unsigned int size) {
     unsigned int number_of_blocks, block_offset;
     Bitmask::block_layout(size, & number_of_blocks, & block_offset);
@@ -29,9 +29,9 @@ void Bitmask::ones(bitblock * const blocks, unsigned int size) {
     Bitmask::clean(blocks, number_of_blocks, block_offset); 
 }
 
-// @param blocks: the blocks containing bits
-// @param size: the number of bits which are represented in blocks
-// @modifies blocks will be set to have all bits be 0
+/// @param blocks: the blocks containing bits
+/// @param size: the number of bits which are represented in blocks
+/// @modifies blocks will be set to have all bits be 0
 void Bitmask::zeros(bitblock * const blocks, unsigned int size) {
     unsigned int number_of_blocks, block_offset;
     Bitmask::block_layout(size, & number_of_blocks, & block_offset);
@@ -70,7 +70,7 @@ unsigned int Bitmask::count(bitblock * const blocks, unsigned int size) {
     return mpn_popcount(blocks, number_of_blocks);
 }
 
-// @note this returns the number of contiguous sequences of 1's
+/// @note this returns the number of contiguous sequences of 1's
 unsigned int Bitmask::words(bitblock * const blocks, unsigned int size) {
     unsigned int number_of_blocks, block_offset;
     Bitmask::block_layout(size, & number_of_blocks, & block_offset);

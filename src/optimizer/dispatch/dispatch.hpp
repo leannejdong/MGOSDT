@@ -22,8 +22,7 @@ bool Optimizer::dispatch(Message const & message, unsigned int id) {
             store_children(vertex -> second, id);
 
             if (is_root) { // Update the optimizer state
-                // float root_upperbound = this -> cart(vertex -> second.capture_set(), vertex -> second.feature_set(), id);
-                // std::cout << "Cart: " << root_upperbound << std::endl;
+
                 float root_upperbound = 1.0;
                 if (Configuration::upperbound > 0.0) { root_upperbound = std::min(root_upperbound, Configuration::upperbound); }
                 vertex -> second.update(vertex -> second.lowerbound(), root_upperbound, -1);
@@ -49,9 +48,7 @@ bool Optimizer::dispatch(Message const & message, unsigned int id) {
             load_self(identifier, vertex);
 
             if (vertex -> second.uncertainty() == 0 || vertex -> second.lowerbound() >= vertex -> second.upperscope() - std::numeric_limits<float>::epsilon()) { break; }
-            bool update = load_children(vertex -> second, message.features, id);
-
-            // if (!update) { break; } // XXX Please check if this check still applies 
+           // bool update = load_children(vertex -> second, message.features, id);
 
             bool is_root = vertex -> second.capture_set().count() == vertex -> second.capture_set().size();
             if (is_root) { // Update the optimizer state
