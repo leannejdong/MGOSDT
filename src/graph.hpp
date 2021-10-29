@@ -17,9 +17,9 @@ class Graph;
 #include "task.hpp"
 #include "tile.hpp"
 
-typedef Tile key_type;
-typedef Task value_type;
-typedef std::vector<int> translation_type;
+using key_type = Tile;
+using value_type = Task;
+using translation_type = std::vector<int>;
 
 // Additional Hash Implementation for tbb::concurrent_hash_table
 // These delegate to the already implemented hash functions and equality operators
@@ -57,55 +57,52 @@ public:
     }
 };
 
-typedef tbb::concurrent_hash_map< // Table for storing forward edges
+using child_table = tbb::concurrent_hash_map< // Table for storing forward edges
     std::pair<key_type, int>, key_type, GraphChildHashComparator, 
-    tbb::scalable_allocator<std::pair<std::pair<key_type, int> const, key_type>>> child_table;
+    tbb::scalable_allocator<std::pair<std::pair<key_type, int> const, key_type>>>;
 
-typedef tbb::concurrent_hash_map< // Table for storing tile-orderings
+using translation_table = tbb::concurrent_hash_map< // Table for storing tile-orderings
     std::pair<key_type, int>, translation_type, GraphChildHashComparator, 
-    tbb::scalable_allocator<std::pair<std::pair<key_type, int> const, translation_type>>> translation_table;
+    tbb::scalable_allocator<std::pair<std::pair<key_type, int> const, translation_type>>>;
 
-typedef tbb::concurrent_hash_map< // Table for storing vertices
+using vertex_table = tbb::concurrent_hash_map< // Table for storing vertices
     key_type, value_type, GraphVertexHashComparator, 
-    tbb::scalable_allocator<std::pair<key_type const, value_type>>> vertex_table;
+    tbb::scalable_allocator<std::pair<key_type const, value_type>>>;
 
-typedef tbb::concurrent_unordered_map< // Set of parents for a single vertex
+using adjacency_set = tbb::concurrent_unordered_map< // Set of parents for a single vertex
     key_type, std::pair<Bitmask, float>, std::hash<Tile>, std::equal_to<Tile>, 
-    tbb::scalable_allocator<std::pair<key_type const, std::pair<Bitmask, float>>>> adjacency_set; 
+    tbb::scalable_allocator<std::pair<key_type const, std::pair<Bitmask, float>>>>;
 
-typedef tbb::concurrent_hash_map< // Table of all adjacency sets
+using adjacency_table = tbb::concurrent_hash_map< // Table of all adjacency sets
     key_type, adjacency_set, GraphVertexHashComparator,
-    tbb::scalable_allocator<std::pair<key_type const, adjacency_set>>> adjacency_table;
+    tbb::scalable_allocator<std::pair<key_type const, adjacency_set>>>;
 
-typedef tbb::concurrent_vector<std::tuple<unsigned int, float, float>, tbb::scalable_allocator<std::tuple<unsigned int, float, float>>> bound_list; // List of split-bounds for a single vertex
+using bound_list = tbb::concurrent_vector<std::tuple<unsigned int, float, float>, tbb::scalable_allocator<std::tuple<unsigned int, float, float>>>; // List of split-bounds for a single vertex
 
-typedef tbb::concurrent_hash_map< // Table of all bound lists
+using bound_table = tbb::concurrent_hash_map< // Table of all bound lists
     key_type, bound_list, GraphVertexHashComparator, 
-    tbb::scalable_allocator<std::pair<key_type const, bound_list>>> bound_table;
+    tbb::scalable_allocator<std::pair<key_type const, bound_list>>>;
 
-typedef vertex_table::const_accessor const_vertex_accessor;
-typedef vertex_table::accessor vertex_accessor;
+using const_vertex_accessor = vertex_table::const_accessor;
+using vertex_accessor = vertex_table::accessor;
 
-typedef translation_table::const_accessor const_translation_accessor;
-typedef translation_table::accessor translation_accessor;
+using const_translation_accessor = translation_table::const_accessor;
+using translation_accessor = translation_table::accessor;
 
-typedef child_table::const_accessor const_child_accessor;
-typedef child_table::accessor child_accessor;
+using const_child_accessor = child_table::const_accessor;
+using child_accessor = child_table::accessor;
 
-typedef adjacency_table::const_accessor const_adjacency_accessor;
-typedef adjacency_table::accessor adjacency_accessor;
+using const_adjacency_accessor = adjacency_table::const_accessor;
+using adjacency_accessor = adjacency_table::accessor;
 
-typedef adjacency_set::const_iterator const_adjacency_iterator;
-typedef adjacency_set::iterator adjacency_iterator;
+using const_adjacency_iterator = adjacency_set::const_iterator;
+using adjacency_iterator = adjacency_set::iterator;
 
-// typedef adjacency_set::const_indicator const_adjacency_indicator;
-// typedef adjacency_set::indicator adjacency_indicator;
+using const_bound_accessor = bound_table::const_accessor;
+using bound_accessor = bound_table::accessor;
 
-typedef bound_table::const_accessor const_bound_accessor;
-typedef bound_table::accessor bound_accessor;
-
-typedef bound_list::const_iterator const_bound_iterator;
-typedef bound_list::iterator bound_iterator;
+using const_bound_iterator = bound_list::const_iterator;
+using bound_iterator = bound_list::iterator;
 
 // Container for storing the dependency graph
 // The vertices of his graph act as a memoization table of subproblems
@@ -141,8 +138,8 @@ public:
     // Bitmask & buffer_1, Bitmask & buffer_2, Bitmask & buffer_3,
     // Task const & task, unsigned int index, bool condition);
 
-    bool erase(key_type const & key, bool disconnect = true);
-    bool disconnect(key_type const & arent, key_type const & child);
+//    bool erase(key_type const & key, bool disconnect = true);
+//    bool disconnect(key_type const & arent, key_type const & child);
     void clear();
 
     unsigned int size() const;

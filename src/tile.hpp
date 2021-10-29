@@ -8,7 +8,7 @@
 /// Tiling is when we divide a loop into a set of parallel tasks of a suitable granularity.
 /// In general, tiling means we apply multiple steps on a small piece of our problem instead of
 /// running each step on the whole problem one after the other.
-// Container for tiles which represent an equivalence class of data sets
+/// Container for tiles which represent an equivalence class of data sets
 class Tile {
 public:
     // @param content: A bitmask containing the bits of a binary matrix in linearized format
@@ -19,8 +19,8 @@ public:
     // @param features: an indicator of features that this tile must capture
     // @param id: The id of the local state used when a buffer is needed
     Tile(Bitmask const & samples, Bitmask const & features, unsigned int id);
-    Tile(void);
-    ~Tile(void);
+    Tile();
+    ~Tile();
     
     // Assignment operator used to transfer ownership of data
     Tile & operator=(Tile const & other);
@@ -30,17 +30,17 @@ public:
     bool operator!=(Tile const & other) const;
 
     // Accessors used to inspect/modify the content
-    Bitmask & content(void);
+    Bitmask & content();
     void content(Bitmask const & _new_content);
-    unsigned int width(void) const;
+    unsigned int width() const;
     void width(unsigned int _new_width);
 
-    size_t hash(void) const;
+    size_t hash() const;
 
-    unsigned int size(void) const;
+    unsigned int size() const;
     void resize(unsigned int new_size);
 
-    std::string to_string(void) const;
+    std::string to_string() const;
 
 private:
     Bitmask _content;
