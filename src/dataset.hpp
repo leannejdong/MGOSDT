@@ -40,26 +40,26 @@ public:
     // The encoder used in converting between non-binary and binary
     Encoder encoder;
 
-    Dataset(void);
+    Dataset();
     // @param data_source: byte stream of csv format which will be automatically encoded into a binary dataset
     // @note see encoder documentation for data source formatting preconditions and encoding semantics
     Dataset(std::istream & data_source);
-    ~Dataset(void);
+    ~Dataset();
 
     // @modifies loads data from data stream
     void load(std::istream & data_source);
     
     // @modifies resets dataset to initial state
-    void clear(void);
+    void clear();
 
     // @returns the sample size of the data set
-    unsigned int size(void) const;
+    unsigned int size() const;
     // @returns the physical number of rows needed to represent the data set
-    unsigned int height(void) const; 
+    unsigned int height() const;
     // @returns the number of binary non-target features used to represent the data set
-    unsigned int width(void) const;
+    unsigned int width() const;
     // @returns the number of unique target values in the dataset
-    unsigned int depth(void) const; 
+    unsigned int depth() const;
 
     // @param capture_set: The indicator for each equivalent groups are contained by this problem
     // @param id: Index of the local state entry used when a column buffer is needed
@@ -119,10 +119,10 @@ private:
     // Index distance_index; // Index for calculating feature distances
 
     void construct_bitmasks(std::istream & input_stream);
-    void construct_cost_matrix(void);
+    void construct_cost_matrix();
     void parse_cost_matrix(std::istream & input_stream);
-    void aggregate_cost_matrix(void);
-    void construct_majority(void);
+    void aggregate_cost_matrix();
+    void construct_majority();
 };
 
 #endif

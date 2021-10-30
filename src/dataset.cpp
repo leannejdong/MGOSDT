@@ -1,7 +1,7 @@
 #include "dataset.hpp"
 
-Dataset::Dataset(void) {}
-Dataset::~Dataset(void) {}
+Dataset::Dataset() {}
+Dataset::~Dataset() {}
 
 Dataset::Dataset(std::istream & data_source) { load(data_source); }
 
@@ -30,7 +30,7 @@ void Dataset::load(std::istream & data_source) {
     return;
 }
 
-void Dataset::clear(void) {
+void Dataset::clear() {
     this -> features.clear();
     this -> targets.clear();
     this -> rows.clear();
@@ -74,7 +74,7 @@ void Dataset::construct_bitmasks(std::istream & data_source) {
     this -> shape = std::tuple< int, int, int >(this -> rows.size(), this -> features.size(), this -> targets.size());
 };
 
-void Dataset::construct_cost_matrix(void) {
+void Dataset::construct_cost_matrix() {
     this -> costs.resize(depth(), std::vector< float >(depth(), 0.0));
     if (Configuration::costs != "") { // Customized cost matrix
         std::ifstream input_stream(Configuration::costs);
@@ -156,7 +156,7 @@ void Dataset::parse_cost_matrix(std::istream & input_stream) {
     }
 };
 
-void Dataset::aggregate_cost_matrix(void) {
+void Dataset::aggregate_cost_matrix() {
     this -> match_costs.resize(depth(), 0.0);
     this -> mismatch_costs.resize(depth(), std::numeric_limits<float>::max());
     this -> max_costs.resize(depth(), -std::numeric_limits<float>::max());
@@ -175,7 +175,7 @@ void Dataset::aggregate_cost_matrix(void) {
     }
 }
 
-void Dataset::construct_majority(void) {
+void Dataset::construct_majority() {
     std::vector< Bitmask > keys(height(), width());
     for (unsigned int i = 0; i < height(); ++i) {
         for (unsigned int j = 0; j < width(); ++j) {
@@ -323,19 +323,19 @@ void Dataset::tile(Bitmask const & capture_set, Bitmask const & feature_set, Til
 }
 
 
-unsigned int Dataset::height(void) const {
+unsigned int Dataset::height() const {
     return std::get<0>(this -> shape);
 }
 
-unsigned int Dataset::width(void) const {
+unsigned int Dataset::width() const {
     return std::get<1>(this -> shape);
 }
 
-unsigned int Dataset::depth(void) const {
+unsigned int Dataset::depth() const {
     return std::get<2>(this -> shape);
 }
 
-unsigned int Dataset::size(void) const {
+unsigned int Dataset::size() const {
     return this -> _size;
 }
 
