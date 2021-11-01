@@ -37,7 +37,7 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
 
     optimizer.initialize();
     for (unsigned int i = 0; i < Configuration::worker_limit; ++i) {
-        workers.emplace_back(std::async(work, i, std::ref(optimizer)));
+        workers.emplace_back(std::async(std::launch::async, work, i, std::ref(optimizer)));
     }
 
     for (auto &fut: workers) {
