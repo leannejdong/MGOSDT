@@ -1,7 +1,8 @@
 #include "bitmask.hpp"
 
 /*! ********************************
-Function Module Definition **
+ * @bitmask.cpp
+ * @brief Function Module Definition **
 ********************************/
 
 std::vector< std::vector<codeblock> > Bitmask::ranges = std::vector< std::vector<codeblock> >();
@@ -96,10 +97,16 @@ void Bitmask::bit_and(bitblock * const blocks, bitblock * other_blocks, unsigned
     Bitmask::clean(blocks, number_of_blocks, block_offset);
 
     if (!flip) {
-        // Special Offload to GMP Implementation
+        /*! Low level bit function performs bitwise logical and of
+         * {other_blocks, number_of_blocks} and {blocks, number_of_blocks}
+         * and write the result to {other_blocks, number_of_blocks}
+         * */
         mpn_and_n(other_blocks, other_blocks, blocks, number_of_blocks);
     } else {
-        // Special Offload to GMP Implementation
+        /*! Low level bit function performs bitwise logical inclusive or of
+         * {other_blocks, number_of_blocks} and {blocks, number_of_blocks}
+         * and write the result to {other_blocks, number_of_blocks}
+         * */
         mpn_nior_n(other_blocks, other_blocks, other_blocks, number_of_blocks);
         mpn_nior_n(other_blocks, other_blocks, blocks, number_of_blocks);
     }
