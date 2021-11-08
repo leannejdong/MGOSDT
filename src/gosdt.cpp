@@ -18,9 +18,9 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::string & result) {
 }
 
 void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > & models) {
-    if(Configuration::verbose) { std::cout << "Using configuration: " << Configuration::to_string(2) << std::endl; }
+    if(Configuration::verbose) { std::cout << "Using configuration: " << Configuration::to_string(2) << "\n"; }
 
-    if(Configuration::verbose) { std::cout << "Initializing Optimization Framework" << std::endl; }
+    if(Configuration::verbose) { std::cout << "Initializing Optimization Framework" << "\n"; }
     Optimizer optimizer;
     optimizer.load(data_source);
 
@@ -32,7 +32,7 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
     std::vector< std::future<int> > workers;
     std::vector< int > iterations(Configuration::worker_limit);
 
-    if(Configuration::verbose) { std::cout << "Starting Optimization" << std::endl; }
+    if(Configuration::verbose) { std::cout << "Starting Optimization" << "\n"; }
     auto start = std::chrono::steady_clock::now();
 
     optimizer.initialize();
@@ -45,35 +45,33 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
     }
     auto stop = std::chrono::steady_clock::now(); // Stop measuring training time
     GOSDT::time = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() / 1000.0;
-    if(Configuration::verbose) { std::cout << "Optimization Complete" << std::endl; }
+    if(Configuration::verbose) { std::cout << "Optimization Complete" << "\n"; }
 
-    for (auto iterator = iterations.begin(); iterator != iterations.end(); ++iterator) { GOSDT::iterations += * iterator; }    
+    for(const auto &iter : iterations) {GOSDT::iterations += iter;}
     GOSDT::size = optimizer.size();
 
     if (Configuration::timing != "") {
         std::ofstream timing_output(Configuration::timing, std::ios_base::app);
         timing_output << GOSDT::time;
-        timing_output.flush();
-        timing_output.close();
     }
 
     if(Configuration::verbose) {
-        std::cout << "Training Duration: " << GOSDT::time << " seconds" << std::endl;
-        std::cout << "Number of Iterations: " << GOSDT::iterations << " iterations" << std::endl;
-        std::cout << "Size of Graph: " << GOSDT::size << " nodes" << std::endl;
+        std::cout << "Training Duration: " << GOSDT::time << " seconds" << "\n";
+        std::cout << "Number of Iterations: " << GOSDT::iterations << " iterations" << "\n";
+        std::cout << "Size of Graph: " << GOSDT::size << " nodes" << "\n";
         float lowerbound, upperbound;
         optimizer.objective_boundary(& lowerbound, & upperbound);
-        std::cout << "Objective Boundary: [" << lowerbound << ", " << upperbound << "]" << std::endl;
-        std::cout << "Optimality Gap: " << optimizer.uncertainty() << std::endl;
+        std::cout << "Objective Boundary: [" << lowerbound << ", " << upperbound << "]" << "\n";
+        std::cout << "Optimality Gap: " << optimizer.uncertainty() << "\n";
     }
 
     // try 
     { // Model Extraction
         if (!optimizer.complete()) {
             if (Configuration::diagnostics) {
-                std::cout << "Non-convergence Detected. Beginning Diagnosis" << std::endl;
+                std::cout << "Non-convergence Detected. Beginning Diagnosis" << "\n";
                 optimizer.diagnose_non_convergence();
-                std::cout << "Diagnosis complete" << std::endl;
+                std::cout << "Diagnosis complete" << "\n";
             }
         }
 
@@ -82,45 +80,34 @@ void mgosdt::GOSDT::fit(std::istream & data_source, std::unordered_set< Model > 
         if (Configuration::model_limit > 0 && models.size() == 0) {
             GOSDT::status = 1;
             if (Configuration::diagnostics) {
-                std::cout << "False-convergence Detected. Beginning Diagnosis" << std::endl;
+                std::cout << "False-convergence Detected. Beginning Diagnosis" << "\n";
                 optimizer.diagnose_false_convergence();
-                std::cout << "Diagnosis complete" << std::endl;
+                std::cout << "Diagnosis complete" << "\n";
             }
         }
 
         if (Configuration::verbose) {
-            std::cout << "Models Generated: " << models.size() << std::endl;
+            std::cout << "Models Generated: " << models.size() << "\n";
             if (optimizer.uncertainty() == 0.0 && models.size() > 0) {
-                std::cout << "Loss: " << models.begin() -> loss() << std::endl;
-                std::cout << "Complexity: " << models.begin() -> complexity() << std::endl;
+                std::cout << "Loss: " << models.begin() -> loss() << "\n";
+                std::cout << "Complexity: " << models.begin() -> complexity() << "\n";
             } 
         }
         if (Configuration::model != "") {
             json output = json::array();
-            for (auto iterator = models.begin(); iterator != models.end(); ++iterator) {
-                Model model = * iterator;
+            for(Model model : models) {
                 json object = json::object();
                 model.to_json(object);
                 output.push_back(object);
             }
+
             std::string result = output.dump(2);
-            if(Configuration::verbose) { std::cout << "Storing Models in: " << Configuration::model << std::endl; }
+            if(Configuration::verbose) { std::cout << "Storing Models in: " << Configuration::model << "\n"; }
             std::ofstream out(Configuration::model);
             out << result;
         }
     }
 }
-
-//void mgosdt::GOSDT::work(int const id, Optimizer & optimizer, int & return_reference) {
-//    unsigned int iterations = 0;
-//    try {
-//        while (optimizer.iterate(id)) { iterations += 1; }
-//    } catch( IntegrityViolation exception ) {
-//        std::cout << exception.to_string() << std::endl;
-//        throw std::move(exception);
-//    }
-//    return_reference = iterations;
-//}
 
  int mgosdt::GOSDT::work(int const id, Optimizer & optimizer) {
     unsigned int iterations = 0;

@@ -18,15 +18,17 @@ Optimizer::~Optimizer() {
 
 
 
-void Optimizer::load(std::istream & data_source) { State::initialize(data_source, Configuration::worker_limit); }
+void Optimizer::load(std::istream & data_source){
+    State::initialize(data_source, Configuration::worker_limit);
+}
 
 void Optimizer::initialize() {
     // Initialize Profile Output
     if (Configuration::profile != "") {
         std::ofstream profile_output(Configuration::profile);
         profile_output << "iterations,time,lowerbound,upperbound,graph_size,queue_size,explore,exploit";
-        profile_output << std::endl;
-        profile_output.flush();
+        profile_output << "\n";
+        //profile_output.flush();
     }
 
     // Initialize Timing State
@@ -110,7 +112,7 @@ void Optimizer::print() const {
             ", Objective: [" << lowerbound << ", " << upperbound << "]" <<
             ", Boundary: " << this -> global_boundary <<
             ", Graph Size: " << State::graph.size() <<
-            ", Queue Size: " << State::queue.size() << std::endl;
+            ", Queue Size: " << State::queue.size() << "\n";
     }
 }
 
@@ -122,7 +124,7 @@ void Optimizer::profile() {
         profile_output << this -> ticks << "," << elapsed() << "," <<
             lowerbound << "," << upperbound << "," << State::graph.size() << "," << 
             State::queue.size() << "," << this -> explore << "," << this -> exploit;
-        profile_output << std::endl;
+        profile_output << "\n";
         profile_output.flush();
         this -> explore = 0;
         this -> exploit = 0;
