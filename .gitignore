@@ -37,5 +37,5 @@ buildc
 #flamegraph
 .data
 
-#misc
+#clangd
 .cache

@@ -1,6 +1,14 @@
 #set(CMAKE_INSTALL_PREFIX install)
 project(gosdt)
 cmake_minimum_required(VERSION 3.8.0 FATAL_ERROR)
+#set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# Disable response files
+set(CMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES Off)
+
+# Build options
+option(ENABLE_CPPCHECK "Enable static analysis with cppcheck" ON)
+option(ENABLE_CLANG_TIDY "Enable static analysis with clang-tidy" ON)
+option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
 
 list(APPEND CMAKE_MODULE_PATH "/usr/share/cmake/Modules")
 find_package(TBB COMPONENTS tbbmalloc tbbmalloc_proxy tbb_preview)
@@ -10,7 +18,7 @@ enable_testing()
 
 #add_compile_options(-pg)
 #add_compile_options(-std=c++17 -O2 -g -Wall -Wextra -pedantic)
-add_compile_options(-std=c++17 -O2 -g -Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align -Wnon-virtual-dtor -Woverloaded-virtual)
+add_compile_options(-std=c++2a -O2 -g -Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align -Wnon-virtual-dtor -Woverloaded-virtual)
 #add_compile_options(-Werror -fdiagnostics-color=auto)
 add_compile_options(-fdiagnostics-color=auto)
 #add_compile_options(-D_GLIBCXX_DEBUG=1)

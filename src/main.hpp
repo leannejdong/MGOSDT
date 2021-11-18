@@ -11,8 +11,8 @@
 #include <vector>
 #include <string>
 
-#include <json/json.hpp>
-#include <csv/csv.h>
+#include "/home/leanne/Dev/mgosdt/include/csv/csv.h"
+#include <nlohmann/json.hpp>
 
 #include "configuration.hpp"
 #include "gosdt.hpp"

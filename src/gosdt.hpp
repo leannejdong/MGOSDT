@@ -17,7 +17,7 @@
 
 #include <alloca.h>
 
-#include <json/json.hpp>
+#include <nlohmann/json.hpp>
 
 #include "integrity_violation.hpp"
 #include "optimizer.hpp"

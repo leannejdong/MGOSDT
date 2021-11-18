@@ -14,7 +14,7 @@
 #include "configuration.hpp"
 #include "message.hpp"
 
-typedef Message message_type;
+using message_type = Message;
 
 class PriorityKeyComparator {
 public:
@@ -43,11 +43,9 @@ struct MembershipKeyHashCompare {
     }
 };
 
-typedef tbb::concurrent_priority_queue< message_type *, PriorityKeyComparator, 
-    tbb::scalable_allocator< message_type * > > queue_type;
+using queue_type = tbb::concurrent_priority_queue<message_type *, PriorityKeyComparator, tbb::scalable_allocator<message_type *>>;
 
-typedef tbb::concurrent_hash_map< message_type *, bool, MembershipKeyHashCompare, 
-    tbb::scalable_allocator<std::pair<message_type *, bool>>> membership_table_type;
+using membership_table_type = tbb::concurrent_hash_map<message_type *, bool, MembershipKeyHashCompare, tbb::scalable_allocator<std::pair<message_type *, bool>>>;
 
 class Queue {
 public:

@@ -15,7 +15,7 @@
 
 #include <cassert>
 
-#include "../include/json/json.hpp"
+#include <nlohmann/json.hpp>
 
 template<typename T>
 std::string error_message(T expectation, T reality, std::string message, std::string context = "") {

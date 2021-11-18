@@ -19,9 +19,9 @@
 #include "bitmask.hpp"
 
 // @note: vector type used for representing GPU floating point vector
-typedef boost::numeric::ublas::vector< float > blasvector;
+using blasvector = boost::numeric::ublas::vector<float>;
 // @note: vector type used for representing GPU mask
-typedef boost::numeric::ublas::vector< bitblock > blasmask;
+using blasmask = boost::numeric::ublas::vector<bitblock>;
 
 // Container used to store prefix sums of vectors which help accelerate our calculations
 // multiple vectors are stored in this container so that ranges don't need to be recomputed for each vector

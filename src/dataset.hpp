@@ -20,8 +20,8 @@
 #include <opencl/cl.hpp>
 #endif
 
-#include <json/json.hpp>
-#include <csv/csv.h>
+#include <nlohmann/json.hpp>
+#include "../include/csv/csv.h"
 
 class Dataset;
 
