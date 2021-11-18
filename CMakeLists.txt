@@ -113,7 +113,7 @@ target_link_libraries(${PROJECT_NAME}_test
 
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_SOURCE_DIR}/${PROJECT_NAME}_test WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
-target_link_libraries(gosdt PRIVATE benchmark::benchmark Threads::Threads)
+target_link_libraries(gosdt PRIVATE benchmark::benchmark Threads::Threads nlohmann_json::nlohmann_json)
 
 if (${CMAKE_SIZEOF_VOID_P} EQUAL 4)
    set(TARGETBITS 32)
