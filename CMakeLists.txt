@@ -14,9 +14,7 @@ list(APPEND CMAKE_MODULE_PATH "/usr/share/cmake/Modules")
 find_package(TBB COMPONENTS tbbmalloc tbbmalloc_proxy tbb_preview)
 find_package(benchmark REQUIRED)
 find_package(Threads REQUIRED)
-find_package(nlohmann_json REQUIRED
-	CONFIG 
-	PATHS "/usr/lib/cmake/")
+find_package(nlohmann_json 3.3.0 REQUIRED)
 enable_testing()
 
 #add_compile_options(-pg)
@@ -76,7 +74,7 @@ target_link_libraries(${PROJECT_NAME}_lib
 		tbbmalloc
 		pthread
 		gmp
-		nlohmann_json
+		nlohmann_json::nlohmann_json
 )
 
 target_include_directories(${PROJECT_NAME}_lib
