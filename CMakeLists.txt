@@ -14,7 +14,9 @@ list(APPEND CMAKE_MODULE_PATH "/usr/share/cmake/Modules")
 find_package(TBB COMPONENTS tbbmalloc tbbmalloc_proxy tbb_preview)
 find_package(benchmark REQUIRED)
 find_package(Threads REQUIRED)
-find_package(nlohmann_json REQUIRED)
+find_package(nlohmann_json REQUIRED
+	CONFIG 
+	PATHS "/usr/lib/cmake/")
 enable_testing()
 
 #add_compile_options(-pg)
