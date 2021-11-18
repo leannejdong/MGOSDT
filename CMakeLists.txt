@@ -1,7 +1,7 @@
 #set(CMAKE_INSTALL_PREFIX install)
 project(gosdt)
 cmake_minimum_required(VERSION 3.8.0 FATAL_ERROR)
-#set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Disable response files
 set(CMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES Off)
 
@@ -14,6 +14,7 @@ list(APPEND CMAKE_MODULE_PATH "/usr/share/cmake/Modules")
 find_package(TBB COMPONENTS tbbmalloc tbbmalloc_proxy tbb_preview)
 find_package(benchmark REQUIRED)
 find_package(Threads REQUIRED)
+find_package(nlohmann_json REQUIRED)
 enable_testing()
 
 #add_compile_options(-pg)
@@ -73,6 +74,7 @@ target_link_libraries(${PROJECT_NAME}_lib
 		tbbmalloc
 		pthread
 		gmp
+		nlohmann_json
 )
 
 target_include_directories(${PROJECT_NAME}_lib
